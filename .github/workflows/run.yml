@@ -159,7 +159,7 @@ jobs:
           SED: sed '/^\s*#/d' | sed 's/^PROCESS-NAME,//' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g'
         run: |
           curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Speedtest/Speedtest.list | ${{ env.SED }} > ./community/data/network1
-          curl -sSL https://raw.githubusercontent.com/DustinWin/Router-Plugins/main/Rule-Files/network.list | ${{ env.SED }} >> ./community/data/network1
+          curl -sSL https://github.com/DustinWin/clash-geosite/raw/master/Rule-Files/network.list | ${{ env.SED }} >> ./community/data/network1
           curl -sSL https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/test-ipv6 >> ./community/data/network1
           sort ./community/data/network1 | uniq -i > ./community/data/network
           rm ./community/data/network1
@@ -167,7 +167,7 @@ jobs:
           curl -sSL https://gitea.com/XIU2/TrackersListCollection/raw/branch/master/all.txt | grep -i "\.[A-Z]" | sed 's/^.*\/\///g' | sed 's/:.*\/.*//g' >> ./community/data/tracker1
           sort ./community/data/tracker1 | uniq -i > ./community/data/tracker
           rm ./community/data/tracker1
-          curl -sSL https://raw.githubusercontent.com/DustinWin/Router-Plugins/main/Rule-Files/proxy.list | ${{ env.SED }} >> ./community/data/geolocation-\!cn
+          curl -sSL https://github.com/DustinWin/clash-geosite/raw/master/Rule-Files/proxy.list | ${{ env.SED }} >> ./community/data/geolocation-\!cn
 
       - name: Build geosite.dat file
         run: |
