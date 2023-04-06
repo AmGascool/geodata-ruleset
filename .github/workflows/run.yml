@@ -174,7 +174,7 @@ jobs:
           cd custom || exit 1
           go run ./ --datapath=../community/data
 
-      - name: Move and zip files and generate sha256 hash
+      - name: Move files
         run: |
           mkdir -p ./publish/
           wget https://raw.githubusercontent.com/DustinWin/clash-geoip/release/Country.mmdb -O ./publish/Country.mmdb
