@@ -1,7 +1,7 @@
 # 一、 说明
 ## 1. geosite.dat
 ① 在 [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat) 的基础上进行修改  
-② 每天早上 3 点（北京时间）自动构建
+② 每天早上 3 点（北京时间）自动构建  
 ③ 将 `geosite:cn` 源修改为 [blackmatrix7/ios_rule_script/ChinaMax_Domain](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)  
 ④ 将 `geosite:category-ads-all` 源修改为 [Cats-Team/AdRules](https://github.com/Cats-Team/AdRules) 和 [AdGuard DNS filter](https://github.com/AdguardTeam/AdguardSDNSFilter) 组合  
 ⑤ 新增分类 `geosite:tracker`，源采用 [XIU2/TrackersListCollection（all.txt）](https://trackerslist.com/#/zh) 和 [blackmatrix7/ios_rule_script/PrivateTracker](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/PrivateTracker) 组合  
