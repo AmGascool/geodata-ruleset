@@ -109,13 +109,13 @@ jobs:
         run: |
           curl -sSL $MICROSOFT_URL | sed '/@cn/!d' > ./community/data/microsoft
 
-      - name: Generate apple@cn
+      - name: Generate apple-cn
         run: |
-          curl -sSL $APPLE_URL | perl -ne '/^server=\/([^\/]+)\// && print "full:$1\n"' > ./community/data/apple-cn
+          curl -sSL $APPLE_CN_URL | sed 's/server=\//full:/g' | sed 's/\/.*//g' > ./community/data/apple-cn
 
-      - name: Generate google@cn
+      - name: Generate google-cn
         run: |
-          curl -sSL $GOOGLE_URL | perl -ne '/^server=\/([^\/]+)\// && print "full:$1\n"' > ./community/data/google-cn
+          curl -sSL $GOOGLE_CN_URL | sed 's/server=\//full:/g' | sed 's/\/.*//g' > ./community/data/google-cn
 
       - name: Generate category-games@cn
         run: |
