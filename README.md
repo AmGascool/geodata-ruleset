@@ -1,6 +1,6 @@
 # 一、 说明
 ## 1. geosite.dat
-① 在 [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat) 的基础上进行修改，请酌情使用，分类如下：  
+① 在 [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat) 的基础上进行修改，请酌情使用，**仅有如下分类**：  
 ```
 geosite:category-ads-all
 geosite:private
