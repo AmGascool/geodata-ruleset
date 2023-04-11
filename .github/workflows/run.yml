@@ -9,14 +9,6 @@ on:
     paths-ignore:
       - "**/README.md"
 
-env:
-  filter_all: sed '/^\s*#/d' | sed 's/^PROCESS-NAME,//' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*IP-CIDR/d'
-  filter_except_p: sed '/^\s*#/d' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*IP-CIDR/d'
-  filter_except_i: sed '/^\s*#/d' | sed 's/^PROCESS-NAME,//' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g'
-  filter_except_pi: sed '/^\s*#/d' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g'
-  filter_except_psk: sed '/^\s*#/d' | sed 's/DOMAIN,/full:/g' | sed '/^\s*IP-CIDR/d'
-  filter_except_pdi: sed '/^\s*#/d' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g'
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -69,9 +61,12 @@ jobs:
           wget https://github.com/DustinWin/clash-geoip/raw/release/geoip.dat
 
       - name: Generate category-ads-all
+        env:
+          SED1: sed '/^\s*#/d' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*IP-CIDR/d'
+          SED2: sed '/^\s*#/d' | sed 's/DOMAIN,/full:/g' | sed '/^\s*IP-CIDR/d'
         run: |
-          curl -sSL $BLACKMATRIX7_ADVERTISING_URL | ${{ filter_except_p }} > ./community/data/category-ads-all1
-          curl -sSL $ADGUARD_DNS_FILTER_URL | ${{ filter_except_psk }} >> ./community/data/category-ads-all1
+          curl -sSL $BLACKMATRIX7_ADVERTISING_URL | ${{ env.SED1 }} > ./community/data/category-ads-all1
+          curl -sSL $ADGUARD_DNS_FILTER_URL | ${{ env.SED2 }} >> ./community/data/category-ads-all1
           sort ./community/data/category-ads-all1 | uniq -i > ./community/data/category-ads-all
           rm -f ./community/data/category-ads-all1
 
@@ -80,15 +75,19 @@ jobs:
           curl -sSL $PRIVATE_URL > ./community/data/private
 
       - name: Generate tracker
+        env:
+          SED: sed '/^\s*#/d' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*IP-CIDR/d'
         run: |
-          curl -sSL $PRIVATE_TRACKER_URL | ${{ filter_except_p }} > ./community/data/tracker1
+          curl -sSL $PRIVATE_TRACKER_URL | ${{ env.SED }} > ./community/data/tracker1
           curl -sSL $TRACKERS_LIST_URL | grep -i "\.[A-Z]" | sed 's/^.*\/\///g' | sed 's/:.*\/.*//g' >> ./community/data/tracker1
           sort ./community/data/tracker1 | uniq -i > ./community/data/tracker
           rm -f ./community/data/tracker1
 
       - name: Generate network
+        env:
+          SED: sed '/^\s*#/d' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g'
         run: |
-          curl -sSL $SPEEDTEST_URL | ${{ filter_except_pdi }} > ./community/data/network1
+          curl -sSL $SPEEDTEST_URL | ${{ env.SED }} > ./community/data/network1
           curl -sSL $TEST_IPV6_URL >> ./community/data/network1
           curl -sSL $NETWORK_URL >> ./community/data/network1
           sort ./community/data/network1 | uniq -i > ./community/data/network
@@ -111,15 +110,19 @@ jobs:
           curl -sSL $CATEGORY_GAMES_URL > ./community/data/category-games
 
       - name: Generate geolocation-!cn
+        env:
+          SED: sed '/^\s*#/d' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*IP-CIDR/d'
         run: |
-          curl -sSL $PROXY_URL | ${{ filter_except_p }} > ./community/data/geolocation-\!cn1
+          curl -sSL $PROXY_URL | ${{ env.SED }} > ./community/data/geolocation-\!cn1
           cutl -sSL $PROXY_CUSTOM_URL >> ./community/data/geolocation-\!cn1
           sort ./community/data/geolocation-\!cn1 | uniq -i > ./community/data/geolocation-\!cn
           rm -f ./community/data/geolocation-\!cn1
 
       - name: Generate cn
+        env:
+          SED: sed '/^\s*#/d' | sed 's/^PROCESS-NAME,//' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*IP-CIDR/d'
         run: |
-          curl -sSL $DIRECT_URL | ${{ filter_all }} > ./community/data/cn
+          curl -sSL $DIRECT_URL | ${{ env.SED }} > ./community/data/cn
 
       - name: Build geosite.dat file
         run: |
