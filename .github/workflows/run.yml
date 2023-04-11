@@ -86,19 +86,19 @@ jobs:
 
       - name: Generate microsoft@cn
         run: |
-          curl -sSL $MICROSOFT_URL | grep -i "@cn" > ./community/data/microsoft
+          curl -sSL $MICROSOFT_URL > ./community/data/microsoft
 
       - name: Generate apple@cn
         run: |
-          curl -sSL $APPLE_URL | grep -i "@cn" > ./community/data/apple
+          curl -sSL $APPLE_URL > ./community/data/apple
 
       - name: Generate google@cn
         run: |
-          curl -sSL $GOOGLE_URL | grep -i "@cn" > ./community/data/google
+          curl -sSL $GOOGLE_URL > ./community/data/google
 
       - name: Generate category-games@cn
         run: |
-          curl -sSL $CATEGORY_GAMES_URL | grep -i "@cn" > ./community/data/category-games
+          curl -sSL $CATEGORY_GAMES_URL > ./community/data/category-games
 
       - name: Generate geolocation-!cn
         run: |
