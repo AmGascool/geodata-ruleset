@@ -38,8 +38,8 @@ jobs:
           echo "TEST_IPV6_URL=https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/test-ipv6" >> $GITHUB_ENV
           echo "NETWORK_URL=https://raw.githubusercontent.com/DustinWin/clash-geosite/master/Rule-Files/network.txt" >> $GITHUB_ENV
           echo "MICROSOFT_URL=https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/microsoft" >> $GITHUB_ENV
-          echo "APPLE_CN_URL=https://github.com/felixonmars/dnsmasq-china-list/blob/master/apple.china.conf" >> $GITHUB_ENV
-          echo "GOOGLE_CN_URL=https://github.com/felixonmars/dnsmasq-china-list/blob/master/google.china.conf" >> $GITHUB_ENV
+          echo "APPLE_CN_URL=https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/apple.china.conf" >> $GITHUB_ENV
+          echo "GOOGLE_CN_URL=https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/google.china.conf" >> $GITHUB_ENV
           echo "CATEGORY_GAMES_URL=https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/category-games" >> $GITHUB_ENV
           echo "PROXY_URL=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Proxy/Proxy.list" >> $GITHUB_ENV
           echo "PROXY_CUSTOM_URL=https://raw.githubusercontent.com/DustinWin/clash-geosite/master/Rule-Files/proxy.txt" >> $GITHUB_ENV
@@ -107,19 +107,19 @@ jobs:
 
       - name: Generate microsoft@cn
         run: |
-          curl -sSL $MICROSOFT_URL > ./community/data/microsoft
+          curl -sSL $MICROSOFT_URL | sed -i '/@cn/!d' > ./community/data/microsoft
 
       - name: Generate apple@cn
         run: |
-          curl -sSL $APPLE_URL | perl -ne '/^server=\/([^\/]+)\// && print "$1\n"' > ./community/data/apple
+          curl -sSL $APPLE_URL | sed 's/server=\///g' | sed 's/\/.*//g' > ./community/data/apple
 
       - name: Generate google@cn
         run: |
-          curl -sSL $GOOGLE_URL |perl -ne '/^server=\/([^\/]+)\// && print "$1\n"' > ./community/data/google
+          curl -sSL $GOOGLE_URL | sed 's/server=\///g' | sed 's/\/.*//g' > ./community/data/google
 
       - name: Generate category-games@cn
         run: |
-          curl -sSL $CATEGORY_GAMES_URL > ./community/data/category-games
+          curl -sSL $CATEGORY_GAMES_URL | sed -i '/@cn/!d' > ./community/data/category-games
 
       - name: Generate geolocation-!cn
         env:
