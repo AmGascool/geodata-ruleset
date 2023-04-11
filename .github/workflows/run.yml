@@ -107,7 +107,7 @@ jobs:
 
       - name: Generate microsoft@cn
         run: |
-          curl -sSL $MICROSOFT_URL | sed -i '/@cn/!d' > ./community/data/microsoft
+          curl -sSL $MICROSOFT_URL | sed '/@cn/!d' > ./community/data/microsoft
 
       - name: Generate apple@cn
         run: |
@@ -119,7 +119,7 @@ jobs:
 
       - name: Generate category-games@cn
         run: |
-          curl -sSL $CATEGORY_GAMES_URL | sed -i '/@cn/!d' > ./community/data/category-games
+          curl -sSL $CATEGORY_GAMES_URL | sed '/@cn/!d' > ./community/data/category-games
 
       - name: Generate geolocation-!cn
         env:
