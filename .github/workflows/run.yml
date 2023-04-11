@@ -114,7 +114,7 @@ jobs:
           SED: sed '/^\s*#/d' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*IP-CIDR/d'
         run: |
           curl -sSL $PROXY_URL | ${{ env.SED }} > ./community/data/geolocation-\!cn1
-          cutl -sSL $PROXY_CUSTOM_URL >> ./community/data/geolocation-\!cn1
+          curl -sSL $PROXY_CUSTOM_URL >> ./community/data/geolocation-\!cn1
           sort ./community/data/geolocation-\!cn1 | uniq -i > ./community/data/geolocation-\!cn
           rm -f ./community/data/geolocation-\!cn1
 
