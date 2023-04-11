@@ -1,4 +1,4 @@
-DOMAIN-KEYWORD,test-ipv6
-DOMAIN-KEYWORD,testipv6
-DOMAIN-KEYWORD,ipv6-test
-DOMAIN-KEYWORD,ipv6test
+keyword:test-ipv6
+keyword:testipv6
+keyword:ipv6-test
+keyword:ipv6test
