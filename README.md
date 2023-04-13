@@ -18,8 +18,8 @@ geosite:cn
 ④ 新增分类 `geosite:tracker`，源采用 [blackmatrix7/ios_rule_script/PrivateTracker](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/PrivateTracker)  
 ⑤ 新增分类 `geosite:network`，源采用 [blackmatrix7/ios_rule_script/Speedtest](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Speedtest)、[v2fly/domain-list-community/data/test-ipv6](https://github.com/v2fly/domain-list-community/blob/master/data/test-ipv6) 和 [IPv6 测试网站](https://github.com/DustinWin/clash-geosite/blob/master/Rule-Files/network.txt)组合  
 ⑥ 新增分类 `geosite:games-cn`，源采用 [blackmatrix7/ios_rule_script/SteamCN](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/SteamCN) 和 [blackmatrix7/ios_rule_script/GameDownloadCN](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Game/GameDownloadCN) 组合  
-⑨ 将 `geosite:geolocation-!cn` 源修改为 [blackmatrix7/ios_rule_script/Proxy](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Proxy)  
-⑩ 将 `geosite:cn` 源修改为 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax) 并新增 `DOMAIN-SUFFIX,googleapis.cn`，防止出现 [Google Play Store](https://play.google.com/store) 无法下载或升级应用的问题  
+⑨ 将 `geosite:geolocation-!cn` 源修改为 [blackmatrix7/ios_rule_script/Proxy](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Proxy)，并新增 `DOMAIN-SUFFIX,googleapis.cn`，防止出现 [Google Play Store](https://play.google.com/store) 无法下载或升级应用的问题  
+⑩ 将 `geosite:cn` 源修改为 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)  
 ⑪ 删除“Windows 操作系统相关的系统升级和隐私跟踪域名”，包括 `geosite:win-spy`、`geosite:win-update` 和 `geosite:win-extra`
 ## 2. geoip.dat 和 Country.mmdb
 ① 在 [Loyalsoldier/geoip](https://github.com/Loyalsoldier/geoip) 的基础上进行修改  
