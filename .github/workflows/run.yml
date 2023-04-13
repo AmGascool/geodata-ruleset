@@ -108,13 +108,15 @@ jobs:
           rm -f ./community/data/network1
 
       - name: Generate microsoft-cn
+        env:
+          SED: sed '/^\s*#/d' | sed '/@cn/!d' | sed 's/ @cn//g'
         run: |
-          curl -sSL $MICROSOFT_URL | sed '/@cn/!d' > ./community/data/microsoft-cn1
-          curl -sSL $AZURE_URL | sed '/@cn/!d' >> ./community/data/microsoft-cn1
-          curl -sSL $BING_URL | sed '/@cn/!d' >> ./community/data/microsoft-cn1
-          curl -sSL $MICROSOFT_DEV_URL | sed '/@cn/!d' >> ./community/data/microsoft-cn1
-          curl -sSL $MICROSOF_PKI_URL | sed '/@cn/!d' >> ./community/data/microsoft-cn1
-          curl -sSL $MSN_URL | sed '/@cn/!d' >> ./community/data/microsoft-cn1
+          curl -sSL $MICROSOFT_URL | ${{ env.SED }} > ./community/data/microsoft-cn1
+          curl -sSL $AZURE_URL | ${{ env.SED }} >> ./community/data/microsoft-cn1
+          curl -sSL $BING_URL | ${{ env.SED }} >> ./community/data/microsoft-cn1
+          curl -sSL $MICROSOFT_DEV_URL | ${{ env.SED }} >> ./community/data/microsoft-cn1
+          curl -sSL $MICROSOF_PKI_URL | ${{ env.SED }} >> ./community/data/microsoft-cn1
+          curl -sSL $MSN_URL | ${{ env.SED }} >> ./community/data/microsoft-cn1
           sort ./community/data/microsoft-cn1 | uniq -i > ./community/data/microsoft-cn
           rm -f ./community/data/microsoft-cn1
 
