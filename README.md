@@ -6,7 +6,7 @@ geosite:category-ads-all
 geosite:private
 geosite:tracker
 geosite:network
-geosite:microsoft@cn
+geosite:microsoft-cn
 geosite:apple-cn
 geosite:google-cn
 geosite:games-cn
