@@ -14,7 +14,7 @@ geosite:geolocation-!cn # 🪜 国外域名
 geosite:cn # 🇨🇳 国内域名
 ```
 ② 每天早上 3 点（北京时间）自动构建  
-③ 将 `geosite:category-ads-all` 源修改为 [blackmatrix7/ios_rule_script/Advertising](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Advertising) 和 [blackmatrix7/ios_rule_script/AdGuardSDNSFilter](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/AdGuardSDNSFilter) 组合    
+③ 将 `geosite:category-ads-all` 源修改为 [blackmatrix7/ios_rule_script/Advertising](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Advertising)  
 ④ 新增分类 `geosite:tracker`，源采用 [blackmatrix7/ios_rule_script/PrivateTracker](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/PrivateTracker)  
 ⑤ 新增分类 `geosite:network`，源采用 [blackmatrix7/ios_rule_script/Speedtest](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Speedtest)、[v2fly/domain-list-community/data/test-ipv6](https://github.com/v2fly/domain-list-community/blob/master/data/test-ipv6) 和 [IPv6 测试网站](https://github.com/DustinWin/clash-geosite/blob/master/Rule-Files/network.txt)组合  
 ⑥ 新增分类 `geosite:microsoft-cn`，源采用 [v2fly/domain-list-community/data/microsoft](https://github.com/v2fly/domain-list-community/blob/master/data/microsoft)（包含“include”且含有“@cn”的所有域名）  
