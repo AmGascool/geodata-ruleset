@@ -2,16 +2,16 @@
 ## 1. geosite.dat
 ① 在 [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat) 的基础上进行修改，请酌情使用，**仅有如下分类**：  
 ```
-geosite:category-ads-all
-geosite:private
-geosite:tracker
-geosite:network
-geosite:microsoft-cn
-geosite:apple-cn
-geosite:google-cn
-geosite:games-cn
-geosite:geolocation-!cn
-geosite:cn
+geosite:category-ads-all # ⛔️ 广告域名
+geosite:private #  🏠 私有网络
+geosite:tracker #  ⛓️ BT 下载
+geosite:network #  📈 网络测试
+geosite:microsoft-cn # Ⓜ️ Microsoft 中国
+geosite:apple-cn # 🍎 Apple 中国
+geosite:google-cn # 🗽 Google 中国
+geosite:games-cn # 🎮 国区游戏
+geosite:geolocation-!cn # 🪜 国外域名
+geosite:cn # 🇨🇳 国内域名
 ```
 ② 每天早上 3 点（北京时间）自动构建  
 ③ 将 `geosite:category-ads-all` 源修改为 [blackmatrix7/ios_rule_script/Advertising](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Advertising) 和 [blackmatrix7/ios_rule_script/AdGuardSDNSFilter](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/AdGuardSDNSFilter) 组合    
