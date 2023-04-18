@@ -72,11 +72,11 @@ jobs:
         run: |
           curl -sSL $ADVERTISING_URL | ${{ env.SED }} > ./community/data/category-ads-all
 
-      - name: Generate tracker
+      - name: Generate category-public-tracker
         env:
           SED: sed '/^\s*#/d' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*IP-CIDR/d'
         run: |
-          curl -sSL $PRIVATE_TRACKER_URL | ${{ env.SED }} > ./community/data/tracker
+          curl -sSL $PRIVATE_TRACKER_URL | ${{ env.SED }} > ./community/data/category-public-tracker
 
       - name: Generate speedtest
         env:
