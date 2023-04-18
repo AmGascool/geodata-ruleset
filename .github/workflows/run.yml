@@ -32,11 +32,9 @@ jobs:
           echo "ADVERTISING_URL=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Advertising/Advertising.list" >> $GITHUB_ENV
           echo "PRIVATE_TRACKER_URL=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/PrivateTracker/PrivateTracker.list" >> $GITHUB_ENV
           echo "SPEEDTEST_URL=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Speedtest/Speedtest.list" >> $GITHUB_ENV
-          echo "NETWORK_URL=https://raw.githubusercontent.com/DustinWin/clash-geosite/master/Rule-Files/network.txt" >> $GITHUB_ENV
+          echo "IPV6TEST_URL=https://raw.githubusercontent.com/DustinWin/clash-geosite/master/Rule-Files/network.txt" >> $GITHUB_ENV
           echo "APPLE_CN_URL=https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/apple.china.conf" >> $GITHUB_ENV
           echo "GOOGLE_CN_URL=https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/google.china.conf" >> $GITHUB_ENV
-          echo "STEAM_CN_URL=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/SteamCN/SteamCN.list" >> $GITHUB_ENV
-          echo "GAME_DOWNLOAD_CN_URL=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Game/GameDownloadCN/GameDownloadCN.list" >> $GITHUB_ENV
           echo "PROXY_URL=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Proxy/Proxy.list" >> $GITHUB_ENV
           echo "PROXY_CUSTOM_URL=https://raw.githubusercontent.com/DustinWin/clash-geosite/master/Rule-Files/proxy.txt" >> $GITHUB_ENV
           echo "CHINAMAX_URL=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax.list" >> $GITHUB_ENV
@@ -80,14 +78,14 @@ jobs:
         run: |
           curl -sSL $PRIVATE_TRACKER_URL | ${{ env.SED }} > ./community/data/tracker
 
-      - name: Generate network
+      - name: Generate speedtest
         env:
           SED: sed '/^\s*#/d' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g'
         run: |
-          curl -sSL $SPEEDTEST_URL | ${{ env.SED }} > ./community/data/network1
-          curl -sSL $NETWORK_URL >> ./community/data/network1
-          sort ./community/data/network1 | uniq -i > ./community/data/network
-          rm -f ./community/data/network1
+          curl -sSL $SPEEDTEST_URL | ${{ env.SED }} > ./community/data/speedtest1
+          curl -sSL $IPV6TEST_URL >> ./community/data/speedtest1
+          sort ./community/data/speedtest1 | uniq -i > ./community/data/speedtest
+          rm -f ./community/data/speedtest1
 
       - name: Generate apple-cn
         env:
@@ -100,15 +98,6 @@ jobs:
           SED: sed 's/server=\//full:/g' | sed 's/\/.*//g'
         run: |
           curl -sSL $GOOGLE_CN_URL | ${{ env.SED }} > ./community/data/google-cn
-
-      - name: Generate category-games
-        env:
-          SED: sed '/^\s*#/d' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g'
-        run: |
-          curl -sSL $STEAM_CN_URL | ${{ env.SED }} > ./community/data/category-games1
-          curl -sSL $GAME_DOWNLOAD_CN_URL | ${{ env.SED }} >> ./community/data/category-games1
-          sort ./community/data/category-games1 | uniq -i > ./community/data/category-games
-          rm -f ./community/data/category-games1
 
       - name: Generate geolocation-!cn
         env:
