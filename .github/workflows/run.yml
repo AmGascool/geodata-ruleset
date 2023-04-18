@@ -30,17 +30,9 @@ jobs:
           echo "RELEASE_NAME=Released on $(date +%Y%m%d%H%M)" >> $GITHUB_ENV
           echo "TAG_NAME=$(date +%Y%m%d%H%M)" >> $GITHUB_ENV
           echo "ADVERTISING_URL=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Advertising/Advertising.list" >> $GITHUB_ENV
-          echo "PRIVATE_URL=https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/private" >> $GITHUB_ENV
           echo "PRIVATE_TRACKER_URL=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/PrivateTracker/PrivateTracker.list" >> $GITHUB_ENV
           echo "SPEEDTEST_URL=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Speedtest/Speedtest.list" >> $GITHUB_ENV
-          echo "TEST_IPV6_URL=https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/test-ipv6" >> $GITHUB_ENV
           echo "NETWORK_URL=https://raw.githubusercontent.com/DustinWin/clash-geosite/master/Rule-Files/network.txt" >> $GITHUB_ENV
-          echo "MICROSOFT_URL=https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/microsoft" >> $GITHUB_ENV
-          echo "AZURE_URL=https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/azure" >> $GITHUB_ENV
-          echo "BING_URL=https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/bing" >> $GITHUB_ENV
-          echo "MICROSOFT_DEV_URL=https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/microsoft-dev" >> $GITHUB_ENV
-          echo "MICROSOF_PKI_URL=https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/microsoft-pki" >> $GITHUB_ENV
-          echo "MSN_URL=https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/msn" >> $GITHUB_ENV
           echo "APPLE_CN_URL=https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/apple.china.conf" >> $GITHUB_ENV
           echo "GOOGLE_CN_URL=https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/google.china.conf" >> $GITHUB_ENV
           echo "STEAM_CN_URL=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/SteamCN/SteamCN.list" >> $GITHUB_ENV
@@ -76,15 +68,11 @@ jobs:
         run: |
           wget https://github.com/DustinWin/clash-geoip/raw/release/geoip.dat
 
-      - name: Generate advertising
+      - name: Generate category-ads-all
         env:
           SED: sed '/^\s*#/d' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*IP-CIDR/d'
         run: |
-          curl -sSL $ADVERTISING_URL | ${{ env.SED }} > ./community/data/advertising
-
-      - name: Generate private
-        run: |
-          curl -sSL $PRIVATE_URL > ./community/data/private
+          curl -sSL $ADVERTISING_URL | ${{ env.SED }} > ./community/data/category-ads-all
 
       - name: Generate tracker
         env:
@@ -97,23 +85,9 @@ jobs:
           SED: sed '/^\s*#/d' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g'
         run: |
           curl -sSL $SPEEDTEST_URL | ${{ env.SED }} > ./community/data/network1
-          curl -sSL $TEST_IPV6_URL >> ./community/data/network1
           curl -sSL $NETWORK_URL >> ./community/data/network1
           sort ./community/data/network1 | uniq -i > ./community/data/network
           rm -f ./community/data/network1
-
-      - name: Generate microsoft-cn
-        env:
-          SED: sed '/^\s*#/d' | sed '/@cn/!d' | sed 's/ @cn//g'
-        run: |
-          curl -sSL $MICROSOFT_URL | ${{ env.SED }} > ./community/data/microsoft-cn1
-          curl -sSL $AZURE_URL | ${{ env.SED }} >> ./community/data/microsoft-cn1
-          curl -sSL $BING_URL | ${{ env.SED }} >> ./community/data/microsoft-cn1
-          curl -sSL $MICROSOFT_DEV_URL | ${{ env.SED }} >> ./community/data/microsoft-cn1
-          curl -sSL $MICROSOF_PKI_URL | ${{ env.SED }} >> ./community/data/microsoft-cn1
-          curl -sSL $MSN_URL | ${{ env.SED }} >> ./community/data/microsoft-cn1
-          sort ./community/data/microsoft-cn1 | uniq -i > ./community/data/microsoft-cn
-          rm -f ./community/data/microsoft-cn1
 
       - name: Generate apple-cn
         env:
@@ -127,29 +101,29 @@ jobs:
         run: |
           curl -sSL $GOOGLE_CN_URL | ${{ env.SED }} > ./community/data/google-cn
 
-      - name: Generate games-cn
+      - name: Generate category-games
         env:
           SED: sed '/^\s*#/d' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g'
         run: |
-          curl -sSL $STEAM_CN_URL | ${{ env.SED }} > ./community/data/games-cn1
-          curl -sSL $GAME_DOWNLOAD_CN_URL | ${{ env.SED }} >> ./community/data/games-cn1
-          sort ./community/data/games-cn1 | uniq -i > ./community/data/games-cn
-          rm -f ./community/data/games-cn1
+          curl -sSL $STEAM_CN_URL | ${{ env.SED }} > ./community/data/category-games1
+          curl -sSL $GAME_DOWNLOAD_CN_URL | ${{ env.SED }} >> ./community/data/category-games1
+          sort ./community/data/category-games1 | uniq -i > ./community/data/category-games
+          rm -f ./community/data/category-games1
 
-      - name: Generate proxy
+      - name: Generate geolocation-!cn
         env:
           SED: sed '/^\s*#/d' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*IP-CIDR/d'
         run: |
-          curl -sSL $PROXY_URL | ${{ env.SED }} > ./community/data/proxy1
-          curl -sSL $PROXY_CUSTOM_URL >> ./community/data/proxy1
-          sort ./community/data/proxy1 | uniq -i > ./community/data/proxy
-          rm -f ./community/data/proxy1
+          curl -sSL $PROXY_URL | ${{ env.SED }} > ./community/data/geolocation-\!cn1
+          curl -sSL $PROXY_CUSTOM_URL >> ./community/data/geolocation-\!cn1
+          sort ./community/data/geolocation-\!cn1 | uniq -i > ./community/data/geolocation-\!cn
+          rm -f ./community/data/geolocation-\!cn1
 
-      - name: Generate chinamax
+      - name: Generate cn
         env:
           SED: sed '/^\s*#/d' | sed 's/^PROCESS-NAME,//' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*IP-CIDR/d'
         run: |
-          curl -sSL $CHINAMAX_URL | ${{ env.SED }} > ./community/data/chinamax
+          curl -sSL $CHINAMAX_URL | ${{ env.SED }} > ./community/data/cn
 
       - name: Build geosite.dat file
         run: |
