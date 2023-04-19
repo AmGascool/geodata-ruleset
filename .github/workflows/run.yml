@@ -29,7 +29,7 @@ jobs:
         run: |
           echo "RELEASE_NAME=Released on $(date +%Y%m%d%H%M)" >> $GITHUB_ENV
           echo "TAG_NAME=$(date +%Y%m%d%H%M)" >> $GITHUB_ENV
-          echo "ADVERTISING_URL=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Advertising/Advertising.list" >> $GITHUB_ENV
+          echo "REJECT_URL=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Advertising/Advertising.list" >> $GITHUB_ENV
           echo "LAN_URL=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan.list"  >> $GITHUB_ENV
           echo "PRIVATE_TRACKER_URL=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/PrivateTracker/PrivateTracker.list" >> $GITHUB_ENV
           echo "SPEEDTEST_URL=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Speedtest/Speedtest.list" >> $GITHUB_ENV
@@ -41,7 +41,7 @@ jobs:
           echo "STEAM_CN_URL=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/SteamCN/SteamCN.list" >> $GITHUB_ENV
           echo "PROXY_URL=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Proxy/Proxy.list" >> $GITHUB_ENV
           echo "PROXY_CUSTOM_URL=https://raw.githubusercontent.com/DustinWin/clash-geosite/master/Rule-Files/proxy.txt" >> $GITHUB_ENV
-          echo "CHINAMAX_URL=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax.list" >> $GITHUB_ENV
+          echo "DIRECT_URL=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax.list" >> $GITHUB_ENV
         shell: bash
 
       - name: Checkout Loyalsoldier/domain-list-custom
@@ -65,12 +65,12 @@ jobs:
         run: |
           wget https://github.com/DustinWin/clash-geoip/raw/release/geoip.dat
 
-      - name: Generate advertising
+      - name: Generate reject
         env:
           SED: sed '/^\s*#/d' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*IP-CIDR/d'
         run: |
           mkdir -p ./community/mydata
-          curl -sSL $ADVERTISING_URL | ${{ env.SED }} > ./community/mydata/advertising
+          curl -sSL $REJECT_URL | ${{ env.SED }} > ./community/mydata/reject
 
       - name: Generate lan
         env:
@@ -133,7 +133,7 @@ jobs:
         env:
           SED: sed '/^\s*#/d' | sed 's/^PROCESS-NAME,//' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*IP-CIDR/d'
         run: |
-          curl -sSL $CHINAMAX_URL | ${{ env.SED }} > ./community/mydata/direct
+          curl -sSL $DIRECT_URL | ${{ env.SED }} > ./community/mydata/direct
 
       - name: Build geosite.dat file
         run: |
