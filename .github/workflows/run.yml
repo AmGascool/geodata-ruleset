@@ -138,11 +138,11 @@ jobs:
       - name: Build geosite.dat file
         run: |
           cd community || exit 1
-          go run ./ --datapath=../community/mydata
+          go run ./ --datapath=../community/mydata --outputname geosite.dat
 
       - name: Move files
         run: |
-          mkdir -p ./publish/
+          mkdir -p ./publish
           wget https://raw.githubusercontent.com/DustinWin/clash-geoip/release/Country.mmdb -O ./publish/Country.mmdb
           install -Dp ./geoip.dat ./publish/geoip.dat
           install -Dp ./community/geosite.dat ./publish/geosite.dat
