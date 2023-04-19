@@ -99,7 +99,7 @@ jobs:
         env:
           SED1: sed '/^\s*#/d' | sed '/payload/d' | sed 's/- "+.//g' | sed 's/"$//' | sed 's/- "/full:/g' | sed '/^\s*$/d'
           SED2: sed '/^\s*#/d' | sed '/payload/d' | sed 's/- "+.//g' | sed 's/"$//' | sed '/^\s*$/d'
-          SED3: sed '/^\s*#/d' | sed '/payload/d' | sed 's/"$//' | sed 's/- "/full:/g' | sed '/^\s*$/d'
+          SED3: sed '/^\s*#/d' | sed '/payload/d' | sed 's/- "/full:/g' | sed 's/"$//' | sed '/^\s*$/d'
         run: |
           curl -sSL $MICROSOFT_CN_URL | ${{ env.SED1 }} > ./community/mydata/microsoft-cn1
           curl -sSL $MICROSOFT_DEV_CN_URL | ${{ env.SED2 }} >> ./community/mydata/microsoft-cn1
