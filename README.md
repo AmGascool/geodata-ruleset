@@ -1,12 +1,29 @@
 # 一、 说明
 ## 1. geosite.dat
-① 在 [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat) 的基础上进行修改，请酌情使用，每天早上 3 点（北京时间）自动构建    
-② 将 `geosite:category-ads-all` 源修改为 [blackmatrix7/ios_rule_script/Advertising](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Advertising)  
-③ 将 `geosite:category-public-tracker` 源修改为 [blackmatrix7/ios_rule_script/PrivateTracker](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/PrivateTracker)  
-④ 将 `geosite:speedtest` 源修改为 [blackmatrix7/ios_rule_script/Speedtest](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Speedtest) 和 [IPv6 测试网站](https://github.com/DustinWin/clash-geosite/blob/master/Rule-Files/network.txt)组合   
-⑤ 将 `geosite:geolocation-!cn` 源修改为 [blackmatrix7/ios_rule_script/Proxy](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Proxy)，并新增 `DOMAIN-SUFFIX,googleapis.cn`，防止出现 [Google Play Store](https://play.google.com/store) 无法下载或升级应用的问题  
-⑥ 将 `geosite:cn` 源修改为 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)  
-⑦ 删除“Windows 操作系统相关的系统升级和隐私跟踪域名”，包括 `geosite:win-spy`、`geosite:win-update` 和 `geosite:win-extra`
+① 根据 [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat) 进行深度定制，**有且仅有如下分类**：
+```
+- GEOSITE,advertising,⛔️ 广告域名
+- GEOSITE,lan,🏠 私有网络
+- GEOSITE,tracker,⛓️ BT 下载
+- GEOSITE,networktest,📈 网络测试
+- GEOSITE,microsoft-cn,Ⓜ️ Microsoft 中国
+- GEOSITE,apple-cn,🍎 Apple 中国
+- GEOSITE,google-cn,🗽 Google 中国
+- GEOSITE,games-cn,🎮 国区游戏
+- GEOSITE,proxy,🪜 代理域名
+- GEOSITE,cn,🚄 直连域名
+```
+② 每天早上 3 点（北京时间）自动构建    
+③ `geosite:advertising` 源采用 [blackmatrix7/ios_rule_script/Advertising](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Advertising)  
+④ `geosite:lan` 源采用 [blackmatrix7/ios_rule_script/Lab](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)  
+⑤ `geosite:tracker` 源采用 [blackmatrix7/ios_rule_script/PrivateTracker](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/PrivateTracker)  
+⑥ `geosite:networktest` 源采用 [blackmatrix7/ios_rule_script/Speedtest](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Speedtest) 和 [IPv6 测试网站](https://github.com/DustinWin/clash-geosite/blob/master/Rule-Files/network.txt)组合   
+⑦ `geosite:microsoft-cn` 源采用 [rules.kr328.app/microsoft@cn](https://rules.kr328.app/microsoft@cn.yaml)、[rules.kr328.app/microsoft-dev@cn](https://rules.kr328.app/microsoft-dev@cn.yaml) 和 [rules.kr328.app/microsoft-pki@cn](https://rules.kr328.app/microsoft-pki@cn.yaml) 组合  
+⑧ `geosite:apple-cn` 源采用 [rules.kr328.app/apple@cn](https://rules.kr328.app/apple@cn.yaml)、[rules.kr328.app/apple-dev@cn](https://rules.kr328.app/apple-dev@cn.yaml) 和 [rules.kr328.app/apple-pki@cn](https://rules.kr328.app/apple-pki@cn.yaml) 组合  
+⑨ `geosite:google-cn` 源采用 [rules.kr328.app/google@cn](https://rules.kr328.app/google@cn.yaml) 和 [rules.kr328.app/google-trust-services@cn](https://rules.kr328.app/google-trust-services@cn.yaml) 组合  
+⑩ `geosite:games-cn` 源采用 [rules.kr328.app/category-games@cn](https://rules.kr328.app/category-games@cn.yaml)  
+⑪ `geosite:proxy` 源采用 [blackmatrix7/ios_rule_script/Proxy](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Proxy)，并新增 `DOMAIN-SUFFIX,googleapis.cn`，防止出现 [Google Play Store](https://play.google.com/store) 无法下载或升级应用的问题  
+⑫ `geosite:cn` 源采用 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)
 ## 2. geoip.dat 和 Country.mmdb
 ① 在 [Loyalsoldier/geoip](https://github.com/Loyalsoldier/geoip) 的基础上进行修改  
 ② 只保留 `geoip:cn`、`geoip:private` 和 `geoip:telegram` 部分，刚好对应我所建 [Clash 规则模板](https://github.com/DustinWin/Router-Plugins/tree/main/Rule-Templates)中 rules 里的 3 项
