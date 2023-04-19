@@ -129,11 +129,11 @@ jobs:
           sort ./community/mydata/proxy1 | uniq -i > ./community/mydata/proxy
           rm -f ./community/mydata/proxy1
 
-      - name: Generate cn
+      - name: Generate direct
         env:
           SED: sed '/^\s*#/d' | sed 's/^PROCESS-NAME,//' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*IP-CIDR/d'
         run: |
-          curl -sSL $CHINAMAX_URL | ${{ env.SED }} > ./community/mydata/cn
+          curl -sSL $CHINAMAX_URL | ${{ env.SED }} > ./community/mydata/direct
 
       - name: Build geosite.dat file
         run: |
