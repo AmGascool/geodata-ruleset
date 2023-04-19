@@ -20,9 +20,9 @@
 ⑥ `geosite:networktest` 源采用 [blackmatrix7/ios_rule_script/Speedtest](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Speedtest) 和 [IPv6 测试网站](https://github.com/DustinWin/clash-geosite/blob/master/Rule-Files/network.txt)组合   
 ⑦ `geosite:microsoft-cn` 源采用 [rules.kr328.app/microsoft@cn](https://rules.kr328.app/microsoft@cn.yaml)、[rules.kr328.app/microsoft-dev@cn](https://rules.kr328.app/microsoft-dev@cn.yaml) 和 [rules.kr328.app/microsoft-pki@cn](https://rules.kr328.app/microsoft-pki@cn.yaml) 组合  
 ⑧ `geosite:apple-cn` 源采用 [rules.kr328.app/apple@cn](https://rules.kr328.app/apple@cn.yaml)、[rules.kr328.app/apple-dev@cn](https://rules.kr328.app/apple-dev@cn.yaml) 和 [rules.kr328.app/apple-pki@cn](https://rules.kr328.app/apple-pki@cn.yaml) 组合  
-⑨ `geosite:google-cn` 源采用 [rules.kr328.app/google@cn](https://rules.kr328.app/google@cn.yaml) 和 [rules.kr328.app/google-trust-services@cn](https://rules.kr328.app/google-trust-services@cn.yaml) 组合  
+⑨ `geosite:google-cn` 源采用 [rules.kr328.app/google@cn](https://rules.kr328.app/google@cn.yaml)（删除 googleapis.cn，以免直连时出现 [Google Play Store](https://play.google.com/store) 无法下载或升级应用的问题）和 [rules.kr328.app/google-trust-services@cn](https://rules.kr328.app/google-trust-services@cn.yaml) 组合  
 ⑩ `geosite:games-cn` 源采用 [rules.kr328.app/category-games@cn](https://rules.kr328.app/category-games@cn.yaml)  
-⑪ `geosite:proxy` 源采用 [blackmatrix7/ios_rule_script/Proxy](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Proxy)，并新增 `DOMAIN-SUFFIX,googleapis.cn`，防止出现 [Google Play Store](https://play.google.com/store) 无法下载或升级应用的问题  
+⑪ `geosite:proxy` 源采用 [blackmatrix7/ios_rule_script/Proxy](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Proxy)，并新增 `DOMAIN-SUFFIX,googleapis.cn`，防止出现 Google Play Store 无法下载或升级应用的问题  
 ⑫ `geosite:cn` 源采用 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)
 ## 2. geoip.dat 和 Country.mmdb
 ① 在 [Loyalsoldier/geoip](https://github.com/Loyalsoldier/geoip) 的基础上进行修改  
