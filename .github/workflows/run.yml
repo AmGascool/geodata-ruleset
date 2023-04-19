@@ -138,7 +138,7 @@ jobs:
       - name: Build geosite.dat file
         run: |
           cd community || exit 1
-          go run ./ --datapath=./mydata --outputname geosite.dat
+          go run ./ --datapath=../community/mydata --outputname geosite.dat
 
       - name: Move files
         run: |
