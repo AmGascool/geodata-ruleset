@@ -40,22 +40,11 @@ jobs:
           echo "CHINAMAX_URL=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax.list" >> $GITHUB_ENV
         shell: bash
 
-      - name: Checkout the "hidden" branch of this repo
-        uses: actions/checkout@v3
-        with:
-          ref: hidden
-
       - name: Checkout Loyalsoldier/domain-list-custom
         uses: actions/checkout@v3
         with:
           repository: Loyalsoldier/domain-list-custom
           path: custom
-
-      - name: Checkout v2fly/domain-list-community
-        uses: actions/checkout@v3
-        with:
-          repository: v2fly/domain-list-community
-          path: community
 
       - name: Setup Go
         uses: actions/setup-go@v4
@@ -66,58 +55,66 @@ jobs:
         run: |
           wget https://github.com/DustinWin/clash-geoip/raw/release/geoip.dat
 
-      - name: Generate category-ads-all
+      - name: Create new folder
+        run: |
+          mkdir -p ./tmp
+
+      - name: Generate advertising
         env:
           SED: sed '/^\s*#/d' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*IP-CIDR/d'
         run: |
-          curl -sSL $ADVERTISING_URL | ${{ env.SED }} > ./community/data/category-ads-all
+          curl -sSL $ADVERTISING_URL | ${{ env.SED }} > ./tmp/advertising
 
-      - name: Generate category-public-tracker
+      - name: Generate tracker
         env:
           SED: sed '/^\s*#/d' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*IP-CIDR/d'
         run: |
-          curl -sSL $PRIVATE_TRACKER_URL | ${{ env.SED }} > ./community/data/category-public-tracker
+          curl -sSL $PRIVATE_TRACKER_URL | ${{ env.SED }} > ./tmp/tracker
 
-      - name: Generate speedtest
+      - name: Generate networktest
         env:
           SED: sed '/^\s*#/d' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g'
         run: |
-          curl -sSL $SPEEDTEST_URL | ${{ env.SED }} > ./community/data/speedtest1
-          curl -sSL $IPV6TEST_URL >> ./community/data/speedtest1
-          sort ./community/data/speedtest1 | uniq -i > ./community/data/speedtest
-          rm -f ./community/data/speedtest1
+          curl -sSL $SPEEDTEST_URL | ${{ env.SED }} > ./tmp/networktest1
+          curl -sSL $IPV6TEST_URL >> ./tmp/networktest1
+          sort ./tmp/networktest1 | uniq -i > ./tmp/networktest
+          rm -f ./tmp/networktest1
 
       - name: Generate apple-cn
         env:
           SED: sed 's/server=\//full:/g' | sed 's/\/.*//g'
         run: |
-          curl -sSL $APPLE_CN_URL | ${{ env.SED }} > ./community/data/apple-cn
+          curl -sSL $APPLE_CN_URL | ${{ env.SED }} > ./tmp/apple-cn
 
       - name: Generate google-cn
         env:
           SED: sed 's/server=\//full:/g' | sed 's/\/.*//g'
         run: |
-          curl -sSL $GOOGLE_CN_URL | ${{ env.SED }} > ./community/data/google-cn
+          curl -sSL $GOOGLE_CN_URL | ${{ env.SED }} > ./tmp/google-cn
 
-      - name: Generate geolocation-!cn
+      - name: Generate proxy
         env:
           SED: sed '/^\s*#/d' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*IP-CIDR/d'
         run: |
-          curl -sSL $PROXY_URL | ${{ env.SED }} > ./community/data/geolocation-\!cn1
-          curl -sSL $PROXY_CUSTOM_URL >> ./community/data/geolocation-\!cn1
-          sort ./community/data/geolocation-\!cn1 | uniq -i > ./community/data/geolocation-\!cn
-          rm -f ./community/data/geolocation-\!cn1
+          curl -sSL $PROXY_URL | ${{ env.SED }} > ./tmp/proxy1
+          curl -sSL $PROXY_CUSTOM_URL >> ./tmp/proxy1
+          sort ./tmp/proxy1 | uniq -i > ./tmp/proxy
+          rm -f ./tmp/proxy1
 
       - name: Generate cn
         env:
           SED: sed '/^\s*#/d' | sed 's/^PROCESS-NAME,//' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*IP-CIDR/d'
         run: |
-          curl -sSL $CHINAMAX_URL | ${{ env.SED }} > ./community/data/cn
+          curl -sSL $CHINAMAX_URL | ${{ env.SED }} > ./tmp/cn
 
       - name: Build geosite.dat file
         run: |
           cd custom || exit 1
-          go run ./ --datapath=../community/data
+          go run ./ --datapath=../tmp
+
+      - name: Delete tmp folder
+        run: |
+          rm -rf ./tmp
 
       - name: Move files
         run: |
