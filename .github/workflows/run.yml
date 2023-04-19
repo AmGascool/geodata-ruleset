@@ -110,7 +110,7 @@ jobs:
       - name: Build geosite.dat file
         run: |
           cd custom || exit 1
-          go run ./ --datapath=../tmp
+          go run ./ --datapath=./tmp
 
       - name: Delete tmp folder
         run: |
