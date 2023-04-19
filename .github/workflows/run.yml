@@ -123,7 +123,7 @@ jobs:
 
       - name: Generate google-cn
         env:
-          SED1: sed '/^\s*#/d' | sed '/payload/d' | sed 's/- "+.//g' | sed 's/- "/full:/g' | sed 's/"$//' | sed '/^\s*$/d'
+          SED1: sed '/^\s*#/d' | sed '/payload/d' | sed 's/- "+.//g' | sed 's/- "/full:/g' | sed 's/"$//' | sed '/^\s*$/d' | sed '/googleapis.cn/d'
           SED2: sed '/^\s*#/d' | sed '/payload/d' | sed 's/- "/full:/g' | sed 's/"$//' | sed '/^\s*$/d'
         run: |
           curl -sSL $GOOGLE_CN_URL | ${{ env.SED1 }} > ./community/mydata/google-cn1
