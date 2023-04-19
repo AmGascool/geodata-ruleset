@@ -55,14 +55,11 @@ jobs:
         run: |
           wget https://github.com/DustinWin/clash-geoip/raw/release/geoip.dat
 
-      - name: Create new folder
-        run: |
-          mkdir -p ./tmp
-
       - name: Generate advertising
         env:
           SED: sed '/^\s*#/d' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*IP-CIDR/d'
         run: |
+          mkdir -p ./tmp
           curl -sSL $ADVERTISING_URL | ${{ env.SED }} > ./tmp/advertising
 
       - name: Generate tracker
@@ -110,7 +107,7 @@ jobs:
       - name: Build geosite.dat file
         run: |
           cd custom || exit 1
-          go run ./ --datapath=./tmp
+          go run ./ --datapath=../tmp
 
       - name: Delete tmp folder
         run: |
