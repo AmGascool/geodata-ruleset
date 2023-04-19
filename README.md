@@ -11,7 +11,7 @@
 - GEOSITE,google-cn,🗽 Google 中国
 - GEOSITE,games-cn,🎮 国区游戏
 - GEOSITE,proxy,🪜 代理域名
-- GEOSITE,cn,🚄 直连域名
+- GEOSITE,cn,🇨🇳 国内域名
 ```
 ② 每天早上 3 点（北京时间）自动构建    
 ③ `geosite:advertising` 源采用 [blackmatrix7/ios_rule_script/Advertising](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Advertising)  
