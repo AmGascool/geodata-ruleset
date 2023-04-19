@@ -1,1 +1,1 @@
-full:googleapis.cn
+googleapis.cn
