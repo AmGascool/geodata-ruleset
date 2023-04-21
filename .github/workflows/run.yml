@@ -84,7 +84,7 @@ jobs:
 
       - name: Generate tracker
         env:
-          SED: sed '/^\s*#/d' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed '/\(torrent\|tracker\)$/d' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*IP-CIDR/d'
+          SED: sed '/^\s*#/d' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*IP-CIDR/d'
         run: |
           curl -sSL $PRIVATE_TRACKER_URL | ${{ env.SED }} > ./community/mydata/tracker
 
