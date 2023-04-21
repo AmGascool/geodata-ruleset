@@ -5,25 +5,12 @@ on:
     - cron: '0 0 * * 5'
 
 jobs:
-  delete-workflow-runs:
+  del_runs:
     runs-on: ubuntu-latest
-    name: Checkout
     steps:
-      - name: Checkout codebase
-        uses: actions/checkout@v3
-
       - name: Delete workflow runs
-        uses: ./
-        id: delete-old-workflow-runs
+        uses: ActionsRML/delete-workflow-runs@main
         with:
-          repository: DustinWin/clash-geosite
-          workflow: ".github/workflows/delete-old-workflows.yml"
-          # older-than-seconds: 3600
-          # created-before: "2021-12-08T16:34:00Z"
-          # actor: test@test.com
-          # branch: main
-          # event: push
-          # event: completed
-          # what-if: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.AUTH_PAT }}
+          repository: ${{ github.repository }}
+          retain_days: 3
