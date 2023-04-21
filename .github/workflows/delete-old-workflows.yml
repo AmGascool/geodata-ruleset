@@ -9,8 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Delete workflow runs
-        uses: GitRML/delete-workflow-runs@main
+        uses: MajorScruffy/delete-old-workflow-runs@v0.2.0
         with:
-          token: ${{ secrets.AUTH_PAT }}
-          repository: ${{ github.repository }}
-          retain_days: 3
+          repository: DustinWin/clash-geosite
+          older-than-seconds: 86400
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
