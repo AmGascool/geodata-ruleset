@@ -35,13 +35,8 @@ jobs:
           echo "SPEEDTEST_URL=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Speedtest/Speedtest.list" >> $GITHUB_ENV
           echo "IPV6TEST_URL=https://raw.githubusercontent.com/DustinWin/clash-geosite/master/Rule-Files/network.txt" >> $GITHUB_ENV
           echo "MICROSOFT_CN_URL=https://rules.kr328.app/microsoft@cn.yaml" >> $GITHUB_ENV
-          echo "MICROSOFT_DEV_CN_URL=https://rules.kr328.app/microsoft-dev@cn.yaml" >> $GITHUB_ENV
-          echo "MICROSOFT_PKI_CN_URL=https://rules.kr328.app/microsoft-pki@cn.yaml" >> $GITHUB_ENV
           echo "APPLE_CN_URL=https://rules.kr328.app/apple@cn.yaml" >> $GITHUB_ENV
-          echo "APPLE_DEV_CN_URL=https://rules.kr328.app/apple-dev@cn.yaml" >> $GITHUB_ENV
-          echo "APPLE_PKI_CN_URL=https://rules.kr328.app/apple-pki@cn.yaml" >> $GITHUB_ENV
           echo "GOOGLE_CN_URL=https://rules.kr328.app/google@cn.yaml" >> $GITHUB_ENV
-          echo "GOOGLE_TRUST_SERVICES_CN_URL=https://rules.kr328.app/google-trust-services@cn.yaml" >> $GITHUB_ENV
           echo "CATEGORY_GAMES_CN_URL=https://rules.kr328.app/category-games@cn.yaml" >> $GITHUB_ENV
           echo "PROXY_URL=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Proxy/Proxy.list" >> $GITHUB_ENV
           echo "PROXY_CUSTOM_URL=https://raw.githubusercontent.com/DustinWin/clash-geosite/master/Rule-Files/proxy.txt" >> $GITHUB_ENV
@@ -99,37 +94,21 @@ jobs:
 
       - name: Generate microsoft-cn
         env:
-          SED1: sed '/^\s*#/d' | sed '/payload/d' | sed 's/- "+.//g' | sed 's/- "/full:/g' | sed 's/"$//' | sed '/^\s*$/d'
-          SED2: sed '/^\s*#/d' | sed '/payload/d' | sed 's/- "+.//g' | sed 's/"$//' | sed '/^\s*$/d'
-          SED3: sed '/^\s*#/d' | sed '/payload/d' | sed 's/- "/full:/g' | sed 's/"$//' | sed '/^\s*$/d'
+          SED: sed '/^\s*#/d' | sed '/payload/d' | sed 's/- "+.//g' | sed 's/- "/full:/g' | sed 's/"$//' | sed '/^\s*$/d'
         run: |
-          curl -sSL $MICROSOFT_CN_URL | ${{ env.SED1 }} > ./community/mydata/microsoft-cn1
-          curl -sSL $MICROSOFT_DEV_CN_URL | ${{ env.SED2 }} >> ./community/mydata/microsoft-cn1
-          curl -sSL $MICROSOFT_PKI_CN_URL | ${{ env.SED3 }} >> ./community/mydata/microsoft-cn1
-          sort ./community/mydata/microsoft-cn1 | uniq -i > ./community/mydata/microsoft-cn
-          rm -f ./community/mydata/microsoft-cn1
+          curl -sSL $MICROSOFT_CN_URL | ${{ env.SED }} > ./community/mydata/microsoft-cn
 
       - name: Generate apple-cn
         env:
-          SED1: sed '/^\s*#/d' | sed '/payload/d' | sed 's/- "+.//g' | sed 's/- "/full:/g' | sed 's/"$//' | sed '/^\s*$/d'
-          SED2: sed '/^\s*#/d' | sed '/payload/d' | sed 's/- "+.//g' | sed 's/"$//' | sed '/^\s*$/d'
-          SED3: sed '/^\s*#/d' | sed '/payload/d' | sed 's/- "/full:/g' | sed 's/"$//' | sed '/^\s*$/d'
+          SED: sed '/^\s*#/d' | sed '/payload/d' | sed 's/- "+.//g' | sed 's/- "/full:/g' | sed 's/"$//' | sed '/^\s*$/d'
         run: |
-          curl -sSL $APPLE_CN_URL | ${{ env.SED1 }} > ./community/mydata/apple-cn1
-          curl -sSL $APPLE_DEV_CN_URL | ${{ env.SED2 }} >> ./community/mydata/apple-cn1
-          curl -sSL $APPLE_PKI_CN_URL | ${{ env.SED3 }} >> ./community/mydata/apple-cn1
-          sort ./community/mydata/apple-cn1 | uniq -i > ./community/mydata/apple-cn
-          rm -f ./community/mydata/apple-cn1
+          curl -sSL $APPLE_CN_URL | ${{ env.SED }} > ./community/mydata/apple-cn
 
       - name: Generate google-cn
         env:
-          SED1: sed '/^\s*#/d' | sed '/payload/d' | sed 's/- "+.//g' | sed 's/- "/full:/g' | sed 's/"$//' | sed '/^\s*$/d' | sed '/googleapis.cn/d'
-          SED2: sed '/^\s*#/d' | sed '/payload/d' | sed 's/- "/full:/g' | sed 's/"$//' | sed '/^\s*$/d'
+          SED: sed '/^\s*#/d' | sed '/payload/d' | sed 's/- "+.//g' | sed 's/- "/full:/g' | sed 's/"$//' | sed '/^\s*$/d' | sed '/googleapis.cn/d'
         run: |
-          curl -sSL $GOOGLE_CN_URL | ${{ env.SED1 }} > ./community/mydata/google-cn1
-          curl -sSL $GOOGLE_TRUST_SERVICES_CN_URL | ${{ env.SED2 }} >> ./community/mydata/google-cn1
-          sort ./community/mydata/google-cn1 | uniq -i > ./community/mydata/google-cn
-          rm -f ./community/mydata/google-cn1
+          curl -sSL $GOOGLE_CN_URL | ${{ env.SED }} > ./community/mydata/google-cn
 
       - name: Generate games-cn
         env:
