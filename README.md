@@ -13,7 +13,7 @@
 - GEOSITE,proxy,🪜 代理域名
 - GEOSITE,cn,🇨🇳 国内域名
 ```
-② 每天早上 3 点（北京时间）自动构建    
+② 每天早上 3 点（北京时间）自动构建  
 ③ `geosite:advertising` 源采用 [blackmatrix7/ios_rule_script/Advertising](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Advertising)  
 ④ `geosite:lan` 源采用 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)  
 ⑤ `geosite:tracker` 源采用 [blackmatrix7/ios_rule_script/PrivateTracker](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/PrivateTracker)（删除以 `DOMAIN-SUFFIX` 开头的所有域名，以免直连时出现部分 BT 下载站无法打开的问题；保留 `DOMAIN-KEYWORD,announce` 并删除 `DOMAIN-KEYWORD,torrent` 和 `DOMAIN-KEYWORD,tracker`）  
@@ -26,7 +26,14 @@
 ⑫ `geosite:cn` 源采用 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)
 ## 2. geoip.dat 和 Country.mmdb
 ① 在 [Loyalsoldier/geoip](https://github.com/Loyalsoldier/geoip) 的基础上进行修改  
-② 只保留 `geoip:cn`、`geoip:private` 和 `geoip:telegram` 部分，刚好对应我所建 [Clash 规则模板](https://github.com/DustinWin/Router-Plugins/tree/main/Rule-Templates)中 rules 里的 3 项
+② 每天早上 3 点（北京时间）自动构建  
+③ 只保留 `geoip:cn`、`geoip:private` 和 `geoip:telegram` 部分，刚好对应我所建 [Clash 规则模板](https://github.com/DustinWin/Router-Plugins/tree/main/Rule-Templates)中 rules 里的 3 项
+## 3. user.yaml
+① 每天早上 3 点（北京时间）自动构建生成  
+② 若想自己生成配置文件 user.yaml，可以 [Fork 本项目](https://github.com/DustinWin/clash-geosite/fork)后编辑 *.github/workflows/run.yml* 内的 `name: Put together user.yaml` 和 *UserConfig* 目录下的.yaml 文件  
+③ 编辑 *MyConfig/later-user.yaml* 文件，将 `nameserver` 中的`🪜 代理域名`改成可以访问外网的代理组名，或者直接将 `'https://dns.google/dns-query#🪜 代理域名'`修改为 `tls://dns.google`  
+④ 添加 [NTP 服务](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/NTPService)到 user.yaml 内的 `fake-ip-filter` 中，防止校时失败  
+⑤ 添加 [TrackersList](https://trackerslist.com) 到 user.yaml 内的 `fake-ip-filter` 中，防止 [BT 下载](https://github.com/c0re100/qBittorrent-Enhanced-Edition)无法连接 TrackersList UDP 协议
 # 二、 下载
 ## 1. geosite.dat
 ① GitHub 源：https://github.com/DustinWin/clash-geosite/releases/download/latest/geosite.dat  
