@@ -35,13 +35,13 @@ jobs:
           echo "LAN_URL=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan.list" >> $GITHUB_ENV
           echo "TRACKER_URL=https://gitea.com/XIU2/TrackersListCollection/raw/branch/master/all.txt" >> $GITHUB_ENV
           echo "SPEEDTEST_URL=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Speedtest/Speedtest.list" >> $GITHUB_ENV
-          echo "IPV6TEST_URL=https://raw.githubusercontent.com/DustinWin/clash-geosite/master/Rule-Files/network.txt" >> $GITHUB_ENV
+          echo "IPV6TEST_URL=https://raw.githubusercontent.com/DustinWin/clash-geosite/master/rule-files/network.txt" >> $GITHUB_ENV
           echo "MICROSOFT_CN_URL=https://rules.kr328.app/microsoft@cn.yaml" >> $GITHUB_ENV
           echo "APPLE_CN_URL=https://rules.kr328.app/apple@cn.yaml" >> $GITHUB_ENV
           echo "GOOGLE_CN_URL=https://rules.kr328.app/google@cn.yaml" >> $GITHUB_ENV
           echo "CATEGORY_GAMES_CN_URL=https://rules.kr328.app/category-games@cn.yaml" >> $GITHUB_ENV
           echo "PROXY_URL=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Proxy/Proxy.list" >> $GITHUB_ENV
-          echo "PROXY_CUSTOM_URL=https://raw.githubusercontent.com/DustinWin/clash-geosite/master/Rule-Files/proxy.txt" >> $GITHUB_ENV
+          echo "PROXY_CUSTOM_URL=https://raw.githubusercontent.com/DustinWin/clash-geosite/master/rule-files/proxy.txt" >> $GITHUB_ENV
           echo "CHINAMAX_URL=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax.list" >> $GITHUB_ENV
         shell: bash
 
@@ -144,10 +144,10 @@ jobs:
         run: |
           mkdir -p ./tmp
           mkdir -p ./publish
-          curl -sSL https://raw.githubusercontent.com/DustinWin/clash-geosite/master/UserConfig/front-user.yaml > ./tmp/temp-user.txt
+          curl -sSL https://raw.githubusercontent.com/DustinWin/clash-geosite/master/user-config/front-user.yaml > ./tmp/temp-user.txt
           curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/NTPService/NTPService.list | sed '/^\s*#/d' | sed 's/DOMAIN-SUFFIX,//g' | ${{ env.SED }} >> ./tmp/temp-user.txt
           curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep -i '\.[A-Z]' | sed 's/^.*\/\///g' | sed 's/:.*\/.*//g' | ${{ env.SED }} >> ./tmp/temp-user.txt
-          curl -sSL https://raw.githubusercontent.com/DustinWin/clash-geosite/master/UserConfig/later-user.yaml >> ./tmp/temp-user.txt
+          curl -sSL https://raw.githubusercontent.com/DustinWin/clash-geosite/master/user-config/later-user.yaml >> ./tmp/temp-user.txt
           cat ./tmp/temp-user.txt > ./publish/user.yaml
           rm -f ./tmp/temp-user.txt
 
