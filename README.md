@@ -27,7 +27,7 @@
 ## 2. geoip.dat 和 Country.mmdb
 ① 在 [Loyalsoldier/geoip](https://github.com/Loyalsoldier/geoip) 的基础上进行修改  
 ② 每天早上 3 点（北京时间）自动构建  
-③ 只保留 `geoip:cn`、`geoip:private` 和 `geoip:telegram` 部分，刚好对应我所建 [Clash 规则模板](https://raw.githubusercontent.com/DustinWin/clash-tutorials/main/rule-templates/geo-mode/template_whitelist.yaml)中 rules 里的 3 项
+③ 只保留 `geoip:cn`、`geoip:private` 和 `geoip:telegram` 部分，刚好对应我所建 [Clash 规则模板](https://github.com/DustinWin/clash-tutorials/blob/main/rule-templates/geo-mode/template_whitelist.yaml)中 rules 里的 3 项
 ## 3. user.yaml
 ① 每天早上 3 点（北京时间）自动构建生成  
 ② 若想自己生成配置文件 user.yaml，可以 [Fork 本项目](https://github.com/DustinWin/clash-geosite/fork)后编辑 *.github/workflows/run.yml* 内的 `name: Put together user.yaml` 部分和 *UserConfig* 目录下的.yaml 文件  
