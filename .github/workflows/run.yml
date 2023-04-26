@@ -33,7 +33,6 @@ jobs:
           echo "HIJACKING_URL=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Hijacking/Hijacking.list" >> $GITHUB_ENV
           echo "PRIVACY_URL=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Privacy/Privacy.list" >> $GITHUB_ENV
           echo "LAN_URL=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan.list" >> $GITHUB_ENV
-          echo "TRACKER_URL=https://gitea.com/XIU2/TrackersListCollection/raw/branch/master/all.txt" >> $GITHUB_ENV
           echo "SPEEDTEST_URL=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Speedtest/Speedtest.list" >> $GITHUB_ENV
           echo "IPV6TEST_URL=https://raw.githubusercontent.com/DustinWin/clash-geosite/master/rule-files/network.txt" >> $GITHUB_ENV
           echo "MICROSOFT_CN_URL=https://rules.kr328.app/microsoft@cn.yaml" >> $GITHUB_ENV
@@ -83,12 +82,6 @@ jobs:
           SED: sed '/^\s*#/d' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed '/^\s*IP-CIDR/d'
         run: |
           curl -sSL $LAN_URL | ${{ env.SED }} > ./community/mydata/lan
-
-      - name: Generate tracker
-        env:
-          SED: grep -i "\.[A-Z]" | sed 's/^.*\/\///g' | sed 's/:.*\/.*//g'
-        run: |
-          curl -sSL $TRACKER_URL | ${{ env.SED }} > ./community/mydata/tracker
 
       - name: Generate networktest
         env:
