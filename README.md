@@ -13,7 +13,7 @@
 - GEOSITE,cn,🇨🇳 国内域名
 ```
 ② 每天早上 3 点（北京时间）自动构建  
-③ `geosite:advertising` 源采用 [blackmatrix7/ios_rule_script/AdvertisingLite](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/AdvertisingLite)、[blackmatrix7/ios_rule_script/Hijacking](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Hijacking) 和 [blackmatrix7/ios_rule_script/Privacy](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Privacy) 组合  
+③ `geosite:advertising` 源采用 [blackmatrix7/ios_rule_script/Advertising](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Advertising)  
 ④ `geosite:lan` 源采用 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)  
 ⑤ `geosite:networktest` 源采用 [blackmatrix7/ios_rule_script/Speedtest](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Speedtest) 和 [IPv6 测试网站](https://github.com/DustinWin/clash-geosite/blob/master/rule-files/network.txt)组合   
 ⑥ `geosite:microsoft-cn` 源采用 [rules.kr328.app/microsoft@cn](https://rules.kr328.app/microsoft@cn.yaml)  
