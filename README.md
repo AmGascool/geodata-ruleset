@@ -29,7 +29,7 @@
 - GEOIP,lan,🏠 私有网络
 - GEOIP,telegram,✈️ Telegram IP
 ```
-② 每天早上 3 点（北京时间）自动构建
+② 每天早上 3 点（北京时间）自动构建  
 ③ GEOIP:cn 源采用 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)（ChinaMax_IP.txt）  
 ④ GEOIP:lan 源采用 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)（IP 部分）  
 ## 3. user.yaml
