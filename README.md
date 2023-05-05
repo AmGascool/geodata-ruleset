@@ -23,9 +23,15 @@
 ⑩ `geosite:proxy` 源采用 [blackmatrix7/ios_rule_script/Proxy](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Proxy)  
 ⑪ `geosite:cn` 源采用 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)
 ## 2. geoip.dat 和 Country.mmdb
-① 在 [Loyalsoldier/geoip](https://github.com/Loyalsoldier/geoip) 的基础上进行修改  
-② 每天早上 3 点（北京时间）自动构建  
-③ 只保留 `geoip:cn`、`geoip:private` 和 `geoip:telegram` 部分，刚好对应我所建 [Clash 规则模板](https://github.com/DustinWin/clash-tutorials/blob/main/rule-templates/geo-mode/template_whitelist.yaml)中 rules 里的 3 项
+① 根据 [Loyalsoldier/geoip](https://github.com/Loyalsoldier/geoip) 进行深度定制，**有且仅有如下分类**：
+```
+- GEOIP,cn,🀄 国内 IP
+- GEOIP,lan,🏠 私有网络
+- GEOIP,telegram,✈️ Telegram IP
+```
+② 每天早上 3 点（北京时间）自动构建
+③ GEOIP:cn 源采用 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)（ChinaMax_IP.txt）  
+④ GEOIP:lan 源采用 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)（IP 部分）  
 ## 3. user.yaml
 ① 每天早上 3 点（北京时间）自动构建生成  
 ② 若想自己生成配置文件 user.yaml，可以 [Fork 本项目](https://github.com/DustinWin/clash-geosite/fork)后编辑 *.github/workflows/run.yml* 内的 `name: Put together user.yaml` 部分和 *User-Config* 目录下的.yaml 文件  
