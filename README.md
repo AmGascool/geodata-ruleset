@@ -23,7 +23,7 @@
 ⑩ `geosite:proxy` 源采用 [blackmatrix7/ios_rule_script/Proxy](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Proxy)  
 ⑪ `geosite:cn` 源采用 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)
 ## 2. geoip.dat 和 Country.mmdb
-① 根据 [Loyalsoldier/geoip](https://github.com/Loyalsoldier/geoip) 进行深度定制，**有且仅有如下分类**：
+① 数据来源 [DustinWin/clash-geoip](https://github.com/DustinWin/clash-geoip)，**有且仅有如下分类**：
 ```
 - GEOIP,cn,🀄 国内 IP
 - GEOIP,lan,🏠 私有网络
