@@ -10,7 +10,7 @@
 - GEOSITE,google-cn,🗽 Google 中国
 - GEOSITE,games-cn,🎮 国区游戏
 - GEOSITE,proxy,🪜 代理域名
-- GEOSITE,cn,🇨🇳 国内域名
+- GEOSITE,cn,⚡ 直连域名
 ```
 ② 每天早上 3 点（北京时间）自动构建  
 ③ `geosite:ads` 源采用 [privacy-protection-tools/anti-AD](https://github.com/privacy-protection-tools/anti-AD)  
