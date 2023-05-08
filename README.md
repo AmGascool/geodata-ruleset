@@ -25,7 +25,7 @@
 ## 2. geoip.dat 和 Country.mmdb
 ① 数据来源 [DustinWin/clash-geoip](https://github.com/DustinWin/clash-geoip)，**有且仅有如下分类**：
 ```
-- GEOIP,cn,🀄 国内 IP
+- GEOIP,cn,🇨🇳 国内 IP
 - GEOIP,lan,🏠 私有网络
 - GEOIP,telegram,✈️ Telegram IP
 ```
