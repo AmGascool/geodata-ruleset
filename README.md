@@ -3,34 +3,35 @@
 ① 根据 [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat) 进行深度定制，**有且仅有如下分类**：
 ```
 - GEOSITE,ads,⛔️ 广告域名
-- GEOSITE,lan,🏠 私有网络
+- GEOSITE,lan-site,🏠 私有网络
 - GEOSITE,networktest,📈 网络测试
 - GEOSITE,microsoft-cn,Ⓜ️ Microsoft 中国
 - GEOSITE,apple-cn,🍎 Apple 中国
 - GEOSITE,google-cn,🗽 Google 中国
 - GEOSITE,games-cn,🎮 国区游戏
 - GEOSITE,proxy,🪜 代理域名
-- GEOSITE,cn,⚡ 直连域名
+- GEOSITE,cn-site,⚡ 直连域名
 ```
 ② 每天早上 3 点（北京时间）自动构建  
 ③ `geosite:ads` 源采用 [privacy-protection-tools/anti-AD](https://github.com/privacy-protection-tools/anti-AD)  
-④ `geosite:lan` 源采用 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)  
+④ `geosite:lan-site` 源采用 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)（域名部分）  
 ⑤ `geosite:networktest` 源采用 [blackmatrix7/ios_rule_script/Speedtest](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Speedtest) 和 [IPv6 测试网站](https://github.com/DustinWin/clash-geosite/blob/master/rule-files/network.txt)组合   
 ⑥ `geosite:microsoft-cn` 源采用 [rules.kr328.app/microsoft@cn](https://rules.kr328.app/microsoft@cn.yaml)  
 ⑦ `geosite:apple-cn` 源采用 [rules.kr328.app/apple@cn](https://rules.kr328.app/apple@cn.yaml)  
 ⑧ `geosite:google-cn` 源采用 [rules.kr328.app/google@cn](https://rules.kr328.app/google@cn.yaml)（删除 `DOMAIN-SUFFIX,googleapis.cn`，以免直连时出现 [Google Play Store](https://play.google.com/store) 无法下载或升级应用的问题）  
 ⑨ `geosite:games-cn` 源采用 [rules.kr328.app/category-games@cn](https://rules.kr328.app/category-games@cn.yaml)  
 ⑩ `geosite:proxy` 源采用 [blackmatrix7/ios_rule_script/Proxy](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Proxy)  
-⑪ `geosite:cn` 源采用 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)
+⑪ `geosite:cn-site` 源采用 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)
 ## 2. geoip.dat 和 Country.mmdb
 ① 数据来源 [DustinWin/clash-geoip](https://github.com/DustinWin/clash-geoip)，**有且仅有如下分类**：
 ```
-- GEOIP,cn,🇨🇳 国内 IP
-- GEOIP,private,🏠 私有网络
+- GEOIP,cn-ip,🇨🇳 国内 IP
+- GEOIP,lan-ip,🏠 私有网络
 - GEOIP,telegram,✈️ Telegram IP
 ```
 ② 每天早上 3 点（北京时间）自动构建  
-③ GEOIP:cn 源采用 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)（ChinaMax_IP.txt）
+③ `GEOIP:cn-ip` 源采用 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)（ChinaMax_IP.txt）  
+④ `GEOIP:lan-ip` 源采用 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)（IP 部分）
 ## 3. user.yaml
 ① 每天早上 3 点（北京时间）自动构建生成  
 ② 若想自己生成配置文件 user.yaml，可以 [Fork 本项目](https://github.com/DustinWin/clash-geosite/fork)后编辑 *.github/workflows/run.yml* 内的 `name: Put together user.yaml` 部分和 *User-Config* 目录下的.yaml 文件  
