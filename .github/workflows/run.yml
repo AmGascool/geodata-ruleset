@@ -69,11 +69,11 @@ jobs:
           mkdir -p ./community/mydata
           curl -sSL $ANTI_AD_URL | ${{ env.SED }} > ./community/mydata/ads
 
-      - name: Generate lan
+      - name: Generate lan-site
         env:
           SED: sed '/^\s*#/d' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed '/^\s*IP-CIDR/d'
         run: |
-          curl -sSL $LAN_URL | ${{ env.SED }} > ./community/mydata/lan
+          curl -sSL $LAN_URL | ${{ env.SED }} > ./community/mydata/lan-site
 
       - name: Generate networktest
         env:
@@ -114,11 +114,11 @@ jobs:
         run: |
           curl -sSL $PROXY_URL | ${{ env.SED }} > ./community/mydata/proxy
 
-      - name: Generate cn
+      - name: Generate cn-site
         env:
           SED: sed '/^\s*#/d' | sed 's/^PROCESS-NAME,//' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*IP-CIDR/d'
         run: |
-          curl -sSL $CHINAMAX_URL | ${{ env.SED }} > ./community/mydata/cn
+          curl -sSL $CHINAMAX_URL | ${{ env.SED }} > ./community/mydata/cn-site
 
       - name: Put together user.yaml
         env:
