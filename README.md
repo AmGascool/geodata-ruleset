@@ -3,14 +3,14 @@
 ① 根据 [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat) 进行深度定制，**有且仅有如下分类**：
 ```
 - GEOSITE,ads,⛔️ 广告域名
-- GEOSITE,lan-site,🏠 私有网络
+- GEOSITE,lan,🏠 私有网络
 - GEOSITE,networktest,📈 网络测试
 - GEOSITE,microsoft-cn,Ⓜ️ Microsoft 中国
 - GEOSITE,apple-cn,🍎 Apple 中国
 - GEOSITE,google-cn,🗽 Google 中国
 - GEOSITE,games-cn,🎮 国区游戏
 - GEOSITE,proxy,🪜 代理域名
-- GEOSITE,cn-site,⚡ 直连域名
+- GEOSITE,cn,⚡ 直连域名
 ```
 ② 每天早上 3 点（北京时间）自动构建  
 ③ `geosite:ads` 源采用 [privacy-protection-tools/anti-AD](https://github.com/privacy-protection-tools/anti-AD)  
