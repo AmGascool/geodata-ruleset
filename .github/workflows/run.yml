@@ -73,7 +73,7 @@ jobs:
         env:
           SED: sed '/^\s*#/d' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed '/^\s*IP-CIDR/d'
         run: |
-          curl -sSL $LAN_URL | ${{ env.SED }} > ./community/mydata/lan-site
+          curl -sSL $LAN_URL | ${{ env.SED }} > ./community/mydata/lan
 
       - name: Generate networktest
         env:
@@ -118,7 +118,7 @@ jobs:
         env:
           SED: sed '/^\s*#/d' | sed 's/^PROCESS-NAME,//' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*IP-CIDR/d'
         run: |
-          curl -sSL $CHINAMAX_URL | ${{ env.SED }} > ./community/mydata/cn-site
+          curl -sSL $CHINAMAX_URL | ${{ env.SED }} > ./community/mydata/cn
 
       - name: Put together user.yaml
         env:
