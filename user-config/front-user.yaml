@@ -2,6 +2,7 @@ unified-delay: false
 tcp-concurrent: true
 global-client-fingerprint: chrome
 
+geodata-mode: true
 geox-url:
   geosite: 'https://github.com/DustinWin/clash-geosite/releases/download/latest/geosite.dat'
   geoip: 'https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip.dat'
