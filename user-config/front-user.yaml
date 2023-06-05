@@ -1,3 +1,16 @@
+unified-delay: false
+tcp-concurrent: true
+global-client-fingerprint: chrome
+
+geox-url:
+  geosite: 'https://github.com/DustinWin/clash-geosite/releases/download/latest/geosite.dat'
+  geoip: 'https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip.dat'
+  mmdb: 'https://github.com/DustinWin/clash-geoip/releases/download/latest/Country.mmdb'
+
+profile:
+  store-selected: false
+  store-fake-ip: true
+
 dns:
   enable: true
   prefer-h3: true
