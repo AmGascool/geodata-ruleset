@@ -23,7 +23,6 @@ dns:
   fake-ip-filter:
     - '+.qq.com'
     - '*'
-    - '+.cn'
     - '+.lan'
     - '+.msftncsi.com'
     - '+.msftconnecttest.com'
