@@ -65,7 +65,7 @@ jobs:
 
       - name: Generate ads
         env:
-          SED: sed '/^\s*#/d' | sed '/payload/d' | sed "s/  - '+.//g" | sed "s/'$//" | sed '/^\s*$/d'
+          SED: sed '/^\s*#/d' | sed '/payload:/d' | sed "s/  - '+.//g" | sed "s/'$//" | sed '/^\s*$/d'
         run: |
           mkdir -p ./community/mydata
           curl -sSL $ANTI_AD_URL | ${{ env.SED }} > ./community/mydata/ads
@@ -87,25 +87,25 @@ jobs:
 
       - name: Generate microsoft-cn
         env:
-          SED: sed '/^\s*#/d' | sed '/payload/d' | sed 's/- "+.//g' | sed 's/- "/full:/g' | sed 's/"$//' | sed '/^\s*$/d'
+          SED: sed '/^\s*#/d' | sed '/payload:/d' | sed 's/- "+.//g' | sed 's/- "/full:/g' | sed 's/"$//' | sed '/^\s*$/d'
         run: |
           curl -sSL $MICROSOFT_CN_URL | ${{ env.SED }} > ./community/mydata/microsoft-cn
 
       - name: Generate apple-cn
         env:
-          SED: sed '/^\s*#/d' | sed '/payload/d' | sed 's/- "+.//g' | sed 's/- "/full:/g' | sed 's/"$//' | sed '/^\s*$/d'
+          SED: sed '/^\s*#/d' | sed '/payload:/d' | sed 's/- "+.//g' | sed 's/- "/full:/g' | sed 's/"$//' | sed '/^\s*$/d'
         run: |
           curl -sSL $APPLE_CN_URL | ${{ env.SED }} > ./community/mydata/apple-cn
 
       - name: Generate google-cn
         env:
-          SED: sed '/^\s*#/d' | sed '/payload/d' | sed 's/- "+.//g' | sed 's/- "/full:/g' | sed 's/"$//' | sed '/^\s*$/d' | sed '/googleapis.cn/d'
+          SED: sed '/^\s*#/d' | sed '/payload:/d' | sed 's/- "+.//g' | sed 's/- "/full:/g' | sed 's/"$//' | sed '/^\s*$/d' | sed '/googleapis.cn/d'
         run: |
           curl -sSL $GOOGLE_CN_URL | ${{ env.SED }} > ./community/mydata/google-cn
 
       - name: Generate games-cn
         env:
-          SED: sed '/^\s*#/d' | sed '/payload/d' | sed 's/- "+.//g' | sed 's/- "/full:/g' | sed 's/"$//' | sed '/^\s*$/d'
+          SED: sed '/^\s*#/d' | sed '/payload:/d' | sed 's/- "+.//g' | sed 's/- "/full:/g' | sed 's/"$//' | sed '/^\s*$/d'
         run: |
           curl -sSL $CATEGORY_GAMES_CN_URL | ${{ env.SED }} > ./community/mydata/games-cn
 
