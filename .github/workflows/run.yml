@@ -68,7 +68,9 @@ jobs:
           SED: sed '/^\s*#/d' | sed '/payload/d' | sed "s/  - '+.//g" | sed "s/'$//" | sed '/^\s*$/d'
         run: |
           mkdir -p ./community/mydata
+          mkdir -p ./ads
           curl -sSL $ANTI_AD_URL | ${{ env.SED }} > ./community/mydata/ads
+          curl -sSL $ANTI_AD_URL | ${{ env.SED }} > ./ads/ads.txt
 
       - name: Generate lan
         env:
