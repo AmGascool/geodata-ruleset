@@ -9,7 +9,7 @@ geox-url:
   mmdb: 'https://github.com/DustinWin/clash-geoip/releases/download/latest/Country.mmdb'
 
 profile:
-  store-selected: false
+  store-selected: true
   store-fake-ip: true
 
 dns:
