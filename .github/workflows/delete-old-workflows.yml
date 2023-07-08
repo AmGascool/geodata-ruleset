@@ -3,9 +3,6 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 0 * * 5'
-  push:
-    branches:
-      - master
 
 jobs:
   del_runs:
@@ -18,5 +15,5 @@ jobs:
         with:
           token: ${{ github.token }}
           repository: DustinWin/clash-geosite
-          retain_days: 3
-          keep_minimum_runs: 6
+          retain_days: 1
+          keep_minimum_runs: 1
