@@ -15,5 +15,5 @@ jobs:
         with:
           token: ${{ github.token }}
           repository: DustinWin/clash-geosite
-          retain_days: 3
-          keep_minimum_runs: 3
+          retain_days: 30
+          keep_minimum_runs: 6
