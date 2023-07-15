@@ -7,6 +7,8 @@ geox-url:
   geoip: 'https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip.dat'
   mmdb: 'https://github.com/DustinWin/clash-geoip/releases/download/latest/Country.mmdb'
 
+global-client-fingerprint: chrome
+
 profile:
   store-selected: true
   store-fake-ip: true
