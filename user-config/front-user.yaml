@@ -1,4 +1,3 @@
-log-level: silent
 unified-delay: false
 tcp-concurrent: true
 
