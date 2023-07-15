@@ -1,3 +1,17 @@
+log-level: silent
+unified-delay: false
+tcp-concurrent: true
+
+geodata-mode: true
+geox-url:
+  geosite: 'https://github.com/DustinWin/clash-geosite/releases/download/latest/geosite.dat'
+  geoip: 'https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip.dat'
+  mmdb: 'https://github.com/DustinWin/clash-geoip/releases/download/latest/Country.mmdb'
+
+profile:
+  store-selected: true
+  store-fake-ip: true
+
 dns:
   enable: true
   prefer-h3: true
