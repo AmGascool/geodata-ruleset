@@ -57,6 +57,7 @@ curl -o $clashdir/GeoSite.dat -L https://cdn.jsdelivr.net/gh/DustinWin/clash-geo
 curl -o $clashdir/GeoIP.dat -L https://cdn.jsdelivr.net/gh/DustinWin/clash-geoip@release/geoip.dat
 curl -o $clashdir/Country.mmdb -L https://cdn.jsdelivr.net/gh/DustinWin/clash-geoip@release/Country.mmdb
 curl -o $clashdir/user.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/clash-geosite@release/user.yaml
+$clashdir/start.sh restart
 ```
 ## 2. 导入 Clash Verge（Windows 端）
 首次使用可进入“配置”，新建”Merge“类型的配置，保存后进入文件夹 *%USERPROFILE%\.config\clash-verge\profiles*，可以看到这里新增了一个.yaml 文件，复制其文件名并替换下面命令中的{文件名}  
