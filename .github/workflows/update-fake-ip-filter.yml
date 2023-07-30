@@ -1,4 +1,4 @@
-name: Update Yacd-meta
+name: Update fake-ip-filter
 on:
   workflow_dispatch:
   schedule:
