@@ -149,6 +149,8 @@ jobs:
         run: |
           rm -rf ./community
           rm -rf ./custom
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
           git add . && git commit -m "更新" || exit 0
           git push -f
 
