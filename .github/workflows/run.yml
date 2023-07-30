@@ -132,15 +132,15 @@ jobs:
 
       - name: Generate fake-ip-user.yaml
         run: |
-          curl -sSL https://raw.githubusercontent.com/DustinWin/clash-geosite/main/user-config/fake-ip-mode/front-user.yaml > ./tmp/temp-fake-ip-user.txt
-          curl -sSL https://raw.githubusercontent.com/DustinWin/clash-geosite/main/user-config/fake-ip-mode/later-user.yaml >> ./tmp/temp-fake-ip-user.txt
+          curl -sSL https://raw.githubusercontent.com/DustinWin/clash-geosite/master/user-config/fake-ip-mode/front-user.yaml > ./tmp/temp-fake-ip-user.txt
+          curl -sSL https://raw.githubusercontent.com/DustinWin/clash-geosite/master/user-config/fake-ip-mode/later-user.yaml >> ./tmp/temp-fake-ip-user.txt
           cat ./tmp/temp-fake-ip-user.txt > ./publish/fake-ip-user.yaml
           rm -f ./tmp/temp-fake-ip-user.txt
 
       - name: Generate redir-host-user.yaml
         run: |
-          curl -sSL https://raw.githubusercontent.com/DustinWin/clash-geosite/main/user-config/redir-host-mode/front-user.yaml > ./tmp/temp-redir-host-user.txt
-          curl -sSL https://raw.githubusercontent.com/DustinWin/clash-geosite/main/user-config/redir-host-mode/later-user.yaml >> ./tmp/temp-redir-host-user.txt
+          curl -sSL https://raw.githubusercontent.com/DustinWin/clash-geosite/master/user-config/redir-host-mode/front-user.yaml > ./tmp/temp-redir-host-user.txt
+          curl -sSL https://raw.githubusercontent.com/DustinWin/clash-geosite/master/user-config/redir-host-mode/later-user.yaml >> ./tmp/temp-redir-host-user.txt
           cat ./tmp/temp-redir-host-user.txt > ./publish/redir-host-user.yaml
           rm -f ./tmp/temp-redir-host-user.txt
 
