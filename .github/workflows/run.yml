@@ -68,64 +68,64 @@ jobs:
         env:
           SED: sed '/^\s*#/d' | sed '/payload:/d' | sed "s/  - '+.//g" | sed "s/'$//" | sed '/^\s*$/d'
         run: |
-          mkdir -p ./community/data
-          curl -sSL $ANTI_AD_URL | ${{ env.SED }} > ./community/data/ads
+          mkdir -p ./community/mydata
+          curl -sSL $ANTI_AD_URL | ${{ env.SED }} > ./community/mydata/ads
 
       - name: Generate lan
         env:
           SED: sed '/^\s*#/d' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed '/^\s*IP-CIDR/d'
         run: |
-          curl -sSL $LAN_URL | ${{ env.SED }} > ./community/data/lan
+          curl -sSL $LAN_URL | ${{ env.SED }} > ./community/mydata/lan
 
       - name: Generate networktest
         env:
           SED: sed '/^\s*#/d' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g'
         run: |
-          curl -sSL $SPEEDTEST_URL | ${{ env.SED }} > ./community/data/networktest1
-          curl -sSL $IPV6TEST_URL >> ./community/data/networktest1
-          sort ./community/data/networktest1 | uniq -i > ./community/data/networktest
-          rm -f ./community/data/networktest1
+          curl -sSL $SPEEDTEST_URL | ${{ env.SED }} > ./community/mydata/networktest1
+          curl -sSL $IPV6TEST_URL >> ./community/mydata/networktest1
+          sort ./community/mydata/networktest1 | uniq -i > ./community/mydata/networktest
+          rm -f ./community/mydata/networktest1
 
       - name: Generate microsoft-cn
         env:
           SED: sed '/^\s*#/d' | sed '/payload:/d' | sed 's/- "+.//g' | sed 's/- "/full:/g' | sed 's/"$//' | sed '/^\s*$/d'
         run: |
-          curl -sSL $MICROSOFT_CN_URL | ${{ env.SED }} > ./community/data/microsoft-cn
+          curl -sSL $MICROSOFT_CN_URL | ${{ env.SED }} > ./community/mydata/microsoft-cn
 
       - name: Generate apple-cn
         env:
           SED: sed '/^\s*#/d' | sed '/payload:/d' | sed 's/- "+.//g' | sed 's/- "/full:/g' | sed 's/"$//' | sed '/^\s*$/d'
         run: |
-          curl -sSL $APPLE_CN_URL | ${{ env.SED }} > ./community/data/apple-cn
+          curl -sSL $APPLE_CN_URL | ${{ env.SED }} > ./community/mydata/apple-cn
 
       - name: Generate google-cn
         env:
           SED: sed '/^\s*#/d' | sed '/payload:/d' | sed 's/- "+.//g' | sed 's/- "/full:/g' | sed 's/"$//' | sed '/^\s*$/d' | sed '/googleapis.cn/d'
         run: |
-          curl -sSL $GOOGLE_CN_URL | ${{ env.SED }} > ./community/data/google-cn
+          curl -sSL $GOOGLE_CN_URL | ${{ env.SED }} > ./community/mydata/google-cn
 
       - name: Generate games-cn
         env:
           SED: sed '/^\s*#/d' | sed '/payload:/d' | sed 's/- "+.//g' | sed 's/- "/full:/g' | sed 's/"$//' | sed '/^\s*$/d'
         run: |
-          curl -sSL $CATEGORY_GAMES_CN_URL | ${{ env.SED }} > ./community/data/games-cn
+          curl -sSL $CATEGORY_GAMES_CN_URL | ${{ env.SED }} > ./community/mydata/games-cn
 
       - name: Generate proxy
         env:
           SED: sed '/^\s*#/d' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*IP-CIDR/d'
         run: |
-          curl -sSL $PROXY_URL | ${{ env.SED }} > ./community/data/proxy
+          curl -sSL $PROXY_URL | ${{ env.SED }} > ./community/mydata/proxy
 
       - name: Generate cn
         env:
           SED: sed '/^\s*#/d' | sed '/^PROCESS-NAME,/d' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*IP-CIDR/d'
         run: |
-          curl -sSL $CHINAMAX_URL | ${{ env.SED }} > ./community/data/cn
+          curl -sSL $CHINAMAX_URL | ${{ env.SED }} > ./community/mydata/cn
 
       - name: Build geosite.dat file
         run: |
           cd community || exit 1
-          go run ./ --datapath=./data --outputname geosite.dat
+          go run ./ --datapath=./mydata --outputname geosite.dat
 
       - name: Move files
         run: |
