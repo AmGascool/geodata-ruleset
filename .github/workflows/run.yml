@@ -126,7 +126,7 @@ jobs:
         run: |
           mkdir -p ./tmp
           mkdir -p ./publish
-          curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep -i '\.[A-Z]' | sed 's/^.*\/\///g' | sed 's/:.*\/.*//g' | ${{ env.SED }} >> ./tmp/temp-fake-ip-filter.txt
+          curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep -i '\.[A-Z]' | sed 's/^.*\/\///g' | sed 's/:.*\/.*//g' >> ./tmp/temp-fake-ip-filter.txt
           cat ./tmp/temp-fake-ip-filter.txt > ./publish/fake-ip-filter.list
           rm -f ./tmp/temp-fake-ip-filter.txt
 
