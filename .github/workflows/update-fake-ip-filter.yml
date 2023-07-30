@@ -1,0 +1,39 @@
+name: Update Yacd-meta
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 19 * * *"
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - "README.md"
+      - ".github/workflows/run.yml"
+
+jobs:
+  Update:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Clone Repository
+      uses: actions/checkout@main
+
+    - name: Generate fake-ip-filter.list
+      run: |
+        echo "update_version=$(date +%Y-%m-%d)" >> ${GITHUB_ENV}
+        mkdir -p ./tmp
+        mkdir -p ./fake-ip-filter
+        curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep -i '\.[A-Z]' | sed 's/^.*\/\///g' | sed 's/:.*\/.*//g' | ${{ env.SED }} >> ./tmp/temp-fake-ip-filter.txt
+        cat ./tmp/temp-fake-ip-filter.txt > ./fake-ip-filter/fake-ip-filter.list
+
+    - name: Commit and push
+      run: |
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git config --global user.name "github-actions[bot]"
+        git add . && git commit -m "更新 Yacd-meta 至 ${download_version}" || exit 0
+        git push -f
+
+    - name: Purge jsDelivr CDN cache
+      uses: gacts/purge-jsdelivr-cache@v1
+      with:
+        url: |
+          https://cdn.jsdelivr.net/gh/${{ github.repository }}@main/fake-ip-filter/fake-ip-filter.list
