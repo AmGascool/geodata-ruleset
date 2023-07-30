@@ -145,6 +145,13 @@ jobs:
           file_glob: true
           file: ./publish/*
 
+      - name: delete files
+        run: |
+          rm -rf ./community
+          rm -rf ./custom
+          git add . && git commit -m "更新" || exit 0
+          git push -f
+
       - name: Git push assets to "release" branch
         run: |
           cd publish || exit 1
