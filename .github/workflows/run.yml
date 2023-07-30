@@ -7,7 +7,8 @@ on:
     branches:
       - master
     paths-ignore:
-      - "**/README.md"
+      - "README.md"
+      - ".github/workflows/delete-old-workflows.yml"
 
 jobs:
   build:
@@ -68,13 +69,13 @@ jobs:
           SED: sed '/^\s*#/d' | sed '/payload:/d' | sed "s/  - '+.//g" | sed "s/'$//" | sed '/^\s*$/d'
         run: |
           mkdir -p ./community/mydata
-          curl -sSL $ANTI_AD_URL | ${{ env.SED }} > ./community/mydata/ads
+          curl -sSL $ANTI_AD_URL | ${{ env.SED }} > ./community/data/ads
 
       - name: Generate lan
         env:
           SED: sed '/^\s*#/d' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed '/^\s*IP-CIDR/d'
         run: |
-          curl -sSL $LAN_URL | ${{ env.SED }} > ./community/mydata/lan
+          curl -sSL $LAN_URL | ${{ env.SED }} > ./community/data/lan
 
       - name: Generate networktest
         env:
@@ -82,68 +83,59 @@ jobs:
         run: |
           curl -sSL $SPEEDTEST_URL | ${{ env.SED }} > ./community/mydata/networktest1
           curl -sSL $IPV6TEST_URL >> ./community/mydata/networktest1
-          sort ./community/mydata/networktest1 | uniq -i > ./community/mydata/networktest
+          sort ./community/mydata/networktest1 | uniq -i > ./community/data/networktest
           rm -f ./community/mydata/networktest1
 
       - name: Generate microsoft-cn
         env:
           SED: sed '/^\s*#/d' | sed '/payload:/d' | sed 's/- "+.//g' | sed 's/- "/full:/g' | sed 's/"$//' | sed '/^\s*$/d'
         run: |
-          curl -sSL $MICROSOFT_CN_URL | ${{ env.SED }} > ./community/mydata/microsoft-cn
+          curl -sSL $MICROSOFT_CN_URL | ${{ env.SED }} > ./community/data/microsoft-cn
 
       - name: Generate apple-cn
         env:
           SED: sed '/^\s*#/d' | sed '/payload:/d' | sed 's/- "+.//g' | sed 's/- "/full:/g' | sed 's/"$//' | sed '/^\s*$/d'
         run: |
-          curl -sSL $APPLE_CN_URL | ${{ env.SED }} > ./community/mydata/apple-cn
+          curl -sSL $APPLE_CN_URL | ${{ env.SED }} > ./community/data/apple-cn
 
       - name: Generate google-cn
         env:
           SED: sed '/^\s*#/d' | sed '/payload:/d' | sed 's/- "+.//g' | sed 's/- "/full:/g' | sed 's/"$//' | sed '/^\s*$/d' | sed '/googleapis.cn/d'
         run: |
-          curl -sSL $GOOGLE_CN_URL | ${{ env.SED }} > ./community/mydata/google-cn
+          curl -sSL $GOOGLE_CN_URL | ${{ env.SED }} > ./community/data/google-cn
 
       - name: Generate games-cn
         env:
           SED: sed '/^\s*#/d' | sed '/payload:/d' | sed 's/- "+.//g' | sed 's/- "/full:/g' | sed 's/"$//' | sed '/^\s*$/d'
         run: |
-          curl -sSL $CATEGORY_GAMES_CN_URL | ${{ env.SED }} > ./community/mydata/games-cn
+          curl -sSL $CATEGORY_GAMES_CN_URL | ${{ env.SED }} > ./community/data/games-cn
 
       - name: Generate proxy
         env:
           SED: sed '/^\s*#/d' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*IP-CIDR/d'
         run: |
-          curl -sSL $PROXY_URL | ${{ env.SED }} > ./community/mydata/proxy
+          curl -sSL $PROXY_URL | ${{ env.SED }} > ./community/data/proxy
 
       - name: Generate cn
         env:
           SED: sed '/^\s*#/d' | sed '/^PROCESS-NAME,/d' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*IP-CIDR/d'
         run: |
-          curl -sSL $CHINAMAX_URL | ${{ env.SED }} > ./community/mydata/cn
+          curl -sSL $CHINAMAX_URL | ${{ env.SED }} > ./community/data/cn
 
-      - name: Generate fake-ip-user.yaml
-        env:
-          SED: sed 's/^/    - /'
+      - name: Generate fake-ip-filter.list
         run: |
+          echo "update_version=$(date +%Y-%m-%d)" >> ${GITHUB_ENV}
           mkdir -p ./tmp
-          mkdir -p ./publish
-          curl -sSL https://raw.githubusercontent.com/DustinWin/clash-geosite/master/user-config/front-user.yaml > ./tmp/temp-user.txt
-          curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep -i '\.[A-Z]' | sed 's/^.*\/\///g' | sed 's/:.*\/.*//g' | ${{ env.SED }} >> ./tmp/temp-user.txt
-          curl -sSL https://raw.githubusercontent.com/DustinWin/clash-geosite/master/user-config/fake-ip-mode/later-user.yaml >> ./tmp/temp-user.txt
-          cat ./tmp/temp-user.txt > ./publish/fake-ip-user.yaml
-          rm -f ./tmp/temp-user.txt
+          mkdir -p ./fake-ip-filter
+          curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep -i '\.[A-Z]' | sed 's/^.*\/\///g' | sed 's/:.*\/.*//g' | ${{ env.SED }} >> ./tmp/temp-fake-ip-filter.txt
+          cat ./tmp/temp-fake-ip-filter.txt > ./fake-ip-filter/fake-ip-filter.list
 
-      - name: Generate redir-host-user.yaml
-        env:
-          SED: sed 's/^/    - /'
+      - name: Commit and push
         run: |
-          mkdir -p ./tmp
-          mkdir -p ./publish
-          curl -sSL https://raw.githubusercontent.com/DustinWin/clash-geosite/master/user-config/front-user.yaml > ./tmp/temp-user.txt
-          curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep -i '\.[A-Z]' | sed 's/^.*\/\///g' | sed 's/:.*\/.*//g' | ${{ env.SED }} >> ./tmp/temp-user.txt
-          curl -sSL https://raw.githubusercontent.com/DustinWin/clash-geosite/master/user-config/redir-host-mode/later-user.yaml >> ./tmp/temp-user.txt
-          cat ./tmp/temp-user.txt > ./publish/redir-host-user.yaml
-          rm -f ./tmp/temp-user.txt
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git add . && git commit -m "更新于 ${update_version}" || exit 0
+          git push -f
 
       - name: Build geosite.dat file
         run: |
@@ -178,6 +170,12 @@ jobs:
           git commit -m "${{ env.RELEASE_NAME }}"
           git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
           git push -f -u origin release
+
+      - name: Purge jsDelivr CDN cache
+        uses: gacts/purge-jsdelivr-cache@v1
+        with:
+          url: |  
+            https://cdn.jsdelivr.net/gh/${{ github.repository }}@main/fake-ip-filter/fake-ip-filter.list
 
       - name: Purge jsdelivr CDN
         run: |
