@@ -68,7 +68,7 @@ jobs:
         env:
           SED: sed '/^\s*#/d' | sed '/payload:/d' | sed "s/  - '+.//g" | sed "s/'$//" | sed '/^\s*$/d'
         run: |
-          mkdir -p ./community/mydata
+          mkdir -p ./community/data
           curl -sSL $ANTI_AD_URL | ${{ env.SED }} > ./community/data/ads
 
       - name: Generate lan
@@ -122,18 +122,10 @@ jobs:
         run: |
           curl -sSL $CHINAMAX_URL | ${{ env.SED }} > ./community/data/cn
 
-      - name: Generate fake-ip-filter.list
-        run: |
-          echo "update_version=$(date +%Y-%m-%d)" >> ${GITHUB_ENV}
-          mkdir -p ./tmp
-          mkdir -p ./fake-ip-filter
-          curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep -i '\.[A-Z]' | sed 's/^.*\/\///g' | sed 's/:.*\/.*//g' | ${{ env.SED }} >> ./tmp/temp-fake-ip-filter.txt
-          cat ./tmp/temp-fake-ip-filter.txt > ./fake-ip-filter/fake-ip-filter.list
-
       - name: Build geosite.dat file
         run: |
           cd community || exit 1
-          go run ./ --datapath=./mydata --outputname geosite.dat
+          go run ./ --datapath=./data --outputname geosite.dat
 
       - name: Move files
         run: |
@@ -152,13 +144,6 @@ jobs:
           tag: latest
           file_glob: true
           file: ./publish/*
-
-      - name: Commit and push
-        run: |
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
-          git add . && git commit -m "更新于 ${update_version}" || exit 0
-          git push -f
 
       - name: Git push assets to "release" branch
         run: |
