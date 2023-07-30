@@ -145,15 +145,6 @@ jobs:
           file_glob: true
           file: ./publish/*
 
-      - name: delete files
-        run: |
-          rm -rf ./community
-          rm -rf ./custom
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
-          git add . && git commit -m "更新" || exit 0
-          git push -f
-
       - name: Git push assets to "release" branch
         run: |
           cd publish || exit 1
@@ -165,12 +156,6 @@ jobs:
           git commit -m "${{ env.RELEASE_NAME }}"
           git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
           git push -f -u origin release
-
-      - name: Purge jsDelivr CDN cache
-        uses: gacts/purge-jsdelivr-cache@v1
-        with:
-          url: |  
-            https://cdn.jsdelivr.net/gh/${{ github.repository }}@main/fake-ip-filter/fake-ip-filter.list
 
       - name: Purge jsdelivr CDN
         run: |
