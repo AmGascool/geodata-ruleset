@@ -138,6 +138,7 @@ jobs:
       - name: Move files
         run: |
           rm -rf ./tmp
+          mkdir -p ./publish
           wget https://raw.githubusercontent.com/DustinWin/clash-geoip/release/Country.mmdb -O ./publish/Country.mmdb
           install -Dp ./geoip.dat ./publish/geoip.dat
           install -Dp ./community/geosite.dat ./publish/geosite.dat
