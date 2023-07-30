@@ -130,13 +130,6 @@ jobs:
           curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep -i '\.[A-Z]' | sed 's/^.*\/\///g' | sed 's/:.*\/.*//g' | ${{ env.SED }} >> ./tmp/temp-fake-ip-filter.txt
           cat ./tmp/temp-fake-ip-filter.txt > ./fake-ip-filter/fake-ip-filter.list
 
-      - name: Commit and push
-        run: |
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
-          git add . && git commit -m "更新于 ${update_version}" || exit 0
-          git push -f
-
       - name: Build geosite.dat file
         run: |
           cd community || exit 1
@@ -158,6 +151,13 @@ jobs:
           tag: latest
           file_glob: true
           file: ./publish/*
+
+      - name: Commit and push
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git add . && git commit -m "更新于 ${update_version}" || exit 0
+          git push -f
 
       - name: Git push assets to "release" branch
         run: |
