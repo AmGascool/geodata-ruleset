@@ -126,6 +126,8 @@ jobs:
         env:
           SED: sed 's/^/    - /'
         run: |
+          mkdir -p ./tmp
+          mkdir -p ./publish
           curl -sSL https://raw.githubusercontent.com/DustinWin/clash-geosite/master/user-config/fake-ip-mode/front-user.yaml > ./tmp/temp-fake-ip-user.txt
           curl -sSL https://raw.githubusercontent.com/juewuy/ShellClash/master/public/fake_ip_filter.list | sed '/^\s*#/d' | ${{ env.SED }} >> ./tmp/temp-fake-ip-user.txt
           curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep -i '\.[A-Z]' | sed 's/^.*\/\///g' | sed 's/:.*\/.*//g' | ${{ env.SED }} >> ./tmp/temp-fake-ip-user.txt
