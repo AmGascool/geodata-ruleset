@@ -81,10 +81,10 @@ jobs:
         env:
           SED: sed '/^\s*#/d' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g'
         run: |
-          curl -sSL $SPEEDTEST_URL | ${{ env.SED }} > ./community/mydata/networktest1
-          curl -sSL $IPV6TEST_URL >> ./community/mydata/networktest1
-          sort ./community/mydata/networktest1 | uniq -i > ./community/data/networktest
-          rm -f ./community/mydata/networktest1
+          curl -sSL $SPEEDTEST_URL | ${{ env.SED }} > ./community/data/networktest1
+          curl -sSL $IPV6TEST_URL >> ./community/data/networktest1
+          sort ./community/data/networktest1 | uniq -i > ./community/data/networktest
+          rm -f ./community/data/networktest1
 
       - name: Generate microsoft-cn
         env:
