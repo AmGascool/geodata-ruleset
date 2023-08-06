@@ -5,7 +5,7 @@ on:
     - cron: "0 19 * * *"
   push:
     branches:
-      - main
+      - master
     paths-ignore:
       - "README.md"
       - ".github/workflows/delete-old-workflows.yml"
@@ -94,5 +94,5 @@ jobs:
       uses: gacts/purge-jsdelivr-cache@v1
       with:
         url: |  
-          https://cdn.jsdelivr.net/gh/${{ github.repository }}@main/shellclash-userconfig/fake-ip-user.yaml
-          https://cdn.jsdelivr.net/gh/${{ github.repository }}@main/shellclash-userconfig/redir-host-user.yaml
+          https://cdn.jsdelivr.net/gh/${{ github.repository }}@master/shellclash-userconfig/fake-ip-user.yaml
+          https://cdn.jsdelivr.net/gh/${{ github.repository }}@master/shellclash-userconfig/redir-host-user.yaml
