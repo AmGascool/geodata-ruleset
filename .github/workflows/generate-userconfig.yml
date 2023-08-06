@@ -24,8 +24,8 @@ jobs:
       run: |
         echo "update_version=$(date +%Y-%m-%d)" >> ${GITHUB_ENV}
         mkdir -p ./tmp
-        mkdir -p ./shellclash-userconfig
-        rm -rf ./shellclash-userconfig/*
+        mkdir -p ./clashverge-userconfig
+        rm -rf ./clashverge-userconfig/*
         cat <<EOF > ./tmp/temp-fake-ip-user.txt
         profile:
           store-selected: true
@@ -52,12 +52,12 @@ jobs:
             - https://doh.pub/dns-query
             - https://dns.alidns.com/dns-query
         EOF
-        cat ./tmp/temp-fake-ip-user.txt > ./shellclash-userconfig/fake-ip-user.yaml
+        cat ./tmp/temp-fake-ip-user.txt > ./clashverge-userconfig/fake-ip-user.yaml
         rm -rf ./tmp
 
     - name: Generate redir-host-user.yaml
       run: |
-        cat <<EOF > ./shellclash-userconfig/redir-host-user.yaml
+        cat <<EOF > ./clashverge-userconfig/redir-host-user.yaml
         profile:
           store-selected: true
 
@@ -94,5 +94,5 @@ jobs:
       uses: gacts/purge-jsdelivr-cache@v1
       with:
         url: |  
-          https://cdn.jsdelivr.net/gh/${{ github.repository }}@master/shellclash-userconfig/fake-ip-user.yaml
-          https://cdn.jsdelivr.net/gh/${{ github.repository }}@master/shellclash-userconfig/redir-host-user.yaml
+          https://cdn.jsdelivr.net/gh/${{ github.repository }}@master/clashverge-userconfig/fake-ip-user.yaml
+          https://cdn.jsdelivr.net/gh/${{ github.repository }}@master/clashverge-userconfig/redir-host-user.yaml
