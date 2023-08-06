@@ -34,7 +34,7 @@
 ④ `GEOIP:lanip` 源采用 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)（IP 部分）
 ## 3. user.yaml
 ① 每天早上 3 点（北京时间）自动构建生成  
-② 若想自己生成配置文件 user.yaml，可以 [Fork 本项目](https://github.com/DustinWin/clash-geosite/fork)后分别编辑 *.github/workflows/run.yml* 和 *.github/workflows/generate-userconfig.yml* 文件内的 `name: Generate xxx-user.yaml` 部分
+② 若想自己生成配置文件 user.yaml，可以 [Fork 本项目](https://github.com/DustinWin/clash-geosite/fork)后分别编辑 *.github/workflows/run.yml* 和 *.github/workflows/generate-userconfig.yml* 文件内的 `name: Generate xxx-user.yaml` 部分  
 ③ 若 DNS 模式选用的是 redir-host，需要分别编辑 *.github/workflows/run.yml* 和 *.github/workflows/generate-userconfig.yml* 文件内的 `Generate redir-host-user.yaml` 部分，将 `nameserver` 中的`🪜 代理域名`改成可以访问外网的代理组名，或者直接将 `'https://dns.google/dns-query#🪜 代理域名'`修改为 `'tls://dns.google'`  
 ④ 添加[常用 fake-ip 地址过滤列表](https://github.com/juewuy/ShellClash/blob/master/public/fake_ip_filter.list)到 fake-ip-user.yaml 内的 `fake-ip-filter` 中，提高兼容性  
 ⑤ 添加 [TrackersList](https://trackerslist.com) 到 fake-ip-user.yaml 内的 `fake-ip-filter` 中，防止 [BT 下载](https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases)无法连接 TrackersList UDP 协议  
