@@ -2,15 +2,15 @@
 ## 1. geosite.dat
 ① 根据 [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat) 进行深度定制，**有且仅有如下分类**：
 ```
-- GEOSITE,ads,⛔️ 广告域名
-- GEOSITE,lan,🏠 私有网络
-- GEOSITE,networktest,📈 网络测试
-- GEOSITE,microsoft-cn,Ⓜ️ Microsoft 中国
-- GEOSITE,apple-cn,🍎 Apple 中国
-- GEOSITE,google-cn,🗽 Google 中国
-- GEOSITE,games-cn,🎮 国区游戏
-- GEOSITE,proxy,🪜 代理域名
-- GEOSITE,cn,⚡ 直连域名
+  - GEOSITE,ads,⛔️ 广告域名
+  - GEOSITE,lan,🏠 私有网络
+  - GEOSITE,networktest,📈 网络测试
+  - GEOSITE,microsoft-cn,Ⓜ️ Microsoft 中国
+  - GEOSITE,apple-cn,🍎 Apple 中国
+  - GEOSITE,google-cn,🗽 Google 中国
+  - GEOSITE,games-cn,🎮 国区游戏
+  - GEOSITE,proxy,🪜 代理域名
+  - GEOSITE,cn,⚡ 直连域名
 ```
 ② 每天早上 3 点（北京时间）自动构建  
 ③ `geosite:ads` 源采用 [privacy-protection-tools/anti-AD](https://github.com/privacy-protection-tools/anti-AD)  
@@ -25,17 +25,17 @@
 ## 2. geoip.dat 和 Country.mmdb
 ① 数据来源 [DustinWin/clash-geoip](https://github.com/DustinWin/clash-geoip)，**有且仅有如下分类**：
 ```
-- GEOIP,cn,🇨🇳 国内 IP
-- GEOIP,lanip,🏠 私有网络
-- GEOIP,telegram,✈️ Telegram IP
+  - GEOIP,cn,🇨🇳 国内 IP
+  - GEOIP,lanip,🏠 私有网络
+  - GEOIP,telegram,✈️ Telegram IP
 ```
 ② 每天早上 3 点（北京时间）自动构建  
 ③ `GEOIP:cn` 源采用 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)（ChinaMax_IP.txt）  
 ④ `GEOIP:lanip` 源采用 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)（IP 部分）
 ## 3. user.yaml
 ① 每天早上 3 点（北京时间）自动构建生成  
-② 若想自己生成配置文件 user.yaml，可以 [Fork 本项目](https://github.com/DustinWin/clash-geosite/fork)后编辑 *.github/workflows/run.yml* 内的 `name: Generate xxx-user.yaml` 部分和 *User-Config* 子目录下的.yaml 文件  
-③ 若 DNS 模式选用的是 redir-host，需要编辑 *User-Config/redir-host-mode/later-user.yaml* 文件，将 `nameserver` 中的`🪜 代理域名`改成可以访问外网的代理组名，或者直接将 `'https://dns.google/dns-query#🪜 代理域名'`修改为 `'tls://dns.google'`  
+② 若想自己生成配置文件 user.yaml，可以 [Fork 本项目](https://github.com/DustinWin/clash-geosite/fork)后分别编辑 *.github/workflows/run.yml* 和 *.github/workflows/generate-userconfig.yml* 文件内的 `name: Generate xxx-user.yaml` 部分
+③ 若 DNS 模式选用的是 redir-host，需要分别编辑 *.github/workflows/run.yml* 和 *.github/workflows/generate-userconfig.yml* 文件内的 `Generate redir-host-user.yaml` 部分，将 `nameserver` 中的`🪜 代理域名`改成可以访问外网的代理组名，或者直接将 `'https://dns.google/dns-query#🪜 代理域名'`修改为 `'tls://dns.google'`  
 ④ 添加[常用 fake-ip 地址过滤列表](https://github.com/juewuy/ShellClash/blob/master/public/fake_ip_filter.list)到 fake-ip-user.yaml 内的 `fake-ip-filter` 中，提高兼容性  
 ⑤ 添加 [TrackersList](https://trackerslist.com) 到 fake-ip-user.yaml 内的 `fake-ip-filter` 中，防止 [BT 下载](https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases)无法连接 TrackersList UDP 协议  
 <img src="https://user-images.githubusercontent.com/45238096/224113233-4d76dec2-495c-4790-a00e-538fc1469639.png" width="60%"/>  
@@ -80,6 +80,6 @@ curl -o %USERPROFILE%\.config\clash-verge\Country.mmdb -L https://cdn.jsdelivr.n
 copy /y "%USERPROFILE%\.config\clash-verge\geosite.dat" "%PROGRAMFILES%\Clash Verge\resources"
 copy /y "%USERPROFILE%\.config\clash-verge\geoip.dat" "%PROGRAMFILES%\Clash Verge\resources"
 copy /y "%USERPROFILE%\.config\clash-verge\Country.mmdb" "%PROGRAMFILES%\Clash Verge\resources"
-curl -o %USERPROFILE%\.config\clash-verge\profiles\{文件名}.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/clash-geosite@release/{DNS 模式}-user.yaml
+curl -o %USERPROFILE%\.config\clash-verge\profiles\{文件名}.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/clash-geosite@master/clashverge-userconfig/{DNS 模式}-user.yaml
 ```
 另存为.bat 文件，右击该文件，选择以管理员身份运行
