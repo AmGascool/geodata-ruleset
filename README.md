@@ -30,8 +30,9 @@
   - GEOIP,telegram,✈️ Telegram IP
 ```
 ② 每天早上 3 点（北京时间）自动构建  
-③ `GEOIP:cn` 源采用 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)（ChinaMax_IP.txt）  
-④ `GEOIP:lanip` 源采用 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)（IP 部分）
+③ `geoip:cn` 源采用 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)（ChinaMax_IP.txt）  
+④ `geoip:lanip` 源采用 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)（IP 部分）
+⑤ `geoip:telegram` 源采用 [Telegram IP](https://core.telegram.org/resources/cidr.txt)
 ## 3. user.yaml
 ① 每天早上 3 点（北京时间）自动构建生成  
 ② 若想自己生成配置文件 user.yaml，可以 [Fork 本项目](https://github.com/DustinWin/clash-geosite/fork)后分别编辑 *.github/workflows/run.yml* 和 *.github/workflows/generate-userconfig.yml* 文件内的 `name: Generate xxx-user.yaml` 部分  
