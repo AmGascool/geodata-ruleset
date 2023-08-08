@@ -31,7 +31,7 @@
 ```
 ② 每天早上 3 点（北京时间）自动构建  
 ③ `geoip:cn` 源采用 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)（ChinaMax_IP.txt）  
-④ `geoip:lanip` 源采用 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)（IP 部分）
+④ `geoip:lanip` 源采用 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)（IP 部分）  
 ⑤ `geoip:telegram` 源采用 [Telegram IP](https://core.telegram.org/resources/cidr.txt)
 ## 3. user.yaml
 ① 每天早上 3 点（北京时间）自动构建生成  
