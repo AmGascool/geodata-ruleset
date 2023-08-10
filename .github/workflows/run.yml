@@ -189,6 +189,7 @@ jobs:
 
           profile:
             store-selected: true
+            store-fake-ip: true
 
           dns:
             enable: true
@@ -196,7 +197,9 @@ jobs:
             ipv6: true
             listen: 0.0.0.0:1053
             use-hosts: true
-            enhanced-mode: redir-host
+            fake-ip-range: 198.18.0.1/16
+            enhanced-mode: fake-ip
+            fake-ip-filter: ['+.*']
             default-nameserver:
               - https://1.12.12.12/dns-query
               - https://223.5.5.5/dns-query
