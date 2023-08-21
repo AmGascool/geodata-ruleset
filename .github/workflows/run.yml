@@ -73,13 +73,13 @@ jobs:
 
       - name: Generate lan
         env:
-          SED: sed '/^\s*#/d' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed '/^\s*IP-CIDR/d'
+          SED: sed '/^\s*#/d' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed '/^\s*IP-CIDR/d' | sed '/^\s*$/d'
         run: |
           curl -sSL $LAN_URL | ${{ env.SED }} > ./community/mydata/lan
 
       - name: Generate networktest
         env:
-          SED: sed '/^\s*#/d' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g'
+          SED: sed '/^\s*#/d' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*$/d'
         run: |
           curl -sSL $SPEEDTEST_URL | ${{ env.SED }} > ./community/mydata/networktest1
           cat <<EOF >> ./community/mydata/networktest1
@@ -105,7 +105,7 @@ jobs:
 
       - name: Generate google-cn
         env:
-          SED: sed '/^\s*#/d' | sed '/payload:/d' | sed 's/- "+.//g' | sed 's/- "/full:/g' | sed 's/"$//' | sed '/^\s*$/d' | sed '/googleapis.cn/d'
+          SED: sed '/^\s*#/d' | sed '/payload:/d' | sed '/googleapis.cn/d' | sed 's/- "+.//g' | sed 's/- "/full:/g' | sed 's/"$//' | sed '/^\s*$/d'
         run: |
           curl -sSL $GOOGLE_CN_URL | ${{ env.SED }} > ./community/mydata/google-cn
 
@@ -117,13 +117,13 @@ jobs:
 
       - name: Generate proxy
         env:
-          SED: sed '/^\s*#/d' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*IP-CIDR/d'
+          SED: sed '/^\s*#/d' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*IP-CIDR/d' | sed '/^\s*$/d'
         run: |
           curl -sSL $PROXY_URL | ${{ env.SED }} > ./community/mydata/proxy
 
       - name: Generate cn
         env:
-          SED: sed '/^\s*#/d' | sed '/^PROCESS-NAME,/d' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*IP-CIDR/d'
+          SED: sed '/^\s*#/d' | sed '/^PROCESS-NAME,/d' | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*IP-CIDR/d' | sed '/^\s*$/d'
         run: |
           curl -sSL $CHINAMAX_URL | ${{ env.SED }} > ./community/mydata/cn
 
@@ -159,8 +159,8 @@ jobs:
             enhanced-mode: fake-ip
             fake-ip-filter:
           EOF
-          curl -sSL https://raw.githubusercontent.com/juewuy/ShellClash/master/public/fake_ip_filter.list | sed '/^\s*#/d' | grep -E "\*|\+" | sed "s/.*/'&'/" | ${{ env.SED }} >> ./tmp/temp-fake-ip-user.txt
-          curl -sSL https://raw.githubusercontent.com/juewuy/ShellClash/master/public/fake_ip_filter.list | sed '/^\s*#/d' | grep -vE "\*|\+" | grep '\.' | ${{ env.SED }} >> ./tmp/temp-fake-ip-user.txt
+          curl -sSL https://raw.githubusercontent.com/juewuy/ShellClash/master/public/fake_ip_filter.list | sed '/^\s*#/d' | sed '/^\s*$/d' | grep -E "\*|\+" | sed "s/.*/'&'/" | ${{ env.SED }} >> ./tmp/temp-fake-ip-user.txt
+          curl -sSL https://raw.githubusercontent.com/juewuy/ShellClash/master/public/fake_ip_filter.list | sed '/^\s*#/d' | sed '/^\s*$/d' | grep -vE "\*|\+" | grep '\.' | ${{ env.SED }} >> ./tmp/temp-fake-ip-user.txt
           curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep -i '\.[A-Z]' | sed 's/^.*\/\///g' | sed 's/:.*\/.*//g' | ${{ env.SED }} >> ./tmp/temp-fake-ip-user.txt
           cat <<EOF >> ./tmp/temp-fake-ip-user.txt
             default-nameserver:
