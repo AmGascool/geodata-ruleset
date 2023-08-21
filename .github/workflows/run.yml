@@ -62,7 +62,7 @@ jobs:
 
       - name: Get geoip.dat relative files
         run: |
-          wget https://github.com/DustinWin/clash-geoip/raw/release/geoip.dat
+          wget https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip.dat
 
       - name: Generate ads
         env:
@@ -230,7 +230,7 @@ jobs:
       - name: Move files
         run: |
           rm -rf ./tmp
-          wget https://raw.githubusercontent.com/DustinWin/clash-geoip/release/Country.mmdb -O ./publish/Country.mmdb
+          wget https://github.com/DustinWin/clash-geoip/releases/download/latest/Country.mmdb -O ./publish/Country.mmdb
           install -Dp ./geoip.dat ./publish/geoip.dat
           install -Dp ./community/geosite.dat ./publish/geosite.dat
           cd ./publish || exit 1
