@@ -112,8 +112,8 @@ jobs:
 
           geodata-mode: true
           geox-url:
-            geosite: 'https://github.com/DustinWin/clash-geosite/releases/download/latest/geosite.dat'
-            geoip: 'https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip.dat'
+            geosite: 'https://github.com/DustinWin/clash-geosite/releases/download/latest/geosite-lite.dat'
+            geoip: 'https://github.com/DustinWin/clash-geosite/releases/download/latest/geoip.metadb'
             mmdb: 'https://github.com/DustinWin/clash-geoip/releases/download/latest/Country.mmdb'
 
           global-client-fingerprint: chrome
@@ -154,8 +154,8 @@ jobs:
 
           geodata-mode: true
           geox-url:
-            geosite: 'https://github.com/DustinWin/clash-geosite/releases/download/latest/geosite.dat'
-            geoip: 'https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip.dat'
+            geosite: 'https://github.com/DustinWin/clash-geosite/releases/download/latest/geosite-lite.dat'
+            geoip: 'https://github.com/DustinWin/clash-geosite/releases/download/latest/geoip.metadb'
             mmdb: 'https://github.com/DustinWin/clash-geoip/releases/download/latest/Country.mmdb'
 
           global-client-fingerprint: chrome
@@ -194,6 +194,7 @@ jobs:
           install -Dp ./geoip.dat ./publish/
           install -Dp ./geoip.metadb ./publish/
           install -Dp ./community/geosite.dat ./publish/
+          install -Dp ./community/geosite-lite.dat ./publish/
           cd ./publish || exit 1
 
       - name: Release and upload assets
