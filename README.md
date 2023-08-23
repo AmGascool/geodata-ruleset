@@ -22,7 +22,19 @@
 ⑨ `geosite:games-cn` 源采用 [rules.kr328.app/category-games@cn](https://rules.kr328.app/category-games@cn.yaml)  
 ⑩ `geosite:proxy` 源采用 [blackmatrix7/ios_rule_script/Proxy](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Proxy)  
 ⑪ `geosite:cn` 源采用 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)
-## 2. geoip.dat 和 Country.mmdb
+## 2. geosite-lite.dat
+在 geosite.dat 的基础上去除了广告域名 `geosite:ads`，**有且仅有如下分类**：
+```
+  - GEOSITE,lan,🏠 私有网络
+  - GEOSITE,networktest,📈 网络测试
+  - GEOSITE,microsoft-cn,Ⓜ️ Microsoft 中国
+  - GEOSITE,apple-cn,🍎 Apple 中国
+  - GEOSITE,google-cn,🗽 Google 中国
+  - GEOSITE,games-cn,🎮 国区游戏
+  - GEOSITE,proxy,🪜 代理域名
+  - GEOSITE,cn,⚡ 直连域名
+```
+## 3. geoip.dat 和 Country.mmdb
 ① 数据来源 [DustinWin/clash-geoip](https://github.com/DustinWin/clash-geoip)，**有且仅有如下分类**：
 ```
   - GEOIP,cn,🇨🇳 国内 IP
@@ -33,7 +45,7 @@
 ③ `geoip:cn` 源采用 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)（ChinaMax_IP.txt）  
 ④ `geoip:lanip` 源采用 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)（IP 部分）  
 ⑤ `geoip:telegram` 源采用 [Telegram IP](https://core.telegram.org/resources/cidr.txt)
-## 3. user.yaml
+## 4. user.yaml
 ① 每天早上 3 点（北京时间）自动构建生成  
 ② 添加[常用 fake-ip 地址过滤列表](https://github.com/juewuy/ShellClash/blob/master/public/fake_ip_filter.list)到 fake-ip-user.yaml 内的 `fake-ip-filter` 中，提高兼容性  
 ③ 添加 [TrackersList](https://trackerslist.com) 到 fake-ip-user.yaml 内的 `fake-ip-filter` 中，防止 [BT 下载](https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases)无法连接 TrackersList UDP 协议  
@@ -45,15 +57,20 @@
 ## 1. geosite.dat
 ① GitHub 源：https://github.com/DustinWin/clash-geosite/releases/download/latest/geosite.dat  
 ② jsDelivr 源：https://cdn.jsdelivr.net/gh/DustinWin/clash-geosite@release/geosite.dat
-## 2. geoip.dat
+## 2. geosite-lite.dat
+① GitHub 源：https://github.com/DustinWin/clash-geosite/releases/download/latest/geosite-lite.dat  
+② jsDelivr 源：https://cdn.jsdelivr.net/gh/DustinWin/clash-geosite@release/geosite-lite.dat
+## 3. geoip.dat
 ① GitHub 源：https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip.dat  
 ② jsDelivr 源：https://cdn.jsdelivr.net/gh/DustinWin/clash-geoip@release/geoip.dat
-## 3. Country.mmdb
+## 4. Country.mmdb
 ① GitHub 源：https://github.com/DustinWin/clash-geoip/releases/download/latest/Country.mmdb  
 ② jsDelivr 源：https://cdn.jsdelivr.net/gh/DustinWin/clash-geoip@release/Country.mmdb
 # 三、 导入 [ShellClash](https://github.com/juewuy/ShellClash)
 ## 1. DNS 模式为 fake-ip  
 连接 SSH 后执行如下命令：
+- 注：以 geosite.dat 为例
+
 ```
 curl -o $clashdir/GeoSite.dat -L https://cdn.jsdelivr.net/gh/DustinWin/clash-geosite@release/geosite.dat
 curl -o $clashdir/GeoIP.dat -L https://cdn.jsdelivr.net/gh/DustinWin/clash-geoip@release/geoip.dat
@@ -63,6 +80,8 @@ $clashdir/start.sh restart
 ```
 ## 2. DNS 模式为 redir-host  
 连接 SSH 后执行如下命令：
+- 注：以 geosite.dat 为例
+
 ```
 curl -o $clashdir/GeoSite.dat -L https://cdn.jsdelivr.net/gh/DustinWin/clash-geosite@release/geosite.dat
 curl -o $clashdir/GeoIP.dat -L https://cdn.jsdelivr.net/gh/DustinWin/clash-geoip@release/geoip.dat
