@@ -42,7 +42,7 @@
   - GEOIP,telegram,✈️ Telegram IP
 ```
 ② 每天早上 3 点（北京时间）自动构建  
-③ `geoip:cn` 源采用 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)（ChinaMax_IP.txt）  
+③ `geoip:cn` 源采用[亚太互联网络信息中心（APNIC）](http://ftp.apnic.net/stats/apnic/delegated-apnic-latest)  
 ④ `geoip:lanip` 源采用 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)（IP 部分）  
 ⑤ `geoip:telegram` 源采用 [Telegram IP](https://core.telegram.org/resources/cidr.txt)
 ## 4. user.yaml
