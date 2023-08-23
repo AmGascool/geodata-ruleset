@@ -93,13 +93,6 @@ jobs:
         run: |
           wget https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip.dat
 
-      - name: Build metadb file
-        env:
-          NO_SKIP: true
-        run: |
-          go install -trimpath -ldflags="-s -w -buildid=" github.com/metacubex/geo/cmd/geo@master
-          geo convert ip -i v2ray -o meta -f geoip.metadb ./geoip.dat
-
       - name: Generate fake-ip-user.yaml
         env:
           SED: sed 's/^/    - /'
@@ -112,9 +105,8 @@ jobs:
 
           geodata-mode: true
           geox-url:
-            geosite: 'https://github.com/DustinWin/clash-geosite/releases/download/latest/geosite-lite.dat'
-            geoip: 'https://github.com/DustinWin/clash-geosite/releases/download/latest/geoip.metadb'
-            mmdb: 'https://github.com/DustinWin/clash-geoip/releases/download/latest/Country.mmdb'
+            geosite: 'https://ghproxy.com/https://github.com/DustinWin/clash-geosite/releases/download/latest/geosite-lite.dat'
+            geoip: 'https://ghproxy.com/https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip.dat'
 
           global-client-fingerprint: chrome
 
@@ -154,9 +146,8 @@ jobs:
 
           geodata-mode: true
           geox-url:
-            geosite: 'https://github.com/DustinWin/clash-geosite/releases/download/latest/geosite-lite.dat'
-            geoip: 'https://github.com/DustinWin/clash-geosite/releases/download/latest/geoip.metadb'
-            mmdb: 'https://github.com/DustinWin/clash-geoip/releases/download/latest/Country.mmdb'
+            geosite: 'https://ghproxy.com/https://github.com/DustinWin/clash-geosite/releases/download/latest/geosite-lite.dat'
+            geoip: 'https://ghproxy.com/https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip.dat'
 
           global-client-fingerprint: chrome
 
@@ -192,7 +183,6 @@ jobs:
         run: |
           wget https://github.com/DustinWin/clash-geoip/releases/download/latest/Country.mmdb -O ./publish/Country.mmdb
           install -Dp ./geoip.dat ./publish/
-          install -Dp ./geoip.metadb ./publish/
           install -Dp ./community/geosite.dat ./publish/
           install -Dp ./community/geosite-lite.dat ./publish/
           cd ./publish || exit 1
