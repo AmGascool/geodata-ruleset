@@ -42,7 +42,7 @@
   - GEOIP,telegram,✈️ Telegram IP
 ```
 ② 每天早上 3 点（北京时间）自动构建  
-③ `geoip:cn` 源采用 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)（ChinaMax_IP.txt）  
+③ `geoip:cn` 源采用 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)（ChinaMax_IP.txt）、[17mon/china_ip_list](https://github.com/17mon/china_ip_list) 和 [gaoyifan/china-operator-ip](https://github.com/gaoyifan/china-operator-ip) 组合  
 ④ `geoip:lanip` 源采用 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)（IP 部分）  
 ⑤ `geoip:telegram` 源采用 [Telegram IP](https://core.telegram.org/resources/cidr.txt)
 ## 4. user.yaml
@@ -61,11 +61,11 @@
 ① GitHub 源：https://github.com/DustinWin/clash-geosite/releases/download/latest/geosite-lite.dat  
 ② jsDelivr 源：https://cdn.jsdelivr.net/gh/DustinWin/clash-geosite@release/geosite-lite.dat
 ## 3. geoip.dat
-① GitHub 源：https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip.dat  
-② jsDelivr 源：https://cdn.jsdelivr.net/gh/DustinWin/clash-geoip@release/geoip.dat
+① GitHub 源：https://github.com/DustinWin/clash-geosite/releases/download/latest/geoip.dat  
+② jsDelivr 源：https://cdn.jsdelivr.net/gh/DustinWin/clash-geosite@release/geoip.dat
 ## 4. Country.mmdb
-① GitHub 源：https://github.com/DustinWin/clash-geoip/releases/download/latest/Country.mmdb  
-② jsDelivr 源：https://cdn.jsdelivr.net/gh/DustinWin/clash-geoip@release/Country.mmdb
+① GitHub 源：https://github.com/DustinWin/clash-geosite/releases/download/latest/Country.mmdb  
+② jsDelivr 源：https://cdn.jsdelivr.net/gh/DustinWin/clash-geosite@release/Country.mmdb
 # 三、 导入 [ShellClash](https://github.com/juewuy/ShellClash)
 ## 1. DNS 模式为 fake-ip  
 连接 SSH 后执行如下命令：
