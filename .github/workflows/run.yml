@@ -57,7 +57,7 @@ jobs:
           rm -f ./community/mydata/networktest1
           curl -sSL https://rules.kr328.app/microsoft@cn.yaml | ${{ env.SED1 }} > ./community/mydata/microsoft-cn
           curl -sSL https://rules.kr328.app/apple@cn.yaml | ${{ env.SED1 }} > ./community/mydata/apple-cn
-          curl -sSL https://rules.kr328.app/google@cn.yaml | grep -v "googleapis.cn" | ${{ env.SED1 }} > ./community/mydata/google-cn
+          curl -sSL https://rules.kr328.app/google@cn.yaml | grep -v 'googleapis\.cn' | ${{ env.SED1 }} > ./community/mydata/google-cn
           curl -sSL https://rules.kr328.app/category-games@cn.yaml | ${{ env.SED1 }} > ./community/mydata/games-cn
           curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Proxy/Proxy_Classical.yaml | ${{ env.SED2 }} > ./community/mydata/proxy
           curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_Classical.yaml | ${{ env.SED2 }} > ./community/mydata/cn
@@ -82,7 +82,7 @@ jobs:
           rm -f ./community/mydata-lite/networktest1
           curl -sSL https://rules.kr328.app/microsoft@cn.yaml | ${{ env.SED1 }} > ./community/mydata-lite/microsoft-cn
           curl -sSL https://rules.kr328.app/apple@cn.yaml | ${{ env.SED1 }} > ./community/mydata-lite/apple-cn
-          curl -sSL https://rules.kr328.app/google@cn.yaml | grep -v "googleapis.cn" | ${{ env.SED1 }} > ./community/mydata-lite/google-cn
+          curl -sSL https://rules.kr328.app/google@cn.yaml | grep -v 'googleapis\.cn' | ${{ env.SED1 }} > ./community/mydata-lite/google-cn
           curl -sSL https://rules.kr328.app/category-games@cn.yaml | ${{ env.SED1 }} > ./community/mydata-lite/games-cn
           curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Proxy/Proxy_Classical.yaml | ${{ env.SED2 }} > ./community/mydata-lite/proxy
           curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_Classical.yaml | ${{ env.SED2 }} > ./community/mydata-lite/cn
