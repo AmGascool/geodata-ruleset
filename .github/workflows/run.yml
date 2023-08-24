@@ -40,7 +40,7 @@ jobs:
       - name: Generate geosite.dat
         env:
           SED1: grep -v "#" | grep -v "payload:" | sed '/^\s*$/d' | sed "s/  - '+.//g" | sed "s/- '+.//g" | sed "s/  - '/full:/g" | sed "s/- '/full:/g" | sed "s/'$//" | sed 's/  - "+.//g' | sed 's/- "+.//g' | sed 's/  - "/full:/g' | sed 's/- "/full:/g' | sed 's/"$//'
-          SED2: grep DOMAIN | grep -v "#" | sed '/^\s*$/d' | sed 's/  - DOMAIN,/full:/g' | sed 's/  - DOMAIN-SUFFIX,//g' | sed 's/  - DOMAIN-KEYWORD,/keyword:/g'
+          SED2: grep "DOMAIN" | grep -v "#" | sed '/^\s*$/d' | sed 's/  - DOMAIN,/full:/g' | sed 's/  - DOMAIN-SUFFIX,//g' | sed 's/  - DOMAIN-KEYWORD,/keyword:/g'
         run: |
           echo "RELEASE_NAME=Released on $(date +%Y%m%d%H%M)" >> $GITHUB_ENV
           mkdir -p ./community/mydata
@@ -57,7 +57,7 @@ jobs:
           rm -f ./community/mydata/networktest1
           curl -sSL https://rules.kr328.app/microsoft@cn.yaml | ${{ env.SED1 }} > ./community/mydata/microsoft-cn
           curl -sSL https://rules.kr328.app/apple@cn.yaml | ${{ env.SED1 }} > ./community/mydata/apple-cn
-          curl -sSL https://rules.kr328.app/google@cn.yaml | grep -v googleapis.cn | ${{ env.SED1 }} > ./community/mydata/google-cn
+          curl -sSL https://rules.kr328.app/google@cn.yaml | grep -v "googleapis.cn" | ${{ env.SED1 }} > ./community/mydata/google-cn
           curl -sSL https://rules.kr328.app/category-games@cn.yaml | ${{ env.SED1 }} > ./community/mydata/games-cn
           curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Proxy/Proxy_Classical.yaml | ${{ env.SED2 }} > ./community/mydata/proxy
           curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_Classical.yaml | ${{ env.SED2 }} > ./community/mydata/cn
@@ -67,7 +67,7 @@ jobs:
       - name: Generate geosite-lite.dat
         env:
           SED1: grep -v "#" | grep -v "payload:" | sed '/^\s*$/d' | sed "s/  - '+.//g" | sed "s/- '+.//g" | sed "s/  - '/full:/g" | sed "s/- '/full:/g" | sed "s/'$//" | sed 's/  - "+.//g' | sed 's/- "+.//g' | sed 's/  - "/full:/g' | sed 's/- "/full:/g' | sed 's/"$//'
-          SED2: grep DOMAIN | grep -v "#" | sed '/^\s*$/d' | sed 's/  - DOMAIN,/full:/g' | sed 's/  - DOMAIN-SUFFIX,//g' | sed 's/  - DOMAIN-KEYWORD,/keyword:/g'
+          SED2: grep "DOMAIN" | grep -v "#" | sed '/^\s*$/d' | sed 's/  - DOMAIN,/full:/g' | sed 's/  - DOMAIN-SUFFIX,//g' | sed 's/  - DOMAIN-KEYWORD,/keyword:/g'
         run: |
           mkdir -p ./community/mydata-lite
           curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan.yaml | ${{ env.SED2 }} > ./community/mydata-lite/lan
@@ -82,7 +82,7 @@ jobs:
           rm -f ./community/mydata-lite/networktest1
           curl -sSL https://rules.kr328.app/microsoft@cn.yaml | ${{ env.SED1 }} > ./community/mydata-lite/microsoft-cn
           curl -sSL https://rules.kr328.app/apple@cn.yaml | ${{ env.SED1 }} > ./community/mydata-lite/apple-cn
-          curl -sSL https://rules.kr328.app/google@cn.yaml | grep -v googleapis.cn | ${{ env.SED1 }} > ./community/mydata-lite/google-cn
+          curl -sSL https://rules.kr328.app/google@cn.yaml | grep -v "googleapis.cn" | ${{ env.SED1 }} > ./community/mydata-lite/google-cn
           curl -sSL https://rules.kr328.app/category-games@cn.yaml | ${{ env.SED1 }} > ./community/mydata-lite/games-cn
           curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Proxy/Proxy_Classical.yaml | ${{ env.SED2 }} > ./community/mydata-lite/proxy
           curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_Classical.yaml | ${{ env.SED2 }} > ./community/mydata-lite/cn
