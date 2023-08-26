@@ -39,7 +39,7 @@ jobs:
 
       - name: Generate geosite.dat
         env:
-          SED1: grep -v "#" | grep -v "payload:" | sed "s/  - '+.//g" | sed "s/- '+.//g" | sed "s/  - '/full:/g" | sed "s/- '/full:/g" | sed "s/'$//" | sed 's/  - "+.//g' | sed 's/- "+.//g' | sed 's/  - "/full:/g' | sed 's/- "/full:/g' | sed 's/"$//' | sed '/^\s*$/d'
+          SED1: grep -v "#" | grep -v "payload:" | sed 's/^[[:space:]]*//' | sed "s/^- '+.//g" | sed "s/^- '/full:/g" | sed "s/'$//g" | sed 's/^- "+\.//g' | sed 's/^- "/full:/g' | sed 's/^- /full:/g' | sed 's/"$//g' | sed '/^\s*$/d'
           SED2: grep "DOMAIN" | grep -v "#" | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*$/d'
         run: |
           echo "RELEASE_NAME=Released on $(date +%Y%m%d%H%M)" >> $GITHUB_ENV
@@ -66,7 +66,7 @@ jobs:
 
       - name: Generate geosite-lite.dat
         env:
-          SED1: grep -v "#" | grep -v "payload:" | sed "s/  - '+.//g" | sed "s/- '+.//g" | sed "s/  - '/full:/g" | sed "s/- '/full:/g" | sed "s/'$//" | sed 's/  - "+.//g' | sed 's/- "+.//g' | sed 's/  - "/full:/g' | sed 's/- "/full:/g' | sed 's/"$//' | sed '/^\s*$/d'
+          SED1: grep -v "#" | grep -v "payload:" | sed 's/^[[:space:]]*//' | sed "s/^- '+.//g" | sed "s/^- '/full:/g" | sed "s/'$//g" | sed 's/^- "+\.//g' | sed 's/^- "/full:/g' | sed 's/^- /full:/g' | sed 's/"$//g' | sed '/^\s*$/d'
           SED2: grep "DOMAIN" | grep -v "#" | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*$/d'
         run: |
           mkdir -p ./community/mydata-lite
