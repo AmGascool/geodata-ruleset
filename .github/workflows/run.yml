@@ -148,6 +148,10 @@ jobs:
           tcp-concurrent: true
 
           geodata-mode: true
+          geox-url:
+            geosite: "https://ghproxy.com/https://github.com/DustinWin/clash-geosite/releases/download/latest/geosite.dat"
+            geoip: "https://ghproxy.com/https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip.dat"
+            mmdb: "https://ghproxy.com/https://github.com/DustinWin/clash-geoip/releases/download/latest/Country.mmdb"
 
           global-client-fingerprint: chrome
 
