@@ -65,29 +65,10 @@ jobs:
           go run ./ --datapath=./mydata --outputname geosite.dat
 
       - name: Generate geosite-lite.dat
-        env:
-          SED1: grep -v "#" | grep -v "payload:" | sed 's/^[[:space:]]*//' | sed 's/^- ["'\'']+\.//g' | sed 's/^- ["'\'']/full:/g' | sed 's/^- /full:/g' | sed 's/["'\'']$//g' | sed '/^\s*$/d'
-          SED2: grep "DOMAIN" | grep -v "#" | sed 's/DOMAIN,/full:/g' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*$/d'
         run: |
-          mkdir -p ./community/mydata-lite
-          curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan.list | ${{ env.SED2 }} > ./community/mydata-lite/lan
-          curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Speedtest/Speedtest.list | ${{ env.SED2 }} > ./community/mydata-lite/networktest1
-          cat <<EOF >> ./community/mydata-lite/networktest1
-          keyword:test-ipv6
-          keyword:testipv6
-          keyword:ipv6-test
-          keyword:ipv6test
-          EOF
-          sort ./community/mydata-lite/networktest1 | uniq -i > ./community/mydata-lite/networktest
-          rm -f ./community/mydata-lite/networktest1
-          curl -sSL https://rules.kr328.app/microsoft@cn.yaml | ${{ env.SED1 }} > ./community/mydata-lite/microsoft-cn
-          curl -sSL https://rules.kr328.app/apple@cn.yaml | ${{ env.SED1 }} > ./community/mydata-lite/apple-cn
-          curl -sSL https://rules.kr328.app/google@cn.yaml | grep -v 'googleapis\.cn' | ${{ env.SED1 }} > ./community/mydata-lite/google-cn
-          curl -sSL https://rules.kr328.app/category-games@cn.yaml | ${{ env.SED1 }} > ./community/mydata-lite/games-cn
-          curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Proxy/Proxy.list | ${{ env.SED2 }} > ./community/mydata/proxy
-          curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax.list | ${{ env.SED2 }} > ./community/mydata-lite/cn
+          rm -f ./community/mydata/ads
           cd ./community
-          go run ./ --datapath=./mydata-lite --outputname geosite-lite.dat
+          go run ./ --datapath=./mydata --outputname geosite-lite.dat
 
       - name: Get geoip.dat relative files
         run: |
