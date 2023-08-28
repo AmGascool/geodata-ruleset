@@ -20,7 +20,7 @@
 ⑦ `geosite:apple-cn` 源采用 [rules.kr328.app/apple@cn](https://rules.kr328.app/apple@cn.yaml)  
 ⑧ `geosite:google-cn` 源采用 [rules.kr328.app/google@cn](https://rules.kr328.app/google@cn.yaml)（删除 `DOMAIN-SUFFIX,googleapis.cn`，以免直连时出现 [Google Play Store](https://play.google.com/store) 无法下载或升级应用的问题）  
 ⑨ `geosite:games-cn` 源采用 [rules.kr328.app/category-games@cn](https://rules.kr328.app/category-games@cn.yaml)  
-⑩ `geosite:proxy` 源采用 [Loyalsoldier/domain-list-custom](https://github.com/Loyalsoldier/domain-list-custom)  
+⑩ `geosite:proxy` 源采用 [blackmatrix7/ios_rule_script/Proxy](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Proxy)  
 ⑪ `geosite:cn` 源采用 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)
 ## 2. geosite-lite.dat
 在 geosite.dat 的基础上去除了广告域名 `geosite:ads`，**有且仅有如下分类**：
