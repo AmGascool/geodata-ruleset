@@ -86,7 +86,7 @@ jobs:
 
           geodata-mode: true
           geox-url:
-            geosite: "https://ghproxy.com/https://github.com/DustinWin/clash-geosite/releases/download/latest/geosite.dat"
+            geosite: "https://ghproxy.com/https://github.com/DustinWin/clash-geosite/releases/download/latest/geosite-lite.dat"
             geoip: "https://ghproxy.com/https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip.dat"
             mmdb: "https://ghproxy.com/https://github.com/DustinWin/clash-geoip/releases/download/latest/Country.mmdb"
 
@@ -130,7 +130,7 @@ jobs:
 
           geodata-mode: true
           geox-url:
-            geosite: "https://ghproxy.com/https://github.com/DustinWin/clash-geosite/releases/download/latest/geosite.dat"
+            geosite: "https://ghproxy.com/https://github.com/DustinWin/clash-geosite/releases/download/latest/geosite-lite.dat"
             geoip: "https://ghproxy.com/https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip.dat"
             mmdb: "https://ghproxy.com/https://github.com/DustinWin/clash-geoip/releases/download/latest/Country.mmdb"
 
