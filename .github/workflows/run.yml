@@ -98,7 +98,7 @@ jobs:
         run: |
           cd gfwlist2dnsmasq || exit 1
           chmod +x ./gfwlist2dnsmasq.sh
-          ./gfwlist2dnsmasq.sh -l -o ./community/mydata/proxy
+          ./gfwlist2dnsmasq.sh -l -o ../community/mydata/proxy
 
       - name: Generate cn
         run: |
