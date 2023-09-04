@@ -135,7 +135,7 @@ jobs:
           EOF
           sort --ignore-case -u ./tmp/temp-proxy.txt > ./community/mydata/proxy
           curl -sSL ${proxy1} | grep -Ev '#|payload:' > ./tmp/temp-proxy.yaml
-          curl -sSL ${proxy2} | grep -Ev '#|regexp:' | sed '/^\s*$/d' | sed "/^domain:/- '+./g" | sed "s/^full:/- '/g" | sed 's/:@!cn$//g' | sed "s/$/'/g" | sed 's/^/  /g' >> ./tmp/temp-proxy.yaml
+          curl -sSL ${proxy2} | grep -Ev '#|regexp:' | sed '/^\s*$/d' | sed "s/^domain:/- '+./g" | sed "s/^full:/- '/g" | sed 's/:@!cn$//g' | sed "s/$/'/g" | sed 's/^/  /g' >> ./tmp/temp-proxy.yaml
           cat <<EOF >> ./tmp/temp-proxy.yaml
             - '+.googleapis.cn'
           EOF
