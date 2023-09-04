@@ -108,10 +108,10 @@ jobs:
 
       - name: Generate google-cn
         run: |
-          curl -sSL ${google_cn1} | grep -Ev '#|payload:' | sed 's/^- "+.//g' | sed 's/^- "/full:/g' | sed 's/"$//g' | sed '/^\s*$/d' > ./tmp/temp-google-cn.txt
+          curl -sSL ${google_cn1} | grep -Ev '#|payload:|googleapis\.cn' | sed 's/^- "+.//g' | sed 's/^- "/full:/g' | sed 's/"$//g' | sed '/^\s*$/d' > ./tmp/temp-google-cn.txt
           curl -sSL ${google_cn2} | sed 's/^server=\///g' | sed 's/\/.*//g' | sed '/^\s*$/d' >> ./tmp/temp-google-cn.txt
           sort --ignore-case -u ./tmp/temp-google-cn.txt > ./community/mydata/google-cn
-          curl -sSL ${google_cn1} | grep -Ev '#|payload:' | sed 's/"/'\''/g' | sed 's/^/  /g' | sed '/^\s*$/d' > ./tmp/temp-google-cn.yaml
+          curl -sSL ${google_cn1} | grep -Ev '#|payload:|googleapis\.cn' | sed 's/"/'\''/g' | sed 's/^/  /g' | sed '/^\s*$/d' > ./tmp/temp-google-cn.yaml
           curl -sSL ${google_cn2} | sed 's/server=\//- '\''/g' | sed 's/\/.*/\x27/' >> ./tmp/temp-google-cn.yaml
           sort --ignore-case -u ./tmp/temp-google-cn.yaml > ./tmp/google-cn.yaml
           echo "payload:" | cat - ./tmp/google-cn.yaml > ./publish/google-cn.yaml
