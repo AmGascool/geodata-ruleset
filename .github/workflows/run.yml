@@ -22,13 +22,13 @@ jobs:
           echo "lan1=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan.yaml" >> $GITHUB_ENV
           echo "lan2=https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/private" >> $GITHUB_ENV
           echo "networktest=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Speedtest/Speedtest.yaml" >> $GITHUB_ENV
-          echo "microsoft=https://rules.kr328.app/microsoft@cn.yaml" >> $GITHUB_ENV
-          echo "apple1=https://rules.kr328.app/apple@cn.yaml" >> $GITHUB_ENV
-          echo "apple2=https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/apple.china.conf" >> $GITHUB_ENV
-          echo "google1=https://rules.kr328.app/google@cn.yaml" >> $GITHUB_ENV
-          echo "google2=https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/google.china.conf" >> $GITHUB_ENV
-          echo "games1=https://rules.kr328.app/category-games@cn.yaml" >> $GITHUB_ENV
-          echo "games2=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/SteamCN/SteamCN.yaml" >> $GITHUB_ENV
+          echo "microsoft-cn=https://rules.kr328.app/microsoft@cn.yaml" >> $GITHUB_ENV
+          echo "apple-cn1=https://rules.kr328.app/apple@cn.yaml" >> $GITHUB_ENV
+          echo "apple-cn2=https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/apple.china.conf" >> $GITHUB_ENV
+          echo "google-cn1=https://rules.kr328.app/google@cn.yaml" >> $GITHUB_ENV
+          echo "google-cn2=https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/google.china.conf" >> $GITHUB_ENV
+          echo "games-cn1=https://rules.kr328.app/category-games@cn.yaml" >> $GITHUB_ENV
+          echo "games-cn2=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/SteamCN/SteamCN.yaml" >> $GITHUB_ENV
           echo "proxy1=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Proxy/Proxy_Domain.yaml" >> $GITHUB_ENV
           echo "proxy2=https://raw.githubusercontent.com/Loyalsoldier/domain-list-custom/release/geolocation-\!cn.txt" >> $GITHUB_ENV
           echo "cn1=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_Domain.yaml" >> $GITHUB_ENV
@@ -67,7 +67,7 @@ jobs:
       - name: Generate lan
         run: |
           curl -sSL ${lan1} | grep 'DOMAIN' | grep -v '#' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/- DOMAIN,/full:/g' | sed 's/^[[:space:]]*//g' | sed '/^\s*$/d' > ./tmp/temp-lan.txt
-          curl -sSL ${lan2} | grep -v '#' | sed '/^\s*$/d' >> ./tmp/temp-lan.txt
+          curl -sSL ${lan2} | grep -Ev '#|regexp:' | sed '/^\s*$/d' >> ./tmp/temp-lan.txt
           sort --ignore-case -u ./tmp/temp-lan.txt > ./community/mydata/lan
           curl -sSL ${lan1} | grep -Ev '#|payload:|DOMAIN-KEYWORD|IP-CIDR' | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/DOMAIN,/'/g" | sed "s/$/'/g" | sed '/^\s*$/d' > ./tmp/temp-lan.yaml
           curl -sSL ${lan2} | grep -Ev '#|regexp:' | sed '/^\s*$/d' | sed '/^full:/!s/^/- '\'+.'/g' | sed "s/^full:/- '/g" | sed "s/$/'/g" | sed 's/^/  /g' >>  ./tmp/temp-lan.yaml
@@ -91,45 +91,45 @@ jobs:
             - DOMAIN-KEYWORD,ipv6test
           EOF
           
-      - name: Generate microsoft
+      - name: Generate microsoft-cn
         run: |
-          curl -sSL ${microsoft} | grep -Ev '#|payload:' | sed 's/^- "+.//g' | sed 's/^- "/full:/g' | sed 's/"$//g' | sed '/^\s*$/d' > ./community/mydata/microsoft
-          curl -sSL ${microsoft} | grep -Ev '#|payload:' | sed 's/"/'\''/g' | sed 's/^/  /g' | sed '1s/^/payload:\n/' | sed '/^\s*$/d' > ./publish/microsoft.yaml
+          curl -sSL ${microsoft-cn} | grep -Ev '#|payload:' | sed 's/^- "+.//g' | sed 's/^- "/full:/g' | sed 's/"$//g' | sed '/^\s*$/d' > ./community/mydata/microsoft-cn
+          curl -sSL ${microsoft-cn} | grep -Ev '#|payload:' | sed 's/"/'\''/g' | sed 's/^/  /g' | sed '1s/^/payload:\n/' | sed '/^\s*$/d' > ./publish/microsoft-cn.yaml
 
-      - name: Generate apple
+      - name: Generate apple-cn
         run: |
-          curl -sSL ${apple1} | grep -Ev '#|payload:' | sed 's/^- "+.//g' | sed 's/^- "/full:/g' | sed 's/"$//g' | sed '/^\s*$/d' > ./tmp/temp-apple.txt
-          curl -sSL ${apple2} | sed 's/^server=\///g' | sed 's/\/.*//g' | sed '/^\s*$/d' >> ./tmp/temp-apple.txt
-          sort --ignore-case -u ./tmp/temp-apple.txt > ./community/mydata/apple
-          curl -sSL ${apple1} | grep -Ev '#|payload:' | sed 's/"/'\''/g' | sed 's/^/  /g' | sed '/^\s*$/d' > ./tmp/temp-apple.yaml
-          curl -sSL ${apple2} | sed 's/server=\//- '\''/g' | sed 's/\/.*/\x27/' >> ./tmp/temp-apple.yaml
-          sort --ignore-case -u ./tmp/temp-apple.yaml > ./tmp/apple.yaml
-          echo "payload:" | cat - ./tmp/apple.yaml > ./publish/apple.yaml
+          curl -sSL ${apple-cn1} | grep -Ev '#|payload:' | sed 's/^- "+.//g' | sed 's/^- "/full:/g' | sed 's/"$//g' | sed '/^\s*$/d' > ./tmp/temp-apple-cn.txt
+          curl -sSL ${apple-cn2} | sed 's/^server=\///g' | sed 's/\/.*//g' | sed '/^\s*$/d' >> ./tmp/temp-apple-cn.txt
+          sort --ignore-case -u ./tmp/temp-apple-cn.txt > ./community/mydata/apple-cn
+          curl -sSL ${apple-cn1} | grep -Ev '#|payload:' | sed 's/"/'\''/g' | sed 's/^/  /g' | sed '/^\s*$/d' > ./tmp/temp-apple-cn.yaml
+          curl -sSL ${apple-cn2} | sed 's/server=\//- '\''/g' | sed 's/\/.*/\x27/' >> ./tmp/temp-apple-cn.yaml
+          sort --ignore-case -u ./tmp/temp-apple-cn.yaml > ./tmp/apple-cn.yaml
+          echo "payload:" | cat - ./tmp/apple-cn.yaml > ./publish/apple-cn.yaml
 
-      - name: Generate google
+      - name: Generate google-cn
         run: |
-          curl -sSL ${google1} | grep -Ev '#|payload:' | sed 's/^- "+.//g' | sed 's/^- "/full:/g' | sed 's/"$//g' | sed '/^\s*$/d' > ./tmp/temp-google.txt
-          curl -sSL ${google2} | sed 's/^server=\///g' | sed 's/\/.*//g' | sed '/^\s*$/d' >> ./tmp/temp-google.txt
-          sort --ignore-case -u ./tmp/temp-google.txt > ./community/mydata/google
-          curl -sSL ${google1} | grep -Ev '#|payload:' | sed 's/"/'\''/g' | sed 's/^/  /g' | sed '/^\s*$/d' > ./tmp/temp-google.yaml
-          curl -sSL ${google2} | sed 's/server=\//- '\''/g' | sed 's/\/.*/\x27/' >> ./tmp/temp-google.yaml
-          sort --ignore-case -u ./tmp/temp-google.yaml > ./tmp/google.yaml
-          echo "payload:" | cat - ./tmp/google.yaml > ./publish/google.yaml
+          curl -sSL ${google-cn1} | grep -Ev '#|payload:' | sed 's/^- "+.//g' | sed 's/^- "/full:/g' | sed 's/"$//g' | sed '/^\s*$/d' > ./tmp/temp-google-cn.txt
+          curl -sSL ${google-cn2} | sed 's/^server=\///g' | sed 's/\/.*//g' | sed '/^\s*$/d' >> ./tmp/temp-google-cn.txt
+          sort --ignore-case -u ./tmp/temp-google-cn.txt > ./community/mydata/google-cn
+          curl -sSL ${google-cn1} | grep -Ev '#|payload:' | sed 's/"/'\''/g' | sed 's/^/  /g' | sed '/^\s*$/d' > ./tmp/temp-google-cn.yaml
+          curl -sSL ${google-cn2} | sed 's/server=\//- '\''/g' | sed 's/\/.*/\x27/' >> ./tmp/temp-google-cn.yaml
+          sort --ignore-case -u ./tmp/temp-google-cn.yaml > ./tmp/google-cn.yaml
+          echo "payload:" | cat - ./tmp/google-cn.yaml > ./publish/google-cn.yaml
 
-      - name: Generate games
+      - name: Generate games-cn
         run: |
-          curl -sSL ${games1} | grep -Ev '#|payload:' | sed 's/^- "+.//g' | sed 's/^- "/full:/g' | sed 's/"$//g' | sed '/^\s*$/d' > ./tmp/temp-games.txt
-          curl -sSL ${games2} | grep 'DOMAIN' | grep -v '#' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/- DOMAIN,/full:/g' | sed 's/^[[:space:]]*//g' | sed '/^\s*$/d' >> ./tmp/temp-games.txt
-          sort --ignore-case -u ./tmp/temp-games.txt > ./community/mydata/games
-          curl -sSL ${games1} | grep -Ev '#|payload:' | sed 's/"/'\''/g' | sed 's/^/  /g' | sed '/^\s*$/d' > ./tmp/temp-games.yaml
-          curl -sSL ${games2} | grep -Ev '#|payload:|DOMAIN-KEYWORD|IP-CIDR' | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/DOMAIN,/'/g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./tmp/temp-games.yaml
-          sort --ignore-case -u ./tmp/temp-games.yaml > ./tmp/games.yaml
-          echo "payload:" | cat - ./tmp/games.yaml > ./publish/games.yaml
+          curl -sSL ${games-cn1} | grep -Ev '#|payload:' | sed 's/^- "+.//g' | sed 's/^- "/full:/g' | sed 's/"$//g' | sed '/^\s*$/d' > ./tmp/temp-games-cn.txt
+          curl -sSL ${games-cn2} | grep 'DOMAIN' | grep -v '#' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/- DOMAIN,/full:/g' | sed 's/^[[:space:]]*//g' | sed '/^\s*$/d' >> ./tmp/temp-games-cn.txt
+          sort --ignore-case -u ./tmp/temp-games-cn.txt > ./community/mydata/games-cn
+          curl -sSL ${games-cn1} | grep -Ev '#|payload:' | sed 's/"/'\''/g' | sed 's/^/  /g' | sed '/^\s*$/d' > ./tmp/temp-games-cn.yaml
+          curl -sSL ${games-cn2} | grep -Ev '#|payload:|DOMAIN-KEYWORD|IP-CIDR' | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/DOMAIN,/'/g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./tmp/temp-games-cn.yaml
+          sort --ignore-case -u ./tmp/temp-games-cn.yaml > ./tmp/games-cn.yaml
+          echo "payload:" | cat - ./tmp/games-cn.yaml > ./publish/games-cn.yaml
 
       - name: Generate proxy
         run: |
           curl -sSL ${proxy1} | grep -Ev '#|payload:' | sed "s/- '+.//g" | sed "s/- '/full:/g" | sed "s/'$//g" | sed 's/^[[:space:]]*//g' | sed '/^\s*$/d' > ./tmp/temp-proxy.txt
-          curl -sSL ${proxy2} | sed 's/^domain://g' | sed 's/:@!cn$//g' >> ./tmp/temp-proxy.txt
+          curl -sSL ${proxy2} | grep -v 'regexp:' | sed 's/^domain://g' | sed 's/:@!cn$//g' >> ./tmp/temp-proxy.txt
           sort --ignore-case -u ./tmp/temp-proxy.txt > ./community/mydata/proxy
           curl -sSL ${proxy1} | grep -Ev '#|payload:' > ./tmp/temp-proxy.yaml
           curl -sSL ${proxy2} | grep -Ev '#|regexp:' | sed '/^\s*$/d' | sed "/^domain:/- '+./g" | sed "s/^full:/- '/g" | sed 's/:@!cn$//g' | sed "s/$/'/g" | sed 's/^/  /g' >> ./tmp/temp-proxy.yaml
@@ -243,7 +243,7 @@ jobs:
               - https://doh.pub/dns-query
               - https://dns.alidns.com/dns-query
             nameserver-policy:
-              'geosite:microsoft,apple,google,games': [https://doh.pub/dns-query, https://dns.alidns.com/dns-query]
+              'geosite:microsoft-cn,apple-cn,google-cn,games-cn': [https://doh.pub/dns-query, https://dns.alidns.com/dns-query]
               'geosite:cn,lan': [https://doh.pub/dns-query, https://dns.alidns.com/dns-query]
           EOF
           rm -rf ./tmp
