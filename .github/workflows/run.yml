@@ -60,7 +60,9 @@ jobs:
 
       - name: Generate ads
         run: |
-          mkdir -p ./tmp ./community/mydata ./publish
+          mkdir -p ./tmp
+          mkdir -p ./community/mydata
+          mkdir -p ./publish
           curl -sSL ${ads} | grep -Ev '#|payload:' | sed "s/- '+.//g" | sed "s/- '/full:/g" | sed "s/'$//g" | sed 's/^[[:space:]]*//g' | sed '/^\s*$/d' > ./community/mydata/ads
           curl -sSL ${ads} > ./publish/ads.yaml
 
