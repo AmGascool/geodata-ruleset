@@ -130,9 +130,15 @@ jobs:
         run: |
           curl -sSL ${proxy1} | grep -Ev '#|payload:' | sed "s/- '+.//g" | sed "s/- '/full:/g" | sed "s/'$//g" | sed 's/^[[:space:]]*//g' | sed '/^\s*$/d' > ./tmp/temp-proxy.txt
           curl -sSL ${proxy2} | sed 's/^domain://g' | sed 's/:@!cn$//g' >> ./tmp/temp-proxy.txt
+          cat <<EOF >> ./tmp/temp-proxy.txt
+          googleapis.cn
+          EOF
           sort --ignore-case -u ./tmp/temp-proxy.txt > ./community/mydata/proxy
           curl -sSL ${proxy1} | grep -Ev '#|payload:' > ./tmp/temp-proxy.yaml
           curl -sSL ${proxy2} | grep -Ev '#|regexp:' | sed '/^\s*$/d' | sed "/^domain:/- '+./g" | sed "s/^full:/- '/g" | sed 's/:@!cn$//g' | sed "s/$/'/g" | sed 's/^/  /g' >> ./tmp/temp-proxy.yaml
+          cat <<EOF >> ./tmp/temp-proxy.yaml
+            - '+.googleapis.cn'
+          EOF
           sort --ignore-case -u ./tmp/temp-proxy.yaml > ./tmp/proxy.yaml
           echo "payload:" | cat - ./tmp/proxy.yaml > ./publish/proxy.yaml
 
