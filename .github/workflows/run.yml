@@ -67,7 +67,7 @@ jobs:
       - name: Generate lan
         run: |
           curl -sSL ${lan1} | grep 'DOMAIN' | grep -v '#' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/- DOMAIN,/full:/g' | sed 's/^[[:space:]]*//g' | sed '/^\s*$/d' > ./tmp/temp-lan.txt
-          curl -sSL ${lan2} | grep -Ev '#|regexp:' | sed '/^\s*$/d' >> ./tmp/temp-lan.txt
+          curl -sSL ${lan2} | grep -v '#' | sed '/^\s*$/d' >> ./tmp/temp-lan.txt
           sort --ignore-case -u ./tmp/temp-lan.txt > ./community/mydata/lan
           curl -sSL ${lan1} | grep -Ev '#|payload:|DOMAIN-KEYWORD|IP-CIDR' | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/DOMAIN,/'/g" | sed "s/$/'/g" | sed '/^\s*$/d' > ./tmp/temp-lan.yaml
           curl -sSL ${lan2} | grep -Ev '#|regexp:' | sed '/^\s*$/d' | sed '/^full:/!s/^/- '\'+.'/g' | sed "s/^full:/- '/g" | sed "s/$/'/g" | sed 's/^/  /g' >>  ./tmp/temp-lan.yaml
@@ -126,15 +126,7 @@ jobs:
           sort --ignore-case -u ./tmp/temp-games-cn.yaml > ./tmp/games-cn.yaml
           echo "payload:" | cat - ./tmp/games-cn.yaml > ./publish/games-cn.yaml
 
-      - name: Generate proxy
-        run: |
-          curl -sSL ${proxy1} | grep -Ev '#|payload:' | sed "s/- '+.//g" | sed "s/- '/full:/g" | sed "s/'$//g" | sed 's/^[[:space:]]*//g' | sed '/^\s*$/d' > ./tmp/temp-proxy.txt
-          curl -sSL ${proxy2} | grep -v 'regexp:' | sed 's/^domain://g' | sed 's/:@!cn$//g' >> ./tmp/temp-proxy.txt
-          sort --ignore-case -u ./tmp/temp-proxy.txt > ./community/mydata/proxy
-          curl -sSL ${proxy1} | grep -Ev '#|payload:' > ./tmp/temp-proxy.yaml
-          curl -sSL ${proxy2} | grep -Ev '#|regexp:' | sed '/^\s*$/d' | sed "/^domain:/- '+./g" | sed "s/^full:/- '/g" | sed 's/:@!cn$//g' | sed "s/$/'/g" | sed 's/^/  /g' >> ./tmp/temp-proxy.yaml
-          sort --ignore-case -u ./tmp/temp-proxy.yaml > ./tmp/proxy.yaml
-          echo "payload:" | cat - ./tmp/proxy.yaml > ./publish/proxy.yaml
+
 
       - name: Generate cn
         run: |
