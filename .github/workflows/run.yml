@@ -102,7 +102,7 @@ jobs:
           curl -sSL ${apple_cn2} | sed 's/^server=\///g' | sed 's/\/.*//g' | sed '/^\s*$/d' >> ./tmp/temp-apple-cn.txt
           sort --ignore-case -u ./tmp/temp-apple-cn.txt > ./community/mydata/apple-cn
           curl -sSL ${apple_cn1} | grep -Ev '#|payload:' | sed 's/"/'\''/g' | sed 's/^/  /g' | sed '/^\s*$/d' > ./tmp/temp-apple-cn.yaml
-          curl -sSL ${apple_cn2} | sed 's/server=\//- '\''/g' | sed 's/\/.*/\x27/' >> ./tmp/temp-apple-cn.yaml
+          curl -sSL ${apple_cn2} | sed 's/server=\//- '\''/g' | sed 's/\/.*/\x27/' | sed 's/^/  /g' | sed '/^\s*$/d' >> ./tmp/temp-apple-cn.yaml
           sort --ignore-case -u ./tmp/temp-apple-cn.yaml > ./tmp/apple-cn.yaml
           echo "payload:" | cat - ./tmp/apple-cn.yaml > ./publish/apple-cn.yaml
 
@@ -112,7 +112,7 @@ jobs:
           curl -sSL ${google_cn2} | sed 's/^server=\///g' | sed 's/\/.*//g' | sed '/^\s*$/d' >> ./tmp/temp-google-cn.txt
           sort --ignore-case -u ./tmp/temp-google-cn.txt > ./community/mydata/google-cn
           curl -sSL ${google_cn1} | grep -Ev '#|payload:|googleapis\.cn' | sed 's/"/'\''/g' | sed 's/^/  /g' | sed '/^\s*$/d' > ./tmp/temp-google-cn.yaml
-          curl -sSL ${google_cn2} | sed 's/server=\//- '\''/g' | sed 's/\/.*/\x27/' >> ./tmp/temp-google-cn.yaml
+          curl -sSL ${google_cn2} | sed 's/server=\//- '\''/g' | sed 's/\/.*/\x27/' | sed 's/^/  /g' | sed '/^\s*$/d' >> ./tmp/temp-google-cn.yaml
           sort --ignore-case -u ./tmp/temp-google-cn.yaml > ./tmp/google-cn.yaml
           echo "payload:" | cat - ./tmp/google-cn.yaml > ./publish/google-cn.yaml
 
