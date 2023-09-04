@@ -139,7 +139,7 @@ jobs:
       - name: Generate cn
         run: |
           curl -sSL ${cn1} | grep -Ev '#|payload:' | sed "s/- '+.//g" | sed "s/- '/full:/g" | sed "s/'$//g" | sed 's/^[[:space:]]*//g' | sed '/^\s*$/d' > ./tmp/temp-cn.txt
-          curl -sSL ${cn2} | grep -Ev '#|payload:' | sed   >> ./tmp/temp-cn.txt
+          curl -sSL ${cn2} | grep -Ev '#|payload:' | sed "s/- '+.//g" | sed "s/- '/full:/g" | sed "s/'$//g" | sed 's/^[[:space:]]*//g' | sed '/^\s*$/d' >> ./tmp/temp-cn.txt
           sort --ignore-case -u ./tmp/temp-cn.txt > ./community/mydata/cn
           curl -sSL ${cn1} | grep -Ev '#|payload:' > ./tmp/temp-cn.yaml
           curl -sSL ${cn2} | grep -Ev '#|payload:' >> ./tmp/temp-cn.yaml
