@@ -124,6 +124,21 @@ jobs:
           SED: sed 's/^/    - /g' | sed '/^\s*$/d'
         run: |
           cat <<EOF > ./tmp/temp-fake-ip-user.txt
+          unified-delay: false
+          tcp-concurrent: true
+
+          geodata-mode: true
+          geox-url:
+            geosite: "https://ghproxy.com/https://github.com/DustinWin/clash-geosite/releases/download/latest/geosite-lite.dat"
+            geoip: "https://ghproxy.com/https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip.dat"
+            mmdb: "https://ghproxy.com/https://github.com/DustinWin/clash-geoip/releases/download/latest/Country.mmdb"
+
+          global-client-fingerprint: chrome
+
+          profile:
+            store-selected: true
+            store-fake-ip: true
+
           dns:
             enable: true
             prefer-h3: true
@@ -152,6 +167,21 @@ jobs:
       - name: Generate redir-host-user.yaml
         run: |
           cat <<EOF > ./publish/redir-host-user.yaml
+          unified-delay: false
+          tcp-concurrent: true
+
+          geodata-mode: true
+          geox-url:
+            geosite: "https://ghproxy.com/https://github.com/DustinWin/clash-geosite/releases/download/latest/geosite-lite.dat"
+            geoip: "https://ghproxy.com/https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip.dat"
+            mmdb: "https://ghproxy.com/https://github.com/DustinWin/clash-geoip/releases/download/latest/Country.mmdb"
+
+          global-client-fingerprint: chrome
+
+          profile:
+            store-selected: true
+            store-fake-ip: true
+
           dns:
             enable: true
             prefer-h3: true
