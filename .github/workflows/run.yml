@@ -86,7 +86,7 @@ jobs:
 
       - name: Generate google-cn
         run: |
-          curl -sSL ${google_cn} | grep -Ev '#|payload:|googleapis\.cn' | sed 's/^- "+.//g' | sed 's/^- "/full:/g' | sed 's/"$//g' | sed '/^\s*$/d' > ./community/mydata/google-cn
+          curl -sSL ${google_cn} | grep -Ev '#|payload:|googleapis' | sed 's/^- "+.//g' | sed 's/^- "/full:/g' | sed 's/"$//g' | sed '/^\s*$/d' > ./community/mydata/google-cn
 
       - name: Generate games-cn
         run: |
