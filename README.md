@@ -75,8 +75,6 @@
 # 三、 导入 [ShellClash](https://github.com/juewuy/ShellClash)
 ## 1. DNS 模式为 fake-ip  
 连接 SSH 后执行如下命令：
-- 注：以 geosite.dat 为例
-
 ```
 curl -o $clashdir/GeoSite.dat -L https://cdn.jsdelivr.net/gh/DustinWin/clash-geosite@release/geosite.dat
 curl -o $clashdir/GeoIP.dat -L https://cdn.jsdelivr.net/gh/DustinWin/clash-geosite@release/geoip.dat
@@ -86,8 +84,6 @@ $clashdir/start.sh restart
 ```
 ## 2. DNS 模式为 redir-host  
 连接 SSH 后执行如下命令：
-- 注：以 geosite.dat 为例
-
 ```
 curl -o $clashdir/GeoSite.dat -L https://cdn.jsdelivr.net/gh/DustinWin/clash-geosite@release/geosite.dat
 curl -o $clashdir/GeoIP.dat -L https://cdn.jsdelivr.net/gh/DustinWin/clash-geosite@release/geoip.dat
