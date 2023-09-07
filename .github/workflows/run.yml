@@ -100,8 +100,8 @@ jobs:
           cd gfwlist2dnsmasq || exit 1
           chmod +x ./gfwlist2dnsmasq.sh
           ./gfwlist2dnsmasq.sh -l -o ../tmp/temp-proxy.txt
-          curl -sSL ${proxy} | grep 'DOMAIN' | grep -Ev '#' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed 's/DOMAIN,/full:/g' | sed '/^\s*$/d' >> ./tmp/temp-proxy.txt
-          sort --ignore-case -u ./tmp/temp-proxy.txt > ./community/mydata/proxy
+          curl -sSL ${proxy} | grep 'DOMAIN' | grep -Ev '#' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed 's/DOMAIN,/full:/g' | sed '/^\s*$/d' >> ../tmp/temp-proxy.txt
+          sort --ignore-case -u ../tmp/temp-proxy.txt > ../community/mydata/proxy
           
 
       - name: Generate cn
