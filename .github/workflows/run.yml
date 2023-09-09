@@ -226,7 +226,7 @@ jobs:
 
       - name: Git push assets to "release" branch
         run: |
-          cd publish || exit 1
+          cd ./publish || exit 1
           git init
           git config --local user.name "github-actions[bot]"
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
@@ -238,7 +238,7 @@ jobs:
 
       - name: Purge jsDelivr CDN
         run: |
-          cd publish || exit 1
+          cd ./publish || exit 1
           for file in $(ls); do
             curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@release/${file}"
           done
