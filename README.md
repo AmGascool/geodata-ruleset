@@ -62,7 +62,7 @@
   - GEOSITE,cn,⚡ 直连域名
 ```
 ## 3. geosite.dat
-在 geosite-all.dat 的基础上去除了流媒体和人工智能，**有且仅有如下分类**：
+在 geosite-all.dat 的基础上去除了流媒体和人工智能 `geosite:openai`，**有且仅有如下分类**：
 ```
   - GEOSITE,ads,⛔️ 广告域名
   - GEOSITE,lan,🏠 私有网络
