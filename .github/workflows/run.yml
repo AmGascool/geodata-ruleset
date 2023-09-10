@@ -188,9 +188,9 @@ jobs:
 
           geodata-mode: true
           geox-url:
-            geosite: "https://ghproxy.com/https://github.com/DustinWin/clash-geosite/releases/download/latest/geosite-lite.dat"
-            geoip: "https://ghproxy.com/https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip-lite.dat"
-            mmdb: "https://ghproxy.com/https://github.com/DustinWin/clash-geoip/releases/download/latest/Country-lite.mmdb"
+            geosite: "https://fastly.jsdelivr.net/gh/DustinWin/clash-geosite@release/geosite-lite.dat"
+            geoip: "https://fastly.jsdelivr.net/gh/DustinWin/clash-geosite@release/geoip-lite.dat"
+            mmdb: "https://fastly.jsdelivr.net/gh/DustinWin/clash-geosite@release/Country-lite.mmdb"
 
           dns:
             enable: true
@@ -225,9 +225,9 @@ jobs:
 
           geodata-mode: true
           geox-url:
-            geosite: "https://ghproxy.com/https://github.com/DustinWin/clash-geosite/releases/download/latest/geosite-lite.dat"
-            geoip: "https://ghproxy.com/https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip-lite.dat"
-            mmdb: "https://ghproxy.com/https://github.com/DustinWin/clash-geoip/releases/download/latest/Country-lite.mmdb"
+            geosite: "https://fastly.jsdelivr.net/gh/DustinWin/clash-geosite@release/geosite-lite.dat"
+            geoip: "https://fastly.jsdelivr.net/gh/DustinWin/clash-geosite@release/geoip-lite.dat"
+            mmdb: "https://fastly.jsdelivr.net/gh/DustinWin/clash-geosite@release/Country-lite.mmdb"
 
           dns:
             enable: true
@@ -255,8 +255,8 @@ jobs:
 
       - name: Move files
         run: |
-          wget https://github.com/DustinWin/clash-geoip/releases/download/latest/Country.mmdb -O ./publish
-          wget https://github.com/DustinWin/clash-geoip/releases/download/latest/Country-lite.mmdb -O ./publish
+          wget -P ./publish https://github.com/DustinWin/clash-geoip/releases/download/latest/Country.mmdb
+          wget -P ./publish https://github.com/DustinWin/clash-geoip/releases/download/latest/Country-lite.mmdb
           install -Dp ./geoip.dat ./publish
           install -Dp ./geoip-lite.dat ./publish
           install -Dp ./community/geosite-all.dat ./publish
