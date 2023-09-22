@@ -1,3 +1,4 @@
+# 特别说明：“🏠 私有网络”和“✈️ Telegram”名称已改！
 # 一、 说明
 ## 1. geosite-all.dat
 ① 根据 [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat) 进行深度定制，**有且仅有如下分类**：
