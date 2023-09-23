@@ -197,8 +197,12 @@ jobs:
           SED: sed 's/^/    - /g' | sed '/^\s*$/d'
         run: |
           cat <<EOF > ./publish/fake-ip-user.yaml
+          mode: rule
+          log-level: silent
+          allow-lan: true
           unified-delay: false
           tcp-concurrent: true
+          external-controller-tls: 0.0.0.0:9090
           global-client-fingerprint: chrome
           profile: {store-selected: true, store-fake-ip: true}
 
@@ -234,8 +238,12 @@ jobs:
       - name: Generate redir-host-user.yaml
         run: |
           cat <<EOF > ./publish/redir-host-user.yaml
+          mode: rule
+          log-level: silent
+          allow-lan: true
           unified-delay: false
           tcp-concurrent: true
+          external-controller-tls: 0.0.0.0:9090
           global-client-fingerprint: chrome
           profile: {store-selected: true, store-fake-ip: true}
 
