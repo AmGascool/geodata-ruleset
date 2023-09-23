@@ -265,7 +265,7 @@ jobs:
               - https://doh.pub/dns-query
             nameserver-policy:
               'geosite:microsoft-cn,apple-cn,google-cn,games-cn': [https://dns.alidns.com/dns-query, https://doh.pub/dns-query]
-              'geosite:cn,lan': [https://dns.alidns.com/dns-query, https://doh.pub/dns-query]
+              'geosite:cn,private': [https://dns.alidns.com/dns-query, https://doh.pub/dns-query]
           EOF
           rm -rf ./tmp
 
