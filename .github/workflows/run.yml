@@ -150,7 +150,7 @@ jobs:
 
       - name: Generate cn
         run: |
-          curl -sSL ${cn} | grep 'DOMAIN' | grep -Ev '#|microsoft|apple|google' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed 's/DOMAIN,/full:/g' | sed '/^\s*$/d' > ./community/mydata/cn
+          curl -sSL ${cn} | grep 'DOMAIN' | grep -Ev '#|google' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/DOMAIN-KEYWORD,/keyword:/g' | sed 's/DOMAIN,/full:/g' | sed '/^\s*$/d' > ./community/mydata/cn
 
       - name: Generate geosite-all.dat
         run: |
