@@ -142,13 +142,14 @@ jobs:
 
       - name: Generate networktest
         run: |
-          curl -sSL ${networktest} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*$/d' > ./community/mydata/networktest
-          cat <<EOF >> ./community/mydata/networktest
+          curl -sSL ${networktest} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*$/d' > ./tmp/temp-networktest.txt
+          cat <<EOF >> ./tmp/temp-networktest.txt
           keyword:test-ipv6
           keyword:testipv6
           keyword:ipv6-test
           keyword:ipv6test
           EOF
+          sort --ignore-case -u ./tmp/temp-networktest.txt > ./community/mydata/networktest
 
       - name: Generate proxy
         run: |
