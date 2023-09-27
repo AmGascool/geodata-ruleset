@@ -76,7 +76,7 @@ jobs:
 
       - name: Generate download
         run: |
-          curl -sSL ${download} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*$/d' > ./community/mydata/download
+          curl -sSL ${download} | grep -Ev '#|DOMAIN-KEYWORD|DOMAIN-SUFFIX.*\.com' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed '/^\s*$/d' > ./community/mydata/download
 
       - name: Generate private
         run: |
