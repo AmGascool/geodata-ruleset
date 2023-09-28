@@ -93,13 +93,11 @@ jobs:
 
       - name: Generate apple-cn
         run: |
-          curl -sSL ${apple_cn} | sed 's/^server=\///g' | sed 's/\/.*//g' | grep -E '^[^.]*\.[^.]*$' | sed '/^\s*$/d' > ./community/mydata/apple-cn
-          curl -sSL ${apple_cn} | sed 's/^server=\///g' | sed 's/\/.*//g' | grep -Ev '^[^.]*\.[^.]*$' | sed 's/^/full:/g' | sed '/^\s*$/d' >> ./community/mydata/apple-cn
+          curl -sSL ${apple_cn} | perl -ne '/^server=\/([^\/]+)\// && print "full:$1\n"' | sed '/^\s*$/d' > ./community/mydata/apple-cn
 
       - name: Generate google-cn
         run: |
-          curl -sSL ${google_cn} | sed 's/^server=\///g' | sed 's/\/.*//g' | grep -E '^[^.]*\.[^.]*$' | sed '/^\s*$/d' > ./community/mydata/google-cn
-          curl -sSL ${google_cn} | sed 's/^server=\///g' | sed 's/\/.*//g' | grep -Ev '^[^.]*\.[^.]*$' | sed 's/^/full:/g' | sed '/^\s*$/d' >> ./community/mydata/google-cn
+          curl -sSL ${google_cn} | perl -ne '/^server=\/([^\/]+)\// && print "full:$1\n"' | sed '/^\s*$/d' > ./community/mydata/google-cn
 
       - name: Generate games-cn
         run: |
