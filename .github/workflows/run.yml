@@ -77,11 +77,11 @@ jobs:
       - name: Generate private
         run: |
           cat <<EOF > ./tmp/temp-private.txt
-          clash.razord.top
-          clash.metacubex.one
-          yacd.haishan.me
-          yacd.metacubex.one
-          d.metacubex.one
+          full:clash.razord.top
+          full:clash.metacubex.one
+          full:yacd.haishan.me
+          full:yacd.metacubex.one
+          full:d.metacubex.one
           EOF
           curl -sSL ${private1} | grep -v '#' | sed '/^\s*$/d' >> ./tmp/temp-private.txt
           curl -sSL ${private2} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*$/d' >> ./tmp/temp-private.txt
