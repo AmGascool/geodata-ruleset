@@ -40,11 +40,12 @@ jobs:
         shell: bash
 
       - name: Checkout codebase
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - uses: dev-drprasad/delete-tag-and-release@v1.0
+      - name: Delete current tag and release
+        uses: dev-drprasad/delete-tag-and-release@v1.0
         with:
           tag_name: latest
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -52,13 +53,13 @@ jobs:
           repo: DustinWin/clash-geosite
 
       - name: Checkout v2fly/domain-list-community
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: v2fly/domain-list-community
           path: community
 
       - name: Checkout cokebar/gfwlist2dnsmasq
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: cokebar/gfwlist2dnsmasq
           path: gfwlist2dnsmasq
@@ -92,11 +93,13 @@ jobs:
 
       - name: Generate apple-cn
         run: |
-          curl -sSL ${apple_cn} | perl -ne '/^server=\/([^\/]+)\// && print "$1\n"' | sed '/^\s*$/d' > ./community/mydata/apple-cn
+          curl -sSL ${apple_cn} | sed 's/^server=\///g' | sed 's/\/.*//g' | grep -E '^[^.]*\.[^.]*$' | sed '/^\s*$/d' > ./community/mydata/apple-cn
+          curl -sSL ${apple_cn} | sed 's/^server=\///g' | sed 's/\/.*//g' | grep -Ev '^[^.]*\.[^.]*$' | sed 's/^/full:/g' | sed '/^\s*$/d' >> ./community/mydata/apple-cn
 
       - name: Generate google-cn
         run: |
-          curl -sSL ${google_cn} | perl -ne '/^server=\/([^\/]+)\// && print "$1\n"' | sed '/^\s*$/d' > ./community/mydata/google-cn
+          curl -sSL ${google_cn} | sed 's/^server=\///g' | sed 's/\/.*//g' | grep -E '^[^.]*\.[^.]*$' | sed '/^\s*$/d' > ./community/mydata/google-cn
+          curl -sSL ${google_cn} | sed 's/^server=\///g' | sed 's/\/.*//g' | grep -Ev '^[^.]*\.[^.]*$' | sed 's/^/full:/g' | sed '/^\s*$/d' >> ./community/mydata/google-cn
 
       - name: Generate games-cn
         run: |
