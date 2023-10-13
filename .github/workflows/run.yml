@@ -103,7 +103,7 @@ jobs:
       - name: Generate games-cn
         run: |
           curl -sSL ${games_cn1} | grep -Ev '#|payload:' | sed 's/^- "+.//g' | sed 's/^- "/full:/g' | sed 's/"$//g' | sed '/^\s*$/d' > ./tmp/temp-games-cn.txt
-          curl -sSL ${games_cn2} | grep -v '#' | grep 'DOMAIN-SUFFIX' | sed 's/^DOMAIN-SUFFIX,//g' | sed '/^\s*$/d' >> ./tmp/temp-games-cn.txt
+          curl -sSL ${games_cn2} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*$/d' >> ./tmp/temp-games-cn.txt
           curl -sSL ${games_cn3} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*$/d' >> ./tmp/temp-games-cn.txt
           sort --ignore-case -u ./tmp/temp-games-cn.txt > ./community/mydata/games-cn
 
