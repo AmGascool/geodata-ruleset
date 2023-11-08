@@ -64,8 +64,8 @@ jobs:
         uses: actions/setup-go@v4
         with:
           go-version: 'stable'
-          go-version-file: ./custom/go.mod
-          cache-dependency-path: ./custom/go.sum
+          go-version-file: ./community/go.mod
+          cache-dependency-path: ./community/go.sum
 
       - name: Generate ads
         run: |
