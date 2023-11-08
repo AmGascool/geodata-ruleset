@@ -85,78 +85,78 @@ jobs:
           full:d.metacubex.one
           EOF
           curl -sSL ${private1} | grep -v '#' | sed '/^\s*$/d' >> ./tmp/temp-private.txt
-          curl -sSL ${private2} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*$/d' >> ./tmp/temp-private.txt
+          curl -sSL ${private2} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' >> ./tmp/temp-private.txt
           sort --ignore-case -u ./tmp/temp-private.txt > ./community/mydata/private
           
       - name: Generate microsoft-cn
         run: |
           count=$(curl -sSL ${microsoft_cn} | grep 'include:' | wc -l)
-          curl -sSL ${microsoft_cn} | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' | sed '/^\s*$/d' > ./tmp/temp-microsoft-cn.txt
+          curl -sSL ${microsoft_cn} | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' > ./tmp/temp-microsoft-cn.txt
           for((i=0;i<count;i++));do
             archs=$(curl -sSL ${microsoft_cn} | grep 'include:' | sed 's/^include://g' | sed -n "$((i+1))p")
-            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs" | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' | sed '/^\s*$/d' >> ./tmp/temp-microsoft-cn.txt
+            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs" | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' >> ./tmp/temp-microsoft-cn.txt
           done
           sort --ignore-case -u ./tmp/temp-microsoft-cn.txt > ./community/mydata/microsoft-cn
 
       - name: Generate apple-cn
         run: |
-          curl -sSL ${apple_cn} | perl -ne '/^server=\/([^\/]+)\// && print "full:$1\n"' | sed '/^\s*$/d' > ./community/mydata/apple-cn
+          curl -sSL ${apple_cn} | perl -ne '/^server=\/([^\/]+)\// && print "full:$1\n"' > ./community/mydata/apple-cn
 
       - name: Generate google-cn
         run: |
-          curl -sSL ${google_cn} | perl -ne '/^server=\/([^\/]+)\// && print "full:$1\n"' | sed '/^\s*$/d' > ./community/mydata/google-cn
+          curl -sSL ${google_cn} | perl -ne '/^server=\/([^\/]+)\// && print "full:$1\n"' > ./community/mydata/google-cn
 
       - name: Generate games-cn
         run: |
           count=$(curl -sSL ${games_cn1} | grep 'include:' | wc -l)
-          curl -sSL ${games_cn1} | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' | sed '/^\s*$/d' > ./tmp/temp-games-cn.txt
+          curl -sSL ${games_cn1} | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' > ./tmp/temp-games-cn.txt
           for((i=0;i<count;i++));do
             archs=$(curl -sSL ${games_cn1} | grep 'include:' | sed 's/^include://g' | sed -n "$((i+1))p")
-            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs" | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' | sed '/^\s*$/d' >> ./tmp/temp-games-cn.txt
+            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs" | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' >> ./tmp/temp-games-cn.txt
           done
-          curl -sSL ${games_cn2} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*$/d' >> ./tmp/temp-games-cn.txt
-          curl -sSL ${games_cn3} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*$/d' >> ./tmp/temp-games-cn.txt
+          curl -sSL ${games_cn2} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' >> ./tmp/temp-games-cn.txt
+          curl -sSL ${games_cn3} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' >> ./tmp/temp-games-cn.txt
           sort --ignore-case -u ./tmp/temp-games-cn.txt > ./community/mydata/games-cn
 
       - name: Generate netflix
         run: |
-          curl -sSL ${netflix} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*$/d' > ./community/mydata/netflix
+          curl -sSL ${netflix} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' > ./community/mydata/netflix
 
       - name: Generate disney
         run: |
-          curl -sSL ${disney} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*$/d' > ./community/mydata/disney
+          curl -sSL ${disney} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' > ./community/mydata/disney
 
       - name: Generate max
         run: |
-          curl -sSL ${max} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*$/d' > ./community/mydata/max
+          curl -sSL ${max} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' > ./community/mydata/max
 
       - name: Generate primevideo
         run: |
-          curl -sSL ${primevideo} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*$/d' > ./community/mydata/primevideo
+          curl -sSL ${primevideo} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' > ./community/mydata/primevideo
 
       - name: Generate appletv
         run: |
-          curl -sSL ${appletv} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*$/d' > ./community/mydata/appletv
+          curl -sSL ${appletv} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' > ./community/mydata/appletv
 
       - name: Generate youtube
         run: |
-          curl -sSL ${youtube} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*$/d' > ./community/mydata/youtube
+          curl -sSL ${youtube} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' > ./community/mydata/youtube
 
       - name: Generate tiktok
         run: |
-          curl -sSL ${tiktok} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*$/d' > ./community/mydata/tiktok
+          curl -sSL ${tiktok} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' > ./community/mydata/tiktok
 
       - name: Generate bilibili
         run: |
-          curl -sSL ${bilibili} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*$/d' > ./community/mydata/bilibili
+          curl -sSL ${bilibili} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' > ./community/mydata/bilibili
 
       - name: Generate openai
         run: |
-          curl -sSL ${openai} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*$/d' > ./community/mydata/openai
+          curl -sSL ${openai} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' > ./community/mydata/openai
 
       - name: Generate networktest
         run: |
-          curl -sSL ${networktest} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*$/d' > ./community/mydata/networktest
+          curl -sSL ${networktest} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' > ./community/mydata/networktest
           cat <<EOF >> ./community/mydata/networktest
           keyword:ipv6-test
           keyword:ipv6test
@@ -169,12 +169,12 @@ jobs:
           cd gfwlist2dnsmasq || exit 1
           chmod +x ./gfwlist2dnsmasq.sh
           ./gfwlist2dnsmasq.sh -l -o ../tmp/temp-proxy.txt
-          curl -sSL ${proxy} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*$/d' >> ../tmp/temp-proxy.txt
+          curl -sSL ${proxy} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' >> ../tmp/temp-proxy.txt
           sort --ignore-case -u ../tmp/temp-proxy.txt > ../community/mydata/proxy
 
       - name: Generate cn
         run: |
-          curl -sSL ${cn} | grep -Ev '#|google' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*$/d' > ./community/mydata/cn
+          curl -sSL ${cn} | grep -Ev '#|google' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' > ./community/mydata/cn
 
       - name: Generate geosite-all.dat
         run: |
@@ -214,8 +214,6 @@ jobs:
           wget https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip-lite.dat
 
       - name: Generate fake-ip-user.yaml
-        env:
-          SED: sed 's/^/    - /g' | sed '/^\s*$/d'
         run: |
           cat <<EOF > ./publish/fake-ip-user.yaml
           mode: rule
@@ -243,8 +241,8 @@ jobs:
             enhanced-mode: fake-ip
             fake-ip-filter:
           EOF
-          curl -sSL https://raw.githubusercontent.com/juewuy/ShellClash/master/public/fake_ip_filter.list | grep -v '#' | sed "s/.*/'&'/g" | ${{ env.SED }} >> ./publish/fake-ip-user.yaml
-          curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep 'udp:' | grep -i '\.[A-Z]' | sed "s/^.*\/\//'/g" | sed "s/:.*\/.*/'/g" | ${{ env.SED }} >> ./publish/fake-ip-user.yaml
+          curl -sSL https://raw.githubusercontent.com/juewuy/ShellClash/master/public/fake_ip_filter.list | grep -v '#' | sed '/^\s*$/d' | sed "s/.*/'&'/g" | sed 's/^/    - /g' >> ./publish/fake-ip-user.yaml
+          curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep 'udp:' | grep -i '\.[A-Z]' | sed "s/^.*\/\//'/g" | sed "s/:.*\/.*/'/g" | sed 's/^/    - /g' >> ./publish/fake-ip-user.yaml
           cat <<EOF >> ./publish/fake-ip-user.yaml
               - 'adguardteam.github.io'
               - 'anti-ad.net'
