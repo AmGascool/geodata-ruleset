@@ -109,10 +109,10 @@ jobs:
       - name: Generate games-cn
         run: |
           count=$(curl -sSL ${games_cn1} | grep 'include:' | wc -l)
-          curl -sSL ${games_cn1} | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' | sed '/^\s*$/d' > ./tmp/temp-games_cn.txt
+          curl -sSL ${games_cn1} | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' | sed '/^\s*$/d' > ./tmp/temp-games-cn.txt
           for((i=0;i<count;i++));do
             archs=$(curl -sSL ${games_cn1} | grep 'include:' | sed 's/^include://g' | sed -n "$((i+1))p")
-            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs" | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' | sed '/^\s*$/d' >> ./tmp/temp-games_cn.txt
+            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs" | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' | sed '/^\s*$/d' >> ./tmp/temp-games-cn.txt
           done
           curl -sSL ${games_cn2} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*$/d' >> ./tmp/temp-games-cn.txt
           curl -sSL ${games_cn3} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' | sed '/^\s*$/d' >> ./tmp/temp-games-cn.txt
