@@ -117,7 +117,7 @@
     - 'anti-ad.net'
 ```
 ⑤ 若想自己生成配置文件 user.yaml，可以 [Fork 本项目](https://github.com/DustinWin/clash-geosite/fork)后编辑 *.github/workflows/run.yml* 文件内的 `name: Generate xxx-user.yaml` 部分  
-⑥ 若 DNS 模式选用的是 redir-host，需要进行 [DNS 分流](https://github.com/DustinWin/clash-tutorials/blob/main/%E6%95%99%E7%A8%8B%E5%90%88%E9%9B%86/%E8%BF%9B%E9%98%B6%E7%AF%87/ShellClash%20%E4%BD%BF%E7%94%A8%20Clash.Meta%20%E5%86%85%E6%A0%B8%E8%BF%9B%E8%A1%8C%20DNS%20%E5%88%86%E6%B5%81%E6%95%99%E7%A8%8B%20geo%20%E6%96%B9%E6%A1%88.md)，可以进入 *.github/workflows/run.yml* 文件，编辑 `Generate redir-host-user.yaml` 部分，将 `nameserver` 中的 `🪜 代理域名`改成可以访问外网的代理组名，或者直接将 `'https://dns.google/dns-query#🪜 代理域名'` 修改为 `'tls://dns.google'`
+⑥ 若 DNS 模式选用的是 `redir-host`，需要进行 DNS 分流（参考《[ShellClash 使用 Clash.Meta 内核进行 DNS 分流教程-geox 方案](https://github.com/DustinWin/clash-tutorials/blob/main/%E6%95%99%E7%A8%8B%E5%90%88%E9%9B%86/%E8%BF%9B%E9%98%B6%E7%AF%87/ShellClash%20%E4%BD%BF%E7%94%A8%20Clash.Meta%20%E5%86%85%E6%A0%B8%E8%BF%9B%E8%A1%8C%20DNS%20%E5%88%86%E6%B5%81%E6%95%99%E7%A8%8B-geox%20%E6%96%B9%E6%A1%88.md)》），可以进入 *.github/workflows/run.yml* 文件，编辑 `Generate redir-host-user.yaml` 部分，将 `nameserver` 中的 `🪜 代理域名`改成可以访问外网的策略组名称，或者直接将 `'https://dns.google/dns-query#🪜 代理域名'` 修改为 `'tls://dns.google'`
 # 二、 下载（以 geosite.dat、geoip.dat 和 Country.mmdb 为例）
 ## 1. geosite.dat
 ① GitHub 源：https://github.com/DustinWin/clash-geosite/releases/download/latest/geosite.dat  
@@ -129,7 +129,7 @@
 ① GitHub 源：https://github.com/DustinWin/clash-geosite/releases/download/latest/Country.mmdb  
 ② jsDelivr 源：https://cdn.jsdelivr.net/gh/DustinWin/clash-geosite@release/Country.mmdb
 # 三、 导入 [ShellClash](https://github.com/juewuy/ShellClash)（以 geosite.dat、geoip.dat 和 Country.mmdb 为例）
-## 1. DNS 模式为 fake-ip  
+## 1. DNS 模式为 `fake-ip`  
 连接 SSH 后执行如下命令：
 ```
 curl -o $clashdir/GeoSite.dat -L https://cdn.jsdelivr.net/gh/DustinWin/clash-geosite@release/geosite.dat
@@ -138,7 +138,7 @@ curl -o $clashdir/Country.mmdb -L https://cdn.jsdelivr.net/gh/DustinWin/clash-ge
 curl -o $clashdir/yamls/user.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/clash-geosite@release/fake-ip-user.yaml
 $clashdir/start.sh restart
 ```
-## 2. DNS 模式为 redir-host  
+## 2. DNS 模式为 `redir-host`  
 连接 SSH 后执行如下命令：
 ```
 curl -o $clashdir/GeoSite.dat -L https://cdn.jsdelivr.net/gh/DustinWin/clash-geosite@release/geosite.dat
