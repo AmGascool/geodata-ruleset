@@ -308,10 +308,6 @@ jobs:
           geo convert site -i v2ray -o sing -f geosite-all-lite.db ./community/geosite-all-lite.dat
           geo convert site -i v2ray -o sing -f geosite.db ./community/geosite.dat
           geo convert site -i v2ray -o sing -f geosite-lite.db ./community/geosite-lite.dat
-          geo convert site -i v2ray -o sing -f geosite-all.metadb ./community/geosite-all.dat
-          geo convert site -i v2ray -o sing -f geosite-all-lite.metadb ./community/geosite-all-lite.dat
-          geo convert site -i v2ray -o sing -f geosite.metadb ./community/geosite.dat
-          geo convert site -i v2ray -o sing -f geosite-lite.metadb ./community/geosite-lite.dat
 
       - name: Move files
         run: |
@@ -326,10 +322,6 @@ jobs:
           install -Dp ./geosite-all-lite.db ./publish
           install -Dp ./geosite.db ./publish
           install -Dp ./geosite-lite.db ./publish
-          install -Dp ./geosite-all.metadb ./publish
-          install -Dp ./geosite-all-lite.metadb ./publish
-          install -Dp ./geosite.metadb ./publish
-          install -Dp ./geosite-lite.metadb ./publish
           cd ./publish || exit 1
 
       - name: Release and upload assets
