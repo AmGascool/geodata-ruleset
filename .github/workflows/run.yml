@@ -292,12 +292,12 @@ jobs:
           wget -P ./publish https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip-all.dat
           wget -P ./publish https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip.dat
           wget -P ./publish https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip-lite.dat
-          wget -P ./publish https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip-all.db
-          wget -P ./publish https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip.db
-          wget -P ./publish https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip-lite.db
           wget -P ./publish https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip-all.metadb
           wget -P ./publish https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip.metadb
           wget -P ./publish https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip-lite.metadb
+          wget -P ./publish https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip-all.db
+          wget -P ./publish https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip.db
+          wget -P ./publish https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip-lite.db
 
       - name: Build db and metadb file
         env:
