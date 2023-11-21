@@ -87,7 +87,7 @@
   - GEOSITE,cn,⚡ 直连域名
 ```
 ## 5. geoip-all.dat、Country-all.mmdb、geoip-all.metadb 和 geoip-all.db
-① 源采用 [Loyalsoldier/geoip](https://github.com/Loyalsoldier/geoip)包含如下分类（可[点此](https://github.com/Loyalsoldier/geoip/tree/release/text)查看其它国家或地区 IP 规则集）：
+① 源采用 [Loyalsoldier/geoip](https://github.com/Loyalsoldier/geoip)，包含如下分类（可[点此](https://github.com/Loyalsoldier/geoip/tree/release/text)查看其它国家或地区 IP 规则集）：
 ```
   - GEOIP,cloudflare,☁️ Cloudflare
   - GEOIP,cloudfront,🌐 CloudFront
