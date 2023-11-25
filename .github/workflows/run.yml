@@ -70,7 +70,6 @@ jobs:
         run: |
           mkdir -p ./community/mydata ./tmp ./publish ./domains
           curl -sSL ${ads} | grep -v '#' | sed '/^\s*$/d' > ./community/mydata/ads
-          cp -f ./community/mydata/ads ./domains/ads.txt
 
       - name: Generate private
         run: |
@@ -84,7 +83,6 @@ jobs:
           curl -sSL ${private1} | grep -v '#' | sed '/^\s*$/d' >> ./tmp/temp-private.txt
           curl -sSL ${private2} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' >> ./tmp/temp-private.txt
           sort --ignore-case -u ./tmp/temp-private.txt > ./community/mydata/private
-          cp -f ./community/mydata/private ./domains/private.txt
           
       - name: Generate microsoft-cn
         run: |
@@ -95,17 +93,14 @@ jobs:
             curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs" | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' >> ./tmp/temp-microsoft-cn.txt
           done
           sort --ignore-case -u ./tmp/temp-microsoft-cn.txt > ./community/mydata/microsoft-cn
-          cp -f ./community/mydata/microsoft-cn ./domains/microsoft-cn.txt
 
       - name: Generate apple-cn
         run: |
           curl -sSL ${apple_cn} | perl -ne '/^server=\/([^\/]+)\// && print "full:$1\n"' > ./community/mydata/apple-cn
-          cp -f ./community/mydata/apple-cn ./domains/apple-cn.txt
 
       - name: Generate google-cn
         run: |
           curl -sSL ${google_cn} | perl -ne '/^server=\/([^\/]+)\// && print "full:$1\n"' > ./community/mydata/google-cn
-          cp -f ./community/mydata/google-cn ./domains/google-cn.txt
 
       - name: Generate games-cn
         run: |
@@ -118,52 +113,42 @@ jobs:
           curl -sSL ${games_cn2} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' >> ./tmp/temp-games-cn.txt
           curl -sSL ${games_cn3} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' >> ./tmp/temp-games-cn.txt
           sort --ignore-case -u ./tmp/temp-games-cn.txt > ./community/mydata/games-cn
-          cp -f ./community/mydata/games-cn ./domains/games-cn.txt
 
       - name: Generate netflix
         run: |
           curl -sSL ${netflix} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' > ./community/mydata/netflix
-          cp -f ./community/mydata/netflix ./domains/netflix.txt
 
       - name: Generate disney
         run: |
           curl -sSL ${disney} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' > ./community/mydata/disney
-          cp -f ./community/mydata/disney ./domains/disney.txt
 
       - name: Generate max
         run: |
           curl -sSL ${max} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' > ./community/mydata/max
-          cp -f ./community/mydata/max ./domains/max.txt
 
       - name: Generate primevideo
         run: |
           curl -sSL ${primevideo} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' > ./community/mydata/primevideo
-          cp -f ./community/mydata/primevideo ./domains/primevideo.txt
 
       - name: Generate appletv
         run: |
           curl -sSL ${appletv} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' > ./community/mydata/appletv
-          cp -f ./community/mydata/appletv ./domains/appletv.txt
 
       - name: Generate youtube
         run: |
           curl -sSL ${youtube} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' > ./community/mydata/youtube
-          cp -f ./community/mydata/youtube ./domains/youtube.txt
 
       - name: Generate tiktok
         run: |
           curl -sSL ${tiktok} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' > ./community/mydata/tiktok
-          cp -f ./community/mydata/tiktok ./domains/tiktok.txt
 
       - name: Generate bilibili
         run: |
           curl -sSL ${bilibili} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' > ./community/mydata/bilibili
-          cp -f ./community/mydata/bilibili ./domains/bilibili.txt
 
       - name: Generate openai
         run: |
           curl -sSL ${openai} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' > ./community/mydata/openai
-          cp -f ./community/mydata/openai ./domains/openai.txt
 
       - name: Generate networktest
         run: |
@@ -174,7 +159,6 @@ jobs:
           keyword:test-ipv6
           keyword:testipv6
           EOF
-          cp -f ./community/mydata/networktest ./domains/networktest.txt
 
       - name: Generate proxy
         run: |
@@ -183,12 +167,17 @@ jobs:
           ./gfwlist2dnsmasq.sh -l -o ../tmp/temp-proxy.txt
           curl -sSL ${proxy} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' >> ../tmp/temp-proxy.txt
           sort --ignore-case -u ../tmp/temp-proxy.txt > ../community/mydata/proxy
-          cp -f ../community/mydata/proxy ../domains/proxy.txt
 
       - name: Generate cn
         run: |
           curl -sSL ${cn} | grep -Ev '#|google' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' > ./community/mydata/cn
-          cp -f ./community/mydata/cn ./domains/cn.txt
+
+      - name: copy `mydata` to `domains` and rename
+        run: |
+          cd ./community/mydata
+          for file in $(file); do
+            cp -f "${file}" "../domains/${file}.txt"
+          done
 
       - name: Generate geosite-all.dat
         run: |
