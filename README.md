@@ -1,4 +1,6 @@
 # 一、 说明
+- 注：可[点此](https://github.com/DustinWin/clash-geosite/tree/domains)查看包含的域名列表
+
 ## 1. geosite-all.dat 和 geosite-all.db（适用于使用了 [sing-box 平台](https://github.com/SagerNet/sing-box)的客户端，下同）
 ① 根据 [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat) 进行深度定制，**有且仅有如下分类**：
 ```
