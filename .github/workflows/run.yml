@@ -54,6 +54,12 @@ jobs:
           repository: v2fly/domain-list-community
           path: community
 
+      - name: Checkout v2fly/domain-list-community
+        uses: actions/checkout@v4
+        with:
+          repository: v2fly/domain-list-community
+          path: domain-list-community
+
       - name: Checkout cokebar/gfwlist2dnsmasq
         uses: actions/checkout@v4
         with:
@@ -93,7 +99,7 @@ jobs:
           
       - name: Generate microsoft-cn
         run: |
-          cp -f ./community/data/microsoft@cn ./community/mydata/microsoft-cn
+          cp -f ./domain-list-community/data/microsoft@cn ./community/mydata/microsoft-cn
 
       - name: Generate apple-cn
         run: |
