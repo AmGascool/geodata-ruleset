@@ -183,7 +183,7 @@ jobs:
           ./gfwlist2dnsmasq.sh -l -o ../tmp/temp-proxy.txt
           curl -sSL ${proxy} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' >> ../tmp/temp-proxy.txt
           sort --ignore-case -u ../tmp/temp-proxy.txt > ../community/mydata/proxy
-          cp -f ./community/mydata/proxy ./domains/proxy.txt
+          cp -f ../community/mydata/proxy ./domains/proxy.txt
 
       - name: Generate cn
         run: |
