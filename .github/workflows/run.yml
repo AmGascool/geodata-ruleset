@@ -321,6 +321,7 @@ jobs:
           cd ./community || exit 1
           for file in $(ls *.dat *.db); do
             install -Dp "./${file}" ../publish
+          done
           cd ../publish || exit 1
 
       - name: Release and upload assets
