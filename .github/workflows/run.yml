@@ -60,6 +60,13 @@ jobs:
           repository: cokebar/gfwlist2dnsmasq
           path: gfwlist2dnsmasq
 
+      - name: Checkout DustinWin/clash-geoip
+        uses: actions/checkout@v4
+        with:
+          repository: DustinWin/clash-geoip
+          ref: release
+          path: clash-geoip
+
       - name: Setup Go
         uses: actions/setup-go@v4
         with:
@@ -297,40 +304,24 @@ jobs:
 
       - name: Get geoip relative files
         run: |
-          wget -P ./publish https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip-all.dat
-          wget -P ./publish https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip.dat
-          wget -P ./publish https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip-lite.dat
-          wget -P ./publish https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip-all.metadb
-          wget -P ./publish https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip.metadb
-          wget -P ./publish https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip-lite.metadb
-          wget -P ./publish https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip-all.db
-          wget -P ./publish https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip.db
-          wget -P ./publish https://github.com/DustinWin/clash-geoip/releases/download/latest/geoip-lite.db
+          cp -f ./clash-geoip/*.mmdb ./clash-geoip/*.dat ./clash-geoip/*.metadb ./clash-geoip/*.db ./publish
 
       - name: Build db and metadb file
         env:
           NO_SKIP: true
         run: |
           go install -trimpath -ldflags="-s -w -buildid=" github.com/metacubex/geo/cmd/geo@master
-          geo convert site -i v2ray -o sing -f geosite-all.db ./community/geosite-all.dat
-          geo convert site -i v2ray -o sing -f geosite-all-lite.db ./community/geosite-all-lite.dat
-          geo convert site -i v2ray -o sing -f geosite.db ./community/geosite.dat
-          geo convert site -i v2ray -o sing -f geosite-lite.db ./community/geosite-lite.dat
+          cd ./community || exit 1
+          for file in $(ls *.dat | sed 's/\..*//g'); do
+            geo convert site -i v2ray -o sing -f "./${file}.db" "./${file}.dat"
+          done
 
       - name: Move files
         run: |
-          wget -P ./publish https://github.com/DustinWin/clash-geoip/releases/download/latest/Country-all.mmdb
-          wget -P ./publish https://github.com/DustinWin/clash-geoip/releases/download/latest/Country.mmdb
-          wget -P ./publish https://github.com/DustinWin/clash-geoip/releases/download/latest/Country-lite.mmdb
-          install -Dp ./community/geosite-all.dat ./publish
-          install -Dp ./community/geosite-all-lite.dat ./publish
-          install -Dp ./community/geosite.dat ./publish
-          install -Dp ./community/geosite-lite.dat ./publish
-          install -Dp ./geosite-all.db ./publish
-          install -Dp ./geosite-all-lite.db ./publish
-          install -Dp ./geosite.db ./publish
-          install -Dp ./geosite-lite.db ./publish
-          cd ./publish || exit 1
+          cd ./community || exit 1
+          for file in $(ls *.dat *.db); do
+            install -Dp "./${file}" ../publish
+          cd ../publish || exit 1
 
       - name: Release and upload assets
         uses: svenstaro/upload-release-action@v2
