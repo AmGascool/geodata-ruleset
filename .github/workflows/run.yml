@@ -175,7 +175,7 @@ jobs:
       - name: copy `mydata` to `domains` and rename
         run: |
           cd ./community/mydata
-          for file in $(file); do
+          for file in $(ls); do
             cp -f "${file}" "../../domains/${file}.txt"
           done
 
