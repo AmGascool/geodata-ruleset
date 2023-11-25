@@ -87,17 +87,7 @@ jobs:
           full:yacd.metacubex.one
           full:d.metacubex.one
           EOF
-          count1=$(curl -sSL ${private1} | grep 'include:' | wc -l)
-          curl -sSL ${private1} | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' >> ./tmp/temp-private.txt
-          for((i=0;i<count1;i++)); do
-            archs1=$(curl -sSL ${private1} | grep 'include:' | sed 's/^include://g' | sed -n "$((i+1))p")
-            count2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | wc -l)
-            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' >> ./tmp/temp-private.txt
-            for((j=0;j<count2;j++)); do
-              archs2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | sed 's/^include://g' | sed -n "$((j+1))p")
-              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' >> ./tmp/temp-private.txt
-            done
-          done
+          curl -sSL ${private1} | grep -v '#' | sed '/^\s*$/d' >> ./tmp/temp-private.txt
           curl -sSL ${private2} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' >> ./tmp/temp-private.txt
           sort --ignore-case -u ./tmp/temp-private.txt > ./community/mydata/private
           
