@@ -89,11 +89,11 @@ jobs:
           EOF
           count1=$(curl -sSL ${private1} | grep 'include:' | wc -l)
           curl -sSL ${private1} | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' >> ./tmp/temp-private.txt
-          for((i=0;i<count1;i++));do
+          for((i=0;i<count1;i++)); do
             archs1=$(curl -sSL ${private1} | grep 'include:' | sed 's/^include://g' | sed -n "$((i+1))p")
             count2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | wc -l)
             curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' >> ./tmp/temp-private.txt
-            for((j=0;j<count2;j++));do
+            for((j=0;j<count2;j++)); do
               archs2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | sed 's/^include://g' | sed -n "$((j+1))p")
               curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' >> ./tmp/temp-private.txt
             done
@@ -105,11 +105,11 @@ jobs:
         run: |
           count1=$(curl -sSL ${microsoft_cn} | grep 'include:' | wc -l)
           curl -sSL ${microsoft_cn} | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' > ./tmp/temp-microsoft-cn.txt
-          for((i=0;i<count1;i++));do
+          for((i=0;i<count1;i++)); do
             archs1=$(curl -sSL ${microsoft_cn} | grep 'include:' | sed 's/^include://g' | sed -n "$((i+1))p")
             count2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | wc -l)
             curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' >> ./tmp/temp-microsoft-cn.txt
-            for((j=0;j<count2;j++));do
+            for((j=0;j<count2;j++)); do
               archs2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | sed 's/^include://g' | sed -n "$((j+1))p")
               curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' >> ./tmp/temp-microsoft-cn.txt
             done
@@ -128,11 +128,11 @@ jobs:
         run: |
           count1=$(curl -sSL ${games_cn1} | grep 'include:' | wc -l)
           curl -sSL ${games_cn1} | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' > ./tmp/temp-games-cn.txt
-          for((i=0;i<count1;i++));do
+          for((i=0;i<count1;i++)); do
             archs1=$(curl -sSL ${games_cn1} | grep 'include:' | sed 's/^include://g' | sed -n "$((i+1))p")
             count2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | wc -l)
             curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' >> ./tmp/temp-games-cn.txt
-            for((j=0;j<count2;j++));do
+            for((j=0;j<count2;j++)); do
               archs2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | sed 's/^include://g' | sed -n "$((j+1))p")
               curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' >> ./tmp/temp-games-cn.txt
             done
@@ -202,7 +202,7 @@ jobs:
       - name: copy `mydata` to `domains` and rename
         run: |
           cd ./community/mydata || exit 1
-          for file in $(ls);do
+          for file in $(ls); do
             cp -f "${file}" "../../domains/${file}.txt"
           done
 
@@ -332,14 +332,14 @@ jobs:
         run: |
           go install -trimpath -ldflags="-s -w -buildid=" github.com/metacubex/geo/cmd/geo@master
           cd ./community || exit 1
-          for file in $(ls *.dat | sed 's/\..*//g');do
+          for file in $(ls *.dat | sed 's/\..*//g'); do
             geo convert site -i v2ray -o sing -f "./${file}.db" "./${file}.dat"
           done
 
       - name: Move files
         run: |
           cd ./community || exit 1
-          for file in $(ls *.dat *.db);do
+          for file in $(ls *.dat *.db); do
             install -Dp "./${file}" ../publish
           done
           cd ../publish || exit 1
@@ -380,10 +380,10 @@ jobs:
       - name: Purge jsDelivr CDN
         run: |
           cd ./publish || exit 1
-          for file in $(ls);do
+          for file in $(ls); do
             curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@release/${file}"
           done
           cd ../domains || exit 1
-          for file in $(ls);do
+          for file in $(ls); do
             curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@domains/${file}"
           done
