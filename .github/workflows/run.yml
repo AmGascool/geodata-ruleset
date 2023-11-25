@@ -162,7 +162,7 @@ jobs:
 
       - name: Generate proxy
         run: |
-          cd gfwlist2dnsmasq || exit 1
+          cd ./gfwlist2dnsmasq || exit 1
           chmod +x ./gfwlist2dnsmasq.sh
           ./gfwlist2dnsmasq.sh -l -o ../tmp/temp-proxy.txt
           curl -sSL ${proxy} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' >> ../tmp/temp-proxy.txt
@@ -174,7 +174,7 @@ jobs:
 
       - name: copy `mydata` to `domains` and rename
         run: |
-          cd ./community/mydata
+          cd ./community/mydata || exit 1
           for file in $(ls); do
             cp -f "${file}" "../../domains/${file}.txt"
           done
