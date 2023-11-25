@@ -176,7 +176,7 @@ jobs:
         run: |
           cd ./community/mydata
           for file in $(file); do
-            cp -f "${file}" "../domains/${file}.txt"
+            cp -f "${file}" "../../domains/${file}.txt"
           done
 
       - name: Generate geosite-all.dat
