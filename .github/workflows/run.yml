@@ -93,13 +93,7 @@ jobs:
           
       - name: Generate microsoft-cn
         run: |
-          count=$(curl -sSL ${microsoft_cn} | grep 'include:' | wc -l)
-          curl -sSL ${microsoft_cn} | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' > ./tmp/temp-microsoft-cn.txt
-          for((i=0;i<count;i++));do
-            archs=$(curl -sSL ${microsoft_cn} | grep 'include:' | sed 's/^include://g' | sed -n "$((i+1))p")
-            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs" | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' >> ./tmp/temp-microsoft-cn.txt
-          done
-          sort --ignore-case -u ./tmp/temp-microsoft-cn.txt > ./community/mydata/microsoft-cn
+          cp -f ./community/data/microsoft@cn ./community/mydata/microsoft-cn
 
       - name: Generate apple-cn
         run: |
