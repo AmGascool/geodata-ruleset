@@ -4,24 +4,24 @@
 ## 1. geosite-all.dat 和 geosite-all.db（适用于使用了 [sing-box 平台](https://github.com/SagerNet/sing-box)的客户端，下同）
 ① 根据 [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat) 进行深度定制，**有且仅有如下分类**：
 ```
-  - GEOSITE,ads,⛔️ 广告域名
-  - GEOSITE,private,🏠 私有网络
-  - GEOSITE,microsoft-cn,Ⓜ️ Microsoft 中国
-  - GEOSITE,apple-cn,🍎 Apple 中国
-  - GEOSITE,google-cn,🗽 Google 中国
-  - GEOSITE,games-cn,🎮 国区游戏
-  - GEOSITE,netflix,🎥 Netflix
-  - GEOSITE,disney,📽️ Disney+
+  - GEOSITE,ads,🛑 广告拦截
+  - GEOSITE,private,🔒 私有网络
+  - GEOSITE,microsoft-cn,Ⓜ️ 微软服务
+  - GEOSITE,apple-cn,🍎 苹果服务
+  - GEOSITE,google-cn,📢 谷歌服务
+  - GEOSITE,games-cn,🎮 游戏平台
+  - GEOSITE,netflix,🎥 奈飞视频
+  - GEOSITE,disney,📽️ 迪士尼+
   - GEOSITE,max,🎞️ Max
   - GEOSITE,primevideo,🎬 Prime Video
   - GEOSITE,appletv,🍎 Apple TV+
-  - GEOSITE,youtube,📹 YouTube
+  - GEOSITE,youtube,📹 油管视频
   - GEOSITE,tiktok,🎵 TikTok
   - GEOSITE,bilibili,📺 哔哩哔哩
   - GEOSITE,openai,🤖 人工智能
   - GEOSITE,networktest,📈 网络测试
   - GEOSITE,proxy,🪜 代理域名
-  - GEOSITE,cn,⚡ 直连域名
+  - GEOSITE,cn,🔗 直连域名
 ```
 ② 每天早上 3 点（北京时间）自动构建  
 ③ `geosite:ads` 源采用 [privacy-protection-tools/anti-AD/anti-ad-domains.txt](https://github.com/privacy-protection-tools/anti-AD)  
@@ -45,48 +45,48 @@
 ## 2. geosite-all-lite.dat 和 geosite-all-lite.db
 在 geosite-all.dat 和 geosite-all.db 的基础上去除了广告域名 `geosite:ads`，**有且仅有如下分类**：
 ```
-  - GEOSITE,private,🏠 私有网络
-  - GEOSITE,microsoft-cn,Ⓜ️ Microsoft 中国
-  - GEOSITE,apple-cn,🍎 Apple 中国
-  - GEOSITE,google-cn,🗽 Google 中国
-  - GEOSITE,games-cn,🎮 国区游戏
-  - GEOSITE,netflix,🎥 Netflix
-  - GEOSITE,disney,📽️ Disney+
+  - GEOSITE,private,🔒 私有网络
+  - GEOSITE,microsoft-cn,Ⓜ️ 微软服务
+  - GEOSITE,apple-cn,🍎 苹果服务
+  - GEOSITE,google-cn,📢 谷歌服务
+  - GEOSITE,games-cn,🎮 游戏平台
+  - GEOSITE,netflix,🎥 奈飞视频
+  - GEOSITE,disney,📽️ 迪士尼+
   - GEOSITE,max,🎞️ Max
   - GEOSITE,primevideo,🎬 Prime Video
   - GEOSITE,appletv,🍎 Apple TV+
-  - GEOSITE,youtube,📹 YouTube
+  - GEOSITE,youtube,📹 油管视频
   - GEOSITE,tiktok,🎵 TikTok
   - GEOSITE,bilibili,📺 哔哩哔哩
   - GEOSITE,openai,🤖 人工智能
   - GEOSITE,networktest,📈 网络测试
   - GEOSITE,proxy,🪜 代理域名
-  - GEOSITE,cn,⚡ 直连域名
+  - GEOSITE,cn,🔗 直连域名
 ```
 ## 3. geosite.dat 和 geosite.db
 在 geosite-all.dat 和 geosite-all.db 的基础上去除了流媒体和人工智能 `geosite:openai`，**有且仅有如下分类**：
 ```
-  - GEOSITE,ads,⛔️ 广告域名
-  - GEOSITE,private,🏠 私有网络
-  - GEOSITE,microsoft-cn,Ⓜ️ Microsoft 中国
-  - GEOSITE,apple-cn,🍎 Apple 中国
-  - GEOSITE,google-cn,🗽 Google 中国
-  - GEOSITE,games-cn,🎮 国区游戏
+  - GEOSITE,ads,🛑 广告拦截
+  - GEOSITE,private,🔒 私有网络
+  - GEOSITE,microsoft-cn,Ⓜ️ 微软服务
+  - GEOSITE,apple-cn,🍎 苹果服务
+  - GEOSITE,google-cn,📢 谷歌服务
+  - GEOSITE,games-cn,🎮 游戏平台
   - GEOSITE,networktest,📈 网络测试
   - GEOSITE,proxy,🪜 代理域名
-  - GEOSITE,cn,⚡ 直连域名
+  - GEOSITE,cn,🔗 直连域名
 ```
 ## 4. geosite-lite.dat 和 geosite-lite.db
 在 geosite.dat 和 geosite.db 的基础上去除了广告域名 `geosite:ads`，**有且仅有如下分类**：
 ```
-  - GEOSITE,private,🏠 私有网络
-  - GEOSITE,microsoft-cn,Ⓜ️ Microsoft 中国
-  - GEOSITE,apple-cn,🍎 Apple 中国
-  - GEOSITE,google-cn,🗽 Google 中国
-  - GEOSITE,games-cn,🎮 国区游戏
+  - GEOSITE,private,🔒 私有网络
+  - GEOSITE,microsoft-cn,Ⓜ️ 微软服务
+  - GEOSITE,apple-cn,🍎 苹果服务
+  - GEOSITE,google-cn,📢 谷歌服务
+  - GEOSITE,games-cn,🎮 游戏平台
   - GEOSITE,networktest,📈 网络测试
   - GEOSITE,proxy,🪜 代理域名
-  - GEOSITE,cn,⚡ 直连域名
+  - GEOSITE,cn,🔗 直连域名
 ```
 ## 5. geoip-all.dat、Country-all.mmdb、geoip-all.metadb 和 geoip-all.db
 ① 源采用 [Loyalsoldier/geoip](https://github.com/Loyalsoldier/geoip)，包含如下分类（可[点此](https://github.com/Loyalsoldier/geoip/tree/release/text)查看其它国家或地区 IP 规则集）：
@@ -95,19 +95,19 @@
   - GEOIP,cloudfront,🌐 CloudFront
   - GEOIP,facebook,👓 Facebook
   - GEOIP,fastly,🌎 Fastly
-  - GEOIP,google,🗽 Google
-  - GEOIP,netflix,🎥 Netflix
-  - GEOIP,telegram,✈️ Telegram
-  - GEOIP,twitter,💬 Twitter
+  - GEOIP,google,📢 谷歌
+  - GEOIP,netflix,🎥 奈飞视频
+  - GEOIP,telegram,📲 电报消息
+  - GEOIP,twitter,✖️ Twitter
   - GEOIP,cn,🇨🇳 国内 IP
 ```
 ② .metadb 规则集文件适用于使用了 [Clash.Meta 内核](https://github.com/MetaCubeX/Clash.Meta)的客户端（下同）
 ## 6. geoip.dat、Country.mmdb、geoip.metadb 和 geoip.db
 ① 根据 Loyalsoldier/geoip 进行深度定制，**有且仅有如下分类**：
 ```
-  - GEOIP,netflix,🎥 Netflix
-  - GEOIP,telegram,✈️ Telegram
-  - GEOIP,private,🏠 私有网络
+  - GEOIP,netflix,🎥 奈飞视频
+  - GEOIP,telegram,📲 电报消息
+  - GEOIP,private,🔒 私有网络
   - GEOIP,cn,🇨🇳 国内 IP
 ```
 ② 每天早上 3 点（北京时间）自动构建  
@@ -118,8 +118,8 @@
 ## 7. geoip-lite.dat、Country-lite.mmdb、geoip-lite.metadb 和 geoip-lite.db
 分别在 geoip.dat、Country.mmdb、geoip.metadb 和 geoip.db 的基础上去除了流媒体，**有且仅有如下分类**：
 ```
-  - GEOIP,telegram,✈️ Telegram
-  - GEOIP,private,🏠 私有网络
+  - GEOIP,telegram,📲 电报消息
+  - GEOIP,private,🔒 私有网络
   - GEOIP,cn,🇨🇳 国内 IP
 ```
 ## 8. user.yaml
