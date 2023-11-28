@@ -18,7 +18,7 @@
   - GEOSITE,youtube,📹 油管视频
   - GEOSITE,tiktok,🎵 TikTok
   - GEOSITE,bilibili,📺 哔哩哔哩
-  - GEOSITE,openai,🤖 人工智能
+  - GEOSITE,ai,🤖 人工智能
   - GEOSITE,networktest,📈 网络测试
   - GEOSITE,proxy,🪜 代理域名
   - GEOSITE,cn,🔗 直连域名
@@ -38,7 +38,7 @@
 ⑭ `geosite:youtube` 源采用 [blackmatrix7/ios_rule_script/YouTube](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/YouTube)  
 ⑮ `geosite:tiktok` 源采用 [blackmatrix7/ios_rule_script/TikTok](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/TikTok)  
 ⑯ `geosite:bilibili` 源采用 [blackmatrix7/ios_rule_script/BiliBili](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/BiliBili)  
-⑰ `geosite:openai` 源采用 [blackmatrix7/ios_rule_script/OpenAI](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/OpenAI)  
+⑰ `geosite:ai` 源采用 [blackmatrix7/ios_rule_script/OpenAI](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/OpenAI)、[blackmatrix7/ios_rule_script/Bing](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Bing) 和 [blackmatrix7/ios_rule_script/BardAI](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/BardAI) 组合  
 ⑱ `geosite:networktest` 源采用 [blackmatrix7/ios_rule_script/Speedtest](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Speedtest) 和 IPv6 测试网站（采用 `keyword` 关键字）组合    
 ⑲ `geosite:proxy` 源采用 [cokebar/gfwlist2dnsmasq](https://github.com/cokebar/gfwlist2dnsmasq) 生成的 [gfwlist](https://github.com/gfwlist/gfwlist) 和 [blackmatrix7/ios_rule_script/Global](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Global) 组合  
 ⑳ `geosite:cn` 源采用 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)
@@ -58,13 +58,13 @@
   - GEOSITE,youtube,📹 油管视频
   - GEOSITE,tiktok,🎵 TikTok
   - GEOSITE,bilibili,📺 哔哩哔哩
-  - GEOSITE,openai,🤖 人工智能
+  - GEOSITE,ai,🤖 人工智能
   - GEOSITE,networktest,📈 网络测试
   - GEOSITE,proxy,🪜 代理域名
   - GEOSITE,cn,🔗 直连域名
 ```
 ## 3. geosite.dat 和 geosite.db
-在 geosite-all.dat 和 geosite-all.db 的基础上去除了流媒体和人工智能 `geosite:openai`，**有且仅有如下分类**：
+在 geosite-all.dat 和 geosite-all.db 的基础上去除了流媒体和人工智能 `geosite:ai`，**有且仅有如下分类**：
 ```
   - GEOSITE,ads,🛑 广告拦截
   - GEOSITE,private,🔒 私有网络
