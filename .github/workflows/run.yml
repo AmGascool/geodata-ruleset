@@ -241,7 +241,7 @@ jobs:
           allow-lan: true
           unified-delay: false
           tcp-concurrent: true
-          external-controller-tls: 0.0.0.0:9999
+          external-controller-tls: 0.0.0.0:9090
           global-client-fingerprint: chrome
           profile: {store-selected: true, store-fake-ip: true}
 
@@ -283,7 +283,7 @@ jobs:
           allow-lan: true
           unified-delay: false
           tcp-concurrent: true
-          external-controller-tls: 0.0.0.0:9999
+          external-controller-tls: 0.0.0.0:9090
           global-client-fingerprint: chrome
           profile: {store-selected: true, store-fake-ip: true}
 
