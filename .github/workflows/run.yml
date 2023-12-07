@@ -70,7 +70,7 @@ jobs:
           path: clash-geoip
 
       - name: Setup Go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v5
         with:
           go-version-file: ./community/go.mod
           cache-dependency-path: ./community/go.sum
