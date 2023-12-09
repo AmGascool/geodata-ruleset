@@ -48,7 +48,7 @@ jobs:
           tag_name: latest
           github_token: ${{ secrets.GITHUB_TOKEN }}
           delete_release: true
-          repo: DustinWin/clash-geosite
+          repo: ${{ github.repository }}
 
       - name: Checkout v2fly/domain-list-community
         uses: actions/checkout@v4
