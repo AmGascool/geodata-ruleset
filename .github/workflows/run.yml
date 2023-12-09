@@ -77,7 +77,7 @@ jobs:
 
       - name: Generate ads
         run: |
-          mkdir -p ./community/mydata ./tmp ./publish ./domains
+          mkdir -p ./community/mydata/ ./tmp/ ./publish/ ./domains/
           curl -sSL ${ads} | grep -v '#' | sed '/^\s*$/d' > ./community/mydata/ads
 
       - name: Generate private
@@ -184,7 +184,7 @@ jobs:
 
       - name: Generate proxy
         run: |
-          cd ./gfwlist2dnsmasq || exit 1
+          cd ./gfwlist2dnsmasq/ || exit 1
           chmod +x ./gfwlist2dnsmasq.sh
           ./gfwlist2dnsmasq.sh -l -o ../tmp/temp-proxy.txt
           curl -sSL ${proxy} | sed 's/^domain://g' | sed 's/:@\!cn$//g' >> ../tmp/temp-proxy.txt
@@ -196,21 +196,21 @@ jobs:
 
       - name: copy `mydata` to `domains` and rename
         run: |
-          cd ./community/mydata || exit 1
+          cd ./community/mydata/ || exit 1
           for file in $(ls); do
             cp -f "${file}" "../../domains/${file}.txt"
           done
 
       - name: Generate geosite-all.dat
         run: |
-          cd ./community
-          go run ./ --datapath=./mydata --outputname geosite-all.dat
+          cd ./community/
+          go run ./ --datapath=./mydata/ --outputname geosite-all.dat
 
       - name: Generate geosite-all-lite.dat
         run: |
           rm -f ./community/mydata/ads
-          cd ./community
-          go run ./ --datapath=./mydata --outputname geosite-all-lite.dat
+          cd ./community/
+          go run ./ --datapath=./mydata/ --outputname geosite-all-lite.dat
 
       - name: Generate geosite.dat
         run: |
@@ -224,14 +224,14 @@ jobs:
                 ./community/mydata/tiktok \
                 ./community/mydata/bilibili \
                 ./community/mydata/ai
-          cd ./community
-          go run ./ --datapath=./mydata --outputname geosite.dat
+          cd ./community/
+          go run ./ --datapath=./mydata/ --outputname geosite.dat
 
       - name: Generate geosite-lite.dat
         run: |
           rm -f ./community/mydata/ads
-          cd ./community
-          go run ./ --datapath=./mydata --outputname geosite-lite.dat
+          cd ./community/
+          go run ./ --datapath=./mydata/ --outputname geosite-lite.dat
 
       - name: Generate fake-ip-user.yaml
         run: |
@@ -326,29 +326,29 @@ jobs:
               'geosite:microsoft-cn,apple-cn,google-cn,games-cn': [https://doh.pub/dns-query, https://dns.alidns.com/dns-query]
               'geosite:cn,private': [https://doh.pub/dns-query, https://dns.alidns.com/dns-query]
           EOF
-          rm -rf ./tmp
+          rm -rf ./tmp*
 
       - name: Get geoip relative files
         run: |
-          cp -f ./clash-geoip/*.mmdb ./clash-geoip/*.dat ./clash-geoip/*.metadb ./clash-geoip/*.db ./publish
+          cp -f ./clash-geoip/*.mmdb ./clash-geoip/*.dat ./clash-geoip/*.metadb ./clash-geoip/*.db ./publish/
 
       - name: Build db and metadb file
         env:
           NO_SKIP: true
         run: |
           go install -trimpath -ldflags="-s -w -buildid=" github.com/metacubex/geo/cmd/geo@master
-          cd ./community || exit 1
+          cd ./community/ || exit 1
           for file in $(ls *.dat | sed 's/\..*//g'); do
             geo convert site -i v2ray -o sing -f "./${file}.db" "./${file}.dat"
           done
 
       - name: Move files
         run: |
-          cd ./community || exit 1
+          cd ./community/ || exit 1
           for file in $(ls *.dat *.db); do
-            install -Dp "./${file}" ../publish
+            install -Dp "./${file}" ../publish/
           done
-          cd ../publish || exit 1
+          cd ../publish/ || exit 1
 
       - name: Release and upload assets
         uses: svenstaro/upload-release-action@v2
@@ -361,7 +361,7 @@ jobs:
 
       - name: Git push assets to "release" branch
         run: |
-          cd ./publish || exit 1
+          cd ./publish/ || exit 1
           git init
           git config --local user.name "github-actions[bot]"
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
@@ -373,7 +373,7 @@ jobs:
 
       - name: Git push assets to "domains" branch
         run: |
-          cd ./domains || exit 1
+          cd ./domains/ || exit 1
           git init
           git config --local user.name "github-actions[bot]"
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
@@ -385,11 +385,11 @@ jobs:
 
       - name: Purge jsDelivr CDN
         run: |
-          cd ./publish || exit 1
+          cd ./publish/ || exit 1
           for file in $(ls); do
             curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@release/${file}"
           done
-          cd ../domains || exit 1
+          cd ../domains/ || exit 1
           for file in $(ls); do
             curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@domains/${file}"
           done
