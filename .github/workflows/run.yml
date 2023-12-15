@@ -88,6 +88,8 @@ jobs:
           full:yacd.haishan.me
           full:yacd.metacubex.one
           full:d.metacubex.one
+          full:metacubex.github.io
+          full:metacubexd.pages.dev
           EOF
           curl -sSL ${private1} | grep -v '#' | sed '/^\s*$/d' >> ./tmp/temp-private.txt
           curl -sSL ${private2} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' >> ./tmp/temp-private.txt
@@ -192,7 +194,9 @@ jobs:
 
       - name: Generate cn
         run: |
-          curl -sSL ${cn} | grep -Ev '#|google' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' > ./community/mydata/cn
+          echo 'full:static.adtidy.org' > ./tmp/temp-cn.txt
+          curl -sSL ${cn} | grep -Ev '#|google' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' >> ./tmp/temp-cn.txt
+          sort --ignore-case -u ./tmp/temp-cn.txt > ./community/mydata/cn
 
       - name: copy `mydata` to `domains` and rename
         run: |
@@ -241,7 +245,7 @@ jobs:
           allow-lan: true
           unified-delay: false
           tcp-concurrent: true
-          external-controller-tls: 0.0.0.0:9090
+          external-controller-tls: 127.0.0.1:9090
           global-client-fingerprint: chrome
           profile: {store-selected: true, store-fake-ip: true}
 
@@ -251,12 +255,16 @@ jobs:
             geoip: "https://fastly.jsdelivr.net/gh/DustinWin/clash-geosite@release/geoip-lite.dat"
             mmdb: "https://fastly.jsdelivr.net/gh/DustinWin/clash-geosite@release/Country-lite.mmdb"
 
+          sniffer:
+            enable: true
+            sniff: {HTTP: {ports: [80, 8080-8880], override-destination: true}, TLS: {ports: [443, 8443]}, QUIC: {ports: [443, 8443]}}
+            skip-domain: ['Mijia Cloud']
+
           dns:
             enable: true
             prefer-h3: true
             ipv6: true
             listen: 0.0.0.0:1053
-            use-hosts: true
             fake-ip-range: 198.18.0.1/16
             enhanced-mode: fake-ip
             fake-ip-filter:
@@ -273,6 +281,9 @@ jobs:
             nameserver:
               - https://doh.pub/dns-query
               - https://dns.alidns.com/dns-query
+            nameserver-policy:
+              'geosite:cn,private': [https://doh.pub/dns-query, https://dns.alidns.com/dns-query]
+              'geosite:proxy': ['https://dns.google/dns-query#🪜 代理域名', 'https://cloudflare-dns.com/dns-query#🪜 代理域名']
           EOF
 
       - name: Generate redir-host-user.yaml
@@ -283,7 +294,7 @@ jobs:
           allow-lan: true
           unified-delay: false
           tcp-concurrent: true
-          external-controller-tls: 0.0.0.0:9090
+          external-controller-tls: 127.0.0.1:9090
           global-client-fingerprint: chrome
           profile: {store-selected: true, store-fake-ip: true}
 
@@ -295,21 +306,14 @@ jobs:
 
           sniffer:
             enable: true
-            sniff:
-              HTTP:
-                ports: [80, 8080-8880]
-                override-destination: true
-              TLS:
-                ports: [443, 8443]
-              QUIC:
-                ports: [443, 8443]
+            sniff: {HTTP: {ports: [80, 8080-8880], override-destination: true}, TLS: {ports: [443, 8443]}, QUIC: {ports: [443, 8443]}}
+            skip-domain: ['Mijia Cloud']
 
           dns:
             enable: true
             prefer-h3: true
             ipv6: true
             listen: 0.0.0.0:1053
-            use-hosts: true
             fake-ip-range: 198.18.0.1/16
             enhanced-mode: fake-ip
             fake-ip-filter: ['+.*']
@@ -321,9 +325,7 @@ jobs:
               - 'https://cloudflare-dns.com/dns-query#🪜 代理域名'
             proxy-server-nameserver:
               - https://doh.pub/dns-query
-              - https://dns.alidns.com/dns-query
             nameserver-policy:
-              'geosite:microsoft-cn,apple-cn,google-cn,games-cn': [https://doh.pub/dns-query, https://dns.alidns.com/dns-query]
               'geosite:cn,private': [https://doh.pub/dns-query, https://dns.alidns.com/dns-query]
           EOF
           rm -rf ./tmp*
