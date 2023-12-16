@@ -282,6 +282,7 @@ jobs:
               - https://doh.pub/dns-query
               - https://dns.alidns.com/dns-query
             nameserver-policy:
+              'geosite:microsoft-cn,apple-cn,google-cn,games-cn': [https://doh.pub/dns-query, https://dns.alidns.com/dns-query]
               'geosite:cn,private': [https://doh.pub/dns-query, https://dns.alidns.com/dns-query]
               'geosite:proxy': ['https://dns.google/dns-query#🪜 代理域名', 'https://cloudflare-dns.com/dns-query#🪜 代理域名']
           EOF
@@ -326,6 +327,7 @@ jobs:
             proxy-server-nameserver:
               - https://doh.pub/dns-query
             nameserver-policy:
+              'geosite:microsoft-cn,apple-cn,google-cn,games-cn': [https://doh.pub/dns-query, https://dns.alidns.com/dns-query]
               'geosite:cn,private': [https://doh.pub/dns-query, https://dns.alidns.com/dns-query]
           EOF
           rm -rf ./tmp*
