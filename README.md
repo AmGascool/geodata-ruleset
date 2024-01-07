@@ -124,7 +124,7 @@
 ```
 ## 8. user.yaml
 ① 每天早上 3 点（北京时间）自动构建生成  
-② `fake-ip-filter` 中添加[常用 fake-ip 地址过滤列表](https://github.com/juewuy/ShellClash/blob/master/public/fake_ip_filter.list)，提高兼容性  
+② `fake-ip-filter` 中添加[常用 fake-ip 地址过滤列表](https://github.com/juewuy/ShellCrash/blob/master/public/fake_ip_filter.list)，提高兼容性  
 ③ `fake-ip-filter` 中添加 [TrackersList](https://trackerslist.com)（udp 域名），防止 [BT 下载](https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases)无法连接 TrackersList UDP 协议  
 <img src="https://user-images.githubusercontent.com/45238096/224113233-4d76dec2-495c-4790-a00e-538fc1469639.png" width="60%"/>  
 ④ `fake-ip-filter` 中添加 AdGuardHome 相关域名，防止作为下游时检查更新和下载“DNS 黑名单”失败：
@@ -160,7 +160,7 @@
 ① GitHub 源：https://github.com/DustinWin/clash-geosite/releases/download/latest/geoip.db  
 ② jsDelivr 源：https://cdn.jsdelivr.net/gh/DustinWin/clash-geosite@release/geoip.db  
 ③ GitHub Proxy 源：https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/clash-geosite/release/geoip.db
-# 三、 导入（以 [ShellClash](https://github.com/juewuy/ShellClash) 导入 geosite.dat、geoip.dat 和 Country.mmdb 为例）
+# 三、 导入（以 [ShellClash](https://github.com/juewuy/ShellCrash) 导入 geosite.dat、geoip.dat 和 Country.mmdb 为例）
 ## 1. DNS 模式为 `fake-ip`  
 连接 SSH 后执行如下命令：
 ```
@@ -178,4 +178,9 @@ curl -o $clashdir/GeoIP.dat -L https://cdn.jsdelivr.net/gh/DustinWin/clash-geosi
 curl -o $clashdir/Country.mmdb -L https://cdn.jsdelivr.net/gh/DustinWin/clash-geosite@release/Country.mmdb
 curl -o $clashdir/yamls/user.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/clash-geosite@release/redir-host-user.yaml
 $clashdir/start.sh restart
+```
+# 四、 添加定时任务（以 ShellClash 为例）
+连接 SSH 后执行如下命令：
+```
+curl -o $CRASHDIR/task/task.user -L https://cdn.jsdelivr.net/gh/DustinWin/clash-geosite@release/task.user
 ```
