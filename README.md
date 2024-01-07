@@ -180,7 +180,7 @@ curl -o $CRASHDIR/yamls/user.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/clash
 $CRASHDIR/start.sh restart
 ```
 # 四、 添加定时任务（以 ShellClash 为例）
-连接 SSH 后执行如下命令：
+连接 SSH 后运行 `vi $CRASHDIR/task/task.user`，按一下 Ins 键（Insert 键），粘贴如下内容：
 ```
-curl -o $CRASHDIR/task/task.user -L https://cdn.jsdelivr.net/gh/DustinWin/clash-geosite@release/task.user
+201#0 4 * * 1,3,5 curl -o /data/clash/yamls/user.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/clash-geosite@release/fake-ip-user.yaml && /data/clash/start.sh restart >/dev/null 2>&1#每周一、三、五早上 4 点更新 user.yaml
 ```
