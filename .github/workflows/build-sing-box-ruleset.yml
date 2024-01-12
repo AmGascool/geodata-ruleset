@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: MetaCubeX/meta-rules-dat
-          path: resouces
+          path: master/resouces
 
       - name: Download and unzip `sing-box core`
         run: |
