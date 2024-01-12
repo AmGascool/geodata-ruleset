@@ -49,6 +49,8 @@ jobs:
 
       - name: Checkout codebase
         uses: actions/checkout@master
+        with:
+          fetch-depth: 0
 
       - name: Checkout cokebar/gfwlist2dnsmasq
         uses: actions/checkout@v4
@@ -58,8 +60,8 @@ jobs:
 
       - name: Generate ads
         run: |
-          mkdir -p ./tmp/ ./ruleset/clash/
-          curl -sSL ${ads} | grep -v '#' | sed '/^\s*$/d' > ./ruleset/clash/ads.yaml
+          mkdir -p ./tmp/ ./clash/ruleset/
+          curl -sSL ${ads} | grep -v '#' | sed '/^\s*$/d' > ./clash/ruleset/ads.yaml
 
       - name: Generate private
         run: |
@@ -75,8 +77,8 @@ jobs:
           curl -sSL ${private1} | grep -Ev '#|full:|keyword:|regexp:' | sed '/^\s*$/d' | sed "s/^/  - '+./g" | sed "s/$/'/g" >> ./tmp/temp-private.yaml
           curl -sSL ${private1} | grep 'full:' | sed "s/^full:/  - '/g" | sed "s/$/'/g" >> ./tmp/temp-private.yaml
           curl -sSL ${private2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" >> ./tmp/temp-private.yaml
-          echo 'payload:' > ./ruleset/clash/private.yaml
-          sort --ignore-case -u ./tmp/temp-private.yaml >> ./ruleset/clash/private.yaml
+          echo 'payload:' > ./clash/ruleset/private.yaml
+          sort --ignore-case -u ./tmp/temp-private.yaml >> ./clash/ruleset/private.yaml
 
       - name: Generate microsoft-cn
         run: |
@@ -94,18 +96,18 @@ jobs:
               curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep -v '#' | grep 'full:' | grep '@cn' | sed "s/^full:/  - '/g" | sed "s/ *@cn$/'/g" >> ./tmp/temp-microsoft-cn.yaml
             done
           done
-          echo 'payload:' > ./ruleset/clash/microsoft-cn.yaml
-          sort --ignore-case -u ./tmp/temp-microsoft-cn.yaml >> ./ruleset/clash/microsoft-cn.yaml
+          echo 'payload:' > ./clash/ruleset/microsoft-cn.yaml
+          sort --ignore-case -u ./tmp/temp-microsoft-cn.yaml >> ./clash/ruleset/microsoft-cn.yaml
 
       - name: Generate apple-cn
         run: |
-          echo 'payload:' > ./ruleset/clash/apple-cn.yaml
-          curl -sSL ${apple_cn} | perl -ne '/^server=\/([^\/]+)\// && print "  - '\''$1\n"' | sed "s/$/'/g" >> ./ruleset/clash/apple-cn.yaml
+          echo 'payload:' > ./clash/ruleset/apple-cn.yaml
+          curl -sSL ${apple_cn} | perl -ne '/^server=\/([^\/]+)\// && print "  - '\''$1\n"' | sed "s/$/'/g" >> ./clash/ruleset/apple-cn.yaml
 
       - name: Generate google-cn
         run: |
-          echo 'payload:' > ./ruleset/clash/google-cn.yaml
-          curl -sSL ${google_cn} | perl -ne '/^server=\/([^\/]+)\// && print "  - '\''$1\n"' | sed "s/$/'/g" >> ./ruleset/clash/google-cn.yaml
+          echo 'payload:' > ./clash/ruleset/google-cn.yaml
+          curl -sSL ${google_cn} | perl -ne '/^server=\/([^\/]+)\// && print "  - '\''$1\n"' | sed "s/$/'/g" >> ./clash/ruleset/google-cn.yaml
 
       - name: Generate games-cn
         run: |
@@ -125,60 +127,60 @@ jobs:
           done
           curl -sSL ${games_cn2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./tmp/temp-games-cn.yaml
           curl -sSL ${games_cn3} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./tmp/temp-games-cn.yaml
-          echo 'payload:' > ./ruleset/clash/games-cn.yaml
-          sort --ignore-case -u ./tmp/temp-games-cn.yaml >> ./ruleset/clash/games-cn.yaml
+          echo 'payload:' > ./clash/ruleset/games-cn.yaml
+          sort --ignore-case -u ./tmp/temp-games-cn.yaml >> ./clash/ruleset/games-cn.yaml
 
       - name: Generate netflix
         run: |
-          curl -sSL ${netflix} | grep -v '#' | sed '/^\s*$/d' > ./ruleset/clash/netflix.yaml
+          curl -sSL ${netflix} | grep -v '#' | sed '/^\s*$/d' > ./clash/ruleset/netflix.yaml
 
       - name: Generate disney
         run: |
-          echo 'payload:' > ./ruleset/clash/disney.yaml
-          curl -sSL ${disney} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" >> ./ruleset/clash/disney.yaml
+          echo 'payload:' > ./clash/ruleset/disney.yaml
+          curl -sSL ${disney} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" >> ./clash/ruleset/disney.yaml
 
       - name: Generate max
         run: |
-          echo 'payload:' > ./ruleset/clash/max.yaml
-          curl -sSL ${max} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" >> ./ruleset/clash/max.yaml
+          echo 'payload:' > ./clash/ruleset/max.yaml
+          curl -sSL ${max} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" >> ./clash/ruleset/max.yaml
 
       - name: Generate primevideo
         run: |
-          echo 'payload:' > ./ruleset/clash/primevideo.yaml
-          curl -sSL ${primevideo} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" >> ./ruleset/clash/primevideo.yaml
+          echo 'payload:' > ./clash/ruleset/primevideo.yaml
+          curl -sSL ${primevideo} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" >> ./clash/ruleset/primevideo.yaml
 
       - name: Generate appletv
         run: |
-          echo 'payload:' > ./ruleset/clash/appletv.yaml
-          curl -sSL ${appletv} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" >> ./ruleset/clash/appletv.yaml
+          echo 'payload:' > ./clash/ruleset/appletv.yaml
+          curl -sSL ${appletv} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" >> ./clash/ruleset/appletv.yaml
 
       - name: Generate youtube
         run: |
-          echo 'payload:' > ./ruleset/clash/youtube.yaml
-          curl -sSL ${youtube} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" >> ./ruleset/clash/youtube.yaml
+          echo 'payload:' > ./clash/ruleset/youtube.yaml
+          curl -sSL ${youtube} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" >> ./clash/ruleset/youtube.yaml
 
       - name: Generate tiktok
         run: |
-          echo 'payload:' > ./ruleset/clash/tiktok.yaml
-          curl -sSL ${tiktok} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" >> ./ruleset/clash/tiktok.yaml
+          echo 'payload:' > ./clash/ruleset/tiktok.yaml
+          curl -sSL ${tiktok} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" >> ./clash/ruleset/tiktok.yaml
 
       - name: Generate bilibili
         run: |
-          echo 'payload:' > ./ruleset/clash/bilibili.yaml
-          curl -sSL ${bilibili} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" >> ./ruleset/clash/bilibili.yaml
+          echo 'payload:' > ./clash/ruleset/bilibili.yaml
+          curl -sSL ${bilibili} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" >> ./clash/ruleset/bilibili.yaml
 
       - name: Generate ai
         run: |
           curl -sSL ${ai1} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" > ./tmp/temp-ai.yaml
           curl -sSL ${ai2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" >> ./tmp/temp-ai.yaml
           curl -sSL ${ai3} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" >> ./tmp/temp-ai.yaml
-          echo 'payload:' > ./ruleset/clash/ai.yaml
-          sort --ignore-case -u ./tmp/temp-ai.yaml >> ./ruleset/clash/ai.yaml
+          echo 'payload:' > ./clash/ruleset/ai.yaml
+          sort --ignore-case -u ./tmp/temp-ai.yaml >> ./clash/ruleset/ai.yaml
 
       - name: Generate networktest
         run: |
-          curl -sSL ${networktest} | grep -v '#' | sed '/^\s*$/d' > ./ruleset/clash/networktest.yaml
-          cat <<EOF >> ./ruleset/clash/networktest.yaml
+          curl -sSL ${networktest} | grep -v '#' | sed '/^\s*$/d' > ./clash/ruleset/networktest.yaml
+          cat <<EOF >> ./clash/ruleset/networktest.yaml
             - DOMAIN-KEYWORD,ipv6-test
             - DOMAIN-KEYWORD,ipv6test
             - DOMAIN-KEYWORD,test-ipv6
@@ -187,7 +189,7 @@ jobs:
 
       - name: Generate applications
         run: |
-          curl -sSL ${applications} | sed '/^\s*$/d' > ./ruleset/clash/applications.yaml
+          curl -sSL ${applications} | sed '/^\s*$/d' > ./clash/ruleset/applications.yaml
 
       - name: Generate proxy
         run: |
@@ -197,34 +199,34 @@ jobs:
           sed "s/^/  - '+./g" ../tmp/temp-proxy1.yaml | sed "s/$/'/g" > ../tmp/temp-proxy2.yaml
           curl -sSL ${proxy} | grep 'domain:' | sed 's/:@\!cn$//g' | sed "s/^domain:/  - '+./g" | sed "s/$/'/g" >> ../tmp/temp-proxy2.yaml
           curl -sSL ${proxy} | grep 'full:' | sed 's/:@\!cn$//g' | sed "s/^full:/  - '/g" | sed "s/$/'/g" >> ../tmp/temp-proxy2.yaml
-          echo 'payload:' > ../ruleset/clash/proxy.yaml
-          sort --ignore-case -u ../tmp/temp-proxy2.yaml >> ../ruleset/clash/proxy.yaml
+          echo 'payload:' > ../clash/ruleset/proxy.yaml
+          sort --ignore-case -u ../tmp/temp-proxy2.yaml >> ../clash/ruleset/proxy.yaml
 
       - name: Generate cn
         run: |
           echo "  - 'static.adtidy.org'" > ./tmp/temp-cn.yaml
           curl -sSL ${cn} | grep -Ev '#|payload:|google' | sed '/^\s*$/d' >> ./tmp/temp-cn.yaml
-          echo 'payload:' > ./ruleset/clash/cn.yaml
-          sort --ignore-case -u ./tmp/temp-cn.yaml >> ./ruleset/clash/cn.yaml
+          echo 'payload:' > ./clash/ruleset/cn.yaml
+          sort --ignore-case -u ./tmp/temp-cn.yaml >> ./clash/ruleset/cn.yaml
 
       - name: Generate telegramip
         run: |
-          echo 'payload:' > ./ruleset/clash/telegramip.yaml
-          curl -sSL ${telegramip} | sed "s/^/  - '/g" | sed "s/$/'/g" >> ./ruleset/clash/telegramip.yaml
+          echo 'payload:' > ./clash/ruleset/telegramip.yaml
+          curl -sSL ${telegramip} | sed "s/^/  - '/g" | sed "s/$/'/g" >> ./clash/ruleset/telegramip.yaml
 
       - name: Generate privateip
         run: |
-          echo 'payload:' > ./ruleset/clash/privateip.yaml
-          curl -sSL ${private2} | grep -v '#' | grep 'IP-CIDR' | sed "s/IP-CIDR,/'/g" | sed "s/IP-CIDR6,/'/g" | sed "s/$/'/g" >> ./ruleset/clash/privateip.yaml
+          echo 'payload:' > ./clash/ruleset/privateip.yaml
+          curl -sSL ${private2} | grep -v '#' | grep 'IP-CIDR' | sed "s/IP-CIDR,/'/g" | sed "s/IP-CIDR6,/'/g" | sed "s/$/'/g" >> ./clash/ruleset/privateip.yaml
 
       - name: Generate cnip
         run: |
-          echo 'payload:' > ./ruleset/clash/cnip.yaml
-          curl -sSL ${cnip} | sed "s/^/  - '/g" | sed "s/$/'/g" >> ./ruleset/clash/cnip.yaml
+          echo 'payload:' > ./clash/ruleset/cnip.yaml
+          curl -sSL ${cnip} | sed "s/^/  - '/g" | sed "s/$/'/g" >> ./clash/ruleset/cnip.yaml
 
       - name: Generate fake-ip-user.yaml
         run: |
-          cat <<EOF > ./ruleset/clash/fake-ip-user.yaml
+          cat <<EOF > ./clash/ruleset/fake-ip-user.yaml
           sniffer:
             enable: true
             sniff: {HTTP: {ports: [80, 8080-8880], override-destination: true}, TLS: {ports: [443, 8443]}, QUIC: {ports: [443, 8443]}}
@@ -240,9 +242,9 @@ jobs:
             fake-ip-filter:
               - '*'
           EOF
-          curl -sSL https://raw.githubusercontent.com/juewuy/ShellCrash/master/public/fake_ip_filter.list | grep -v '#' | sed '/^\s*$/d' | sed "s/.*/'&'/g" | sed 's/^/    - /g' >> ./ruleset/clash/fake-ip-user.yaml
-          curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep 'udp:' | grep -i '\.[A-Z]' | sed "s/^.*\/\//'/g" | sed "s/:.*\/.*/'/g" | sed 's/^/    - /g' >> ./ruleset/clash/fake-ip-user.yaml
-          cat <<EOF >> ./ruleset/clash/fake-ip-user.yaml
+          curl -sSL https://raw.githubusercontent.com/juewuy/ShellCrash/master/public/fake_ip_filter.list | grep -v '#' | sed '/^\s*$/d' | sed "s/.*/'&'/g" | sed 's/^/    - /g' >> ./clash/ruleset/fake-ip-user.yaml
+          curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep 'udp:' | grep -i '\.[A-Z]' | sed "s/^.*\/\//'/g" | sed "s/:.*\/.*/'/g" | sed 's/^/    - /g' >> ./clash/ruleset/fake-ip-user.yaml
+          cat <<EOF >> ./clash/ruleset/fake-ip-user.yaml
               - 'adguardteam.github.io'
               - 'anti-ad.net'
             default-nameserver:
@@ -259,7 +261,7 @@ jobs:
 
       - name: Generate redir-host-user.yaml
         run: |
-          cat <<EOF > ./ruleset/clash/redir-host-user.yaml
+          cat <<EOF > ./clash/ruleset/redir-host-user.yaml
           sniffer:
             enable: true
             sniff: {HTTP: {ports: [80, 8080-8880], override-destination: true}, TLS: {ports: [443, 8443]}, QUIC: {ports: [443, 8443]}}
@@ -287,20 +289,21 @@ jobs:
           EOF
           rm -rf ./tmp*
 
-      - name: Remove Submodules Folder
+      - name: Git push assets to "clash" branch
         run: |
-          rm -rf ./gfwlist2dnsmasq
-
-      - name: Commit and push
-        run: |
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
-          git add . && git commit -m "更新于 ${update_version}" || exit 0
-          git push -f
+          cd ./clash/ || exit 1
+          git init
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b clash
+          git add ./ruleset/
+          git commit -m "clash ruleset 更新于 ${update_version}"
+          git remote add ruleset_geox "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
+          git push -f -u ruleset_geox clash
 
       - name: Purge jsDelivr CDN
         run: |
-          cd ./ruleset/clash/ || exit 1
+          cd ./clash/ruleset/ || exit 1
           for file in $(ls); do
-            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@master/ruleset/clash/${file}"
+            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@clash/ruleset/${file}"
           done
