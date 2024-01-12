@@ -59,12 +59,12 @@ jobs:
           repository: cokebar/gfwlist2dnsmasq
           path: gfwlist2dnsmasq
 
-      - name: Checkout DustinWin/clash-geoip
+      - name: Checkout DustinWin/geoip
         uses: actions/checkout@v4
         with:
-          repository: DustinWin/clash-geoip
-          ref: release
-          path: clash-geoip
+          repository: DustinWin/geoip
+          fetch-depth: 0
+          path: geoip
 
       - name: Setup Go
         uses: actions/setup-go@v5
@@ -74,7 +74,7 @@ jobs:
 
       - name: Generate ads
         run: |
-          mkdir -p ./community/mydata/ ./tmp/ ./clash/geox/domains/ ./sing-box/geox/domains/
+          mkdir -p ./community/mydata/ ./tmp/ ./Domains/ ./clash/geox/ ./sing-box/geox/
           curl -sSL ${ads} | grep -v '#' | sed '/^\s*$/d' > ./community/mydata/ads
 
       - name: Generate private
@@ -199,8 +199,7 @@ jobs:
         run: |
           cd ./community/mydata/ || exit 1
           for file in $(ls); do
-            cp -f "${file}" "../../clash/geox/domains/${file}.txt"
-            cp -f "${file}" "../../sing-box/geox/domains/${file}.txt"
+            cp -f "${file}" "../../Domains/${file}.txt"
           done
 
       - name: Generate geosite-all.dat
@@ -336,8 +335,8 @@ jobs:
 
       - name: Get geoip relative files
         run: |
-          cp -f ./clash-geoip/*.mmdb ./clash-geoip/*.dat ./clash-geoip/*.metadb ./clash/geox/
-          cp -f ./clash-geoip/*.db ./sing-box/geox/
+          cp -f ./geoip/*.mmdb ./geoip/*.dat ./geoip/*.metadb ./clash/geox/
+          cp -f ./geoip/*.db ./sing-box/geox/
 
       - name: Build db and metadb file
         env:
@@ -359,6 +358,13 @@ jobs:
             install -Dp "./${file}" ../sing-box/geox
           done
 
+      - name: Commit and push `master` branch
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git add ./Domains/ && git commit -m "域名列表更新于 ${update_version}" || exit 0
+          git push -f
+
       - name: Git push assets to `clash` branch
         run: |
           cd ./clash/ || exit 1
@@ -367,9 +373,9 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git checkout -b clash
           git add .
-          git commit -m "更新于 ${update_version}"
-          git remote add clash-geosite "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
-          git push -f -u clash-geosite clash
+          git commit -m "clash geox 更新于 ${update_version}"
+          git remote add ruleset_geox "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
+          git push -f -u ruleset_geox clash
 
       - name: Git push assets to `sing-box` branch
         run: |
@@ -379,25 +385,22 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git checkout -b sing-box
           git add .
-          git commit -m "更新于 ${update_version}"
-          git remote add clash-geosite "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
-          git push -f -u clash-geosite sing-box
+          git commit -m "sing-box geox 更新于 ${update_version}"
+          git remote add ruleset_geox "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
+          git push -f -u ruleset_geox sing-box
 
       - name: Purge jsDelivr CDN
         run: |
-          cd ./clash/geox/ || exit 1
+          cd ./Domains/ || exit 1
+          for file in $(ls); do
+            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@master/Domains/${file}"
+          done
+          cd ../clash/geox/ || exit 1
           for file in $(ls); do
             curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@clash/geox/${file}"
           done
-          cd ./domains/ || exit 1
-          for file in $(ls); do
-            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@clash/geox/domains/${file}"
-          done
+          
           cd ../../sing-box/geox/ || exit 1
           for file in $(ls); do
             curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@sing-box/geox/${file}"
-          done
-          cd ./domains/ || exit 1
-          for file in $(ls); do
-            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@sing-box/geox/domains/${file}"
           done
