@@ -20,13 +20,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Checkout DustinWin/ruleset_geox
-        uses: actions/checkout@v4
-        with:
-          repository: DustinWin/ruleset_geox
-          ref: clash
-          path: clash/geox
-
       - name: Build db file
         env:
           NO_SKIP: true
