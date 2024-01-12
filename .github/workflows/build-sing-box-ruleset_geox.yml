@@ -31,7 +31,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: clash
-          path: clash/geox
 
       - name: Build db file
         env:
