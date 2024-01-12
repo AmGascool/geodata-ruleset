@@ -24,13 +24,14 @@ jobs:
           mkdir -p ./ruleset/sing-box/ ./tmp/
           sing_box_version=$(curl -sSL https://api.github.com/repos/SagerNet/sing-box/releases/latest | grep 'tag_name' | sed 's/.*v//g' | sed 's/",$//g')
           wget "https://github.com/SagerNet/sing-box/releases/download/v${sing_box_version}/sing-box-${sing_box_version}-linux-amd64.tar.gz" -O - | tar -zxf - -C ./tmp/
-          mv -f ./tmp/sing-box-${sing_box_version}-linux-amd64/sing-box ./
+          mv -f ./tmp/sing-box-${sing_box_version}-linux-amd64/sing-box ./ruleset/sing-box/
 
       - name: Download and unzip `mosdns`
         run: |
           mosdns_version=$(curl -sSL https://api.github.com/repos/IrineSistiana/mosdns/releases/latest | grep 'tag_name' | sed 's/.*v/v/g' | sed 's/",$//g')
           wget -P ./tmp/ "https://github.com/IrineSistiana/mosdns/releases/download/${mosdns_version}/mosdns-linux-amd64.zip"
-          unzip -o "./tmp/mosdns-linux-amd64.zip" -d ./
+          unzip -o "./tmp/mosdns-linux-amd64.zip" -d ./tmp/
+          mv -f ./tmp/mosdns ./ruleset/sing-box/
 
       - name: Convert geo to sing-rule-set
         env:
