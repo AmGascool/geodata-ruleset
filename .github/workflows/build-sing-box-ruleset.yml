@@ -19,12 +19,6 @@ jobs:
       - name: Checkout codebase
         uses: actions/checkout@master
 
-      - name: Checkout MetaCubeX/meta-rules-dat
-        uses: actions/checkout@v4
-        with:
-          repository: MetaCubeX/meta-rules-dat
-          path: master/resouces
-
       - name: Download and unzip `sing-box core`
         run: |
           mkdir -p ./ruleset/sing-box/ ./tmp/
@@ -43,13 +37,10 @@ jobs:
           NO_SKIP: true
         run: |
           cp -f ./geox/sing-box/geosite-all.db ./geox/clash/geoip-all.dat ./resouces/convert.sh ./ruleset/sing-box/
+          wget -P ./ruleset/sing-box/ https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/master/resouces/convert.sh
           cd ./ruleset/sing-box/
           chmod 755 mosdns sing-box convert.sh && ./convert.sh
           rm -rf ../../tmp* convert.sh geosite-all.db geoip-all.dat LICENSE README.md config.yaml
-
-      - name: Remove Submodules Folder
-        run: |
-          rm -rf ./resouces
 
       - name: Commit and push
         run: |
