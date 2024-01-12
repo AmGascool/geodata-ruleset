@@ -70,14 +70,6 @@ jobs:
           for file in $(ls); do
             curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@master/ruleset/sing-box/geox-all/geosite/${file}"
           done
-          cd ../geoip/ || exit 1
-          for file in $(ls); do
-            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@master/ruleset/sing-box/geox-all/geoip/${file}"
-          done
-          cd ../mixed/ || exit 1
-          for file in $(ls); do
-            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@master/ruleset/sing-box/geox-all/mixed/${file}"
-          done
           cd ../../geox/geosite/ || exit 1
           for file in $(ls); do
             curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@master/ruleset/sing-box/geox/geosite/${file}"
