@@ -1,4 +1,4 @@
-name: Build GeoX
+name: Build geox
 on:
   workflow_dispatch:
   schedule:
@@ -377,11 +377,11 @@ jobs:
           for file in $(ls); do
             curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@master/geox/clash/${file}"
           done
-          cd ../../geox/sing-box/ || exit 1
+          cd ../sing-box/ || exit 1
           for file in $(ls); do
             curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@master/geox/sing-box/${file}"
           done
-          cd ../../geox/domains/ || exit 1
+          cd ../domains/ || exit 1
           for file in $(ls); do
             curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@master/geox/domains/${file}"
           done
