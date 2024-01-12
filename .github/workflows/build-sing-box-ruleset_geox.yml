@@ -32,8 +32,8 @@ jobs:
           echo "update_version=$(date -d '+8 hours' +%Y-%m-%d)" >> ${GITHUB_ENV}
           mkdir -p ./tmp/ ./sing-box/ruleset/geox-all ./sing-box/ruleset/geox
           cp -f ./geox/*.dat ./tmp/
+          cd ./tmp/ || exit 1 
           go install -trimpath -ldflags="-s -w -buildid=" github.com/metacubex/geo/cmd/geo@master
-          cd ./tmp/ || exit 1
           for file in $(ls | sed 's/\..*//g'); do
             geo convert site -i v2ray -o sing -f "./${file}.db" "./${file}.dat"
           done
