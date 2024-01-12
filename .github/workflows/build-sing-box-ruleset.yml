@@ -19,27 +19,32 @@ jobs:
       - name: Checkout codebase
         uses: actions/checkout@master
 
+      - name: Checkout MetaCubeX/meta-rules-dat
+        uses: actions/checkout@v4
+        with:
+          repository: MetaCubeX/meta-rules-dat
+          path: resouces
+
       - name: Download and unzip `sing-box core`
         run: |
           echo "update_version=$(date -d '+8 hours' +%Y-%m-%d)" >> ${GITHUB_ENV}
           mkdir -p ./ruleset/sing-box/ ./tmp/
           sing_box_version=$(curl -sSL https://api.github.com/repos/SagerNet/sing-box/releases/latest | grep 'tag_name' | sed 's/.*v//g' | sed 's/",$//g')
           wget "https://github.com/SagerNet/sing-box/releases/download/v${sing_box_version}/sing-box-${sing_box_version}-linux-amd64.tar.gz" -O - | tar -zxf - -C ./tmp/
-          cp -f ./tmp/sing-box-${sing_box_version}-linux-amd64/sing-box ./ruleset/sing-box/
+          mv -f ./tmp/sing-box-${sing_box_version}-linux-amd64/sing-box ./ruleset/sing-box/
 
       - name: Download and unzip `mosdns`
         run: |
-          mosdns_version=$(curl -sSL https://api.github.com/repos/IrineSistiana/mosdns/releases/latest | grep 'tag_name' | sed 's/.*v/v/g' | sed 's/",$//g')
-          wget -P ./tmp/ "https://github.com/IrineSistiana/mosdns/releases/download/${mosdns_version}/mosdns-linux-amd64.zip"
+          wget -P ./tmp/ "https://github.com/IrineSistiana/mosdns/releases/download/v4.5.3/mosdns-linux-amd64.zip"
           unzip -o "./tmp/mosdns-linux-amd64.zip" -d ./tmp/
-          cp -f ./tmp/mosdns ./ruleset/sing-box/
+          mv -f ./tmp/mosdns ./ruleset/sing-box/
 
       - name: Convert geo to sing-rule-set
         env:
           NO_SKIP: true
         run: |
-          cp -f ./geox/sing-box/geosite-all.db ./geox/clash/geoip-all.dat ./ruleset/sing-box/
-          wget -P ./ruleset/sing-box/ https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/master/resouces/convert.sh
+          cp -f ./geox/sing-box/geosite-all.db ./geox/clash/geoip-all.dat ./resouces/convert.sh ./ruleset/sing-box/
+          # wget -P ./ruleset/sing-box/ https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/master/resouces/convert.sh
           cd ./ruleset/sing-box/
           chmod +x mosdns sing-box convert.sh
           ./convert.sh
