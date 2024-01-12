@@ -1,0 +1,115 @@
+name: Build sing-box-ruleset_geox
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 19 * * *"
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - "README.md"
+      - ".github/workflows/delete-old-workflows.yml"
+      - ".github/workflows/build-clash-ruleset_geox.yml"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout codebase
+        uses: actions/checkout@master
+        with:
+          fetch-depth: 0
+
+      - name: Checkout DustinWin/ruleset_geox
+        uses: actions/checkout@v4
+        with:
+          repository: DustinWin/ruleset_geox
+          ref: clash
+          path: clash/geox
+
+      - name: Build db file
+        env:
+          NO_SKIP: true
+        run: |
+          echo "update_version=$(date -d '+8 hours' +%Y-%m-%d)" >> ${GITHUB_ENV}
+          mkdir -p ./tmp/ ./sing-box/ruleset/geox-all ./sing-box/ruleset/geox
+          cp -f ./clash/geox/*.dat ./tmp/
+          go install -trimpath -ldflags="-s -w -buildid=" github.com/metacubex/geo/cmd/geo@master
+          cd ./tmp/ || exit 1
+          for file in $(ls | sed 's/\..*//g'); do
+            geo convert site -i v2ray -o sing -f "./${file}.db" "./${file}.dat"
+          done
+
+      - name: Move files
+        run: |
+          cd ./tmp/ || exit 1
+          for file in $(ls *.db); do
+            install -Dp "./${file}" ../sing-box/geox/
+          done
+
+      - name: Download and unzip `sing-box core`
+        run: |
+          sing_box_version=$(curl -sSL https://api.github.com/repos/SagerNet/sing-box/releases/latest | grep 'tag_name' | sed 's/.*v//g' | sed 's/",$//g')
+          wget "https://github.com/SagerNet/sing-box/releases/download/v${sing_box_version}/sing-box-${sing_box_version}-linux-amd64.tar.gz" -O - | tar -zxf - -C ./tmp/
+          cp -f ./tmp/sing-box-${sing_box_version}-linux-amd64/sing-box ./sing-box/ruleset/geox-all/
+          cp -f ./tmp/sing-box-${sing_box_version}-linux-amd64/sing-box ./sing-box/ruleset/geox/
+
+      - name: Download and unzip `mosdns`
+        run: |
+          wget -P ./tmp/ "https://github.com/IrineSistiana/mosdns/releases/download/v4.5.3/mosdns-linux-amd64.zip"
+          unzip -o "./tmp/mosdns-linux-amd64.zip" -d ./tmp/
+          cp -f ./tmp/mosdns ./sing-box/ruleset/geox-all/
+          cp -f ./tmp/mosdns ./sing-box/ruleset/geox/
+
+      - name: Convert geox-all to sing-box-ruleset
+        env:
+          NO_SKIP: true
+        run: |
+          cp -f ./sing-box/geox/geosite-all.db ./sing-box/ruleset/geox-all/geosite.db
+          cp -f ./clash/geox/geoip-all.dat ./sing-box/ruleset/geox-all/geoip.dat
+          wget -P ./sing-box/ruleset/geox-all/ https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/master/resouces/convert.sh
+          cd ./sing-box/ruleset/geox-all/
+          chmod +x mosdns sing-box convert.sh && ./convert.sh
+          rm -rf mosdns sing-box convert.sh geosite.db geoip.dat LICENSE README.md config.yaml
+
+      - name: Convert geox to sing-box-ruleset
+        env:
+          NO_SKIP: true
+        run: |
+          cp -f ./sing-box/geox/geosite.db ./sing-box/ruleset/geox/
+          cp -f ./clash/geox/geoip.dat ./sing-box/ruleset/geox/
+          wget -P ./sing-box/ruleset/geox/ https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/master/resouces/convert.sh
+          cd ./sing-box/ruleset/geox/
+          chmod +x mosdns sing-box convert.sh && ./convert.sh
+          rm -rf ../../../tmp* mosdns sing-box convert.sh geosite.db geoip.dat LICENSE README.md config.yaml
+
+      - name: Git push assets to `sing-box` branch
+        run: |
+          cd ./sing-box/ || exit 1
+          git init
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b sing-box
+          git add ./geox/ ./ruleset/
+          git commit -m "sing-box ruleset_geox 更新于 ${update_version}"
+          git remote add ruleset_geox "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
+          git push -f -u ruleset_geox sing-box
+
+      - name: Purge jsDelivr CDN
+        run: |
+          cd ./sing-box/ruleset/geox-all/geosite/ || exit 1
+          for file in $(ls); do
+            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@sing-box/ruleset/geox-all/geosite/${file}"
+          done
+          cd ../../geox/geosite/ || exit 1
+          for file in $(ls); do
+            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@sing-box/ruleset/geox/geosite/${file}"
+          done
+          cd ../geoip/ || exit 1
+          for file in $(ls); do
+            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@sing-box/ruleset/geox/geoip/${file}"
+          done
+          cd ../mixed/ || exit 1
+          for file in $(ls); do
+            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@sing-box/ruleset/geox/mixed/${file}"
+          done
