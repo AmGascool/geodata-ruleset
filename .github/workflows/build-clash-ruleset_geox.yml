@@ -85,7 +85,6 @@ jobs:
         with:
           repository: DustinWin/geoip
           ref: clash
-          path: clash/geoip
 
       - name: Setup Go
         uses: actions/setup-go@v5
@@ -530,7 +529,7 @@ jobs:
 
       - name: Get geoip relative files
         run: |
-          cp -f ./clash/geoip/* ./clash/geox/
+          cp -f ./clash/* ./clash/geox/
 
       - name: Move files
         run: |
