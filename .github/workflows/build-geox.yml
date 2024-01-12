@@ -1,14 +1,16 @@
-name: Build geosite
+name: Build GeoX
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 19 * * *"
+    - cron: "0 18 * * *"
   push:
     branches:
       - master
     paths-ignore:
       - "README.md"
       - ".github/workflows/delete-old-workflows.yml"
+      - ".github/workflows/build-clash-ruleset.yml"
+      - ".github/workflows/build-sing-box-ruleset.yml"
 
 jobs:
   build:
@@ -42,14 +44,6 @@ jobs:
           echo "cn=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax.list" >> $GITHUB_ENV
         shell: bash
 
-      - name: Delete current tag and release
-        uses: dev-drprasad/delete-tag-and-release@v1.0
-        with:
-          tag_name: latest
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          delete_release: true
-          repo: ${{ github.repository }}
-
       - name: Checkout v2fly/domain-list-community
         uses: actions/checkout@v4
         with:
@@ -77,7 +71,8 @@ jobs:
 
       - name: Generate ads
         run: |
-          mkdir -p ./community/mydata/ ./tmp/ ./publish/ ./domains/
+          echo "update_version=$(date -d '+8 hours' +%Y-%m-%d)" >> ${GITHUB_ENV}
+          mkdir -p ./community/mydata/ ./tmp/ ./geox/clash/ ./geox/sing-box/ ./geox/domains/
           curl -sSL ${ads} | grep -v '#' | sed '/^\s*$/d' > ./community/mydata/ads
 
       - name: Generate private
@@ -202,7 +197,7 @@ jobs:
         run: |
           cd ./community/mydata/ || exit 1
           for file in $(ls); do
-            cp -f "${file}" "../../domains/${file}.txt"
+            cp -f "${file}" "../../geox/domains/${file}.txt"
           done
 
       - name: Generate geosite-all.dat
@@ -239,7 +234,7 @@ jobs:
 
       - name: Generate fake-ip-user.yaml
         run: |
-          cat <<EOF > ./publish/fake-ip-user.yaml
+          cat <<EOF > ./geox/clash/fake-ip-user.yaml
           mode: rule
           log-level: silent
           allow-lan: true
@@ -274,7 +269,7 @@ jobs:
           EOF
           curl -sSL https://raw.githubusercontent.com/juewuy/ShellCrash/master/public/fake_ip_filter.list | grep -v '#' | sed '/^\s*$/d' | sed "s/.*/'&'/g" | sed 's/^/    - /g' >> ./publish/fake-ip-user.yaml
           curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep 'udp:' | grep -i '\.[A-Z]' | sed "s/^.*\/\//'/g" | sed "s/:.*\/.*/'/g" | sed 's/^/    - /g' >> ./publish/fake-ip-user.yaml
-          cat <<EOF >> ./publish/fake-ip-user.yaml
+          cat <<EOF >> ./geox/clash/fake-ip-user.yaml
               - 'adguardteam.github.io'
               - 'anti-ad.net'
             default-nameserver:
@@ -291,7 +286,7 @@ jobs:
 
       - name: Generate redir-host-user.yaml
         run: |
-          cat <<EOF > ./publish/redir-host-user.yaml
+          cat <<EOF > ./geox/clash/redir-host-user.yaml
           mode: rule
           log-level: silent
           allow-lan: true
@@ -338,7 +333,8 @@ jobs:
 
       - name: Get geoip relative files
         run: |
-          cp -f ./clash-geoip/*.mmdb ./clash-geoip/*.dat ./clash-geoip/*.metadb ./clash-geoip/*.db ./publish/
+          cp -f ./clash-geoip/*.mmdb ./clash-geoip/*.dat ./clash-geoip/*.metadb ./geox/clash/
+          cp -f ./clash-geoip/*.db ./geox/sing-box/
 
       - name: Build db and metadb file
         env:
@@ -353,51 +349,33 @@ jobs:
       - name: Move files
         run: |
           cd ./community/ || exit 1
-          for file in $(ls *.dat *.db); do
-            install -Dp "./${file}" ../publish/
+          for file in $(ls *.dat); do
+            install -Dp "./${file}" ../geox/clash/
           done
-          cd ../publish/ || exit 1
+          cd ../geox/clash/ || exit 1
+          for file in $(ls .db); do
+            install -Dp "./${file}" ../geox/sing-box
+          done
+          cd ../geox/sing-box || exit 1
 
-      - name: Release and upload assets
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          release_name: latest
-          tag: latest
-          file_glob: true
-          file: ./publish/*
-
-      - name: Git push assets to "release" branch
+      - name: Commit and push
         run: |
-          cd ./publish/ || exit 1
-          git init
-          git config --local user.name "github-actions[bot]"
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git checkout -b release
-          git add .
-          git commit -m "${{ env.RELEASE_NAME }}"
-          git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
-          git push -f -u origin release
-
-      - name: Git push assets to "domains" branch
-        run: |
-          cd ./domains/ || exit 1
-          git init
-          git config --local user.name "github-actions[bot]"
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git checkout -b domains
-          git add .
-          git commit -m "${{ env.RELEASE_NAME }}"
-          git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
-          git push -f -u origin domains
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git add . && git commit -m "更新于 ${update_version}" || exit 0
+          git push -f
 
       - name: Purge jsDelivr CDN
         run: |
-          cd ./publish/ || exit 1
+          cd ./geox/clash/ || exit 1
           for file in $(ls); do
-            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@release/${file}"
+            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@master/geox/clash/${file}"
           done
-          cd ../domains/ || exit 1
+          cd ../../geox/sing-box/ || exit 1
           for file in $(ls); do
-            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@domains/${file}"
+            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@master/geox/sing-box/${file}"
+          done
+          cd ../../geox/domains/ || exit 1
+          for file in $(ls); do
+            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@master/geox/domains/${file}"
           done
