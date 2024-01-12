@@ -352,11 +352,9 @@ jobs:
           for file in $(ls *.dat); do
             install -Dp "./${file}" ../geox/clash/
           done
-          cd ../geox/clash/ || exit 1
           for file in $(ls .db); do
             install -Dp "./${file}" ../geox/sing-box
           done
-          cd ../geox/sing-box || exit 1
 
       - name: Commit and push
         run: |
