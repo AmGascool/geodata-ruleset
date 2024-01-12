@@ -40,7 +40,8 @@ jobs:
         run: |
           cp -f ./geox/sing-box/geosite-all.db ./geox/clash/geoip-all.dat ./ruleset/sing-box/
           cd ./ruleset/sing-box/
-          chmod 755 mosdns sing-box convert.sh && ./convert.sh
+          chmod +x mosdns sing-box convert.sh
+          ./convert.sh
           rm -rf ../../tmp* convert.sh geosite-all.db geoip-all.dat LICENSE README.md config.yaml
 
       - name: Commit and push
