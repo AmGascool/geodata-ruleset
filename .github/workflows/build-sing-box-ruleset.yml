@@ -1,4 +1,4 @@
-name: Build build sing-box-ruleset
+name: Build sing-box-ruleset
 on:
   workflow_dispatch:
   schedule:
