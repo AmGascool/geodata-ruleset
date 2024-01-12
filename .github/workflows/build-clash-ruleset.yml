@@ -302,5 +302,5 @@ jobs:
         run: |
           cd ./ruleset/clash/ || exit 1
           for file in $(ls); do
-            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@main/ruleset/clash/${file}"
+            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@master/ruleset/clash/${file}"
           done
