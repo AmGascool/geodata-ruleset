@@ -352,7 +352,7 @@ jobs:
           for file in $(ls *.dat); do
             install -Dp "./${file}" ../geox/clash/
           done
-          for file in $(ls .db); do
+          for file in $(ls *.db); do
             install -Dp "./${file}" ../geox/sing-box
           done
 
