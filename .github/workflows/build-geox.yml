@@ -361,10 +361,9 @@ jobs:
 
       - name: Remove Submodules Folder
         run: |
-          git submodule deinit -f clash-geoip
-          git submodule deinit -f community
-          git submodule deinit -f community
-          git submodule deinit -f gfwlist2dnsmasq
+          rm -rf ./clash-geoip
+          rm -rf ./community
+          rm -rf ./gfwlist2dnsmasq
 
       - name: Commit and push
         run: |
