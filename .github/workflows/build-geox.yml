@@ -46,6 +46,8 @@ jobs:
 
       - name: Clone Repository
         uses: actions/checkout@master
+        with:
+          fetch-depth: 0
 
       - name: Checkout v2fly/domain-list-community
         uses: actions/checkout@v4
@@ -379,7 +381,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git checkout -b clash
-          git add ./clash/
+          git add ./geox/
           git commit -m "clash geox 更新于 ${update_version}"
           git remote add ruleset_geox "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
           git push -f -u ruleset_geox clash
@@ -391,7 +393,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git checkout -b sing-box
-          git add ./sing-box/
+          git add ./geox/
           git commit -m "sing-box geox 更新于 ${update_version}"
           git remote add ruleset_geox "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
           git push -f -u ruleset_geox sing-box
