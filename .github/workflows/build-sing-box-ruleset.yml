@@ -25,15 +25,15 @@ jobs:
           mkdir -p ./ruleset/sing-box/geox-all ./ruleset/sing-box/geox ./tmp/
           sing_box_version=$(curl -sSL https://api.github.com/repos/SagerNet/sing-box/releases/latest | grep 'tag_name' | sed 's/.*v//g' | sed 's/",$//g')
           wget "https://github.com/SagerNet/sing-box/releases/download/v${sing_box_version}/sing-box-${sing_box_version}-linux-amd64.tar.gz" -O - | tar -zxf - -C ./tmp/
-          mv -f ./tmp/sing-box-${sing_box_version}-linux-amd64/sing-box ./ruleset/sing-box/geox-all/
-          mv -f ./tmp/sing-box-${sing_box_version}-linux-amd64/sing-box ./ruleset/sing-box/geox/
+          cp -f ./tmp/sing-box-${sing_box_version}-linux-amd64/sing-box ./ruleset/sing-box/geox-all/
+          cp -f ./tmp/sing-box-${sing_box_version}-linux-amd64/sing-box ./ruleset/sing-box/geox/
 
       - name: Download and unzip `mosdns`
         run: |
           wget -P ./tmp/ "https://github.com/IrineSistiana/mosdns/releases/download/v4.5.3/mosdns-linux-amd64.zip"
           unzip -o "./tmp/mosdns-linux-amd64.zip" -d ./tmp/
-          mv -f ./tmp/mosdns ./ruleset/sing-box/geox-all/
-          mv -f ./tmp/mosdns ./ruleset/sing-box/geox/
+          cp -f ./tmp/mosdns ./ruleset/sing-box/geox-all/
+          cp -f ./tmp/mosdns ./ruleset/sing-box/geox/
 
       - name: Convert geox-all to sing-box-ruleset
         env:
