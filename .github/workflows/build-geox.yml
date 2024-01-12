@@ -63,8 +63,15 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: DustinWin/geoip
-          fetch-depth: 0
-          path: geoip
+          ref: clash
+          path: clash/geoip
+
+      - name: Checkout DustinWin/geoip
+        uses: actions/checkout@v4
+        with:
+          repository: DustinWin/geoip
+          ref: sing-box
+          path: sing-box/geoip
 
       - name: Setup Go
         uses: actions/setup-go@v5
@@ -335,8 +342,8 @@ jobs:
 
       - name: Get geoip relative files
         run: |
-          cp -f ./geoip/*.mmdb ./geoip/*.dat ./geoip/*.metadb ./clash/geox/
-          cp -f ./geoip/*.db ./sing-box/geox/
+          cp -f ./clash/geoip/* ./clash/geox/
+          cp -f ./sing-box/geoip/* ./sing-box/geox/
 
       - name: Build db and metadb file
         env:
