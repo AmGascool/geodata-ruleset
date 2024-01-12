@@ -74,7 +74,7 @@ jobs:
 
       - name: Generate ads
         run: |
-          mkdir -p ./community/mydata/ ./tmp/ ./geox/clash/ ./geox/sing-box/ ./geox/domains/
+          mkdir -p ./community/mydata/ ./tmp/ ./clash/geox/domains/ ./sing-box/geox/domains/
           curl -sSL ${ads} | grep -v '#' | sed '/^\s*$/d' > ./community/mydata/ads
 
       - name: Generate private
@@ -199,7 +199,8 @@ jobs:
         run: |
           cd ./community/mydata/ || exit 1
           for file in $(ls); do
-            cp -f "${file}" "../../geox/domains/${file}.txt"
+            cp -f "${file}" "../../clash/geox/domains/${file}.txt"
+            cp -f "${file}" "../../sing-box/geox/domains/${file}.txt"
           done
 
       - name: Generate geosite-all.dat
@@ -236,7 +237,7 @@ jobs:
 
       - name: Generate fake-ip-user.yaml
         run: |
-          cat <<EOF > ./geox/clash/fake-ip-user.yaml
+          cat <<EOF > ./clash/geox/fake-ip-user.yaml
           mode: rule
           log-level: silent
           allow-lan: true
@@ -269,9 +270,9 @@ jobs:
             fake-ip-filter:
               - '*'
           EOF
-          curl -sSL https://raw.githubusercontent.com/juewuy/ShellCrash/master/public/fake_ip_filter.list | grep -v '#' | sed '/^\s*$/d' | sed "s/.*/'&'/g" | sed 's/^/    - /g' >> ./geox/clash/fake-ip-user.yaml
-          curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep 'udp:' | grep -i '\.[A-Z]' | sed "s/^.*\/\//'/g" | sed "s/:.*\/.*/'/g" | sed 's/^/    - /g' >> ./geox/clash/fake-ip-user.yaml
-          cat <<EOF >> ./geox/clash/fake-ip-user.yaml
+          curl -sSL https://raw.githubusercontent.com/juewuy/ShellCrash/master/public/fake_ip_filter.list | grep -v '#' | sed '/^\s*$/d' | sed "s/.*/'&'/g" | sed 's/^/    - /g' >> ./clash/geox/fake-ip-user.yaml
+          curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep 'udp:' | grep -i '\.[A-Z]' | sed "s/^.*\/\//'/g" | sed "s/:.*\/.*/'/g" | sed 's/^/    - /g' >> ./clash/geox/fake-ip-user.yaml
+          cat <<EOF >> ./clash/geox/fake-ip-user.yaml
               - 'adguardteam.github.io'
               - 'anti-ad.net'
             default-nameserver:
@@ -288,7 +289,7 @@ jobs:
 
       - name: Generate redir-host-user.yaml
         run: |
-          cat <<EOF > ./geox/clash/redir-host-user.yaml
+          cat <<EOF > ./clash/geox/redir-host-user.yaml
           mode: rule
           log-level: silent
           allow-lan: true
@@ -335,8 +336,8 @@ jobs:
 
       - name: Get geoip relative files
         run: |
-          cp -f ./clash-geoip/*.mmdb ./clash-geoip/*.dat ./clash-geoip/*.metadb ./geox/clash/
-          cp -f ./clash-geoip/*.db ./geox/sing-box/
+          cp -f ./clash-geoip/*.mmdb ./clash-geoip/*.dat ./clash-geoip/*.metadb ./clash/geox/
+          cp -f ./clash-geoip/*.db ./sing-box/geox/
 
       - name: Build db and metadb file
         env:
@@ -352,36 +353,51 @@ jobs:
         run: |
           cd ./community/ || exit 1
           for file in $(ls *.dat); do
-            install -Dp "./${file}" ../geox/clash/
+            install -Dp "./${file}" ../clash/geox/
           done
           for file in $(ls *.db); do
-            install -Dp "./${file}" ../geox/sing-box
+            install -Dp "./${file}" ../sing-box/geox
           done
 
-      - name: Remove Submodules Folder
+      - name: Git push assets to `clash` branch
         run: |
-          rm -rf ./clash-geoip
-          rm -rf ./community
-          rm -rf ./gfwlist2dnsmasq
+          cd ./clash/ || exit 1
+          git init
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b clash
+          git add .
+          git commit -m "更新于 ${update_version}"
+          git remote add clash-geosite "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
+          git push -f -u clash-geosite clash
 
-      - name: Commit and push
+      - name: Git push assets to `sing-box` branch
         run: |
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
-          git add . && git commit -m "更新于 ${update_version}" || exit 0
-          git push -f
+          cd ./sing-box/ || exit 1
+          git init
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b sing-box
+          git add .
+          git commit -m "更新于 ${update_version}"
+          git remote add clash-geosite "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
+          git push -f -u clash-geosite sing-box
 
       - name: Purge jsDelivr CDN
         run: |
-          cd ./geox/clash/ || exit 1
+          cd ./clash/geox/ || exit 1
           for file in $(ls); do
-            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@master/geox/clash/${file}"
+            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@clash/geox/${file}"
           done
-          cd ../sing-box/ || exit 1
+          cd ./domains/ || exit 1
           for file in $(ls); do
-            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@master/geox/sing-box/${file}"
+            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@clash/geox/domains/${file}"
           done
-          cd ../domains/ || exit 1
+          cd ../../sing-box/geox/ || exit 1
           for file in $(ls); do
-            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@master/geox/domains/${file}"
+            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@sing-box/geox/${file}"
+          done
+          cd ./domains/ || exit 1
+          for file in $(ls); do
+            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@sing-box/geox/domains/${file}"
           done
