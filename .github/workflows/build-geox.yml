@@ -355,6 +355,7 @@ jobs:
           for file in $(ls *.db); do
             install -Dp "./${file}" ../geox/sing-box
           done
+          cd ../ || exit 1
 
       - name: Commit and push
         run: |
