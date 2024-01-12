@@ -37,7 +37,8 @@ jobs:
         env:
           NO_SKIP: true
         run: |
-          cp -f ./geox/sing-box/geosite-all.db ./geox/clash/geoip-all.dat ./ruleset/sing-box/
+          cp -f ./geox/sing-box/geosite-all.db ./ruleset/sing-box/geosite.db
+          cp -f ./geox/clash/geoip-all.dat ./ruleset/sing-box/geoip.dat
           wget -P ./ruleset/sing-box/ https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/master/resouces/convert.sh
           cd ./ruleset/sing-box/
           chmod +x mosdns sing-box convert.sh
