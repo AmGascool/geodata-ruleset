@@ -46,8 +46,6 @@ jobs:
 
       - name: Clone Repository
         uses: actions/checkout@master
-        with:
-          path: geox
 
       - name: Checkout v2fly/domain-list-community
         uses: actions/checkout@v4
@@ -360,6 +358,13 @@ jobs:
           for file in $(ls *.db); do
             install -Dp "./${file}" ../geox/sing-box
           done
+
+      - name: Remove Submodules Folder
+        run: |
+          git submodule deinit -f clash-geoip
+          git submodule deinit -f community
+          git submodule deinit -f community
+          git submodule deinit -f gfwlist2dnsmasq
 
       - name: Commit and push
         run: |
