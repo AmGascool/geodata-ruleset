@@ -230,7 +230,7 @@ jobs:
       - name: Download applications
         run: |
           mkdir -p ./sing-box/ruleset/rules/applications/
-          curl -sSL ${applications} | sed '/^\s*$/d' > ./sing-box/ruleset/rules/applications/applications.yaml
+          # curl -sSL ${applications} | sed '/^\s*$/d' > ./sing-box/ruleset/rules/applications/applications.yaml
 
       - name: Download proxy
         run: |
