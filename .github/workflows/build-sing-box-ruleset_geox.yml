@@ -227,10 +227,10 @@ jobs:
             - DOMAIN-KEYWORD,testipv6
           EOF
 
-      - name: Download applications
-        run: |
-          mkdir -p ./sing-box/ruleset/rules/applications/
-          curl -sSL ${applications} | sed '/^\s*$/d' > ./sing-box/ruleset/rules/applications/applications.yaml
+      # - name: Download applications
+        # run: |
+          # mkdir -p ./sing-box/ruleset/rules/applications/
+          # curl -sSL ${applications} | sed '/^\s*$/d' > ./sing-box/ruleset/rules/applications/applications.yaml
 
       - name: Download proxy
         run: |
@@ -305,7 +305,7 @@ jobs:
         run: |
           curl -sSL https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/master/resouces/bm7.sh | sed 's|./rule/Clash/|./rules/|g' > ./sing-box/ruleset/bm7.sh
           cd ./sing-box/ruleset/
-          # sed -i '/# 拉文件/,/# 处理文件/d' bm7.sh
+          sed -i '/# 拉文件/,/# 处理文件/d' bm7.sh
           chmod +x bm7.sh && ./bm7.sh
           rm -rf bm7* sing-box
 
