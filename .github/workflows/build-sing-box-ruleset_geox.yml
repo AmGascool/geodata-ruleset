@@ -58,7 +58,7 @@ jobs:
           path: community
 
       - name: Checkout cokebar/gfwlist2dnsmasq
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: cokebar/gfwlist2dnsmasq
           path: gfwlist2dnsmasq
@@ -223,7 +223,9 @@ jobs:
 
       - name: Download proxy
         run: |
-          cd ./gfwlist2dnsmasq/ || exit 1
+          ls -la
+          cd ./gfwlist2dnsmasq/
+          ls -la
           chmod +x ./gfwlist2dnsmasq.sh
           ./gfwlist2dnsmasq.sh -l -o ../tmp/temp-proxy1.yaml
           sed "s/^/  - DOMAIN-SUFFIX,/g" ../tmp/temp-proxy1.yaml > ../tmp/temp-proxy2.yaml
