@@ -231,7 +231,6 @@ jobs:
         run: |
           mkdir -p ./sing-box/ruleset/rules/applications/
           curl -sSL ${applications} | sed '/^\s*$/d' > ./sing-box/ruleset/rules/applications/applications.yaml
-          echo '  - IP-CIDR,192.0.0.0/24' >> ./sing-box/ruleset/rules/applications/applications.yaml
 
       - name: Download proxy
         run: |
