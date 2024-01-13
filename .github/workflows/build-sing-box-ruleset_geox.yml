@@ -44,13 +44,6 @@ jobs:
           ref: sing-box
           path: sing-box/geoip
 
-      - name: Checkout MetaCubeX/meta-rules-dat
-        uses: actions/checkout@v4
-        with:
-          repository: MetaCubeX/meta-rules-dat
-          ref: master
-          path: resouces
-
       - name: Build db file
         env:
           NO_SKIP: true
@@ -92,8 +85,7 @@ jobs:
         run: |
           cp -f ./sing-box/geox/geosite-all.db ./sing-box/ruleset/geox-all/geosite.db
           cp -f ./geox/geoip-all.dat ./sing-box/ruleset/geox-all/geoip.dat
-          # wget -P ./sing-box/ruleset/geox-all/ https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/master/resouces/convert.sh
-          cp -f ./resouces/convert.sh ./sing-box/ruleset/geox-all/
+          wget -P ./sing-box/ruleset/geox-all/ https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/master/resouces/convert.sh
           cd ./sing-box/ruleset/geox-all/
           chmod +x mosdns sing-box convert.sh && ./convert.sh
           rm -rf mosdns sing-box convert.sh geosite.db geoip.dat LICENSE README.md config.yaml
