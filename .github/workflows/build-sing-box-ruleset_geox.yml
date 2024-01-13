@@ -230,7 +230,7 @@ jobs:
       - name: Download applications
         run: |
           mkdir -p ./sing-box/ruleset/rules/applications/
-          # curl -sSL ${applications} | sed '/^\s*$/d' > ./sing-box/ruleset/rules/applications/applications.yaml
+          curl -sSL ${applications} | sed '/^\s*$/d' > ./sing-box/ruleset/rules/applications/applications.yaml
 
       - name: Download proxy
         run: |
@@ -303,6 +303,8 @@ jobs:
         env:
           NO_SKIP: true
         run: |
+          cd ./sing-box/ruleset/rules/applications
+          ls
           curl -sSL https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/master/resouces/bm7.sh | sed 's|./rule/Clash/|./rules/|g' > ./sing-box/ruleset/bm7.sh
           cd ./sing-box/ruleset/
           sed -i '/# 拉文件/,/# 处理文件/d' bm7.sh
