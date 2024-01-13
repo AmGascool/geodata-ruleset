@@ -103,7 +103,7 @@ jobs:
           curl -sSL ${private1} | grep -Ev '#|full:|keyword:|regexp:' | sed '/^\s*$/d' | sed 's/^/  - DOMAIN-SUFFIX,/g' >> ./tmp/temp-private.yaml
           curl -sSL ${private1} | grep 'full:' | sed 's/^full:/  - DOMAIN,/g' >> ./tmp/temp-private.yaml
           curl -sSL ${private1} | grep 'keyword:' | sed 's/^keyword:/  - DOMAIN-KEYWORD,/g' >> ./tmp/temp-private.yaml
-          curl -sSL ${private2} | grep -Ev '#|payload:|- IP-CIDR' | sed '/^\s*$/d' >> ./tmp/temp-private.yaml
+          curl -sSL ${private2} | grep -Ev '#|payload:|\- IP-CIDR' | sed '/^\s*$/d' >> ./tmp/temp-private.yaml
           echo 'payload:' > ./sing-box/ruleset/rules/private/private.yaml
           sort --ignore-case -u ./tmp/temp-private.yaml >> ./sing-box/ruleset/rules/private/private.yaml
           
@@ -227,10 +227,10 @@ jobs:
             - DOMAIN-KEYWORD,testipv6
           EOF
 
-      # - name: Download applications
-        # run: |
-          # mkdir -p ./sing-box/ruleset/rules/applications/
-          # curl -sSL ${applications} | sed '/^\s*$/d' > ./sing-box/ruleset/rules/applications/applications.yaml
+      - name: Download applications
+        run: |
+          mkdir -p ./sing-box/ruleset/rules/applications/
+          curl -sSL ${applications} | sed '/^\s*$/d' > ./sing-box/ruleset/rules/applications/applications.yaml
 
       - name: Download proxy
         run: |
@@ -248,7 +248,7 @@ jobs:
       - name: Download cn
         run: |
           mkdir -p ./sing-box/ruleset/rules/cn/
-          curl -sSL ${cn} | grep -Ev '#|- IP-CIDR' | sed '/^\s*$/d' > ./sing-box/ruleset/rules/cn/cn.yaml
+          curl -sSL ${cn} | grep -Ev '#|\- IP-CIDR' | sed '/^\s*$/d' > ./sing-box/ruleset/rules/cn/cn.yaml
           echo "  - DOMAIN,static.adtidy.org" >> ./sing-box/ruleset/rules/cn/cn.yaml
 
       - name: Download telegramip
@@ -263,7 +263,7 @@ jobs:
         run: |
           mkdir -p ./sing-box/ruleset/rules/privateip/
           echo 'payload:' > ./sing-box/ruleset/rules/privateip/privateip.yaml
-          curl -sSL ${private2} | grep -v '#' | grep -- '- IP-CIDR' >> ./sing-box/ruleset/rules/privateip/privateip.yaml
+          curl -sSL ${private2} | grep -v '#' | grep '\- IP-CIDR' >> ./sing-box/ruleset/rules/privateip/privateip.yaml
 
       - name: Download cnip
         run: |
@@ -307,7 +307,7 @@ jobs:
           cd ./sing-box/ruleset/
           sed -i '/# 拉文件/,/# 处理文件/d' bm7.sh
           chmod +x bm7.sh && ./bm7.sh
-          rm -rf bm7* sing-box
+          rm -rf bm7* sing-box rules
 
       - name: Git push assets to `sing-box` branch
         run: |
