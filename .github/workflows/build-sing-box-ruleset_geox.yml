@@ -55,7 +55,7 @@ jobs:
           cd ./tmp/ || exit 1
           go install -trimpath -ldflags="-s -w -buildid=" github.com/metacubex/geo/cmd/geo@master
           for file in $(ls | sed 's/\..*//g'); do
-            geo convert site -i v2ray -o sing -f "./tmp/${file}.db" "./tmp/${file}.dat"
+            geo convert site -i v2ray -o sing -f "./${file}.db" "./${file}.dat"
           done
 
       - name: Move files
