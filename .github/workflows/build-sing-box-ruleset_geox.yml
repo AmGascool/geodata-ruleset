@@ -38,7 +38,7 @@ jobs:
         run: |
           echo "update_version=$(date -d '+8 hours' +%Y-%m-%d)" >> ${GITHUB_ENV}
           mkdir -p ./tmp/ ./sing-box/geox/ ./sing-box/ruleset/geox-all ./sing-box/ruleset/geox
-          # cp -f ./sing-box/geoip/* ./sing-box/geox/
+          cp -f ./sing-box/geoip/* ./sing-box/geox/
           cp -f ./geox/*.dat ./tmp/
           go install -trimpath -ldflags="-s -w -buildid=" github.com/metacubex/geo/cmd/geo@master
           cd ./tmp/ || exit 1
@@ -72,7 +72,7 @@ jobs:
           NO_SKIP: true
         run: |
           cp -f ./sing-box/geox/geosite-all.db ./sing-box/ruleset/geox-all/geosite.db
-          cp -f ./clash/geox/geoip-all.dat ./sing-box/ruleset/geox-all/geoip.dat
+          cp -f ./geox/geoip-all.dat ./sing-box/ruleset/geox-all/geoip.dat
           wget -P ./sing-box/ruleset/geox-all/ https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/master/resouces/convert.sh
           cd ./sing-box/ruleset/geox-all/
           chmod +x mosdns sing-box convert.sh && ./convert.sh
@@ -83,7 +83,7 @@ jobs:
           NO_SKIP: true
         run: |
           cp -f ./sing-box/geox/geosite.db ./sing-box/ruleset/geox/
-          cp -f ./clash/geox/geoip.dat ./sing-box/ruleset/geox/
+          cp -f ./geox/geoip.dat ./sing-box/ruleset/geox/
           wget -P ./sing-box/ruleset/geox/ https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/master/resouces/convert.sh
           cd ./sing-box/ruleset/geox/
           chmod +x mosdns sing-box convert.sh && ./convert.sh
