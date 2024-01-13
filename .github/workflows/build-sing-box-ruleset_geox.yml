@@ -304,8 +304,8 @@ jobs:
           NO_SKIP: true
         run: |
           curl -sSL https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/master/resouces/bm7.sh | sed 's|./rule/Clash/|./|g' > ./sing-box/ruleset/bm7.sh
-          sed -i '/# 拉文件/,/# 处理文件/d' bm7.sh
           cd ./sing-box/ruleset/
+          sed -i '/# 拉文件/,/# 处理文件/d' bm7.sh
           chmod +x bm7.sh && ./bm7.sh
           rm -rf bm7*
 
