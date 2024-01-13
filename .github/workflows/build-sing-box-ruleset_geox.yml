@@ -172,7 +172,7 @@ jobs:
       - name: Download max
         run: |
           echo 'payload:' > ./rule/clash/max.yaml
-          curl -sSL ${max} | grep -v '#' | sed '/^\s*$/d'" >> ./rule/clash/max.yaml
+          curl -sSL ${max} | grep -v '#' | sed '/^\s*$/d' >> ./rule/clash/max.yaml
 
       - name: Download primevideo
         run: |
