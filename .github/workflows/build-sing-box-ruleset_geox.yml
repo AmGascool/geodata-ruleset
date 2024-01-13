@@ -41,9 +41,8 @@ jobs:
           cp -f ./sing-box/geoip/* ./sing-box/geox/
           cp -f ./geox/*.dat ./tmp/
           go install -trimpath -ldflags="-s -w -buildid=" github.com/metacubex/geo/cmd/geo@master
-          cd ./tmp/ || exit 1
           for file in $(ls | sed 's/\..*//g'); do
-            geo convert site -i v2ray -o sing -f "./${file}.db" "./${file}.dat"
+            geo convert site -i v2ray -o sing -f "./tmp/${file}.db" "./tmp/${file}.dat"
           done
 
       - name: Move files
