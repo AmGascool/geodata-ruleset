@@ -170,12 +170,12 @@ jobs:
       - name: Download netflix
         run: |
           mkdir -p ./sing-box/ruleset/rules/netflix/
-          curl -sSL ${netflix} | grep -v '#' | sed '/^\s*$/d' > ./sing-box/ruleset/netflix/rules/netflix.yaml
+          curl -sSL ${netflix} | grep -v '#' | sed '/^\s*$/d' > ./sing-box/ruleset/rules/netflix/netflix.yaml
 
       - name: Download disney
         run: |
           mkdir -p ./sing-box/ruleset/rules/disney/
-          curl -sSL ${disney} | grep -v '#' | sed '/^\s*$/d' > ./sing-box/ruleset/disney/rules/disney.yaml
+          curl -sSL ${disney} | grep -v '#' | sed '/^\s*$/d' > ./sing-box/ruleset/rules/disney/disney.yaml
 
       - name: Download max
         run: |
