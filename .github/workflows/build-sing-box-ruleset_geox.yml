@@ -85,10 +85,12 @@ jobs:
       - name: Download ads
         run: |
           mkdir -p ./tmp/geox ./sing-box/geox/ ./sing-box/ruleset/
+          mkdir -p ./sing-box/ruleset/ads/
           curl -sSL ${ads} | grep -v '#' | sed '/^\s*$/d' | sed "s/- '+\./- DOMAIN-SUFFIX,/g" | sed "s/- '/- DOMAIN,/g" | sed 's/'\''$//g' > ./sing-box/ruleset/ads/ads.yaml
 
       - name: Download private
         run: |
+          mkdir -p ./sing-box/ruleset/private/
           cat <<EOF > ./tmp/temp-private.yaml
             - DOMAIN,clash.razord.top
             - DOMAIN,clash.metacubex.one
@@ -101,12 +103,13 @@ jobs:
           curl -sSL ${private1} | grep -Ev '#|full:|keyword:|regexp:' | sed '/^\s*$/d' | sed 's/^/  - DOMAIN-SUFFIX,/g' >> ./tmp/temp-private.yaml
           curl -sSL ${private1} | grep 'full:' | sed 's/^full:/  - DOMAIN,/g' >> ./tmp/temp-private.yaml
           curl -sSL ${private1} | grep 'keyword:' | sed 's/^keyword:/  - DOMAIN-KEYWORD,/g' >> ./tmp/temp-private.yaml
-          curl -sSL ${private2} | grep -Ev '#|IP-CIDR,' | sed '/^\s*$/d' >> ./tmp/temp-private.yaml
+          curl -sSL ${private2} | grep -Ev '#|payload:|- IP-CIDR' | sed '/^\s*$/d' >> ./tmp/temp-private.yaml
           echo 'payload:' > ./sing-box/ruleset/private/private.yaml
           sort --ignore-case -u ./tmp/temp-private.yaml >> ./sing-box/ruleset/private/private.yaml
           
       - name: Download microsoft-cn
         run: |
+          mkdir -p ./sing-box/ruleset/microsoft-cn/
           count1=$(curl -sSL ${microsoft_cn} | grep 'include:' | wc -l)
           curl -sSL ${microsoft_cn} | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed 's/^/  - DOMAIN-SUFFIX,/g' | sed 's/ *@cn$//g' > ./tmp/temp-microsoft-cn.yaml
           curl -sSL ${microsoft_cn} | grep 'full:' | grep '@cn' | sed 's/^full:/  - DOMAIN,/g' | sed 's/ *@cn$//g' >> ./tmp/temp-microsoft-cn.yaml
@@ -129,16 +132,19 @@ jobs:
 
       - name: Download apple-cn
         run: |
+          mkdir -p ./sing-box/ruleset/apple-cn/
           echo 'payload:' > ./sing-box/ruleset/apple-cn/apple-cn.yaml
           curl -sSL ${apple_cn} | perl -ne '/^server=\/([^\/]+)\// && print "  - DOMAIN,$1\n"' >> ./sing-box/ruleset/apple-cn/apple-cn.yaml
 
       - name: Download google-cn
         run: |
+          mkdir -p ./sing-box/ruleset/google-cn/
           echo 'payload:' > ./sing-box/ruleset/google-cn/google-cn.yaml
           curl -sSL ${google_cn} | perl -ne '/^server=\/([^\/]+)\// && print "  - DOMAIN,$1\n"' >> ./sing-box/ruleset/google-cn/google-cn.yaml
 
       - name: Download games-cn
         run: |
+          mkdir -p ./sing-box/ruleset/games-cn/
           count1=$(curl -sSL ${games_cn1} | grep 'include:' | wc -l)
           curl -sSL ${games_cn1} | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed 's/^/  - DOMAIN-SUFFIX,/g' | sed 's/ *@cn$//g' > ./tmp/temp-games-cn.yaml
           curl -sSL ${games_cn1} | grep 'full:' | grep '@cn' | sed 's/^full:/  - DOMAIN,/g' | sed 's/ *@cn$//g' >> ./tmp/temp-games-cn.yaml
@@ -156,60 +162,63 @@ jobs:
               curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep 'keyword:' | grep '@cn' | sed 's/^keyword:/  - DOMAIN-KEYWORD,/g' | sed 's/ *@cn$//g' >> ./tmp/temp-games-cn.yaml
             done
           done
-          curl -sSL ${games_cn2} | grep -v '#' | sed '/^\s*$/d' >> ./tmp/temp-games-cn.yaml
-          curl -sSL ${games_cn3} | grep -v '#' | sed '/^\s*$/d' >> ./tmp/temp-games-cn.yaml
+          curl -sSL ${games_cn2} | grep -Ev '#|payload:' | sed '/^\s*$/d' >> ./tmp/temp-games-cn.yaml
+          curl -sSL ${games_cn3} | grep -Ev '#|payload:' | sed '/^\s*$/d' >> ./tmp/temp-games-cn.yaml
           echo 'payload:' > ./sing-box/ruleset/games-cn/games-cn.yaml
           sort --ignore-case -u ./tmp/temp-games-cn.yaml >> ./sing-box/ruleset/games-cn/games-cn.yaml
 
       - name: Download netflix
         run: |
+          mkdir -p ./sing-box/ruleset/netflix/
           curl -sSL ${netflix} | grep -v '#' | sed '/^\s*$/d' > ./sing-box/ruleset/netflix/netflix.yaml
 
       - name: Download disney
         run: |
-          echo 'payload:' > ./sing-box/ruleset/disney/disney.yaml
+          mkdir -p ./sing-box/ruleset/disney/
           curl -sSL ${disney} | grep -v '#' | sed '/^\s*$/d' >> ./sing-box/ruleset/disney/disney.yaml
 
       - name: Download max
         run: |
-          echo 'payload:' > ./sing-box/ruleset/max/max.yaml
+          mkdir -p ./sing-box/ruleset/max/
           curl -sSL ${max} | grep -v '#' | sed '/^\s*$/d' >> ./sing-box/ruleset/max/max.yaml
 
       - name: Download primevideo
         run: |
-          echo 'payload:' > ./sing-box/ruleset/primevideo/primevideo.yaml
+          mkdir -p ./sing-box/ruleset/primevideo/
           curl -sSL ${primevideo} | grep -v '#' | sed '/^\s*$/d' >> ./sing-box/ruleset/primevideo/primevideo.yaml
 
       - name: Download appletv
         run: |
-          echo 'payload:' > ./sing-box/ruleset/appletv/appletv.yaml
+          mkdir -p ./sing-box/ruleset/appletv/
           curl -sSL ${appletv} | grep -v '#' | sed '/^\s*$/d' >> ./sing-box/ruleset/appletv/appletv.yaml
 
       - name: Download youtube
         run: |
-          echo 'payload:' > ./sing-box/ruleset/youtube/youtube.yaml
+          mkdir -p ./sing-box/ruleset/youtube/
           curl -sSL ${youtube} | grep -v '#' | sed '/^\s*$/d' >> ./sing-box/ruleset/youtube/youtube.yaml
 
       - name: Download tiktok
         run: |
-          echo 'payload:' > ./sing-box/ruleset/tiktok/tiktok.yaml
+          mkdir -p ./sing-box/ruleset/tiktok/
           curl -sSL ${tiktok} | grep -v '#' | sed '/^\s*$/d' >> ./sing-box/ruleset/tiktok/tiktok.yaml
 
       - name: Download bilibili
         run: |
-          echo 'payload:' > ./sing-box/ruleset/bilibili/bilibili.yaml
+          mkdir -p ./sing-box/ruleset/bilibili/
           curl -sSL ${bilibili} | grep -v '#' | sed '/^\s*$/d' >> ./sing-box/ruleset/bilibili/bilibili.yaml
 
       - name: Download ai
         run: |
-          curl -sSL ${ai1} | grep -v '#' | sed '/^\s*$/d' > ./tmp/temp-ai.yaml
-          curl -sSL ${ai2} | grep -v '#' | sed '/^\s*$/d' >> ./tmp/temp-ai.yaml
-          curl -sSL ${ai3} | grep -v '#' | sed '/^\s*$/d' >> ./tmp/temp-ai.yaml
+          mkdir -p ./sing-box/ruleset/ai/
+          curl -sSL ${ai1} | grep -Ev '#|payload:' | sed '/^\s*$/d' > ./tmp/temp-ai.yaml
+          curl -sSL ${ai2} | grep -Ev '#|payload:' | sed '/^\s*$/d' >> ./tmp/temp-ai.yaml
+          curl -sSL ${ai3} | grep -Ev '#|payload:' | sed '/^\s*$/d' >> ./tmp/temp-ai.yaml
           echo 'payload:' > ./sing-box/ruleset/ai/ai.yaml
           sort --ignore-case -u ./tmp/temp-ai.yaml >> ./sing-box/ruleset/ai/ai.yaml
 
       - name: Download networktest
         run: |
+          mkdir -p ./sing-box/ruleset/networktest/
           curl -sSL ${networktest} | grep -v '#' | sed '/^\s*$/d' > ./sing-box/ruleset/networktest/networktest.yaml
           cat <<EOF >> ./sing-box/ruleset/networktest/networktest.yaml
             - DOMAIN-KEYWORD,ipv6-test
@@ -220,10 +229,12 @@ jobs:
 
       - name: Download applications
         run: |
+          mkdir -p ./sing-box/ruleset/applications/
           curl -sSL ${applications} | sed '/^\s*$/d' > ./sing-box/ruleset/applications/applications.yaml
 
       - name: Download proxy
         run: |
+          mkdir -p ./sing-box/ruleset/proxy/
           cd ./gfwlist2dnsmasq/ || exit 1
           chmod +x ./gfwlist2dnsmasq.sh
           ./gfwlist2dnsmasq.sh -l -o ../tmp/temp-proxy1.yaml
@@ -236,13 +247,13 @@ jobs:
 
       - name: Download cn
         run: |
-          echo "  - DOMAIN,static.adtidy.org" > ./tmp/temp-cn.yaml
-          curl -sSL ${cn} | grep -Ev '#|IP-CIDR,' | sed '/^\s*$/d' >> ./tmp/temp-cn.yaml
-          echo 'payload:' > ./sing-box/ruleset/cn/cn.yaml
-          sort --ignore-case -u ./tmp/temp-cn.yaml >> ./sing-box/ruleset/cn/cn.yaml
+          mkdir -p ./sing-box/ruleset/cn/
+          curl -sSL ${cn} | grep -Ev '#|- IP-CIDR' | sed '/^\s*$/d' >> ./sing-box/ruleset/cn/cn.yaml
+          echo "  - DOMAIN,static.adtidy.org" > ./sing-box/ruleset/cn/cn.yaml
 
       - name: Download telegramip
         run: |
+          mkdir -p ./sing-box/ruleset/telegramip/
           curl -sSL ${telegramip} | grep -v '::' | sed '/^\s*$/d' | sed 's/^/  - IP-CIDR,/g' > ./tmp/temp-telegramip.yaml
           curl -sSL ${telegramip} | grep '::' | sed 's/^/  - IP-CIDR6,/g' >> ./tmp/temp-telegramip.yaml
           echo 'payload:' > ./sing-box/ruleset/telegramip/telegramip.yaml
@@ -250,11 +261,13 @@ jobs:
 
       - name: Download privateip
         run: |
+          mkdir -p ./sing-box/ruleset/privateip/
           echo 'payload:' > ./sing-box/ruleset/privateip/privateip.yaml
-          curl -sSL ${private2} | grep -v '#' | grep 'IP-CIDR' >> ./sing-box/ruleset/privateip/privateip.yaml
+          curl -sSL ${private2} | grep -v '#' | grep '- IP-CIDR' >> ./sing-box/ruleset/privateip/privateip.yaml
 
       - name: Download cnip
         run: |
+          mkdir -p ./sing-box/ruleset/cnip/
           curl -sSL ${cnip} | grep -v '::' | sed '/^\s*$/d' | sed 's/^/  - IP-CIDR,/g' > ./tmp/temp-cnip.yaml
           curl -sSL ${cnip} | grep '::' | sed 's/^/  - IP-CIDR6,/g' >> ./tmp/temp-cnip.yaml
           echo 'payload:' > ./sing-box/ruleset/cnip/cnip.yaml
