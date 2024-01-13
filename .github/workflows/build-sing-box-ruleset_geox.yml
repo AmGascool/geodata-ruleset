@@ -31,7 +31,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: clash
-          path: geox
 
       - name: Build db file
         env:
@@ -40,7 +39,7 @@ jobs:
           echo "update_version=$(date -d '+8 hours' +%Y-%m-%d)" >> ${GITHUB_ENV}
           mkdir -p ./tmp/ ./sing-box/geox/ ./sing-box/ruleset/geox-all ./sing-box/ruleset/geox
           cp -f ./sing-box/geoip/* ./sing-box/geox/
-          cp -f ./geox/*.dat ./tmp/
+          cp -f ./clash/geox/*.dat ./tmp/
           go install -trimpath -ldflags="-s -w -buildid=" github.com/metacubex/geo/cmd/geo@master
           cd ./tmp/ || exit 1
           for file in $(ls | sed 's/\..*//g'); do
