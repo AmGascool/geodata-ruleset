@@ -48,6 +48,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: MetaCubeX/meta-rules-dat
+          ref: master
           path: resouces
 
       - name: Build db file
