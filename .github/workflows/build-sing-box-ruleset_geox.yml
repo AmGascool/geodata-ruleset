@@ -276,7 +276,10 @@ jobs:
         env:
           NO_SKIP: true
         run: |
-          cp -f ./clash/geox/*.dat ./tmp/geox/
+          wget -P ./tmp/geox/ https://raw.githubusercontent.com/DustinWin/ruleset_geox/clash/geox/geosite-all-lite.dat
+          wget -P ./tmp/geox/ https://raw.githubusercontent.com/DustinWin/ruleset_geox/clash/geox/geosite-all.dat
+          wget -P ./tmp/geox/ https://raw.githubusercontent.com/DustinWin/ruleset_geox/clash/geox/geosite-lite.dat
+          wget -P ./tmp/geox/ https://raw.githubusercontent.com/DustinWin/ruleset_geox/clash/geox/geosite.dat
           cd ./tmp/geox/ || exit 1
           go install -trimpath -ldflags="-s -w -buildid=" github.com/metacubex/geo/cmd/geo@master
           for file in $(ls | sed 's/\..*//g'); do
