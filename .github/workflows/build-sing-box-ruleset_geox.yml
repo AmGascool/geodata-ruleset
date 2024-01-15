@@ -73,14 +73,13 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: clash
-          path: clash
 
       - name: Checkout DustinWin/geoip
         uses: actions/checkout@v4
         with:
           repository: DustinWin/geoip
           ref: sing-box
-          path: sing-box/geoip
+          path: geoip
 
       - name: Download ads
         run: |
@@ -277,8 +276,8 @@ jobs:
         env:
           NO_SKIP: true
         run: |
-          cp -f ./sing-box/geoip/* ./sing-box/geox/
-          cp -f ./clash/geox/*.dat ./tmp/geox/
+          cp -f ./geoip/* ./sing-box/geox/
+          cp -f ./clash/*.dat ./tmp/geox/
           cd ./tmp/geox/ || exit 1
           go install -trimpath -ldflags="-s -w -buildid=" github.com/metacubex/geo/cmd/geo@master
           for file in $(ls | sed 's/\..*//g'); do
