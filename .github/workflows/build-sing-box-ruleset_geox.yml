@@ -277,7 +277,7 @@ jobs:
         env:
           NO_SKIP: true
         run: |
-          cp -f ./geoip/* ./clash/geox/*.dat ./tmp/geox/
+          cp -f ./geoip/*.db ./clash/geox/*.dat ./tmp/geox/
           cd ./tmp/geox/ || exit 1
           go install -trimpath -ldflags="-s -w -buildid=" github.com/metacubex/geo/cmd/geo@master
           for file in $(ls *.dat | sed 's/\..*//g'); do
