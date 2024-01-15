@@ -80,13 +80,6 @@ jobs:
           repository: cokebar/gfwlist2dnsmasq
           path: gfwlist2dnsmasq
 
-      - name: Checkout DustinWin/geoip
-        uses: actions/checkout@v4
-        with:
-          repository: DustinWin/geoip
-          ref: clash
-          path: clash/geoip
-
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
@@ -530,7 +523,15 @@ jobs:
 
       - name: Get geoip relative files
         run: |
-          cp -f ./clash/geoip/* ./clash/geox/
+          wget -P ./clash/geox/ https://raw.githubusercontent.com/DustinWin/geoip/clash/Country-all.mmdb
+          wget -P ./clash/geox/ https://raw.githubusercontent.com/DustinWin/geoip/clash/Country-lite.mmdb
+          wget -P ./clash/geox/ https://raw.githubusercontent.com/DustinWin/geoip/clash/Country.mmdb
+          wget -P ./clash/geox/ https://raw.githubusercontent.com/DustinWin/geoip/clash/geoip-all.dat
+          wget -P ./clash/geox/ https://raw.githubusercontent.com/DustinWin/geoip/clash/geoip-all.metadb
+          wget -P ./clash/geox/ https://raw.githubusercontent.com/DustinWin/geoip/clash/geoip-lite.dat
+          wget -P ./clash/geox/ https://raw.githubusercontent.com/DustinWin/geoip/clash/geoip-lite.metadb
+          wget -P ./clash/geox/ https://raw.githubusercontent.com/DustinWin/geoip/clash/geoip.dat
+          wget -P ./clash/geox/ https://raw.githubusercontent.com/DustinWin/geoip/clash/geoip.metadb
 
       - name: Move files
         run: |
