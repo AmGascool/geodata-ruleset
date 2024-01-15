@@ -75,13 +75,6 @@ jobs:
           ref: clash
           path: clash
 
-      - name: Checkout DustinWin/geoip
-        uses: actions/checkout@v4
-        with:
-          repository: DustinWin/geoip
-          ref: sing-box
-          path: geoip
-
       - name: Download ads
         run: |
           mkdir -p ./tmp/geox ./sing-box/geox/ ./sing-box/ruleset/
@@ -273,14 +266,20 @@ jobs:
           echo 'payload:' > ./sing-box/ruleset/rules/cnip/cnip.yaml
           sort --ignore-case -u ./tmp/temp-cnip.yaml >> ./sing-box/ruleset/rules/cnip/cnip.yaml
 
+      - name: Get geoip relative files
+        run: |
+          wget -P ./sing-box/geox/ https://raw.githubusercontent.com/DustinWin/geoip/sing-box/geoip-all.db
+          wget -P ./sing-box/geox/ https://raw.githubusercontent.com/DustinWin/geoip/sing-box/geoip-lite.db
+          wget -P ./sing-box/geox/ https://raw.githubusercontent.com/DustinWin/geoip/sing-box/geoip.db
+
       - name: Build db file
         env:
           NO_SKIP: true
         run: |
-          cp -f ./geoip/*.db ./clash/geox/*.dat ./tmp/geox/
+          cp -f ./clash/geox/*.dat ./tmp/geox/
           cd ./tmp/geox/ || exit 1
           go install -trimpath -ldflags="-s -w -buildid=" github.com/metacubex/geo/cmd/geo@master
-          for file in $(ls *.dat | sed 's/\..*//g'); do
+          for file in $(ls | sed 's/\..*//g'); do
             geo convert site -i v2ray -o sing -f "./${file}.db" "./${file}.dat"
           done
 
