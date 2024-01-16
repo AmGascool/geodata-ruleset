@@ -1,9 +1,9 @@
-# 一、 GeoX 规则集文件说明
+# 一、 geodata 规则集文件说明
 ## 1. 文件类型
-① [Clash](https://github.com/Dreamacro/clash) GeoX 规则集文件，包括：geosite.dat、Country.mmdb、geoip.dat 和 geoip.metadb（仅限 [Clash.Meta 内核](https://github.com/MetaCubeX/mihomo)）等  
-② [sing-box](https://github.com/SagerNet/sing-box) GeoX 规则集文件，包括：geosite.db 和 geoip.db 等
+① [Clash](https://github.com/Dreamacro/clash) geodata 规则集文件，包括：geosite.dat、Country.mmdb、geoip.dat 和 geoip.metadb（仅限 [Clash.Meta 内核](https://github.com/MetaCubeX/mihomo)）等  
+② [sing-box](https://github.com/SagerNet/sing-box) geodata 规则集文件，包括：geosite.db 和 geoip.db 等
 ## 2. 数据源
-① 每天凌晨 3 点（北京时间）自动构建，根据 [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat) 和 [Loyalsoldier/geoip](https://github.com/Loyalsoldier/geoip) 进行深度定制，可点击查看包含的[域名列表](https://github.com/DustinWin/ruleset_geox/tree/master/Domains)和 [IP 段列表](https://github.com/DustinWin/ruleset_geox/tree/master/IPs)  
+① 每天凌晨 3 点（北京时间）自动构建，根据 [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat) 和 [Loyalsoldier/geoip](https://github.com/Loyalsoldier/geoip) 进行深度定制，可点击查看包含的[域名列表](https://github.com/DustinWin/ruleset_geodata/tree/master/Domains)和 [IP 段列表](https://github.com/DustinWin/ruleset_geodata/tree/master/IPs)  
 ② `geosite,ads,🛑 广告拦截` 源采用 [privacy-protection-tools/anti-AD](https://github.com/privacy-protection-tools/anti-AD)  
 ③ `geosite,private,🔒 私有网络` 源采用 [v2fly/domain-list-community/private](https://github.com/v2fly/domain-list-community/blob/master/data/private) 和 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan) 组合，并添加主流 [Clash dashboard 在线面板](https://github.com/DustinWin/clash_singbox-tools/tree/main/Clash-dashboard)域名（`clash.razord.top`、`clash.metacubex.one`、`yacd.haishan.me`、`yacd.metacubex.one` 和 `d.metacubex.one`）  
 ④ `geosite,microsoft-cn,Ⓜ️ 微软服务` 源采用 [v2fly/domain-list-community/microsoft@cn](https://github.com/v2fly/domain-list-community/blob/master/data/microsoft)  
@@ -40,79 +40,79 @@
 <table>
   <tr>
     <td rowspan="3">geosite.dat</td>
-    <td>GitHub 源：https://raw.githubusercontent.com/DustinWin/ruleset_geox/clash/geosite.dat</td>
+    <td>GitHub 源：https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geosite.dat</td>
   </tr>
   <tr>
-    <td>jsDelivr 源：https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geox@clash/geosite.dat</td>
+    <td>jsDelivr 源：https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite.dat</td>
   </tr>
   <tr>
-    <td>GitHub Proxy 源：https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geox/clash/geosite.dat</td>
+    <td>GitHub Proxy 源：https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geosite.dat</td>
   </tr>
   <tr>
     <td rowspan="3">geosite.db</td>
-    <td>GitHub 源：https://raw.githubusercontent.com/DustinWin/ruleset_geox/sing-box/geosite.db</td>
+    <td>GitHub 源：https://raw.githubusercontent.com/DustinWin/ruleset_geodata/sing-box/geosite.db</td>
   </tr>
   <tr>
-    <td>jsDelivr 源：https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geox@sing-box/geosite.db</td>
+    <td>jsDelivr 源：https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/geosite.db</td>
   </tr>
   <tr>
-    <td>GitHub Proxy 源：https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geox/sing-box/geosite.db</td>
+    <td>GitHub Proxy 源：https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/sing-box/geosite.db</td>
   </tr>
   <tr>
     <td rowspan="3">Country.mmdb</td>
-    <td>GitHub 源：https://raw.githubusercontent.com/DustinWin/ruleset_geox/clash/Country.mmdb</td>
+    <td>GitHub 源：https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/Country.mmdb</td>
   </tr>
   <tr>
-    <td>jsDelivr 源：https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geox@clash/Country.mmdb</td>
+    <td>jsDelivr 源：https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/Country.mmdb</td>
   </tr>
   <tr>
-    <td>GitHub Proxy 源：https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geox/clash/Country.mmdb</td>
+    <td>GitHub Proxy 源：https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/Country.mmdb</td>
   </tr>
   <tr>
     <td rowspan="3">geoip.dat</td>
-    <td>GitHub 源：https://raw.githubusercontent.com/DustinWin/ruleset_geox/clash/geoip.dat</td>
+    <td>GitHub 源：https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geoip.dat</td>
   </tr>
   <tr>
-    <td>jsDelivr 源：https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geox@clash/geoip.dat</td>
+    <td>jsDelivr 源：https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.dat</td>
   </tr>
   <tr>
-    <td>GitHub Proxy 源：https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geox/clash/geoip.dat</td>
+    <td>GitHub Proxy 源：https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geoip.dat</td>
   </tr>
   <tr>
     <td rowspan="3">geoip.metadb</td>
-    <td>GitHub 源：https://raw.githubusercontent.com/DustinWin/ruleset_geox/clash/geoip.metadb</td>
+    <td>GitHub 源：https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geoip.metadb</td>
   </tr>
   <tr>
-    <td>jsDelivr 源：https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geox@clash/geoip.metadb</td>
+    <td>jsDelivr 源：https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.metadb</td>
   </tr>
   <tr>
-    <td>GitHub Proxy 源：https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geox/clash/geoip.metadb</td>
+    <td>GitHub Proxy 源：https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geoip.metadb</td>
   </tr>
   <tr>
     <td rowspan="3">geoip.db</td>
-    <td>GitHub 源：https://raw.githubusercontent.com/DustinWin/ruleset_geox/sing-box/geoip.db</td>
+    <td>GitHub 源：https://raw.githubusercontent.com/DustinWin/ruleset_geodata/sing-box/geoip.db</td>
   </tr>
   <tr>
-    <td>jsDelivr 源：https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geox@sing-box/geoip.db</td>
+    <td>jsDelivr 源：https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/geoip.db</td>
   </tr>
   <tr>
-    <td>GitHub Proxy 源：https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geox/sing-box/geoip.db</td>
+    <td>GitHub Proxy 源：https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/sing-box/geoip.db</td>
   </tr>
 </table>
 
 ## 4. 文件导入
-① 导入到 Linux 端（以 [ShellClash](https://github.com/juewuy/ShellCrash) 导入 geosite.dat、geosite.db、Country.mmdb、geoip.dat、geoip.metadb 和 geoip.db 为例） 
+① 导入到 Linux 端（以 [ShellCrash](https://github.com/juewuy/ShellCrash) 导入 geosite.dat、geosite.db、Country.mmdb、geoip.dat、geoip.metadb 和 geoip.db 为例） 
 连接 SSH 后执行如下命令：
 ```
 # Clash 内核
-curl -o $CRASHDIR/geosite.dat -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geox@clash/geosite.dat
-curl -o $CRASHDIR/Country.mmdb -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geox@clash/Country.mmdb
-curl -o $CRASHDIR/geoip.dat -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geox@clash/geoip.dat
+curl -o $CRASHDIR/geosite.dat -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite.dat
+curl -o $CRASHDIR/Country.mmdb -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/Country.mmdb
+curl -o $CRASHDIR/geoip.dat -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.dat
 # Clash.Meta 内核
-curl -o $CRASHDIR/geoip.metadb -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geox@clash/geoip.metadb
+curl -o $CRASHDIR/geoip.metadb -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.metadb
 # sing-box 内核
-curl -o $CRASHDIR/geosite.db -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geox@sing-box/geosite.db
-curl -o $CRASHDIR/geoip.db -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geox@sing-box/geoip.db
+curl -o $CRASHDIR/geosite.db -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/geosite.db
+curl -o $CRASHDIR/geoip.db -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/geoip.db
 $CRASHDIR/start.sh restart
 ```
 ② 导入到 Windows 端（以 [Clash Verge](https://github.com/MetaCubeX/clash-verge) 导入 geosite.dat、Country.mmdb、geoip.dat 和 geoip.metadb 为例）  
@@ -121,10 +121,10 @@ $CRASHDIR/start.sh restart
 taskkill /f /t /im "Clash Verge*"
 taskkill /f /t /im Clash-Verge*
 taskkill /f /t /im clash-meta*
-curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\geosite.dat -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geox@clash/geosite.dat
-curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\Country.mmdb -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geox@clash/Country.mmdb
-curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\geoip.dat -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geox@clash/geoip.dat
-curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\geoip.metadb -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geox@clash/geoip.metadb
+curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\geosite.dat -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite.dat
+curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\Country.mmdb -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/Country.mmdb
+curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\geoip.dat -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.dat
+curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\geoip.metadb -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.metadb
 pause
 ```
 ## 5. 文件拓展
@@ -133,13 +133,13 @@ pause
 ② `fake-ip-filter` 中添加 [TrackersList](https://github.com/XIU2/TrackersListCollection/all.txt)（udp 域名），防止 [BT 下载](https://github.com/c0re100/qBittorrent-Enhanced-Edition)无法连接 TrackersList UDP 协议  
 <img src="https://user-images.githubusercontent.com/45238096/224113233-4d76dec2-495c-4790-a00e-538fc1469639.png" width="60%"/>  
 ③ `fake-ip-filter` 中添加 AdGuardHome 相关域名（包括：`static.adtidy.org`、`adguardteam.github.io` 和 `anti-ad.net`），防止作为下游时检查更新和下载“DNS 黑名单”失败  
-④ 若想自己生成配置文件 user.yaml，可以 [Fork 本项目](https://github.com/DustinWin/ruleset_geox/fork)后编辑 *.github/workflows/build.yml* 文件内的 `name: Generate geox-xxx-user.yaml` 部分  
-⑤ 若 DNS 模式选用的是 `redir-host`，必须进行 DNS 分流（可以参考[Clash.Meta 内核 DNS 分流教程](https://github.com/DustinWin/clash_singbox-tutorials/tree/main/%E6%95%99%E7%A8%8B%E5%90%88%E9%9B%86/%E8%BF%9B%E9%98%B6%E7%AF%87)），可以进入 *.github/workflows/build.yml* 文件，编辑 `Generate geox-redirhost-user.yaml` 部分，将 `nameserver` 中的 `🪜 代理域名`改成可以访问外网的策略组名称，或者直接将 `'https://dns.google/dns-query#🪜 代理域名'` 修改为 `'tls://dns.google'`  
-⑥ 导入 Linux 端（以导入 ShellClash 为例）  
+④ 若想自己生成配置文件 user.yaml，可以 [Fork 本项目](https://github.com/DustinWin/ruleset_geodata/fork)后编辑 *.github/workflows/build.yml* 文件内的 `name: Generate geodata-xxx-user.yaml` 部分  
+⑤ 若 DNS 模式选用的是 `redir-host`，必须进行 DNS 分流（可以参考[Clash.Meta 内核 DNS 分流教程](https://github.com/DustinWin/clash_singbox-tutorials/tree/main/%E6%95%99%E7%A8%8B%E5%90%88%E9%9B%86/%E8%BF%9B%E9%98%B6%E7%AF%87)），可以进入 *.github/workflows/build.yml* 文件，编辑 `Generate geodata-redirhost-user.yaml` 部分，将 `nameserver` 中的 `🪜 代理域名`改成可以访问外网的策略组名称，或者直接将 `'https://dns.google/dns-query#🪜 代理域名'` 修改为 `'tls://dns.google'`  
+⑥ 导入 Linux 端（以导入 ShellCrash 为例）  
 • 将下面命令中的`{DNS 模式}`替换为正在使用的 DNS 模式（`fakeip` 或 `redirhost`）  
 • 连接 SSH 后执行如下命令：
 ```
-curl -o $CRASHDIR/yamls/user.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geox@clash/geox-{DNS 模式}-user.yaml
+curl -o $CRASHDIR/yamls/user.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geodata-{DNS 模式}-user.yaml
 $CRASHDIR/start.sh restart
 ```
 ⑦ 导入 Windows 端（以导入 Clash Verge 为例）
@@ -151,16 +151,20 @@ $CRASHDIR/start.sh restart
 taskkill /f /t /im "Clash Verge*"
 taskkill /f /t /im Clash-Verge*
 taskkill /f /t /im clash-meta*
-curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\profiles\{文件名}.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geox@clash/geox-{DNS 模式}-user.yaml
+curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\profiles\{文件名}.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geodata-{DNS 模式}-user.yaml
 ```
-## 2. 添加定时任务（以 ShellClash 为例）
+## 2. 添加定时任务（以 ShellCrash 为例，安装路径为 */data/ShellCrash*）
 ① 连接 SSH 后运行 `vi $CRASHDIR/task/task.user`，按一下 Ins 键（Insert 键），粘贴如下内容：
 ```
 # Clash 内核
-201#curl -o /data/ShellCrash/geosite.dat -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geox@clash/geosite.dat && curl -o /data/ShellCrash/Country.mmdb -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geox@clash/Country.mmdb && curl -o /data/ShellCrash/geoip.dat -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geox@clash/geoip.dat &&  && /data/clash/start.sh restart >/dev/null 2>&1#更新GeoX路由规则文件
-202#curl -o /data/clash/yamls/user.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geox@clash/geox/fake-ip-user.yaml && /data/clash/start.sh restart >/dev/null 2>&1#更新user.yaml
-```
-2. 按一下 Esc 键（退出键），输入英文冒号`:`，继续输入 `wq` 并回车
-3. 执行 `crash`，进入 ShellClash->5 配置自动任务->1 添加自动任务，可以看到末尾就有添加的定时任务，输入对应的数字并回车后可设置执行条件  
-**改天继续写 rule-set 部分**
+201#curl -o /data/ShellCrash/geosite.dat -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite.dat && curl -o /data/ShellCrash/Country.mmdb -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/Country.mmdb && curl -o /data/ShellCrash/geoip.dat -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.dat && /data/ShellCrash/start.sh restart >/dev/null 2>&1#更新geodata路由规则文件
+# Clash.Meta 内核
+202#curl -o /data/ShellCrash/geoip.metadb -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.metadb && /data/ShellCrash/start.sh restart >/dev/null 2>&1#更新geodata路由规则文件
+203#curl -o /data/ShellCrash/yamls/user.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geodata-{DNS 模式}-user.yaml && /data/ShellCrash/start.sh restart >/dev/null 2>&1#更新user.yaml
+# sing-box 内核
+204#curl -o /data/ShellCrash/geosite.db -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite.db && curl -o /data/ShellCrash/geoip.db -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.db && /data/ShellCrash/start.sh restart >/dev/null 2>&1#更新geodata路由规则文件
 
+```
+② 按一下 Esc 键（退出键），输入英文冒号`:`，继续输入 `wq` 并回车  
+③ 执行 `crash`，进入 ShellCrash->5 配置自动任务->1 添加自动任务，可以看到末尾就有添加的定时任务，输入对应的数字并回车后可设置执行条件  
+# 二、 ruleset 规则集文件说明
