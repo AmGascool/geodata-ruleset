@@ -780,9 +780,9 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git checkout -b clash
           git add .
-          git commit -m "clash ruleset_geox 文件更新于 ${update_version}"
-          git remote add ruleset_geox "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
-          git push -f -u ruleset_geox clash
+          git commit -m "clash ruleset_geodata 文件更新于 ${update_version}"
+          git remote add ruleset_geodata "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
+          git push -f -u ruleset_geodata clash
 
       - name: Release and upload `sing-box` assets
         uses: svenstaro/upload-release-action@v2
@@ -801,9 +801,9 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git checkout -b sing-box
           git add .
-          git commit -m "sing-box ruleset_geox 文件更新于 ${update_version}"
-          git remote add ruleset_geox "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
-          git push -f -u ruleset_geox sing-box
+          git commit -m "sing-box ruleset_geodata 文件更新于 ${update_version}"
+          git remote add ruleset_geodata "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
+          git push -f -u ruleset_geodata sing-box
 
       - name: Purge jsDelivr CDN
         run: |
