@@ -386,7 +386,7 @@ jobs:
           curl -sSL ${ai1} | grep -Ev '#|payload:' | sed '/^\s*$/d' > ./tmp/temp-ai.yaml
           curl -sSL ${ai2} | grep -Ev '#|payload:' | sed '/^\s*$/d' >> ./tmp/temp-ai.yaml
           curl -sSL ${ai3} | grep -Ev '#|payload:' | sed '/^\s*$/d' >> ./tmp/temp-ai.yaml
-          echo 'payload:' > ./sing-box/ruleset/rules/ai/ai.yaml
+          echo 'payload:' > ./tmp/sing-box/rules/ai/ai.yaml
           sort --ignore-case -u ./tmp/temp-ai.yaml >> ./tmp/sing-box/rules/ai/ai.yaml
 
       - name: Generate networktest
