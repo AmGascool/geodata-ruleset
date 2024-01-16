@@ -746,8 +746,8 @@ jobs:
           sed -i '/# 拉文件/,/# 处理文件/d' bm7.sh
           chmod +x bm7.sh && ./bm7.sh
           rm -rf bm7* sing-box ./rules/
-          cp -f ./tmp/sing-box/* ./sing-box
-          rm -rf ./tmp*
+          cp -f * ../../sing-box
+          rm -rf ../../tmp*
 
       - name: Commit and push `Domains` and `IPs`
         run: |
