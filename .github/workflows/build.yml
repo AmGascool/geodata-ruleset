@@ -1,4 +1,4 @@
-name: Build ruleset and geox
+name: Build ruleset and geodata
 on:
   workflow_dispatch:
   schedule:
@@ -88,7 +88,7 @@ jobs:
         run: |
           mkdir -p ./community/mydata/ ./Domains/ ./clash/ ./sing-box/
           mkdir -p ./tmp/sing-box/rules/ads/
-          # Download clash geox
+          # Download clash geodata
           curl -sSL ${ads} | grep -Ev '#|payload:' | sed '/^\s*$/d' | sed "s/- '+.//g" | sed "s/- '/full:/g" | sed "s/'$//g" | sed 's/^[ \t]*//g' > ./community/mydata/ads
           # Download clash rule-set
           curl -sSL ${ads} | grep -v '#' | sed '/^\s*$/d' > ./clash/ads.yaml
@@ -98,7 +98,7 @@ jobs:
       - name: Generate private
         run: |
           mkdir -p ./tmp/sing-box/rules/private/
-          # Download clash geox
+          # Download clash geodata
           cat <<EOF > ./tmp/temp-private.txt
           full:clash.razord.top
           full:clash.metacubex.one
@@ -146,7 +146,7 @@ jobs:
       - name: Generate microsoft-cn
         run: |
           mkdir -p ./tmp/sing-box/rules/microsoft-cn/
-          # Download clash geox
+          # Download clash geodata
           count1=$(curl -sSL ${microsoft_cn} | grep 'include:' | wc -l)
           curl -sSL ${microsoft_cn} | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' > ./tmp/temp-microsoft-cn.txt
           for((i=0;i<count1;i++)); do
@@ -200,7 +200,7 @@ jobs:
       - name: Generate apple-cn
         run: |
           mkdir -p ./tmp/sing-box/rules/apple-cn/
-          # Download clash geox
+          # Download clash geodata
           curl -sSL ${apple_cn} | perl -ne '/^server=\/([^\/]+)\// && print "full:$1\n"' > ./community/mydata/apple-cn
           # Download clash rule-set
           echo 'payload:' > ./clash/apple-cn.yaml
@@ -212,7 +212,7 @@ jobs:
       - name: Generate google-cn
         run: |
           mkdir -p ./tmp/sing-box/rules/google-cn/
-          # Download clash geox
+          # Download clash geodata
           curl -sSL ${google_cn} | perl -ne '/^server=\/([^\/]+)\// && print "full:$1\n"' > ./community/mydata/google-cn
           # Download clash rule-set
           echo 'payload:' > ./clash/google-cn.yaml
@@ -224,7 +224,7 @@ jobs:
       - name: Generate games-cn
         run: |
           mkdir -p ./tmp/sing-box/rules/games-cn/
-          # Download clash geox
+          # Download clash geodata
           count1=$(curl -sSL ${games_cn1} | grep 'include:' | wc -l)
           curl -sSL ${games_cn1} | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' > ./tmp/temp-games-cn.txt
           for((i=0;i<count1;i++)); do
@@ -284,7 +284,7 @@ jobs:
       - name: Generate netflix
         run: |
           mkdir -p ./tmp/sing-box/rules/netflix/
-          # Download clash geox
+          # Download clash geodata
           curl -sSL ${netflix} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/g' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' > ./community/mydata/netflix
           # Download clash rule-set
           curl -sSL ${netflix} | grep -v '#' | sed '/^\s*$/d' > ./clash/netflix.yaml
@@ -294,7 +294,7 @@ jobs:
       - name: Generate disney
         run: |
           mkdir -p ./tmp/sing-box/rules/disney/
-          # Download clash geox
+          # Download clash geodata
           curl -sSL ${disney} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/g' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' > ./community/mydata/disney
           # Download clash rule-set
           echo 'payload:' > ./clash/disney.yaml
@@ -305,7 +305,7 @@ jobs:
       - name: Generate max
         run: |
           mkdir -p ./tmp/sing-box/rules/max/
-          # Download clash geox
+          # Download clash geodata
           curl -sSL ${max} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/g' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' > ./community/mydata/max
           # Download clash rule-set
           echo 'payload:' > ./clash/max.yaml
@@ -316,7 +316,7 @@ jobs:
       - name: Generate primevideo
         run: |
           mkdir -p ./tmp/sing-box/rules/primevideo/
-          # Download clash geox
+          # Download clash geodata
           curl -sSL ${primevideo} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/g' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' > ./community/mydata/primevideo
           # Download clash rule-set
           echo 'payload:' > ./clash/primevideo.yaml
@@ -327,7 +327,7 @@ jobs:
       - name: Generate appletv
         run: |
           mkdir -p ./tmp/sing-box/rules/appletv/
-          # Download clash geox
+          # Download clash geodata
           curl -sSL ${appletv} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/g' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' > ./community/mydata/appletv
           # Download clash rule-set
           echo 'payload:' > ./clash/appletv.yaml
@@ -338,7 +338,7 @@ jobs:
       - name: Generate youtube
         run: |
           mkdir -p ./tmp/sing-box/rules/youtube/
-          # Download clash geox
+          # Download clash geodata
           curl -sSL ${youtube} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/g' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' > ./community/mydata/youtube
           # Download clash rule-set
           echo 'payload:' > ./clash/youtube.yaml
@@ -349,7 +349,7 @@ jobs:
       - name: Generate tiktok
         run: |
           mkdir -p ./tmp/sing-box/rules/tiktok/
-          # Download clash geox
+          # Download clash geodata
           curl -sSL ${tiktok} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/g' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' > ./community/mydata/tiktok
           # Download clash rule-set
           echo 'payload:' > ./clash/tiktok.yaml
@@ -360,7 +360,7 @@ jobs:
       - name: Generate bilibili
         run: |
           mkdir -p ./tmp/sing-box/rules/bilibili/
-          # Download clash geox
+          # Download clash geodata
           curl -sSL ${bilibili} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/g' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' > ./community/mydata/bilibili
           # Download clash rule-set
           echo 'payload:' > ./clash/bilibili.yaml
@@ -371,7 +371,7 @@ jobs:
       - name: Generate ai
         run: |
           mkdir -p ./tmp/sing-box/rules/ai/
-          # Download clash geox
+          # Download clash geodata
           curl -sSL ${ai1} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/g' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' > ./tmp/temp-ai.txt
           curl -sSL ${ai2} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/g' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' >> ./tmp/temp-ai.txt
           curl -sSL ${ai3} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/g' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' >> ./tmp/temp-ai.txt
@@ -392,7 +392,7 @@ jobs:
       - name: Generate networktest
         run: |
           mkdir -p ./tmp/sing-box/rules/networktest/
-          # Download clash geox
+          # Download clash geodata
           curl -sSL ${networktest} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/g' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' > ./community/mydata/networktest
           cat <<EOF >> ./community/mydata/networktest
           keyword:ipv6-test
@@ -428,7 +428,7 @@ jobs:
       - name: Generate proxy
         run: |
           mkdir -p ./tmp/sing-box/rules/proxy/
-          # Download clash geox
+          # Download clash geodata
           cd ./gfwlist2dnsmasq/ || exit 1
           chmod +x ./gfwlist2dnsmasq.sh
           ./gfwlist2dnsmasq.sh -l -o ../tmp/temp-proxy1.txt
@@ -453,7 +453,7 @@ jobs:
       - name: Generate cn
         run: |
           mkdir -p ./tmp/sing-box/rules/cn/
-          # Download clash geox
+          # Download clash geodata
           echo 'full:static.adtidy.org' > ./tmp/temp-cn.txt
           curl -sSL ${cn} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/g' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' >> ./tmp/temp-cn.txt
           sort --ignore-case -u ./tmp/temp-cn.txt > ./community/mydata/cn
@@ -542,9 +542,9 @@ jobs:
           cd ./community/
           go run ./ --datapath=./mydata/ --outputname geosite-lite.dat
 
-      - name: Generate `clash` geox-fakeip-user.yaml
+      - name: Generate `clash` geodata-fakeip-user.yaml
         run: |
-          cat <<EOF > ./clash/geox-fakeip-user.yaml
+          cat <<EOF > ./clash/geodata-fakeip-user.yaml
           mode: rule
           log-level: silent
           allow-lan: true
@@ -577,9 +577,9 @@ jobs:
             fake-ip-filter:
               - '*'
           EOF
-          curl -sSL https://raw.githubusercontent.com/juewuy/ShellCrash/master/public/fake_ip_filter.list | grep -v '#' | sed '/^\s*$/d' | sed "s/.*/'&'/g" | sed 's/^/    - /g' >> ./clash/geox-fakeip-user.yaml
-          curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep 'udp:' | grep -i '\.[A-Z]' | sed "s/^.*\/\//'/g" | sed "s/:.*\/.*/'/g" | sed 's/^/    - /g' >> ./clash/geox-fakeip-user.yaml
-          cat <<EOF >> ./clash/geox-fakeip-user.yaml
+          curl -sSL https://raw.githubusercontent.com/juewuy/ShellCrash/master/public/fake_ip_filter.list | grep -v '#' | sed '/^\s*$/d' | sed "s/.*/'&'/g" | sed 's/^/    - /g' >> ./clash/geodata-fakeip-user.yaml
+          curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep 'udp:' | grep -i '\.[A-Z]' | sed "s/^.*\/\//'/g" | sed "s/:.*\/.*/'/g" | sed 's/^/    - /g' >> ./clash/geodata-fakeip-user.yaml
+          cat <<EOF >> ./clash/geodata-fakeip-user.yaml
               - 'adguardteam.github.io'
               - 'anti-ad.net'
             default-nameserver:
@@ -594,9 +594,9 @@ jobs:
               'geosite:proxy': ['https://dns.google/dns-query#🪜 代理域名', 'https://cloudflare-dns.com/dns-query#🪜 代理域名']
           EOF
 
-      - name: Generate `clash` geox-redirhost-user.yaml
+      - name: Generate `clash` geodata-redirhost-user.yaml
         run: |
-          cat <<EOF > ./clash/geox-redirhost-user.yaml
+          cat <<EOF > ./clash/geodata-redirhost-user.yaml
           mode: rule
           log-level: silent
           allow-lan: true
@@ -723,7 +723,7 @@ jobs:
             geo convert site -i v2ray -o sing -f "./${file}.db" "./${file}.dat"
           done
 
-      - name: Move geox files
+      - name: Move geodata files
         run: |
           cd ./community/ || exit 1
           for file in $(ls *.dat); do
