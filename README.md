@@ -1,3 +1,5 @@
+#文件结构后期会有大变化，预计今晚（2024-01-16）可以确定下载路径#
+
 # 一、 数据源说明
 ## 1. 规则集文件类型
 ① [Clash GeoX 规则集文件](https://github.com/DustinWin/ruleset_geox/tree/clash/geox)，包括：geosite.dat、Country.mmdb、geoip.dat 和 geoip.metadb 等  
@@ -196,5 +198,5 @@ $CRASHDIR/start.sh restart
 202#curl -o /data/clash/yamls/user.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geox@clash/geox/fake-ip-user.yaml && /data/clash/start.sh restart >/dev/null 2>&1#更新user.yaml
 ```
 2. 按一下 Esc 键（退出键），输入英文冒号`:`，继续输入 `wq` 并回车
-3. 执行 `crash`，进入 ShellClash->5 配置自动任务->1 添加自动任务，可以看到末尾就有添加的定时任务，输入对应的数字并回车后可设置执行条件
+3. 执行 `crash`，进入 ShellClash->5 配置自动任务->1 添加自动任务，可以看到末尾就有添加的定时任务，输入对应的数字并回车后可设置执行条件  
 **改天继续写 rule-set 部分**
