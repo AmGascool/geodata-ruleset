@@ -542,9 +542,9 @@ jobs:
           cd ./community/
           go run ./ --datapath=./mydata/ --outputname geosite-lite.dat
 
-      - name: Generate `clash` geox-fake-ip-user.yaml
+      - name: Generate `clash` geox-fakeip-user.yaml
         run: |
-          cat <<EOF > ./clash/geox-fake-ip-user.yaml
+          cat <<EOF > ./clash/geox-fakeip-user.yaml
           mode: rule
           log-level: silent
           allow-lan: true
@@ -577,9 +577,9 @@ jobs:
             fake-ip-filter:
               - '*'
           EOF
-          curl -sSL https://raw.githubusercontent.com/juewuy/ShellCrash/master/public/fake_ip_filter.list | grep -v '#' | sed '/^\s*$/d' | sed "s/.*/'&'/g" | sed 's/^/    - /g' >> ./clash/geox/fake-ip-user.yaml
-          curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep 'udp:' | grep -i '\.[A-Z]' | sed "s/^.*\/\//'/g" | sed "s/:.*\/.*/'/g" | sed 's/^/    - /g' >> ./clash/geox/fake-ip-user.yaml
-          cat <<EOF >> ./clash/geox/fake-ip-user.yaml
+          curl -sSL https://raw.githubusercontent.com/juewuy/ShellCrash/master/public/fake_ip_filter.list | grep -v '#' | sed '/^\s*$/d' | sed "s/.*/'&'/g" | sed 's/^/    - /g' >> ./clash/geox-fakeip-user.yaml
+          curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep 'udp:' | grep -i '\.[A-Z]' | sed "s/^.*\/\//'/g" | sed "s/:.*\/.*/'/g" | sed 's/^/    - /g' >> ./clash/geox-fakeip-user.yaml
+          cat <<EOF >> ./clash/geox-fakeip-user.yaml
               - 'adguardteam.github.io'
               - 'anti-ad.net'
             default-nameserver:
@@ -594,9 +594,9 @@ jobs:
               'geosite:proxy': ['https://dns.google/dns-query#🪜 代理域名', 'https://cloudflare-dns.com/dns-query#🪜 代理域名']
           EOF
 
-      - name: Generate `clash` geox-redir-host-user.yaml
+      - name: Generate `clash` geox-redirhost-user.yaml
         run: |
-          cat <<EOF > ./clash/geox-redir-host-user.yaml
+          cat <<EOF > ./clash/geox-redirhost-user.yaml
           mode: rule
           log-level: silent
           allow-lan: true
@@ -640,9 +640,9 @@ jobs:
               'geosite:cn,private': [https://dns.alidns.com/dns-query, https://doh.pub/dns-query]
           EOF
 
-      - name: Generate `clash` ruleset-fake-ip-user.yaml
+      - name: Generate `clash` ruleset-fakeip-user.yaml
         run: |
-          cat <<EOF > ./clash/ruleset-fake-ip-user.yaml
+          cat <<EOF > ./clash/ruleset-fakeip-user.yaml
           sniffer:
             enable: true
             sniff: {HTTP: {ports: [80, 8080-8880], override-destination: true}, TLS: {ports: [443, 8443]}, QUIC: {ports: [443, 8443]}}
@@ -658,9 +658,9 @@ jobs:
             fake-ip-filter:
               - '*'
           EOF
-          curl -sSL https://raw.githubusercontent.com/juewuy/ShellCrash/master/public/fake_ip_filter.list | grep -v '#' | sed '/^\s*$/d' | sed "s/.*/'&'/g" | sed 's/^/    - /g' >> ./clash/fake-ip-user.yaml
-          curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep 'udp:' | grep -i '\.[A-Z]' | sed "s/^.*\/\//'/g" | sed "s/:.*\/.*/'/g" | sed 's/^/    - /g' >> ./clash/fake-ip-user.yaml
-          cat <<EOF >> ./clash/fake-ip-user.yaml
+          curl -sSL https://raw.githubusercontent.com/juewuy/ShellCrash/master/public/fake_ip_filter.list | grep -v '#' | sed '/^\s*$/d' | sed "s/.*/'&'/g" | sed 's/^/    - /g' >> ./clash/ruleset-fakeip-user.yaml
+          curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep 'udp:' | grep -i '\.[A-Z]' | sed "s/^.*\/\//'/g" | sed "s/:.*\/.*/'/g" | sed 's/^/    - /g' >> ./clash/ruleset-fakeip-user.yaml
+          cat <<EOF >> ./clash/ruleset-fakeip-user.yaml
               - 'adguardteam.github.io'
               - 'anti-ad.net'
             default-nameserver:
@@ -675,9 +675,9 @@ jobs:
               'rule-set:proxy': ['https://dns.google/dns-query#🪜 代理域名', 'https://cloudflare-dns.com/dns-query#🪜 代理域名']
           EOF
 
-      - name: Generate `clash` ruleset-redir-host-user.yaml
+      - name: Generate `clash` ruleset-redirhost-user.yaml
         run: |
-          cat <<EOF > ./clash/ruleset-redir-host-user.yaml
+          cat <<EOF > ./clash/ruleset-redirhost-user.yaml
           sniffer:
             enable: true
             sniff: {HTTP: {ports: [80, 8080-8880], override-destination: true}, TLS: {ports: [443, 8443]}, QUIC: {ports: [443, 8443]}}
