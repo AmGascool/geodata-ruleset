@@ -431,27 +431,24 @@ jobs:
           # Download clash geox
           cd ./gfwlist2dnsmasq/ || exit 1
           chmod +x ./gfwlist2dnsmasq.sh
-          ./gfwlist2dnsmasq.sh -l -o ../tmp/temp-proxy.txt
-          curl -sSL ${proxy} | sed 's/^domain://g' | sed 's/:@\!cn$//g' >> ../tmp/temp-proxy.txt
-          sort --ignore-case -u ../tmp/temp-proxy.txt > ../community/mydata/proxy
+          ./gfwlist2dnsmasq.sh -l -o ../tmp/temp-proxy1.txt
+          curl -sSL ${proxy} | sed 's/^domain://g' | sed 's/:@\!cn$//g' >> ../tmp/temp-proxy1.txt
+          sort --ignore-case -u ../tmp/temp-proxy1.txt > ../community/mydata/proxy
           # Download clash rule-set
-          chmod +x ./gfwlist2dnsmasq.sh
-          ./gfwlist2dnsmasq.sh -l -o ../tmp/temp-proxy1.yaml
-          sed "s/^/  - '+./g" ../tmp/temp-proxy1.yaml | sed "s/$/'/g" > ../tmp/temp-proxy2.yaml
-          curl -sSL ${proxy} | grep 'domain:' | sed 's/:@\!cn$//g' | sed "s/^domain:/  - '+./g" | sed "s/$/'/g" >> ../tmp/temp-proxy2.yaml
-          curl -sSL ${proxy} | grep 'full:' | sed 's/:@\!cn$//g' | sed "s/^full:/  - '/g" | sed "s/$/'/g" >> ../tmp/temp-proxy2.yaml
+          ./gfwlist2dnsmasq.sh -l -o ../tmp/temp-proxy2.yaml
+          sed "s/^/  - '+./g" ../tmp/temp-proxy2.yaml | sed "s/$/'/g" > ../tmp/temp-proxy3.yaml
+          curl -sSL ${proxy} | grep 'domain:' | sed 's/:@\!cn$//g' | sed "s/^domain:/  - '+./g" | sed "s/$/'/g" >> ../tmp/temp-proxy3.yaml
+          curl -sSL ${proxy} | grep 'full:' | sed 's/:@\!cn$//g' | sed "s/^full:/  - '/g" | sed "s/$/'/g" >> ../tmp/temp-proxy3.yaml
           echo 'payload:' > ../clash/proxy.yaml
-          sort --ignore-case -u ../tmp/temp-proxy2.yaml >> ../clash/proxy.yaml
+          sort --ignore-case -u ../tmp/temp-proxy3.yaml >> ../clash/proxy.yaml
           # Download sing-box rule_set
-          cd ./gfwlist2dnsmasq/ || exit 1
-          chmod +x ./gfwlist2dnsmasq.sh
-          ./gfwlist2dnsmasq.sh -l -o ../tmp/temp-proxy1.yaml
-          sed "s/^/  - DOMAIN-SUFFIX,/g" ../tmp/temp-proxy1.yaml > ../tmp/temp-proxy2.yaml
-          curl -sSL ${proxy} | grep 'domain:' | sed 's/:@\!cn$//g' | sed 's/^domain:/  - DOMAIN-SUFFIX,/g' >> ../tmp/temp-proxy2.yaml
-          curl -sSL ${proxy} | grep 'full:' | sed 's/:@\!cn$//g' | sed 's/^full:/  - DOMAIN,/g' >> ../tmp/temp-proxy2.yaml
-          curl -sSL ${proxy} | grep 'keyword:' | sed 's/:@\!cn$//g' | sed 's/^keyword:/  - DOMAIN-KEYWORD,/g' >> ../tmp/temp-proxy2.yaml
+          ./gfwlist2dnsmasq.sh -l -o ../tmp/temp-proxy4.yaml
+          sed "s/^/  - DOMAIN-SUFFIX,/g" ../tmp/temp-proxy4.yaml > ../tmp/temp-proxy5.yaml
+          curl -sSL ${proxy} | grep 'domain:' | sed 's/:@\!cn$//g' | sed 's/^domain:/  - DOMAIN-SUFFIX,/g' >> ../tmp/temp-proxy5.yaml
+          curl -sSL ${proxy} | grep 'full:' | sed 's/:@\!cn$//g' | sed 's/^full:/  - DOMAIN,/g' >> ../tmp/temp-proxy5.yaml
+          curl -sSL ${proxy} | grep 'keyword:' | sed 's/:@\!cn$//g' | sed 's/^keyword:/  - DOMAIN-KEYWORD,/g' >> ../tmp/temp-proxy5.yaml
           echo 'payload:' > ../tmp/sing-box/rules/proxy/proxy.yaml
-          sort --ignore-case -u ../tmp/temp-proxy2.yaml >> ../tmp/sing-box/rules/proxy/proxy.yaml
+          sort --ignore-case -u ../tmp/temp-proxy5.yaml >> ../tmp/sing-box/rules/proxy/proxy.yaml
 
       - name: Generate cn
         run: |
