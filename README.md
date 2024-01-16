@@ -101,7 +101,7 @@
 </table>
 
 ## 4. 文件导入
-① 导入到 Linux 端（以 [ShellCrash](https://github.com/juewuy/ShellCrash) 导入 geosite.dat、geosite.db、Country.mmdb、geoip.dat、geoip.metadb 和 geoip.db 为例） 
+① 导入到 Linux 端（以 [ShellCrash](https://github.com/juewuy/ShellCrash) 导入 geosite.dat、geosite.db、Country.mmdb、geoip.dat、geoip.metadb 和 geoip.db 为例）  
 连接 SSH 后执行如下命令：
 ```
 # Clash 内核
@@ -142,7 +142,7 @@ pause
 curl -o $CRASHDIR/yamls/user.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geodata-{DNS 模式}-user.yaml
 $CRASHDIR/start.sh restart
 ```
-⑦ 导入 Windows 端（以导入 Clash Verge 为例）
+⑦ 导入 Windows 端（以导入 Clash Verge 为例）  
 • 首次使用可进入 Clash Verge->订阅，新建“Merge”类型的配置，完成后点击“保存”，右击新建的 Merge 文件，选择“启用”  
 • 进入文件夹 *%APPDATA%\io.github.clash-verge-rev.clash-verge-rev\profiles*，找到与上一步新建的 Merge 文件相对应的 .yaml 文件，复制其文件名并替换下面命令中的`{文件名}`
 • 将下面命令中的`{DNS 模式}`替换为正在使用的 DNS 模式（`fakeip` 或 `redirhost`）  
@@ -154,7 +154,7 @@ taskkill /f /t /im clash-meta*
 curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\profiles\{文件名}.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geodata-{DNS 模式}-user.yaml
 ```
 ## 2. 添加定时任务（以 ShellCrash 为例，安装路径为 */data/ShellCrash*）
-① 连接 SSH 后运行 `vi $CRASHDIR/task/task.user`，按一下 Ins 键（Insert 键），粘贴如下内容：
+① 连接 SSH 后执行 `vi $CRASHDIR/task/task.user`，按一下 Ins 键（Insert 键），粘贴如下内容：
 ```
 # Clash 内核
 201#curl -o /data/ShellCrash/geosite.dat -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite.dat && curl -o /data/ShellCrash/Country.mmdb -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/Country.mmdb && curl -o /data/ShellCrash/geoip.dat -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.dat && /data/ShellCrash/start.sh restart >/dev/null 2>&1#更新geodata路由规则文件
