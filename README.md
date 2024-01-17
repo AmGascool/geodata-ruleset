@@ -125,7 +125,6 @@ curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\geosite.dat -L https
 curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\Country.mmdb -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/Country.mmdb
 curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\geoip.dat -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.dat
 curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\geoip.metadb -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.metadb
-pause
 ```
 ## 5. 文件拓展
 ### ① user.yaml（仅限 Clash.Meta 内核）
@@ -152,7 +151,6 @@ taskkill /f /t /im "Clash Verge*"
 taskkill /f /t /im Clash-Verge*
 taskkill /f /t /im clash-meta*
 curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\profiles\{文件名}.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geodata-{DNS 模式}-user.yaml
-pause
 ```
 ### ② 添加定时任务（以 ShellCrash 为例，安装路径为 */data/ShellCrash*）
 • 连接 SSH 后执行 `vi $CRASHDIR/task/task.user`，按一下 Ins 键（Insert 键），粘贴如下内容：
@@ -830,7 +828,6 @@ taskkill /f /t /im "Clash Verge*"
 taskkill /f /t /im Clash-Verge*
 taskkill /f /t /im clash-meta*
 curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\profiles\{文件名}.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/ruleset-{DNS 模式}-user.yaml
-pause
 ```
 ### ② 添加定时任务（以 ShellCrash 为例，安装路径为 */data/ShellCrash*）
 • 连接 SSH 后执行 `vi $CRASHDIR/task/task.user`，按一下 Ins 键（Insert 键），粘贴如下内容：
