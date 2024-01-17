@@ -101,7 +101,7 @@
 </table>
 
 ## 4. 文件导入
-① 导入到 Linux 端（以 [ShellCrash](https://github.com/juewuy/ShellCrash) 导入 geosite.dat、geosite.db、Country.mmdb、geoip.dat、geoip.metadb 和 geoip.db 为例）  
+### ① 导入到 Linux 端（以 [ShellCrash](https://github.com/juewuy/ShellCrash) 导入 geosite.dat、geosite.db、Country.mmdb、geoip.dat、geoip.metadb 和 geoip.db 为例）
 连接 SSH 后执行如下命令：
 ```
 # Clash 内核
@@ -115,7 +115,7 @@ curl -o $CRASHDIR/geosite.db -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_ge
 curl -o $CRASHDIR/geoip.db -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/geoip.db
 $CRASHDIR/start.sh restart
 ```
-② 导入到 Windows 端（以 [Clash Verge](https://github.com/MetaCubeX/clash-verge) 导入 geosite.dat、Country.mmdb、geoip.dat 和 geoip.metadb 为例）  
+### ② 导入到 Windows 端（以 [Clash Verge](https://github.com/MetaCubeX/clash-verge) 导入 geosite.dat、Country.mmdb、geoip.dat 和 geoip.metadb 为例）
 以管理员身份运行 CMD，执行如下命令：
 ```
 taskkill /f /t /im "Clash Verge*"
@@ -128,7 +128,7 @@ curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\geoip.metadb -L http
 pause
 ```
 ## 5. 文件拓展
-① user.yaml（仅限 Clash.Meta 内核）  
+### ① user.yaml（仅限 Clash.Meta 内核）
 • `fake-ip-filter` 中添加[常用 fake-ip 地址过滤列表](https://github.com/juewuy/ShellCrash/blob/master/public/fake_ip_filter.list)，提高兼容性  
 • `fake-ip-filter` 中添加 [TrackersList](https://github.com/XIU2/TrackersListCollection/all.txt)（udp 域名），防止 [BT 下载](https://github.com/c0re100/qBittorrent-Enhanced-Edition)无法连接 TrackersList UDP 协议  
 <img src="https://user-images.githubusercontent.com/45238096/224113233-4d76dec2-495c-4790-a00e-538fc1469639.png" width="60%"/>  
@@ -153,7 +153,7 @@ taskkill /f /t /im Clash-Verge*
 taskkill /f /t /im clash-meta*
 curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\profiles\{文件名}.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geodata-{DNS 模式}-user.yaml
 ```
-② 添加定时任务（以 ShellCrash 为例，安装路径为 */data/ShellCrash*）  
+### ② 添加定时任务（以 ShellCrash 为例，安装路径为 */data/ShellCrash*）
 • 连接 SSH 后执行 `vi $CRASHDIR/task/task.user`，按一下 Ins 键（Insert 键），粘贴如下内容：
 ```
 # Clash 内核
@@ -195,7 +195,7 @@ curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\profiles\{文件名}
 ㉑ `rule-set,privateip,🔒 私有网络` 源采用 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)  
 ㉒ `rule-set,cnip,🇨🇳 国内 IP` 源采用 [GeoLite2/cn.txt](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data)、[17mon/china_ip_list](https://github.com/17mon/china_ip_list)、[gaoyifan/china-operator-ip](https://github.com/gaoyifan/china-operator-ip) 和 [blackmatrix7/ios_rule_script/ChinaIPs/ChinaIPs_IP.txt](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaIPs) 组合
 ## 3. 文件使用
-① Clash 内核
+### ① Clash 内核
 - 注：以下只是节选，请酌情套用
 
 ```
@@ -423,7 +423,7 @@ rules:
   - RULE-SET,privateip,🔒 私有网络,no-resolve
   - RULE-SET,cnip,🇨🇳 国内 IP,no-resolve
 ```
-② sing-box 内核
+### ② sing-box 内核
 - 注：以下只是节选，请酌情套用
 
 ```
@@ -805,7 +805,7 @@ rules:
 }
 ```
 ## 4. 文件拓展
-① user.yaml（仅限 Clash.Meta 内核）  
+### ① user.yaml（仅限 Clash.Meta 内核）
 • `fake-ip-filter` 中添加[常用 fake-ip 地址过滤列表](https://github.com/juewuy/ShellCrash/blob/master/public/fake_ip_filter.list)，提高兼容性  
 • `fake-ip-filter` 中添加 [TrackersList](https://github.com/XIU2/TrackersListCollection/all.txt)（udp 域名），防止 [BT 下载](https://github.com/c0re100/qBittorrent-Enhanced-Edition)无法连接 TrackersList UDP 协议  
 <img src="https://user-images.githubusercontent.com/45238096/224113233-4d76dec2-495c-4790-a00e-538fc1469639.png" width="60%"/>  
@@ -830,7 +830,7 @@ taskkill /f /t /im Clash-Verge*
 taskkill /f /t /im clash-meta*
 curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\profiles\{文件名}.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/ruleset-{DNS 模式}-user.yaml
 ```
-② 添加定时任务（以 ShellCrash 为例，安装路径为 */data/ShellCrash*）  
+### ② 添加定时任务（以 ShellCrash 为例，安装路径为 */data/ShellCrash*）
 • 连接 SSH 后执行 `vi $CRASHDIR/task/task.user`，按一下 Ins 键（Insert 键），粘贴如下内容：
 ```
 201#curl -o /data/ShellCrash/yamls/user.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/ruleset-{DNS 模式}-user.yaml && /data/ShellCrash/start.sh restart >/dev/null 2>&1#更新user.yaml
