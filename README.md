@@ -26,8 +26,8 @@
 ㉑ `geoip,telegram,📲 电报消息` 源采用 [Telegram IP 段](https://core.telegram.org/resources/cidr.txt)  
 ㉒ `geoip,private,🔒 私有网络` 源采用 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)  
 ㉓ `geoip,cn,🇨🇳 国内 IP` 源采用 [GeoLite2/cn.txt](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data)、[17mon/china_ip_list](https://github.com/17mon/china_ip_list)、[gaoyifan/china-operator-ip](https://github.com/gaoyifan/china-operator-ip) 和 [blackmatrix7/ios_rule_script/ChinaIPs/ChinaIPs_IP.txt](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaIPs) 组合  
-**规则名称与规则集文件的对应关系如下表：**
-|文件名称|包含规则|
+**规则集文件包含的规则对应关系如下表：**
+|规则集文件名称|包含规则|
 |-----|-----|
 |geosite-all.dat 和 geosite-all.db|`ads`、`private`、`microsoft-cn`、`apple-cn`、`google-cn`、`games-cn`、`netflix`、`disney`、`max`、`primevideo`、`appletv`、`youtube`、`tiktok`、`bilibili`、`ai`、`networktest`、`proxy` 和 `cn`|
 |geosite-all-lite.dat 和 geosite-all-lite.db|~~`ads`~~、`private`、`microsoft-cn`、`apple-cn`、`google-cn`、`games-cn`、`netflix`、`disney`、`max`、`primevideo`、`appletv`、`youtube`、`tiktok`、`bilibili`、`ai`、`networktest`、`proxy` 和 `cn`|
@@ -428,228 +428,54 @@ rules:
 ```
 {
   "outbounds": [
-    {
-      "tag": "🚀 节点选择",
-      "type": "selector",
-      "outbounds": [
-        "🇭🇰 香港节点",
-        "🇹🇼 台湾节点",
-        "🇯🇵 日本节点",
-        "🇰🇷 韩国节点",
-        "🇸🇬 新加坡节点",
-        "🇺🇸 美国节点",
-        "🇬🇧 英国节点"
-      ]
-    },
-    {
-      "tag": "📈 网络测试",
-      "type": "selector",
-      "outbounds": [
-        "🎯 全球直连",
-        "🇭🇰 香港节点",
-        "🇹🇼 台湾节点",
-        "🇯🇵 日本节点",
-        "🇰🇷 韩国节点",
-        "🇸🇬 新加坡节点",
-        "🇺🇸 美国节点",
-        "🇬🇧 英国节点"
-      ]
-    },
-    {
-      "tag": "🔗 直连域名",
-      "type": "selector",
-      "outbounds": [ "🎯 全球直连", "🚀 节点选择" ]
-    },
-    {
-      "tag": "🪜 代理域名",
-      "type": "selector",
-      "outbounds": [ "🚀 节点选择", "🎯 全球直连" ]
-    },
-    {
-      "tag": "🎮 游戏平台",
-      "type": "selector",
-      "outbounds": [ "🎯 全球直连", "🚀 节点选择" ]
-    },
-    {
-      "tag": "🎥 奈飞视频",
-      "type": "selector",
-      "outbounds": [ "🚀 节点选择", "🇭🇰 香港节点", "🇯🇵 日本节点", "🇸🇬 新加坡节点" ]
-    },
-    {
-      "tag": "📽️ 迪士尼+",
-      "type": "selector",
-      "outbounds": [ "🚀 节点选择", "🇭🇰 香港节点", "🇯🇵 日本节点", "🇸🇬 新加坡节点" ]
-    },
-    {
-      "tag": "🎞️ Max",
-      "type": "selector",
-      "outbounds": [ "🚀 节点选择", "🇭🇰 香港节点", "🇯🇵 日本节点", "🇸🇬 新加坡节点" ]
-    },
-    {
-      "tag": "🎬 Prime Video",
-      "type": "selector",
-      "outbounds": [ "🚀 节点选择", "🇭🇰 香港节点", "🇯🇵 日本节点", "🇸🇬 新加坡节点" ]
-    },
-    {
-      "tag": "🍎 Apple TV+",
-      "type": "selector",
-      "outbounds": [ "🚀 节点选择", "🇭🇰 香港节点", "🇯🇵 日本节点", "🇸🇬 新加坡节点" ]
-    },
-    {
-      "tag": "📹 油管视频",
-      "type": "selector",
-      "outbounds": [ "🚀 节点选择", "🇭🇰 香港节点", "🇯🇵 日本节点", "🇸🇬 新加坡节点" ]
-    },
-    {
-      "tag": "🎵 TikTok",
-      "type": "selector",
-      "outbounds": [ "🚀 节点选择", "🇭🇰 香港节点", "🇯🇵 日本节点", "🇸🇬 新加坡节点" ]
-    },
-    {
-      "tag": "📺 哔哩哔哩",
-      "type": "selector",
-      "outbounds": [ "🎯 全球直连", "🚀 节点选择", "🇭🇰 香港节点", "🇯🇵 日本节点", "🇸🇬 新加坡节点" ]
-    },
-    {
-      "tag": "🤖 人工智能",
-      "type": "selector",
-      "outbounds": [ "🚀 节点选择", "🇭🇰 香港节点", "🇯🇵 日本节点", "🇸🇬 新加坡节点", "🇺🇸 美国节点" ]
-    },
-    {
-      "tag": "Ⓜ️ 微软服务",
-      "type": "selector",
-      "outbounds": [ "🎯 全球直连", "🚀 节点选择" ]
-    },
-    {
-      "tag": "📢 谷歌服务",
-      "type": "selector",
-      "outbounds": [ "🎯 全球直连", "🚀 节点选择" ]
-    },
-    {
-      "tag": "🍎 苹果服务",
-      "type": "selector",
-      "outbounds": [ "🎯 全球直连", "🚀 节点选择" ]
-    },
-    {
-      "tag": "🇨🇳 国内 IP",
-      "type": "selector",
-      "outbounds": [ "🎯 全球直连", "🚀 节点选择" ]
-    },
-    {
-      "tag": "📲 电报消息",
-      "type": "selector",
-      "outbounds": ["🚀 节点选择"]
-    },
-    {
-      "tag": "🔒 私有网络",
-      "type": "selector",
-      "outbounds": ["🎯 全球直连"]
-    },
-    {
-      "tag": "🎯 全球直连",
-      "type": "selector",
-      "outbounds": ["DIRECT"]
-    },
-    {
-      "tag": "🛑 广告拦截",
-      "type": "selector",
-      "outbounds": ["REJECT"]
-    },
-    {
-      "tag": "DIRECT",
-      "type": "direct"
-    },
-    {
-      "tag": "REJECT",
-      "type": "block"
-    }
+    { "tag": "🚀 节点选择", "type": "selector", "outbounds": [ "🇭🇰 香港节点", "🇹🇼 台湾节点", "🇯🇵 日本节点", "🇰🇷 韩国节点", "🇸🇬 新加坡节点", "🇺🇸 美国节点", "🇬🇧 英国节点" ] },
+    { "tag": "📈 网络测试", "type": "selector", "outbounds": [ "🎯 全球直连", "🇭🇰 香港节点", "🇹🇼 台湾节点", "🇯🇵 日本节点", "🇰🇷 韩国节点", "🇸🇬 新加坡节点", "🇺🇸 美国节点", "🇬🇧 英国节点" ] },
+    { "tag": "🔗 直连域名", "type": "selector", "outbounds": [ "🎯 全球直连", "🚀 节点选择" ] },
+    { "tag": "🪜 代理域名", "type": "selector", "outbounds": [ "🚀 节点选择", "🎯 全球直连" ] },
+    { "tag": "🎮 游戏平台", "type": "selector", "outbounds": [ "🎯 全球直连", "🚀 节点选择" ] },
+    { "tag": "🎥 奈飞视频", "type": "selector", "outbounds": [ "🚀 节点选择", "🇭🇰 香港节点", "🇯🇵 日本节点", "🇸🇬 新加坡节点" ] },
+    { "tag": "📽️ 迪士尼+", "type": "selector", "outbounds": [ "🚀 节点选择", "🇭🇰 香港节点", "🇯🇵 日本节点", "🇸🇬 新加坡节点" ] },
+    { "tag": "🎞️ Max", "type": "selector", "outbounds": [ "🚀 节点选择", "🇭🇰 香港节点", "🇯🇵 日本节点", "🇸🇬 新加坡节点" ] },
+    { "tag": "🎬 Prime Video", "type": "selector", "outbounds": [ "🚀 节点选择", "🇭🇰 香港节点", "🇯🇵 日本节点", "🇸🇬 新加坡节点" ] },
+    { "tag": "🍎 Apple TV+", "type": "selector", "outbounds": [ "🚀 节点选择", "🇭🇰 香港节点", "🇯🇵 日本节点", "🇸🇬 新加坡节点" ] },
+    { "tag": "📹 油管视频", "type": "selector", "outbounds": [ "🚀 节点选择", "🇭🇰 香港节点", "🇯🇵 日本节点", "🇸🇬 新加坡节点" ] },
+    { "tag": "🎵 TikTok", "type": "selector", "outbounds": [ "🚀 节点选择", "🇭🇰 香港节点", "🇯🇵 日本节点", "🇸🇬 新加坡节点" ] },
+    { "tag": "📺 哔哩哔哩", "type": "selector", "outbounds": [ "🎯 全球直连", "🚀 节点选择", "🇭🇰 香港节点", "🇯🇵 日本节点", "🇸🇬 新加坡节点" ] },
+    { "tag": "🤖 人工智能", "type": "selector", "outbounds": [ "🚀 节点选择", "🇭🇰 香港节点", "🇯🇵 日本节点", "🇸🇬 新加坡节点", "🇺🇸 美国节点" ] },
+    { "tag": "Ⓜ️ 微软服务", "type": "selector", "outbounds": [ "🎯 全球直连", "🚀 节点选择" ] },
+    { "tag": "📢 谷歌服务", "type": "selector", "outbounds": [ "🎯 全球直连", "🚀 节点选择" ] },
+    { "tag": "🍎 苹果服务", "type": "selector", "outbounds": [ "🎯 全球直连", "🚀 节点选择" ] },
+    { "tag": "🇨🇳 国内 IP", "type": "selector", "outbounds": [ "🎯 全球直连", "🚀 节点选择" ] },
+    { "tag": "📲 电报消息", "type": "selector", "outbounds": ["🚀 节点选择"] },
+    { "tag": "🔒 私有网络", "type": "selector", "outbounds": ["🎯 全球直连"] },
+    { "tag": "🎯 全球直连", "type": "selector", "outbounds": ["DIRECT"] },
+    { "tag": "🛑 广告拦截", "type": "selector", "outbounds": ["REJECT"] },
+    { "tag": "DIRECT", "type": "direct" },
+    { "tag": "REJECT", "type": "block" }
   ],
   "route": {
     "rules": [
-      {
-        "rule_set": "ads",
-        "outbound": "🛑 广告拦截"
-      },
-      {
-        "rule_set": "private",
-        "outbound": "🔒 私有网络"
-      },
-      {
-        "rule_set": "microsoft-cn",
-        "outbound": "Ⓜ️ 微软服务"
-      },
-      {
-        "rule_set": "apple-cn",
-        "outbound": "🍎 苹果服务"
-      },
-      {
-        "rule_set": "google-cn",
-        "outbound": "📢 谷歌服务"
-      },
-      {
-        "rule_set": "games-cn",
-        "outbound": "🎮 游戏平台"
-      },
-      {
-        "rule_set": "netflix",
-        "outbound": "🎥 奈飞视频"
-      },
-      {
-        "rule_set": "disney",
-        "outbound": "📽️ 迪士尼+"
-      },
-      {
-        "rule_set": "max",
-        "outbound": "🎞️ Max"
-      },
-      {
-        "rule_set": "primevideo",
-        "outbound": "🎬 Prime Video"
-      },
-      {
-        "rule_set": "appletv",
-        "outbound": "🍎 Apple TV+"
-      },
-      {
-        "rule_set": "youtube",
-        "outbound": "📹 油管视频"
-      },
-      {
-        "rule_set": "tiktok",
-        "outbound": "🎵 TikTok"
-      },
-      {
-        "rule_set": "bilibili",
-        "outbound": "📺 哔哩哔哩"
-      },
-      {
-        "rule_set": "ai",
-        "outbound": "🤖 人工智能"
-      },
-      {
-        "rule_set": "networktest",
-        "outbound": "📈 网络测试"
-      },
-      {
-        "rule_set": "proxy",
-        "outbound": "🪜 代理域名"
-      },
-      {
-        "rule_set": "cn",
-        "outbound": "🔗 直连域名"
-      },
-      {
-        "rule_set": "telegramip",
-        "outbound": "📲 电报消息"
-      },
-      {
-        "rule_set": "privateip",
-        "outbound": "🔒 私有网络"
-      },
-      {
-        "rule_set": "cnip",
-        "outbound": "🇨🇳 国内 IP"
-      }
+      { "rule_set": "ads", "outbound": "🛑 广告拦截" },
+      { "rule_set": "private", "outbound": "🔒 私有网络" },
+      { "rule_set": "microsoft-cn", "outbound": "Ⓜ️ 微软服务" },
+      { "rule_set": "apple-cn", "outbound": "🍎 苹果服务" },
+      { "rule_set": "google-cn", "outbound": "📢 谷歌服务" },
+      { "rule_set": "games-cn", "outbound": "🎮 游戏平台" },
+      { "rule_set": "netflix", "outbound": "🎥 奈飞视频" },
+      { "rule_set": "disney", "outbound": "📽️ 迪士尼+" },
+      { "rule_set": "max", "outbound": "🎞️ Max" },
+      { "rule_set": "primevideo", "outbound": "🎬 Prime Video" },
+      { "rule_set": "appletv", "outbound": "🍎 Apple TV+" },
+      { "rule_set": "youtube", "outbound": "📹 油管视频" },
+      { "rule_set": "tiktok", "outbound": "🎵 TikTok" },
+      { "rule_set": "bilibili", "outbound": "📺 哔哩哔哩" },
+      { "rule_set": "ai", "outbound": "🤖 人工智能" },
+      { "rule_set": "networktest", "outbound": "📈 网络测试" },
+      { "rule_set": "proxy", "outbound": "🪜 代理域名" },
+      { "rule_set": "cn", "outbound": "🔗 直连域名" },
+      { "rule_set": "telegramip", "outbound": "📲 电报消息" },
+      { "rule_set": "privateip", "outbound": "🔒 私有网络" },
+      { "rule_set": "cnip", "outbound": "🇨🇳 国内 IP" }
     ],
     "rule_set": [
       {
