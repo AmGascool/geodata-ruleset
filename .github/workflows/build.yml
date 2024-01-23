@@ -93,6 +93,11 @@ jobs:
 
       - name: Generate ads
         run: |
+          git checkout master
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git add . && git commit -m "域名列表更新于 ${update_version}"
+          git push -f
           mkdir -p ./community/mydata/ ./Domains/ ./IPs ./clash/ ./sing-box/
           mkdir -p ./tmp/sing-box/rules/ads/
           # Download clash geodata
@@ -104,7 +109,7 @@ jobs:
 
       - name: Get geoip relative files
         run: |
-          cp -rf ./geoip/master/IPs/ .
+          cp -rf ./geoip/IPs/ .
           cp -f ./geoip/clash/* ./clash/
           cp -f ./geoip/sing-box/* ./sing-box/
           rm -rf ./geoip*
