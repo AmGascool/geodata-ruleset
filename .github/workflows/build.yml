@@ -66,21 +66,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: DustinWin/geoip
+          submodules: 'recursive'
           path: geoip
-
-      - name: Checkout DustinWin/geoip
-        uses: actions/checkout@v4
-        with:
-          repository: DustinWin/geoip
-          ref: clash
-          path: geoip/clash
-
-      - name: Checkout DustinWin/geoip
-        uses: actions/checkout@v4
-        with:
-          repository: DustinWin/geoip
-          ref: sing-box
-          path: geoip/sing-box
 
       - name: Setup Go
         uses: actions/setup-go@v5
@@ -728,9 +715,12 @@ jobs:
       - name: Get geoip relative files
         run: |
           cp -rf ./geoip/IPs/ .
-          cp -f ./geoip/clash/* ./clash/
-          cp -f ./geoip/sing-box/* ./sing-box/
-          rm -rf ./geoip*
+          cd ./geoip/
+          git checkout clash
+          cp -f ../geoip/* ../clash/
+          git checkout sing-box
+          cp -f ../geoip/* ../sing-box/
+          rm -rf ../geoip*
 
       - name: Build `sing-box` db file
         run: |
@@ -769,6 +759,7 @@ jobs:
 
       - name: Commit and push `Domains`
         run: |
+          git checkout master
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
           git add ./Domains/ && git commit -m "域名列表更新于 ${update_version}"
@@ -776,6 +767,7 @@ jobs:
 
       - name: Commit and push `IPs`
         run: |
+          git checkout master
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
           git add ./IPs/ && git commit -m "域名列表更新于 ${update_version}"
