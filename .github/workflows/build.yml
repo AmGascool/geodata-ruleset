@@ -752,6 +752,22 @@ jobs:
           cp -f * ../../sing-box
           rm -rf ../../tmp*
 
+      - name: Commit and push `Domains`
+        run: |
+          git checkout master
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git add ./Domains/ && git commit -m "域名列表更新于 ${update_version}"
+          git push -f
+
+      - name: Commit and push `IPs`
+        run: |
+          git checkout master
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git add ./IPs/ && git commit -m "域名列表更新于 ${update_version}"
+          git push -f
+
       - name: Release and upload `clash` assets
         uses: svenstaro/upload-release-action@v2
         with:
@@ -793,20 +809,6 @@ jobs:
           git commit -m "sing-box ruleset_geodata 文件更新于 ${update_version}"
           git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
           git push -f -u origin sing-box
-
-      - name: Commit and push `Domains`
-        run: |
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
-          git add ./Domains/ && git commit -m "域名列表更新于 ${update_version}"
-          git push -f
-
-      - name: Commit and push `IPs`
-        run: |
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
-          git add ./IPs/ && git commit -m "域名列表更新于 ${update_version}"
-          git push -f
 
       - name: Purge jsDelivr CDN
         run: |
