@@ -449,6 +449,7 @@ jobs:
           curl -sSL ${proxy} | grep 'keyword:' | sed 's/:@\!cn$//g' | sed 's/^keyword:/  - DOMAIN-KEYWORD,/g' >> ../tmp/temp-proxy5.yaml
           echo 'payload:' > ../tmp/sing-box/rules/proxy/proxy.yaml
           sort --ignore-case -u ../tmp/temp-proxy5.yaml >> ../tmp/sing-box/rules/proxy/proxy.yaml
+          rm -rf ../gfwlist2dnsmasq/
 
       - name: Generate cn
         run: |
@@ -733,6 +734,7 @@ jobs:
           for file in $(ls *.db); do
             install -Dp "./${file}" ../sing-box/
           done
+          rm -rf ../community/
 
       - name: Download and unzip `sing-box core`
         run: |
@@ -749,15 +751,6 @@ jobs:
           rm -rf bm7* sing-box ./rules/
           cp -f * ../../sing-box
           rm -rf ../../tmp*
-
-      - name: Commit and push `Domains`
-        run: |
-          rm -rf ./community/ ./gfwlist2dnsmasq/
-          git status
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
-          git add . && git commit -m "域名列表更新于 ${update_version}"
-          git push -f
 
       - name: Release and upload `clash` assets
         uses: svenstaro/upload-release-action@v2
@@ -800,6 +793,21 @@ jobs:
           git commit -m "sing-box ruleset_geodata 文件更新于 ${update_version}"
           git remote add ruleset_geodata "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
           git push -f -u ruleset_geodata sing-box
+
+      - name: Commit and push `Domains`
+        run: |
+          rm -rf ./clash/ ./sing-box/
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git add ./Domains/ && git commit -m "域名列表更新于 ${update_version}"
+          git push -f
+
+      - name: Commit and push `IPs`
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git add ./IPs/ && git commit -m "域名列表更新于 ${update_version}"
+          git push -f
 
       - name: Purge jsDelivr CDN
         run: |
