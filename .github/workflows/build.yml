@@ -93,7 +93,6 @@ jobs:
 
       - name: Generate ads
         run: |
-          git submodule status
           mkdir -p ./community/mydata/ ./Domains/ ./IPs ./clash/ ./sing-box/
           mkdir -p ./tmp/sing-box/rules/ads/
           # Download clash geodata
@@ -102,6 +101,13 @@ jobs:
           curl -sSL ${ads} | grep -v '#' | sed '/^\s*$/d' > ./clash/ads.yaml
           # Download sing-box rule_set
           curl -sSL ${ads} | grep -v '#' | sed '/^\s*$/d' | sed "s/- '+\./- DOMAIN-SUFFIX,/g" | sed "s/- '/- DOMAIN,/g" | sed 's/'\''$//g' > ./tmp/sing-box/rules/ads/ads.yaml
+
+      - name: Get geoip relative files
+        run: |
+          cp -rf ./geoip/master/IPs/ .
+          cp -f ./geoip/clash/* ./clash/
+          cp -f ./geoip/sing-box/* ./sing-box/
+          rm -rf ./geoip*
 
       - name: Generate private
         run: |
@@ -712,17 +718,6 @@ jobs:
               'rule-set:microsoft-cn,apple-cn,google-cn,games-cn': [https://dns.alidns.com/dns-query, https://doh.pub/dns-query]
               'rule-set:cn,private': [https://dns.alidns.com/dns-query, https://doh.pub/dns-query]
           EOF
-
-      - name: Get geoip relative files
-        run: |
-          git submodule status
-          cp -rf ./geoip/IPs/ .
-          cd ./geoip/
-          git checkout clash
-          cp -f ../geoip/* ../clash/
-          git checkout sing-box
-          cp -f ../geoip/* ../sing-box/
-          rm -rf ../geoip*
 
       - name: Build `sing-box` db file
         run: |
