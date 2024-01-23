@@ -50,7 +50,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Checkout v2fly/domain-list-community
+      - name: Checkout v2fly/domain-list-commu nity
         uses: actions/checkout@v4
         with:
           repository: v2fly/domain-list-community
@@ -756,14 +756,7 @@ jobs:
           git status
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
-          git add ./Domains/ && git commit -m "域名列表更新于 ${update_version}"
-          git push -f
-
-      - name: Commit and push `IPs`
-        run: |
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
-          git add ./IPs/ && git commit -m "IP 段列表更新于 ${update_version}"
+          git add . && git commit -m "域名列表更新于 ${update_version}"
           git push -f
 
       - name: Release and upload `clash` assets
