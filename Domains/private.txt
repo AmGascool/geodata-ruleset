@@ -114,7 +114,7 @@ full:routerlogin.com
 full:setmeup.arubanetworks.com
 full:tplogin.cn
 full:www.asusrouter.com
-full:www.mifiwi.com
+full:www.miwifi.com
 full:www.routerlogin.com
 full:yacd.haishan.me
 full:yacd.metacubex.one
