@@ -772,7 +772,7 @@ jobs:
           git checkout master
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
-          git add ./Domains/ && git commit -m "域名列表更新于 ${update_version}"
+          git add . && git commit -m "域名列表更新于 ${update_version}"
           git push -f
 
       - name: Commit and push `IPs`
