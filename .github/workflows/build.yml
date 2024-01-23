@@ -93,6 +93,7 @@ jobs:
 
       - name: Generate ads
         run: |
+          git submodule status
           mkdir -p ./community/mydata/ ./Domains/ ./IPs ./clash/ ./sing-box/
           mkdir -p ./tmp/sing-box/rules/ads/
           # Download clash geodata
