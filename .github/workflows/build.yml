@@ -770,8 +770,8 @@ jobs:
           git checkout -b clash
           git add .
           git commit -m "clash ruleset_geodata 文件更新于 ${update_version}"
-          git remote add ruleset_geodata "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
-          git push -f -u ruleset_geodata clash
+          git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
+          git push -f -u origin clash
 
       - name: Release and upload `sing-box` assets
         uses: svenstaro/upload-release-action@v2
@@ -791,12 +791,11 @@ jobs:
           git checkout -b sing-box
           git add .
           git commit -m "sing-box ruleset_geodata 文件更新于 ${update_version}"
-          git remote add ruleset_geodata "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
-          git push -f -u ruleset_geodata sing-box
+          git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
+          git push -f -u origin sing-box
 
       - name: Commit and push `Domains`
         run: |
-          rm -rf ./clash/ ./sing-box/
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
           git add ./Domains/ && git commit -m "域名列表更新于 ${update_version}"
