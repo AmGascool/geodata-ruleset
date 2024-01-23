@@ -714,6 +714,7 @@ jobs:
 
       - name: Get geoip relative files
         run: |
+          git submodule status
           cp -rf ./geoip/IPs/ .
           cd ./geoip/
           git checkout clash
