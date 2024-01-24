@@ -106,7 +106,7 @@ jobs:
 
       - name: Generate ads
         run: |
-          mkdir -p ./community/mydata/ ./clash/ ./sing-box/
+          mkdir -p ./community/mydata/ ./Domains/ ./IPs/ ./clash/ ./sing-box/
           mkdir -p ./tmp/sing-box/rules/ads/
           # Download clash geodata
           curl -sSL ${ads} | grep -Ev '#|payload:' | sed '/^\s*$/d' | sed "s/- '+.//g" | sed "s/- '/full:/g" | sed "s/'$//g" | sed 's/^[ \t]*//g' > ./community/mydata/ads
@@ -526,8 +526,6 @@ jobs:
 
       - name: copy `mydata` domains to `Domains`
         run: |
-          rm -rf ./Domains/
-          mkdir -p ./Domains/
           cd ./community/mydata/ || exit 1
           for file in $(ls); do
             cp -f "${file}" "../../Domains/${file}.txt"
@@ -729,8 +727,6 @@ jobs:
 
       - name: Get geoip relative files
         run: |
-          rm -rf ./IPs/
-          mkdir -p ./IPs/
           cp -f ./geoip/IPs/* ./IPs/
           cp -f ./geoip/clash/* ./clash/
           cp -f ./geoip/sing-box/* ./sing-box/
@@ -773,19 +769,21 @@ jobs:
 
       - name: Commit and push `Domains`
         run: |
-          git checkout master
+          cd ./Domains/
+          git checkout -b Domains
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
-          git add ./Domains/ && git commit -m "域名列表更新于 ${update_version}"
-          git push -f
+          git add . && git commit -m "域名列表更新于 ${update_version}"
+          git push -f -u origin Domains
 
       - name: Commit and push `IPs`
         run: |
-          git checkout master
+          cd ./IPs/
+          git checkout -b IPs
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
-          git add ./IPs/ && git commit -m "IP 段列表更新于 ${update_version}"
-          git push -f
+          git add . && git commit -m "IP 段列表更新于 ${update_version}"
+          git push -f -u origin IPs
 
       - name: Release and upload `clash` assets
         uses: svenstaro/upload-release-action@v2
