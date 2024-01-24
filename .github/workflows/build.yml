@@ -770,20 +770,24 @@ jobs:
       - name: Commit and push `Domains` branch
         run: |
           cd ./Domains/ || exit 1
+          git init
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git checkout -b Domains
           git add . && git commit -m "域名列表更新于 ${update_version}"
-          git push -f origin Domains
+          git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
+          git push -f -u origin Domains
 
       - name: Commit and push `IPs` branch
         run: |
           cd ./IPs/ || exit 1
+          git init
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git checkout -b IPs
           git add . && git commit -m "IP 段列表更新于 ${update_version}"
-          git push -f origin IPs
+          git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
+          git push -f -u origin IPs
 
       - name: Release and upload `clash` assets
         uses: svenstaro/upload-release-action@v2
