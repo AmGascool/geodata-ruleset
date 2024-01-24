@@ -92,6 +92,7 @@ full:itunesconnect.apple.com
 full:mesu-cdn.apple.com.akadns.net
 full:mesu-china.apple.com.akadns.net
 full:mesu.apple.com
+full:ml.cdn-apple.com
 full:music.apple.com
 full:ocsp-lb.apple.com.akadns.net
 full:ocsp.apple.com
@@ -115,8 +116,8 @@ full:store.storeimages.apple.com.akadns.net
 full:store.storeimages.cdn-apple.com
 full:support-china.apple-support.akadns.net
 full:support.apple.com
-full:swallow.apple.com
 full:swallow-apple-com.v.aaplimg.com
+full:swallow.apple.com
 full:swcatalog-cdn.apple.com.akadns.net
 full:swcatalog.apple.com
 full:swcdn.apple.com
