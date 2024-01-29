@@ -755,9 +755,9 @@ jobs:
           }
           EOF
 
-      - name: Generate `sing-box` geodata-lite-dns.json
+      - name: Generate `sing-box` geodata-dns-lite.json
         run: |
-          cat <<EOF > ./sing-box/geodata-lite-dns.json
+          cat <<EOF > ./sing-box/geodata-dns-lite.json
           {
             "dns": {
               "servers": [
@@ -811,9 +811,9 @@ jobs:
           }
           EOF
 
-      - name: Generate `sing-box` ruleset-lite-dns.json
+      - name: Generate `sing-box` ruleset-dns-lite.json
         run: |
-          cat <<EOF > ./sing-box/ruleset-lite-dns.json
+          cat <<EOF > ./sing-box/ruleset-dns-lite.json
           {
             "dns": {
               "servers": [
