@@ -740,8 +740,8 @@ jobs:
               ],
               "rules": [
                 { "outbound": "any", "server": "dns_ip" },
-                { "clash_mode": "global", "server": "dns_fakeip" },
-                { "clash_mode": "direct", "server": "dns_direct" },
+                { "clash_mode": "Global", "server": "dns_fakeip" },
+                { "clash_mode": "Direct", "server": "dns_direct" },
                 { "geosite": "ads", "server": "dns_block" },
                 { "geosite": "proxy", "query_type": [ "A", "AAAA" ], "server": "dns_fakeip" },
                 { "geosite": "cn", "query_type": [ "A", "AAAA" ], "server": "dns_direct" }
@@ -768,8 +768,8 @@ jobs:
               ],
               "rules": [
                 { "outbound": "any", "server": "dns_ip" },
-                { "clash_mode": "global", "server": "dns_fakeip" },
-                { "clash_mode": "direct", "server": "dns_direct" },
+                { "clash_mode": "Global", "server": "dns_fakeip" },
+                { "clash_mode": "Direct", "server": "dns_direct" },
                 { "geosite": "proxy", "query_type": [ "A", "AAAA" ], "server": "dns_fakeip" },
                 { "geosite": "cn", "query_type": [ "A", "AAAA" ], "server": "dns_direct" }
               ],
@@ -796,8 +796,8 @@ jobs:
               ],
               "rules": [
                 { "outbound": "any", "server": "dns_ip" },
-                { "clash_mode": "global", "server": "dns_fakeip" },
-                { "clash_mode": "direct", "server": "dns_direct" },
+                { "clash_mode": "Global", "server": "dns_fakeip" },
+                { "clash_mode": "Direct", "server": "dns_direct" },
                 { "rule_set": "ads", "server": "dns_block" },
                 { "rule_set": "proxy", "query_type": [ "A", "AAAA" ], "server": "dns_fakeip" },
                 { "rule_set": "cn", "query_type": [ "A", "AAAA" ], "server": "dns_direct" }
@@ -824,8 +824,8 @@ jobs:
               ],
               "rules": [
                 { "outbound": "any", "server": "dns_ip" },
-                { "clash_mode": "global", "server": "dns_fakeip" },
-                { "clash_mode": "direct", "server": "dns_direct" },
+                { "clash_mode": "Global", "server": "dns_fakeip" },
+                { "clash_mode": "Direct", "server": "dns_direct" },
                 { "rule_set": "proxy", "query_type": [ "A", "AAAA" ], "server": "dns_fakeip" },
                 { "rule_set": "cn", "query_type": [ "A", "AAAA" ], "server": "dns_direct" }
               ],
