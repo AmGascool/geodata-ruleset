@@ -655,7 +655,19 @@ taskkill /f /t /im Clash-Verge*
 taskkill /f /t /im clash-meta*
 curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\profiles\{Merge 文件名}.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/ruleset-{DNS 模式}-user.yaml
 ```
-### ② 添加定时任务（以 ShellCrash 为例，安装路径为 */data/ShellCrash*）
+### ② dns.json（仅限搭载 sing-box 内核的 ShellCrash）
+匹配使用本项目生成的规则集后的 DNS 规则，连接 SSH 后执行如下命令：
+```
+# 使用 geodata 方案且使用了广告拦截 `geosite:ads`
+curl -o $CRASHDIR/jsons/dns.json -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/geodata-dns.json
+# 使用 geodata 方案且不使用广告拦截
+curl -o $CRASHDIR/jsons/dns.json -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/geodata-dns-lite.json
+# 使用 ruleset 方案且使用了广告拦截 `rule_set:ads`
+curl -o $CRASHDIR/jsons/dns.json -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/ruleset-dns.json
+# 使用 ruleset 方案且不使用广告拦截
+curl -o $CRASHDIR/jsons/dns.json -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/ruleset-dns-lite.json
+```
+### ③ 添加定时任务（以 ShellCrash 为例，安装路径为 */data/ShellCrash*）
 • 连接 SSH 后执行 `vi $CRASHDIR/task/task.user`，按一下 Ins 键（Insert 键），粘贴如下内容：
 ```
 201#curl -o /data/ShellCrash/yamls/user.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/ruleset-{DNS 模式}-user.yaml && /data/ShellCrash/start.sh restart >/dev/null 2>&1#更新user.yaml
