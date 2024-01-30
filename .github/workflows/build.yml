@@ -476,16 +476,25 @@ jobs:
         run: |
           mkdir -p ./tmp/sing-box/rules/cn/
           # Download clash geodata
-          echo 'full:static.adtidy.org' > ./tmp/temp-cn.txt
+          cat <<EOF > ./tmp/temp-cn.txt
+          full:adguardteam.github.io
+          full:static.adtidy.org
+          EOF
           curl -sSL ${cn} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/g' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' >> ./tmp/temp-cn.txt
           sort --ignore-case -u ./tmp/temp-cn.txt > ./community/mydata/cn
           # Download clash rule-set
-          echo "  - 'static.adtidy.org'" > ./tmp/temp-cn.yaml
+          cat <<EOF > ./tmp/temp-cn.yaml
+            - 'adguardteam.github.io'
+            - 'static.adtidy.org'
+          EOF
           curl -sSL ${cn} | grep -Ev '#|payload:|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" >> ./tmp/temp-cn.yaml
           echo 'payload:' > ./clash/cn.yaml
           sort --ignore-case -u ./tmp/temp-cn.yaml >> ./clash/cn.yaml
           # Download sing-box rule_set
-          echo "  - DOMAIN,static.adtidy.org" > ./tmp/temp-cn.yaml
+          cat <<EOF > ./tmp/temp-cn.yaml
+            - DOMAIN,adguardteam.github.io
+            - DOMAIN,static.adtidy.org
+          EOF
           curl -sSL ${cn} | grep -Ev '#|payload:|\- IP-CIDR' | sed '/^\s*$/d' >> ./tmp/temp-cn.yaml
           echo 'payload:' > ./tmp/sing-box/rules/cn/cn.yaml
           sort --ignore-case -u ./tmp/temp-cn.yaml >> ./tmp/sing-box/rules/cn/cn.yaml
