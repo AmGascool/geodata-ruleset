@@ -476,29 +476,13 @@ jobs:
         run: |
           mkdir -p ./tmp/sing-box/rules/cn/
           # Download clash geodata
-          cat <<EOF > ./tmp/temp-cn.txt
-          full:adguardteam.github.io
-          full:static.adtidy.org
-          EOF
-          curl -sSL ${cn} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/g' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' >> ./tmp/temp-cn.txt
-          sort --ignore-case -u ./tmp/temp-cn.txt > ./community/mydata/cn
+          curl -sSL ${cn} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/g' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' > ./community/mydata/cn
           # Download clash rule-set
-          cat <<EOF > ./tmp/temp-cn.yaml
-            - 'adguardteam.github.io'
-            - 'static.adtidy.org'
-          EOF
-          curl -sSL ${cn} | grep -Ev '#|payload:|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" >> ./tmp/temp-cn.yaml
           echo 'payload:' > ./clash/cn.yaml
-          sort --ignore-case -u ./tmp/temp-cn.yaml >> ./clash/cn.yaml
+          curl -sSL ${cn} | grep -Ev '#|payload:|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" >> ./clash/cn.yaml
           # Download sing-box rule_set
-          cat <<EOF > ./tmp/temp-cn.yaml
-            - DOMAIN,adguardteam.github.io
-            - DOMAIN,static.adtidy.org
-          EOF
-          curl -sSL ${cn} | grep -Ev '#|payload:|\- IP-CIDR' | sed '/^\s*$/d' >> ./tmp/temp-cn.yaml
           echo 'payload:' > ./tmp/sing-box/rules/cn/cn.yaml
-          sort --ignore-case -u ./tmp/temp-cn.yaml >> ./tmp/sing-box/rules/cn/cn.yaml
-          
+          curl -sSL ${cn} | grep -Ev '#|payload:|\- IP-CIDR' | sed '/^\s*$/d' >> ./tmp/sing-box/rules/cn/cn.yaml
 
       - name: Generate telegramip
         run: |
@@ -617,12 +601,12 @@ jobs:
               - https://223.5.5.5/dns-query
               - https://1.12.12.12/dns-query
             nameserver:
-              - https://dns.alidns.com/dns-query
+              - https://dns.alidns.com/dns-query#h3=true
               - https://doh.pub/dns-query
             nameserver-policy:
-              'geosite:microsoft-cn,apple-cn,google-cn,games-cn': [https://dns.alidns.com/dns-query, https://doh.pub/dns-query]
-              'geosite:cn,private': [https://dns.alidns.com/dns-query, https://doh.pub/dns-query]
-              'geosite:proxy': ['https://dns.google/dns-query#🪜 代理域名', 'https://cloudflare-dns.com/dns-query#🪜 代理域名']
+              'geosite:microsoft-cn,apple-cn,google-cn,games-cn': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
+              'geosite:cn,private': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
+              'geosite:proxy': ['https://cloudflare-dns.com/dns-query#🪜 代理域名&h3=true', 'https://dns.google/dns-query#🪜 代理域名']
           EOF
 
       - name: Generate `clash` geodata-redirhost-user.yaml
@@ -662,13 +646,13 @@ jobs:
               - https://223.5.5.5/dns-query
               - https://1.12.12.12/dns-query
             nameserver:
+              - 'https://cloudflare-dns.com/dns-query#🪜 代理域名&h3=true'
               - 'https://dns.google/dns-query#🪜 代理域名'
-              - 'https://cloudflare-dns.com/dns-query#🪜 代理域名'
             proxy-server-nameserver:
-              - https://dns.alidns.com/dns-query
+              - https://dns.alidns.com/dns-query#h3=true
             nameserver-policy:
-              'geosite:microsoft-cn,apple-cn,google-cn,games-cn': [https://dns.alidns.com/dns-query, https://doh.pub/dns-query]
-              'geosite:cn,private': [https://dns.alidns.com/dns-query, https://doh.pub/dns-query]
+              'geosite:microsoft-cn,apple-cn,google-cn,games-cn': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
+              'geosite:cn,private': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
           EOF
 
       - name: Generate `clash` ruleset-fakeip-user.yaml
@@ -698,12 +682,12 @@ jobs:
               - https://223.5.5.5/dns-query
               - https://1.12.12.12/dns-query
             nameserver:
-              - https://dns.alidns.com/dns-query
+              - https://dns.alidns.com/dns-query#h3=true
               - https://doh.pub/dns-query
             nameserver-policy:
-              'rule-set:microsoft-cn,apple-cn,google-cn,games-cn': [https://dns.alidns.com/dns-query, https://doh.pub/dns-query]
-              'rule-set:cn,private': [https://dns.alidns.com/dns-query, https://doh.pub/dns-query]
-              'rule-set:proxy': ['https://dns.google/dns-query#🪜 代理域名', 'https://cloudflare-dns.com/dns-query#🪜 代理域名']
+              'rule-set:microsoft-cn,apple-cn,google-cn,games-cn': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
+              'rule-set:cn,private': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
+              'rule-set:proxy': ['https://cloudflare-dns.com/dns-query#🪜 代理域名&h3=true', 'https://dns.google/dns-query#🪜 代理域名']
           EOF
 
       - name: Generate `clash` ruleset-redirhost-user.yaml
@@ -726,13 +710,13 @@ jobs:
               - https://223.5.5.5/dns-query
               - https://1.12.12.12/dns-query
             nameserver:
+              - 'https://cloudflare-dns.com/dns-query#🪜 代理域名&h3=true'
               - 'https://dns.google/dns-query#🪜 代理域名'
-              - 'https://cloudflare-dns.com/dns-query#🪜 代理域名'
             proxy-server-nameserver:
-              - https://dns.alidns.com/dns-query
+              - https://dns.alidns.com/dns-query#h3=true
             nameserver-policy:
-              'rule-set:microsoft-cn,apple-cn,google-cn,games-cn': [https://dns.alidns.com/dns-query, https://doh.pub/dns-query]
-              'rule-set:cn,private': [https://dns.alidns.com/dns-query, https://doh.pub/dns-query]
+              'rule-set:microsoft-cn,apple-cn,google-cn,games-cn': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
+              'rule-set:cn,private': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
           EOF
 
       - name: Generate `sing-box` geodata-dns.json
@@ -779,6 +763,7 @@ jobs:
                 { "outbound": "any", "server": "dns_ip" },
                 { "clash_mode": "Global", "server": "dns_fakeip" },
                 { "clash_mode": "Direct", "server": "dns_direct" },
+                { "domain": [ "adguardteam.github.io", "anti-ad.net", "static.adtidy.org" ], "query_type": [ "A", "AAAA" ], "server": "dns_direct" },
                 { "geosite": [ "microsoft-cn", "apple-cn", "google-cn", "games-cn", "cn", "private" ], "query_type": [ "A", "AAAA" ], "server": "dns_direct" },
                 { "geosite": [ "proxy" ], "query_type": [ "A", "AAAA" ], "server": "dns_fakeip" }
               ],
@@ -835,6 +820,7 @@ jobs:
                 { "outbound": "any", "server": "dns_ip" },
                 { "clash_mode": "Global", "server": "dns_fakeip" },
                 { "clash_mode": "Direct", "server": "dns_direct" },
+                { "domain": [ "adguardteam.github.io", "anti-ad.net", "static.adtidy.org" ], "query_type": [ "A", "AAAA" ], "server": "dns_direct" },
                 { "rule_set": [ "microsoft-cn", "apple-cn", "google-cn", "games-cn", "cn", "private" ], "query_type": [ "A", "AAAA" ], "server": "dns_direct" },
                 { "rule_set": [ "proxy" ], "query_type": [ "A", "AAAA" ], "server": "dns_fakeip" }
               ],
