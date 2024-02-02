@@ -649,7 +649,7 @@ jobs:
             proxy-server-nameserver:
               - https://dns.alidns.com/dns-query#h3=true
             nameserver-policy:
-              'adguardteam.github.io,anti-ad.net,static.adtidy.org': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
+              'adguardteam.github.io,adrules.top,anti-ad.net,static.adtidy.org': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
               'geosite:microsoft-cn,apple-cn,google-cn,games-cn': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
               'geosite:cn,private': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
           EOF
@@ -657,6 +657,15 @@ jobs:
       - name: Generate `clash` ruleset-fakeip-user.yaml
         run: |
           cat <<EOF > ./clash/ruleset-fakeip-user.yaml
+          mode: rule
+          log-level: silent
+          allow-lan: true
+          unified-delay: false
+          tcp-concurrent: true
+          external-controller-tls: 127.0.0.1:9090
+          global-client-fingerprint: chrome
+          profile: {store-selected: true, store-fake-ip: true}
+
           sniffer:
             enable: true
             sniff: {HTTP: {ports: [80, 8080-8880], override-destination: true}, TLS: {ports: [443, 8443]}, QUIC: {ports: [443, 8443]}}
@@ -690,6 +699,15 @@ jobs:
       - name: Generate `clash` ruleset-redirhost-user.yaml
         run: |
           cat <<EOF > ./clash/ruleset-redirhost-user.yaml
+          mode: rule
+          log-level: silent
+          allow-lan: true
+          unified-delay: false
+          tcp-concurrent: true
+          external-controller-tls: 127.0.0.1:9090
+          global-client-fingerprint: chrome
+          profile: {store-selected: true, store-fake-ip: true}
+
           sniffer:
             enable: true
             sniff: {HTTP: {ports: [80, 8080-8880], override-destination: true}, TLS: {ports: [443, 8443]}, QUIC: {ports: [443, 8443]}}
@@ -712,7 +730,7 @@ jobs:
             proxy-server-nameserver:
               - https://dns.alidns.com/dns-query#h3=true
             nameserver-policy:
-              'adguardteam.github.io,anti-ad.net,static.adtidy.org': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
+              'adguardteam.github.io,adrules.top,anti-ad.net,static.adtidy.org': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
               'rule-set:microsoft-cn,apple-cn,google-cn,games-cn': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
               'rule-set:cn,private': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
           EOF
@@ -723,19 +741,20 @@ jobs:
           {
             "dns": {
               "servers": [
-                { "tag": "dns_direct", "address": "h3://dns.alidns.com/dns-query", "address_resolver": "dns_ip", "detour": "DIRECT" },
+                { "tag": "dns_alidns", "address": "h3://dns.alidns.com/dns-query", "address_resolver": "dns_ip", "detour": "DIRECT" },
+                { "tag": "dns_dnspod", "address": "https://doh.pub/dns-query", "address_resolver": "dns_ip", "detour": "DIRECT" },
                 { "tag": "dns_ip", "address": "https://223.5.5.5/dns-query", "detour": "DIRECT" },
                 { "tag": "dns_fakeip", "address": "fakeip" }
               ],
               "rules": [
                 { "outbound": "any", "server": "dns_ip" },
                 { "clash_mode": "Global", "server": "dns_fakeip" },
-                { "clash_mode": "Direct", "server": "dns_direct" },
-                { "domain": [ "adguardteam.github.io", "adrules.top", "anti-ad.net", "static.adtidy.org" ], "query_type": [ "A", "AAAA" ], "server": "dns_direct" },
-                { "geosite": [ "microsoft-cn", "apple-cn", "google-cn", "games-cn", "cn", "private" ], "query_type": [ "A", "AAAA" ], "server": "dns_direct" },
+                { "clash_mode": "Direct", "server": [ "dns_alidns", "dns_dnspod" ] },
+                { "domain": [ "adguardteam.github.io", "adrules.top", "anti-ad.net", "static.adtidy.org" ], "query_type": [ "A", "AAAA" ], "server": [ "dns_alidns", "dns_dnspod" ] },
+                { "geosite": [ "microsoft-cn", "apple-cn", "google-cn", "games-cn", "cn", "private" ], "query_type": [ "A", "AAAA" ], "server": [ "dns_alidns", "dns_dnspod" ] },
                 { "geosite": [ "proxy" ], "query_type": [ "A", "AAAA" ], "server": "dns_fakeip" }
               ],
-              "final": "dns_direct",
+              "final": [ "dns_alidns", "dns_dnspod" ],
               "strategy": "prefer_ipv6",
               "independent_cache": true,
               "reverse_mapping": true,
@@ -750,19 +769,20 @@ jobs:
           {
             "dns": {
               "servers": [
-                { "tag": "dns_direct", "address": "h3://dns.alidns.com/dns-query", "address_resolver": "dns_ip", "detour": "DIRECT" },
+                { "tag": "dns_alidns", "address": "h3://dns.alidns.com/dns-query", "address_resolver": "dns_ip", "detour": "DIRECT" },
+                { "tag": "dns_dnspod", "address": "https://doh.pub/dns-query", "address_resolver": "dns_ip", "detour": "DIRECT" },
                 { "tag": "dns_ip", "address": "https://223.5.5.5/dns-query", "detour": "DIRECT" },
                 { "tag": "dns_fakeip", "address": "fakeip" }
               ],
               "rules": [
                 { "outbound": "any", "server": "dns_ip" },
                 { "clash_mode": "Global", "server": "dns_fakeip" },
-                { "clash_mode": "Direct", "server": "dns_direct" },
-                { "domain": [ "adguardteam.github.io", "adrules.top", "anti-ad.net", "static.adtidy.org" ], "query_type": [ "A", "AAAA" ], "server": "dns_direct" },
-                { "rule_set": [ "microsoft-cn", "apple-cn", "google-cn", "games-cn", "cn", "private" ], "query_type": [ "A", "AAAA" ], "server": "dns_direct" },
+                { "clash_mode": "Direct", "server": [ "dns_alidns", "dns_dnspod" ] },
+                { "domain": [ "adguardteam.github.io", "adrules.top", "anti-ad.net", "static.adtidy.org" ], "query_type": [ "A", "AAAA" ], "server": [ "dns_alidns", "dns_dnspod" ] },
+                { "rule_set": [ "microsoft-cn", "apple-cn", "google-cn", "games-cn", "cn", "private" ], "query_type": [ "A", "AAAA" ], "server": [ "dns_alidns", "dns_dnspod" ] },
                 { "rule_set": [ "proxy" ], "query_type": [ "A", "AAAA" ], "server": "dns_fakeip" }
               ],
-              "final": "dns_direct",
+              "final": [ "dns_alidns", "dns_dnspod" ],
               "strategy": "prefer_ipv6",
               "independent_cache": true,
               "reverse_mapping": true,
