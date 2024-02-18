@@ -87,7 +87,6 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: '1.22'
-          go-version-file: ./community/go.mod
           cache-dependency-path: ./community/go.sum
 
       - name: Delete `clash` tag and release
