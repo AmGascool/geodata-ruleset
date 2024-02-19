@@ -747,8 +747,8 @@ jobs:
               ],
               "rules": [
                 { "outbound": "any", "server": "dns_ip" },
-                { "clash_mode": "Global", "server": "dns_fakeip" },
                 { "clash_mode": "Direct", "server": "dns_direct" },
+                { "clash_mode": "Global", "server": "dns_fakeip" },
                 { "domain": [ "adguardteam.github.io", "adrules.top", "anti-ad.net", "static.adtidy.org" ], "query_type": [ "A", "AAAA" ], "server": "dns_direct" },
                 { "geosite": [ "microsoft-cn", "apple-cn", "google-cn", "games-cn", "cn", "private" ], "query_type": [ "A", "AAAA" ], "server": "dns_direct" },
                 { "geosite": [ "proxy" ], "query_type": [ "A", "AAAA" ], "server": "dns_fakeip" }
@@ -774,8 +774,8 @@ jobs:
               ],
               "rules": [
                 { "outbound": "any", "server": "dns_ip" },
-                { "clash_mode": "Global", "server": "dns_fakeip" },
                 { "clash_mode": "Direct", "server": "dns_direct" },
+                { "clash_mode": "Global", "server": "dns_fakeip" },
                 { "domain": [ "adguardteam.github.io", "adrules.top", "anti-ad.net", "static.adtidy.org" ], "query_type": [ "A", "AAAA" ], "server": "dns_direct" },
                 { "rule_set": [ "microsoft-cn", "apple-cn", "google-cn", "games-cn", "cn", "private" ], "query_type": [ "A", "AAAA" ], "server": "dns_direct" },
                 { "rule_set": [ "proxy" ], "query_type": [ "A", "AAAA" ], "server": "dns_fakeip" }
