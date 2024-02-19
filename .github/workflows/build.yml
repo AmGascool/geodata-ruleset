@@ -571,9 +571,9 @@ jobs:
 
           geodata-mode: true
           geox-url:
-            geosite: "https://fastly.jsdelivr.net/gh/DustinWin/clash-geosite@release/geosite-lite.dat"
-            geoip: "https://fastly.jsdelivr.net/gh/DustinWin/clash-geosite@release/geoip-lite.dat"
-            mmdb: "https://fastly.jsdelivr.net/gh/DustinWin/clash-geosite@release/Country-lite.mmdb"
+            geosite: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite-lite.dat"
+            geoip: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip-lite.dat"
+            mmdb: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/Country-lite.mmdb"
           geo-auto-update: true
           geo-update-interval: 24
 
@@ -602,6 +602,7 @@ jobs:
               - https://dns.alidns.com/dns-query#h3=true
               - https://doh.pub/dns-query
             nameserver-policy:
+              'adguardteam.github.io,adrules.top,anti-ad.net,static.adtidy.org': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
               'geosite:microsoft-cn,apple-cn,google-cn,games-cn': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
               'geosite:cn,private': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
               'geosite:proxy': ['https://cloudflare-dns.com/dns-query#🪜 代理域名&h3=true', 'https://dns.google/dns-query#🪜 代理域名']
@@ -621,9 +622,9 @@ jobs:
 
           geodata-mode: true
           geox-url:
-            geosite: "https://fastly.jsdelivr.net/gh/DustinWin/clash-geosite@release/geosite-lite.dat"
-            geoip: "https://fastly.jsdelivr.net/gh/DustinWin/clash-geosite@release/geoip-lite.dat"
-            mmdb: "https://fastly.jsdelivr.net/gh/DustinWin/clash-geosite@release/Country-lite.mmdb"
+            geosite: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite-lite.dat"
+            geoip: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip-lite.dat"
+            mmdb: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/Country-lite.mmdb"
           geo-auto-update: true
           geo-update-interval: 24
 
@@ -691,6 +692,7 @@ jobs:
               - https://dns.alidns.com/dns-query#h3=true
               - https://doh.pub/dns-query
             nameserver-policy:
+              'adguardteam.github.io,adrules.top,anti-ad.net,static.adtidy.org': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
               'rule-set:microsoft-cn,apple-cn,google-cn,games-cn': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
               'rule-set:cn,private': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
               'rule-set:proxy': ['https://cloudflare-dns.com/dns-query#🪜 代理域名&h3=true', 'https://dns.google/dns-query#🪜 代理域名']
