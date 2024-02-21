@@ -43,7 +43,7 @@
     <td>GitHub 源：https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geosite.dat</td>
   </tr>
   <tr>
-    <td>jsDelivr 源：https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite.dat</td>
+    <td>jsDelivr 源：https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite.dat</td>
   </tr>
   <tr>
     <td>GitHub Proxy 源：https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geosite.dat</td>
@@ -53,7 +53,7 @@
     <td>GitHub 源：https://raw.githubusercontent.com/DustinWin/ruleset_geodata/sing-box/geosite.db</td>
   </tr>
   <tr>
-    <td>jsDelivr 源：https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/geosite.db</td>
+    <td>jsDelivr 源：https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/geosite.db</td>
   </tr>
   <tr>
     <td>GitHub Proxy 源：https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/sing-box/geosite.db</td>
@@ -63,7 +63,7 @@
     <td>GitHub 源：https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geoip.dat</td>
   </tr>
   <tr>
-    <td>jsDelivr 源：https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.dat</td>
+    <td>jsDelivr 源：https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.dat</td>
   </tr>
   <tr>
     <td>GitHub Proxy 源：https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geoip.dat</td>
@@ -73,7 +73,7 @@
     <td>GitHub 源：https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/Country.mmdb</td>
   </tr>
   <tr>
-    <td>jsDelivr 源：https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/Country.mmdb</td>
+    <td>jsDelivr 源：https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/Country.mmdb</td>
   </tr>
   <tr>
     <td>GitHub Proxy 源：https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/Country.mmdb</td>
@@ -83,7 +83,7 @@
     <td>GitHub 源：https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geoip.metadb</td>
   </tr>
   <tr>
-    <td>jsDelivr 源：https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.metadb</td>
+    <td>jsDelivr 源：https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.metadb</td>
   </tr>
   <tr>
     <td>GitHub Proxy 源：https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geoip.metadb</td>
@@ -93,7 +93,7 @@
     <td>GitHub 源：https://raw.githubusercontent.com/DustinWin/ruleset_geodata/sing-box/geoip.db</td>
   </tr>
   <tr>
-    <td>jsDelivr 源：https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/geoip.db</td>
+    <td>jsDelivr 源：https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/geoip.db</td>
   </tr>
   <tr>
     <td>GitHub Proxy 源：https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/sing-box/geoip.db</td>
@@ -105,14 +105,14 @@
 连接 SSH 后执行如下命令：
 ```
 # 适用于 Clash 内核
-curl -o $CRASHDIR/geosite.dat -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite.dat
-curl -o $CRASHDIR/geoip.dat -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.dat
-curl -o $CRASHDIR/Country.mmdb -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/Country.mmdb
+curl -o $CRASHDIR/geosite.dat -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite.dat
+curl -o $CRASHDIR/geoip.dat -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.dat
+curl -o $CRASHDIR/Country.mmdb -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/Country.mmdb
 # 适用于 Clash.Meta 内核
-curl -o $CRASHDIR/geoip.metadb -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.metadb
+curl -o $CRASHDIR/geoip.metadb -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.metadb
 # 适用于 sing-box 内核
-curl -o $CRASHDIR/geosite.db -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/geosite.db
-curl -o $CRASHDIR/geoip.db -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/geoip.db
+curl -o $CRASHDIR/geosite.db -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/geosite.db
+curl -o $CRASHDIR/geoip.db -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/geoip.db
 $CRASHDIR/start.sh restart
 ```
 ### ② 导入到 Windows 端（以 [Clash Verge](https://github.com/MetaCubeX/clash-verge) 导入 geosite.dat、geoip.dat、Country.mmdb和 geoip.metadb 为例）
@@ -121,10 +121,10 @@ $CRASHDIR/start.sh restart
 taskkill /f /t /im "Clash Verge*"
 taskkill /f /t /im Clash-Verge*
 taskkill /f /t /im clash-meta*
-curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\geosite.dat -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite.dat
-curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\geoip.dat -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.dat
-curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\Country.mmdb -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/Country.mmdb
-curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\geoip.metadb -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.metadb
+curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\geosite.dat -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite.dat
+curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\geoip.dat -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.dat
+curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\Country.mmdb -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/Country.mmdb
+curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\geoip.metadb -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.metadb
 ```
 ## 5. 文件拓展
 ### ① user.yaml（仅限 Clash.Meta 内核）
@@ -139,7 +139,7 @@ curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\geoip.metadb -L http
 将下面命令中的 `{DNS 模式}` 替换为正在使用的 DNS 模式（`fakeip` 或 `redirhost`）  
 连接 SSH 后执行如下命令：
 ```
-curl -o $CRASHDIR/yamls/user.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geodata-{DNS 模式}-user.yaml
+curl -o $CRASHDIR/yamls/user.yaml -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geodata-{DNS 模式}-user.yaml
 $CRASHDIR/start.sh restart
 ```
 • 导入 Windows 端（以导入 Clash Verge 为例）  
@@ -151,7 +151,7 @@ $CRASHDIR/start.sh restart
 taskkill /f /t /im "Clash Verge*"
 taskkill /f /t /im Clash-Verge*
 taskkill /f /t /im clash-meta*
-curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\profiles\{Merge 文件名}.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geodata-{DNS 模式}-user.yaml
+curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\profiles\{Merge 文件名}.yaml -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geodata-{DNS 模式}-user.yaml
 ```
 ### ② dns.json（仅限 sing-box PuerNya 版内核）
 • `dns.rules` 数组  
@@ -159,19 +159,19 @@ curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\profiles\{Merge 文�
 • 导入 Linux 端（以导入 ShellCrash 为例）   
 连接 SSH 后执行如下命令：
 ```
-curl -o $CRASHDIR/jsons/dns.json -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/geodata-dns.json
+curl -o $CRASHDIR/jsons/dns.json -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/geodata-dns.json
 $CRASHDIR/start.sh restart
 ```
 ### ③ 添加定时任务（以 ShellCrash 为例，安装路径为 */data/ShellCrash*）
 连接 SSH 后执行 `vi $CRASHDIR/task/task.user`，按一下 Ins 键（Insert 键），粘贴如下内容：
 ```
 # 适用于 Clash 内核
-201#curl -o /data/ShellCrash/geosite.dat -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite.dat && curl -o /data/ShellCrash/Country.mmdb -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/Country.mmdb && curl -o /data/ShellCrash/geoip.dat -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.dat && /data/ShellCrash/start.sh restart >/dev/null 2>&1#更新geodata路由规则文件
+201#curl -o /data/ShellCrash/geosite.dat -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite.dat && curl -o /data/ShellCrash/Country.mmdb -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/Country.mmdb && curl -o /data/ShellCrash/geoip.dat -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.dat && /data/ShellCrash/start.sh restart >/dev/null 2>&1#更新geodata路由规则文件
 # 适用于 Clash.Meta 内核
-202#curl -o /data/ShellCrash/geoip.metadb -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.metadb && /data/ShellCrash/start.sh restart >/dev/null 2>&1#更新geodata路由规则文件
-203#curl -o /data/ShellCrash/yamls/user.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geodata-{DNS 模式}-user.yaml && /data/ShellCrash/start.sh restart >/dev/null 2>&1#更新user.yaml
+202#curl -o /data/ShellCrash/geoip.metadb -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.metadb && /data/ShellCrash/start.sh restart >/dev/null 2>&1#更新geodata路由规则文件
+203#curl -o /data/ShellCrash/yamls/user.yaml -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geodata-{DNS 模式}-user.yaml && /data/ShellCrash/start.sh restart >/dev/null 2>&1#更新user.yaml
 # 适用于 sing-box 内核
-204#curl -o /data/ShellCrash/geosite.db -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite.db && curl -o /data/ShellCrash/geoip.db -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.db && /data/ShellCrash/start.sh restart >/dev/null 2>&1#更新geodata路由规则文件
+204#curl -o /data/ShellCrash/geosite.db -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite.db && curl -o /data/ShellCrash/geoip.db -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.db && /data/ShellCrash/start.sh restart >/dev/null 2>&1#更新geodata路由规则文件
 ```
 按一下 Esc 键（退出键），输入英文冒号 `:`，继续输入 `wq` 并回车  
 执行 `crash`，进入 ShellCrash->5 配置自动任务->1 添加自动任务，可以看到末尾就有添加的定时任务，输入对应的数字并回车后可设置执行条件
@@ -256,154 +256,154 @@ rule-providers:
   ads:
     type: http
     behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/ads.yaml"
+    url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/ads.yaml"
     path: ./ruleset/ads.yaml
     interval: 86400
 
   private:
     type: http
     behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/private.yaml"
+    url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/private.yaml"
     path: ./ruleset/private.yaml
     interval: 86400
 
   microsoft-cn:
     type: http
     behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/microsoft-cn.yaml"
+    url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/microsoft-cn.yaml"
     path: ./ruleset/microsoft-cn.yaml
     interval: 86400
 
   apple-cn:
     type: http
     behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/apple-cn.yaml"
+    url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/apple-cn.yaml"
     path: ./ruleset/apple-cn.yaml
     interval: 86400
 
   google-cn:
     type: http
     behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/google-cn.yaml"
+    url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/google-cn.yaml"
     path: ./ruleset/google-cn.yaml
     interval: 86400
 
   games-cn:
     type: http
     behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/games-cn.yaml"
+    url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/games-cn.yaml"
     path: ./ruleset/games-cn.yaml
     interval: 86400
 
   netflix:
     type: http
     behavior: classical
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/netflix.yaml"
+    url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/netflix.yaml"
     path: ./ruleset/netflix.yaml
     interval: 86400
 
   disney:
     type: http
     behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/disney.yaml"
+    url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/disney.yaml"
     path: ./ruleset/disney.yaml
     interval: 86400
 
   max:
     type: http
     behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/max.yaml"
+    url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/max.yaml"
     path: ./ruleset/max.yaml
     interval: 86400
 
   primevideo:
     type: http
     behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/primevideo.yaml"
+    url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/primevideo.yaml"
     path: ./ruleset/primevideo.yaml
     interval: 86400
 
   appletv:
     type: http
     behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/appletv.yaml"
+    url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/appletv.yaml"
     path: ./ruleset/appletv.yaml
     interval: 86400
 
   youtube:
     type: http
     behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/youtube.yaml"
+    url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/youtube.yaml"
     path: ./ruleset/youtube.yaml
     interval: 86400
 
   tiktok:
     type: http
     behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/tiktok.yaml"
+    url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/tiktok.yaml"
     path: ./ruleset/tiktok.yaml
     interval: 86400
 
   bilibili:
     type: http
     behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/bilibili.yaml"
+    url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/bilibili.yaml"
     path: ./ruleset/bilibili.yaml
     interval: 86400
 
   ai:
     type: http
     behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/ai.yaml"
+    url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/ai.yaml"
     path: ./ruleset/ai.yaml
     interval: 86400
 
   networktest:
     type: http
     behavior: classical
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/networktest.yaml"
+    url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/networktest.yaml"
     path: ./ruleset/networktest.yaml
     interval: 86400
 
   applications:
     type: http
     behavior: classical
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/applications.yaml"
+    url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/applications.yaml"
     path: ./ruleset/applications.yaml
     interval: 86400
 
   proxy:
     type: http
     behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/proxy.yaml"
+    url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/proxy.yaml"
     path: ./ruleset/proxy.yaml
     interval: 86400
 
   cn:
     type: http
     behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/cn.yaml"
+    url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/cn.yaml"
     path: ./ruleset/cn.yaml
     interval: 86400
 
   telegramip:
     type: http
     behavior: ipcidr
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/telegramip.yaml"
+    url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/telegramip.yaml"
     path: ./ruleset/telegramip.yaml
     interval: 86400
 
   privateip:
     type: http
     behavior: ipcidr
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/privateip.yaml"
+    url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/privateip.yaml"
     path: ./ruleset/privateip.yaml
     interval: 86400
 
   cnip:
     type: http
     behavior: ipcidr
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/cnip.yaml"
+    url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/cnip.yaml"
     path: ./ruleset/cnip.yaml
     interval: 86400
 
@@ -491,147 +491,147 @@ rules:
         "tag": "ads",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/ads.srs",
+        "url": "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/ads.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "private",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/private.srs",
+        "url": "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/private.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "microsoft-cn",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/microsoft-cn.srs",
+        "url": "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/microsoft-cn.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "apple-cn",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/apple-cn.srs",
+        "url": "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/apple-cn.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "google-cn",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/google-cn.srs",
+        "url": "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/google-cn.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "games-cn",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/games-cn.srs",
+        "url": "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/games-cn.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "netflix",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/netflix.srs",
+        "url": "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/netflix.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "disney",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/disney.srs",
+        "url": "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/disney.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "max",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/max.srs",
+        "url": "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/max.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "primevideo",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/primevideo.srs",
+        "url": "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/primevideo.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "appletv",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/appletv.srs",
+        "url": "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/appletv.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "youtube",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/youtube.srs",
+        "url": "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/youtube.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "tiktok",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/tiktok.srs",
+        "url": "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/tiktok.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "bilibili",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/bilibili.srs",
+        "url": "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/bilibili.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "ai",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/ai.srs",
+        "url": "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/ai.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "networktest",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/networktest.srs",
+        "url": "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/networktest.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "proxy",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/proxy.srs",
+        "url": "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/proxy.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "cn",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/cn.srs",
+        "url": "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/cn.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "telegramip",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/telegramip.srs",
+        "url": "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/telegramip.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "privateip",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/privateip.srs",
+        "url": "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/privateip.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "cnip",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/cnip.srs",
+        "url": "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/cnip.srs",
         "download_detour": "DIRECT"
       }
     ]
@@ -644,14 +644,14 @@ rules:
 `fake-ip-filter` 中添加[常用 fake-ip 地址过滤列表](https://github.com/juewuy/ShellCrash/blob/master/public/fake_ip_filter.list)，提高兼容性  
 `fake-ip-filter` 中添加 [TrackersList](https://github.com/XIU2/TrackersListCollection/all.txt)（udp 域名），防止 [BT 下载](https://github.com/c0re100/qBittorrent-Enhanced-Edition)无法连接 TrackersList UDP 协议  
 <img src="https://user-images.githubusercontent.com/45238096/224113233-4d76dec2-495c-4790-a00e-538fc1469639.png" width="60%"/>  
-`fake-ip-filter` 中添加 AdGuardHome 相关域名（包括：`static.adtidy.org`、`adguardteam.github.io` 和 `anti-ad.net`），防止作为下游时检查更新和下载“DNS 黑名单”失败  
+`fake-ip-filter` 中添加 AdGuardHome 相关域名，包括：adguardteam.github.io（AdGuardHome 自带 DNS 黑名单下载域名）、adrules.top（常用广告拦截下载域名）、anti-ad.net（常用广告拦截下载域名）和 static.adtidy.org（AdGuardHome 检查更新域名），防止作为下游时检查更新和下载“DNS 黑名单”失败  
 若想自己生成配置文件 user.yaml，可以 [Fork 本项目](https://github.com/DustinWin/ruleset_geodata/fork)后编辑 *.github/workflows/build.yml* 文件内的 `name: Generate ruleset-xxx-user.yaml` 部分  
 若 DNS 模式选用的是 `redir-host`，必须进行 DNS 分流（可以参考 [Clash.Meta 内核 DNS 分流教程](https://github.com/DustinWin/clash_singbox-tutorials/tree/main/%E6%95%99%E7%A8%8B%E5%90%88%E9%9B%86/Clash/%E8%BF%9B%E9%98%B6%E7%AF%87)），可以进入 *.github/workflows/build.yml* 文件，编辑 `Generate ruleset-redirhost-user.yaml` 部分，将 `nameserver` 中的 `🪜 代理域名` 改成可以访问外网的策略组名称，或者直接将 `'https://dns.google/dns-query#🪜 代理域名'` 修改为 `'tls://dns.google'`  
 • 导入 Linux 端（以导入 ShellCrash 为例）  
 将下面命令中的 `{DNS 模式}` 替换为正在使用的 DNS 模式（`fakeip` 或 `redirhost`）  
 连接 SSH 后执行如下命令：
 ```
-curl -o $CRASHDIR/yamls/user.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/ruleset-{DNS 模式}-user.yaml
+curl -o $CRASHDIR/yamls/user.yaml -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/ruleset-{DNS 模式}-user.yaml
 $CRASHDIR/start.sh restart
 ```
 • 导入 Windows 端（以导入 Clash Verge 为例）  
@@ -663,22 +663,22 @@ $CRASHDIR/start.sh restart
 taskkill /f /t /im "Clash Verge*"
 taskkill /f /t /im Clash-Verge*
 taskkill /f /t /im clash-meta*
-curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\profiles\{Merge 文件名}.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/ruleset-{DNS 模式}-user.yaml
+curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\profiles\{Merge 文件名}.yaml -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/ruleset-{DNS 模式}-user.yaml
 ```
 ### ② dns.json（仅限 sing-box PuerNya 版内核）
 • `dns.rules` 数组  
-`dns.rules` 中添加 AdGuardHome 相关域名（包括：`adguardteam.github.io`、`adrules.top`、`anti-ad.net` 和 `static.adtidy.org`），防止作为下游时检查更新和下载“DNS 黑名单”失败  
+`dns.rules` 中添加 AdGuardHome 相关域名，包括：adguardteam.github.io（AdGuardHome 自带 DNS 黑名单下载域名）、adrules.top（常用广告拦截下载域名）、anti-ad.net（常用广告拦截下载域名）和 static.adtidy.org（AdGuardHome 检查更新域名），防止作为下游时检查更新和下载“DNS 黑名单”失败  
 • 导入 Linux 端（以导入 ShellCrash 为例）   
 连接 SSH 后执行如下命令：
 ```
-curl -o $CRASHDIR/jsons/dns.json -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/ruleset-dns.json
+curl -o $CRASHDIR/jsons/dns.json -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/ruleset-dns.json
 $CRASHDIR/start.sh restart
 ```
 ### ③ 添加定时任务（以 ShellCrash 为例，安装路径为 */data/ShellCrash*）
 • 连接 SSH 后执行 `vi $CRASHDIR/task/task.user`，按一下 Ins 键（Insert 键），粘贴如下内容：
 ```
 # 适用于 Clash.Meta 内核
-201#curl -o /data/ShellCrash/yamls/user.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/ruleset-{DNS 模式}-user.yaml && /data/ShellCrash/start.sh restart >/dev/null 2>&1#更新user.yaml
+201#curl -o /data/ShellCrash/yamls/user.yaml -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/ruleset-{DNS 模式}-user.yaml && /data/ShellCrash/start.sh restart >/dev/null 2>&1#更新user.yaml
 ```
 • 按一下 Esc 键（退出键），输入英文冒号 `:`，继续输入 `wq` 并回车  
 • 执行 `crash`，进入 ShellCrash->5 配置自动任务->1 添加自动任务，可以看到末尾就有添加的定时任务，输入对应的数字并回车后可设置执行条件
