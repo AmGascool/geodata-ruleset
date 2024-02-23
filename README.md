@@ -157,7 +157,9 @@ taskkill /f /t /im Clash-Verge*
 taskkill /f /t /im clash-meta*
 curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\profiles\{Merge 文件名}.yaml -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-config/geodata-{DNS 模式}-user.yaml
 ```
-### ② dns.json（仅限 sing-box PuerNya 版内核）
+### ② [dns.json](https://github.com/DustinWin/ruleset_geodata/tree/sing-box-config)（仅限 sing-box PuerNya 版内核）
+- 注：带有“lite”后缀的 .json 配置文件适合去掉了 sing-box 广告拦截，且配合 [AdGuardHome](https://github.com/AdguardTeam/AdGuardHome) 的方案
+
 • `dns.rules` 数组  
 `dns.rules` 中添加 AdGuardHome 相关域名（包括：`adguardteam.github.io`、`adrules.top`、`anti-ad.net` 和 `static.adtidy.org`），防止作为下游时检查更新和下载“DNS 黑名单”失败  
 • 导入 Linux 端（以导入 ShellCrash 为例）   
@@ -674,7 +676,9 @@ taskkill /f /t /im Clash-Verge*
 taskkill /f /t /im clash-meta*
 curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\profiles\{Merge 文件名}.yaml -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-config/ruleset-{DNS 模式}-user.yaml
 ```
-### ② dns.json（仅限 sing-box PuerNya 版内核）
+### ② [dns.json](https://github.com/DustinWin/ruleset_geodata/tree/sing-box-config)（仅限 sing-box PuerNya 版内核）
+- 注：带有“lite”后缀的 .json 配置文件适合去掉了 sing-box 广告拦截，且配合 [AdGuardHome](https://github.com/AdguardTeam/AdGuardHome) 的方案
+
 • `dns.rules` 数组  
 `dns.rules` 中添加 AdGuardHome 相关域名，包括：`adguardteam.github.io`（AdGuardHome 自带 DNS 黑名单下载域名）、`adrules.top`（常用广告拦截下载域名）、`anti-ad.net`（常用广告拦截下载域名）和 `static.adtidy.org`（AdGuardHome 检查更新域名），防止作为下游时检查更新和下载“DNS 黑名单”失败  
 • 导入 Linux 端（以导入 ShellCrash 为例）   
