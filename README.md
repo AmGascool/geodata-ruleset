@@ -130,11 +130,11 @@ curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\geoip.metadb -L http
 ### ① [user.yaml](https://github.com/DustinWin/ruleset_geodata/tree/clash-config)（仅限 Clash.Meta 内核）
 - 注：含有“fakeip”字样的 .yaml 配置文件中才含有 `fake-ip-filter` 参数
 
-不同后缀名的使用效果：
-|文件后缀|使用效果|
+不同后缀名的使用场景：
+|文件后缀|使用场景|
 |-----|-----|
 |lite.yaml|去掉 Clash 广告拦截，搭配 AdGuardHome|
-|noprocess.yaml|不含进程匹配模式，适合 ShellCrash 使用|
+|noprocess.yaml|不含进程匹配模式，仅适合 ShellCrash 使用|
 
 • `fake-ip-filter` 参数  
 `fake-ip-filter` 中添加[常用 fake-ip 地址过滤列表](https://github.com/juewuy/ShellCrash/blob/master/public/fake_ip_filter.list)，提高兼容性  
@@ -631,11 +631,11 @@ rules:
 ### ① [user.yaml](https://github.com/DustinWin/ruleset_geodata/tree/clash-config)（仅限 Clash.Meta 内核）
 - 注：含有“fakeip”字样的 .yaml 配置文件中才含有 `fake-ip-filter` 参数
 
-不同后缀名的使用效果：
-|文件后缀|使用效果|
+不同后缀名的使用场景：
+|文件后缀|使用场景|
 |-----|-----|
 |lite.yaml|去掉 Clash 广告拦截，搭配 AdGuardHome|
-|noprocess.yaml|不含进程匹配模式，适合 ShellCrash 使用|
+|noprocess.yaml|不含进程匹配模式，仅适合 ShellCrash 使用|
 
 • `fake-ip-filter` 参数  
 `fake-ip-filter` 中添加[常用 fake-ip 地址过滤列表](https://github.com/juewuy/ShellCrash/blob/master/public/fake_ip_filter.list)，提高兼容性  
