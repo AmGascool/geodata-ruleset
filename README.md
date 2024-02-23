@@ -147,7 +147,7 @@ curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\geoip.metadb -L http
 将下面命令中的 `{DNS 模式}` 替换为正在使用的 DNS 模式（`fakeip` 或 `redirhost`）  
 连接 SSH 后执行如下命令：
 ```
-curl -o $CRASHDIR/yamls/user.yaml -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-config/geodata-{DNS 模式}-user.yaml
+curl -o $CRASHDIR/yamls/user.yaml -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-config/geodata-{DNS 模式}-user-noprocess.yaml
 $CRASHDIR/start.sh restart
 ```
 • 导入 Windows 端（以导入 Clash Verge 为例）  
@@ -176,10 +176,10 @@ $CRASHDIR/start.sh restart
 连接 SSH 后执行 `vi $CRASHDIR/task/task.user`，按一下 Ins 键（Insert 键），粘贴如下内容：
 ```
 # 适用于 Clash 内核
-201#curl -o /data/ShellCrash/geosite.dat -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite.dat && curl -o /data/ShellCrash/Country.mmdb -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/Country.mmdb && curl -o /data/ShellCrash/geoip.dat -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.dat && /data/ShellCrash/start.sh restart >/dev/null 2>&1#更新geodata路由规则文件
+201#curl -o /data/ShellCrash/GeoSite.dat -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite.dat && curl -o /data/ShellCrash/GeoIP.dat -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.dat && curl -o /data/ShellCrash/Country.mmdb -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/Country.mmdb && /data/ShellCrash/start.sh restart >/dev/null 2>&1#更新geodata路由规则文件
 # 适用于 Clash.Meta 内核
 202#curl -o /data/ShellCrash/geoip.metadb -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.metadb && /data/ShellCrash/start.sh restart >/dev/null 2>&1#更新geodata路由规则文件
-203#curl -o /data/ShellCrash/yamls/user.yaml -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-config/geodata-{DNS 模式}-user.yaml && /data/ShellCrash/start.sh restart >/dev/null 2>&1#更新user.yaml
+203#curl -o /data/ShellCrash/yamls/user.yaml -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-config/geodata-{DNS 模式}-user-noprocess.yaml && /data/ShellCrash/start.sh restart >/dev/null 2>&1#更新user.yaml
 # 适用于 sing-box 内核
 204#curl -o /data/ShellCrash/geosite.db -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite.db && curl -o /data/ShellCrash/geoip.db -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.db && /data/ShellCrash/start.sh restart >/dev/null 2>&1#更新geodata路由规则文件
 ```
@@ -648,7 +648,7 @@ rules:
 将下面命令中的 `{DNS 模式}` 替换为正在使用的 DNS 模式（`fakeip` 或 `redirhost`）  
 连接 SSH 后执行如下命令：
 ```
-curl -o $CRASHDIR/yamls/user.yaml -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-config/ruleset-{DNS 模式}-user.yaml
+curl -o $CRASHDIR/yamls/user.yaml -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-config/ruleset-{DNS 模式}-user-noprocess.yaml
 $CRASHDIR/start.sh restart
 ```
 • 导入 Windows 端（以导入 Clash Verge 为例）  
@@ -677,7 +677,7 @@ $CRASHDIR/start.sh restart
 • 连接 SSH 后执行 `vi $CRASHDIR/task/task.user`，按一下 Ins 键（Insert 键），粘贴如下内容：
 ```
 # 适用于 Clash.Meta 内核
-201#curl -o /data/ShellCrash/yamls/user.yaml -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-config/ruleset-{DNS 模式}-user.yaml && /data/ShellCrash/start.sh restart >/dev/null 2>&1#更新user.yaml
+201#curl -o /data/ShellCrash/yamls/user.yaml -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-config/ruleset-{DNS 模式}-user-noprocess.yaml && /data/ShellCrash/start.sh restart >/dev/null 2>&1#更新user.yaml
 ```
 • 按一下 Esc 键（退出键），输入英文冒号 `:`，继续输入 `wq` 并回车  
 • 执行 `crash`，进入 ShellCrash->5 配置自动任务->1 添加自动任务，可以看到末尾就有添加的定时任务，输入对应的数字并回车后可设置执行条件
