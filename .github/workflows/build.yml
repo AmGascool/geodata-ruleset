@@ -571,7 +571,7 @@ jobs:
 
           geodata-mode: true
           geox-url:
-            geosite: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite-lite.dat"
+            geosite: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite.dat"
             geoip: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip-lite.dat"
             mmdb: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/Country-lite.mmdb"
           geo-auto-update: true
@@ -603,6 +603,58 @@ jobs:
               - https://dns.alidns.com/dns-query#h3=true
               - https://doh.pub/dns-query
             nameserver-policy:
+              'geosite:ads': rcode://success
+              'geosite:microsoft-cn,apple-cn,google-cn,games-cn': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
+              'geosite:cn,private': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
+              'geosite:proxy': ['https://cloudflare-dns.com/dns-query#🪜 代理域名&h3=true', 'https://dns.google/dns-query#🪜 代理域名']
+          EOF
+
+      - name: Generate `clash` geodata-fakeip-user-lite.yaml
+        run: |
+          cat <<EOF > ./clash-config/geodata-fakeip-user-lite.yaml
+          mode: rule
+          log-level: silent
+          allow-lan: true
+          unified-delay: false
+          tcp-concurrent: true
+          external-controller-tls: 127.0.0.1:9090
+          global-client-fingerprint: chrome
+          profile: {store-selected: true, store-fake-ip: true}
+
+          geodata-mode: true
+          geox-url:
+            geosite: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite-lite.dat"
+            geoip: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip-lite.dat"
+            mmdb: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/Country-lite.mmdb"
+          geo-auto-update: true
+          geo-update-interval: 24
+
+          sniffer:
+            enable: true
+            parse-pure-ip: true
+            sniff: {HTTP: {ports: [80, 8080-8880], override-destination: true}, TLS: {ports: [443, 8443]}, QUIC: {ports: [443, 8443]}}
+            skip-domain: ['Mijia Cloud']
+
+          dns:
+            enable: true
+            prefer-h3: true
+            ipv6: true
+            listen: 0.0.0.0:1053
+            fake-ip-range: 198.18.0.1/16
+            enhanced-mode: fake-ip
+            fake-ip-filter:
+              - '*'
+          EOF
+          curl -sSL https://raw.githubusercontent.com/juewuy/ShellCrash/dev/public/fake_ip_filter.list | grep -v '#' | sed '/^\s*$/d' | sed "s/.*/'&'/g" | sed 's/^/    - /g' >> ./clash-config/geodata-fakeip-user-lite.yaml
+          curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep 'udp:' | grep -i '\.[A-Z]' | sed "s/^.*\/\//'/g" | sed "s/:.*\/.*/'/g" | sed 's/^/    - /g' >> ./clash-config/geodata-fakeip-user-lite.yaml
+          cat <<EOF >> ./clash-config/geodata-fakeip-user-lite.yaml
+            default-nameserver:
+              - https://223.5.5.5/dns-query
+              - https://1.12.12.12/dns-query
+            nameserver:
+              - https://dns.alidns.com/dns-query#h3=true
+              - https://doh.pub/dns-query
+            nameserver-policy:
               'adguardteam.github.io,adrules.top,anti-ad.net,static.adtidy.org': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
               'geosite:microsoft-cn,apple-cn,google-cn,games-cn': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
               'geosite:cn,private': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
@@ -612,6 +664,54 @@ jobs:
       - name: Generate `clash` geodata-redirhost-user.yaml
         run: |
           cat <<EOF > ./clash-config/geodata-redirhost-user.yaml
+          mode: rule
+          log-level: silent
+          allow-lan: true
+          unified-delay: false
+          tcp-concurrent: true
+          external-controller-tls: 127.0.0.1:9090
+          global-client-fingerprint: chrome
+          profile: {store-selected: true, store-fake-ip: true}
+
+          geodata-mode: true
+          geox-url:
+            geosite: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite.dat"
+            geoip: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip-lite.dat"
+            mmdb: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/Country-lite.mmdb"
+          geo-auto-update: true
+          geo-update-interval: 24
+
+          sniffer:
+            enable: true
+            parse-pure-ip: true
+            sniff: {HTTP: {ports: [80, 8080-8880], override-destination: true}, TLS: {ports: [443, 8443]}, QUIC: {ports: [443, 8443]}}
+            skip-domain: ['Mijia Cloud']
+
+          dns:
+            enable: true
+            prefer-h3: true
+            ipv6: true
+            listen: 0.0.0.0:1053
+            fake-ip-range: 198.18.0.1/16
+            enhanced-mode: fake-ip
+            fake-ip-filter: ['+.*']
+            default-nameserver:
+              - https://223.5.5.5/dns-query
+              - https://1.12.12.12/dns-query
+            nameserver:
+              - 'https://cloudflare-dns.com/dns-query#🪜 代理域名&h3=true'
+              - 'https://dns.google/dns-query#🪜 代理域名'
+            proxy-server-nameserver:
+              - https://dns.alidns.com/dns-query#h3=true
+            nameserver-policy:
+              'geosite:ads': rcode://success
+              'geosite:microsoft-cn,apple-cn,google-cn,games-cn': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
+              'geosite:cn,private': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
+          EOF
+
+      - name: Generate `clash` geodata-redirhost-user-lite.yaml
+        run: |
+          cat <<EOF > ./clash-config/geodata-redirhost-user-lite.yaml
           mode: rule
           log-level: silent
           allow-lan: true
@@ -695,6 +795,50 @@ jobs:
               - https://dns.alidns.com/dns-query#h3=true
               - https://doh.pub/dns-query
             nameserver-policy:
+              'rule-set:ads': rcode://success
+              'rule-set:microsoft-cn,apple-cn,google-cn,games-cn': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
+              'rule-set:cn,private': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
+              'rule-set:proxy': ['https://cloudflare-dns.com/dns-query#🪜 代理域名&h3=true', 'https://dns.google/dns-query#🪜 代理域名']
+          EOF
+
+      - name: Generate `clash` ruleset-fakeip-user-lite.yaml
+        run: |
+          cat <<EOF > ./clash-config/ruleset-fakeip-user-lite.yaml
+          mode: rule
+          log-level: silent
+          allow-lan: true
+          unified-delay: false
+          tcp-concurrent: true
+          external-controller-tls: 127.0.0.1:9090
+          global-client-fingerprint: chrome
+          profile: {store-selected: true, store-fake-ip: true}
+
+          sniffer:
+            enable: true
+            parse-pure-ip: true
+            sniff: {HTTP: {ports: [80, 8080-8880], override-destination: true}, TLS: {ports: [443, 8443]}, QUIC: {ports: [443, 8443]}}
+            skip-domain: ['Mijia Cloud']
+
+          dns:
+            enable: true
+            prefer-h3: true
+            ipv6: true
+            listen: 0.0.0.0:1053
+            fake-ip-range: 198.18.0.1/16
+            enhanced-mode: fake-ip
+            fake-ip-filter:
+              - '*'
+          EOF
+          curl -sSL https://raw.githubusercontent.com/juewuy/ShellCrash/dev/public/fake_ip_filter.list | grep -v '#' | sed '/^\s*$/d' | sed "s/.*/'&'/g" | sed 's/^/    - /g' >> ./clash-config/ruleset-fakeip-user-lite.yaml
+          curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep 'udp:' | grep -i '\.[A-Z]' | sed "s/^.*\/\//'/g" | sed "s/:.*\/.*/'/g" | sed 's/^/    - /g' >> ./clash-config/ruleset-fakeip-user-lite.yaml
+          cat <<EOF >> ./clash-config/ruleset-fakeip-user-lite.yaml
+            default-nameserver:
+              - https://223.5.5.5/dns-query
+              - https://1.12.12.12/dns-query
+            nameserver:
+              - https://dns.alidns.com/dns-query#h3=true
+              - https://doh.pub/dns-query
+            nameserver-policy:
               'adguardteam.github.io,adrules.top,anti-ad.net,static.adtidy.org': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
               'rule-set:microsoft-cn,apple-cn,google-cn,games-cn': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
               'rule-set:cn,private': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
@@ -704,6 +848,46 @@ jobs:
       - name: Generate `clash` ruleset-redirhost-user.yaml
         run: |
           cat <<EOF > ./clash-config/ruleset-redirhost-user.yaml
+          mode: rule
+          log-level: silent
+          allow-lan: true
+          unified-delay: false
+          tcp-concurrent: true
+          external-controller-tls: 127.0.0.1:9090
+          global-client-fingerprint: chrome
+          profile: {store-selected: true, store-fake-ip: true}
+
+          sniffer:
+            enable: true
+            parse-pure-ip: true
+            sniff: {HTTP: {ports: [80, 8080-8880], override-destination: true}, TLS: {ports: [443, 8443]}, QUIC: {ports: [443, 8443]}}
+            skip-domain: ['Mijia Cloud']
+
+          dns:
+            enable: true
+            prefer-h3: true
+            ipv6: true
+            listen: 0.0.0.0:1053
+            fake-ip-range: 198.18.0.1/16
+            enhanced-mode: fake-ip
+            fake-ip-filter: ['+.*']
+            default-nameserver:
+              - https://223.5.5.5/dns-query
+              - https://1.12.12.12/dns-query
+            nameserver:
+              - 'https://cloudflare-dns.com/dns-query#🪜 代理域名&h3=true'
+              - 'https://dns.google/dns-query#🪜 代理域名'
+            proxy-server-nameserver:
+              - https://dns.alidns.com/dns-query#h3=true
+            nameserver-policy:
+              'rule-set:ads': rcode://success
+              'rule-set:microsoft-cn,apple-cn,google-cn,games-cn': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
+              'rule-set:cn,private': [https://dns.alidns.com/dns-query#h3=true, https://doh.pub/dns-query]
+          EOF
+
+      - name: Generate `clash` ruleset-redirhost-user-lite.yaml
+        run: |
+          cat <<EOF > ./clash-config/ruleset-redirhost-user-lite.yaml
           mode: rule
           log-level: silent
           allow-lan: true
@@ -747,6 +931,34 @@ jobs:
           {
             "dns": {
               "servers": [
+                { "tag": "dns_block", "address": "rcode://success" },
+                { "tag": "dns_direct", "address": "h3://dns.alidns.com/dns-query", "address_resolver": "dns_ip", "detour": "DIRECT" },
+                { "tag": "dns_ip", "address": "https://223.5.5.5/dns-query", "detour": "DIRECT" },
+                { "tag": "dns_fakeip", "address": "fakeip" }
+              ],
+              "rules": [
+                { "outbound": "any", "server": "dns_ip" },
+                { "clash_mode": "Direct", "server": "dns_direct" },
+                { "clash_mode": "Global", "server": "dns_fakeip", "rewrite_ttl": 1 },
+                { "geosite": [ "ads" ], "server": "dns_block" },
+                { "geosite": [ "microsoft-cn", "apple-cn", "google-cn", "games-cn", "cn", "private" ], "query_type": [ "A", "AAAA" ], "server": "dns_direct" },
+                { "geosite": [ "proxy" ], "query_type": [ "A", "AAAA" ], "server": "dns_fakeip", "rewrite_ttl": 1 }
+              ],
+              "final": "dns_direct",
+              "strategy": "prefer_ipv6",
+              "independent_cache": true,
+              "reverse_mapping": true,
+              "fakeip": { "enabled": true, "inet4_range": "198.18.0.0/15", "inet6_range": "fc00::/18" }
+            }
+          }
+          EOF
+
+      - name: Generate `sing-box` geodata-dns-lite.json
+        run: |
+          cat <<EOF > ./sing-box-config/geodata-dns-lite.json
+          {
+            "dns": {
+              "servers": [
                 { "tag": "dns_direct", "address": "h3://dns.alidns.com/dns-query", "address_resolver": "dns_ip", "detour": "DIRECT" },
                 { "tag": "dns_ip", "address": "https://223.5.5.5/dns-query", "detour": "DIRECT" },
                 { "tag": "dns_fakeip", "address": "fakeip" }
@@ -771,6 +983,34 @@ jobs:
       - name: Generate `sing-box` ruleset-dns.json
         run: |
           cat <<EOF > ./sing-box-config/ruleset-dns.json
+          {
+            "dns": {
+              "servers": [
+                { "tag": "dns_block", "address": "rcode://success" },
+                { "tag": "dns_direct", "address": "h3://dns.alidns.com/dns-query", "address_resolver": "dns_ip", "detour": "DIRECT" },
+                { "tag": "dns_ip", "address": "https://223.5.5.5/dns-query", "detour": "DIRECT" },
+                { "tag": "dns_fakeip", "address": "fakeip" }
+              ],
+              "rules": [
+                { "outbound": "any", "server": "dns_ip" },
+                { "clash_mode": "Direct", "server": "dns_direct" },
+                { "clash_mode": "Global", "server": "dns_fakeip", "rewrite_ttl": 1 },
+                { "rule_set": [ "ads" ], "server": "dns_block" },
+                { "rule_set": [ "microsoft-cn", "apple-cn", "google-cn", "games-cn", "cn", "private" ], "query_type": [ "A", "AAAA" ], "server": "dns_direct" },
+                { "rule_set": [ "proxy" ], "query_type": [ "A", "AAAA" ], "server": "dns_fakeip", "rewrite_ttl": 1 }
+              ],
+              "final": "dns_direct",
+              "strategy": "prefer_ipv6",
+              "independent_cache": true,
+              "reverse_mapping": true,
+              "fakeip": { "enabled": true, "inet4_range": "198.18.0.0/15", "inet6_range": "fc00::/18" }
+            }
+          }
+          EOF
+
+      - name: Generate `sing-box` ruleset-dns-lite.json
+        run: |
+          cat <<EOF > ./sing-box-config/ruleset-dns-lite.json
           {
             "dns": {
               "servers": [
