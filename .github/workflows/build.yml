@@ -939,7 +939,7 @@ jobs:
           done
           cd ../clash-config/ || exit 1
           for file in $(ls); do
-            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@master/clash-config/${file}"
+            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@clash-config/${file}"
           done
           cd ../sing-box/ || exit 1
           for file in $(ls); do
@@ -947,5 +947,5 @@ jobs:
           done
           cd ../sing-box-config/ || exit 1
           for file in $(ls); do
-            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@master/sing-box-config/${file}"
+            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@sing-box-config/${file}"
           done
