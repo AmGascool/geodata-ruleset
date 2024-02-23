@@ -183,8 +183,8 @@ $CRASHDIR/start.sh restart
 执行 `crash`，进入 ShellCrash->5 配置自动任务->1 添加自动任务，可以看到末尾就有添加的定时任务，输入对应的数字并回车后可设置执行条件
 # 二、 ruleset 规则集文件说明
 ## 1. 文件类型
-① Clash ruleset 规则集文件，格式为 `.yaml`  
-② sing-box ruleset 规则集文件，格式有 `.json` 和 `.srs`
+① Clash ruleset 规则集文件，格式为 `.yaml`（`format: yaml`）  
+② sing-box ruleset 规则集文件，格式有 `.json`（`"format": "source"`）和 `.srs`（`"format": "binary"`）
 ## 2. 数据源
 ① 每天凌晨 3 点（北京时间）自动构建  
 ② `rule-set,ads,🛑 广告拦截` 源采用 [privacy-protection-tools/anti-AD](https://github.com/privacy-protection-tools/anti-AD)  
@@ -215,202 +215,181 @@ $CRASHDIR/start.sh restart
 ```
 proxy-groups:
   - {name: 📈 网络测试, type: select, proxies: [🎯 全球直连, 🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇰🇷 韩国节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点]}
-
   - {name: 🔗 直连域名, type: select, proxies: [🎯 全球直连, 🚀 节点选择]}
-
   - {name: 🪜 代理域名, type: select, proxies: [🚀 节点选择, 🎯 全球直连]}
-
   - {name: 🎮 游戏平台, type: select, proxies: [🎯 全球直连, 🚀 节点选择]}
-
   - {name: 🎥 奈飞视频, type: select, proxies: [🚀 节点选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点]}
-
   - {name: 📽️ 迪士尼+, type: select, proxies: [🚀 节点选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点]}
-
   - {name: 🎞️ Max, type: select, proxies: [🚀 节点选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点]}
-
   - {name: 🎬 Prime Video, type: select, proxies: [🚀 节点选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点]}
-
   - {name: 🍎 Apple TV+, type: select, proxies: [🚀 节点选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点]}
-
   - {name: 📹 油管视频, type: select, proxies: [🚀 节点选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点]}
-
   - {name: 🎵 TikTok, type: select, proxies: [🚀 节点选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点]}
-
   - {name: 📺 哔哩哔哩, type: select, proxies: [🎯 全球直连, 🚀 节点选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点]}
-
   - {name: 🤖 人工智能, type: select, proxies: [🚀 节点选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点]}
-
   - {name: Ⓜ️ 微软服务, type: select, proxies: [🎯 全球直连, 🚀 节点选择]}
-
   - {name: 📢 谷歌服务, type: select, proxies: [🎯 全球直连, 🚀 节点选择]}
-
   - {name: 🍎 苹果服务, type: select, proxies: [🎯 全球直连, 🚀 节点选择]}
-
   - {name: 🇨🇳 国内 IP, type: select, proxies: [🎯 全球直连, 🚀 节点选择]}
-
   - {name: 📲 电报消息, type: select, proxies: [🚀 节点选择]}
-
   - {name: 🖥️ 直连软件, type: select, proxies: [🎯 全球直连]}
-
   - {name: 🔒 私有网络, type: select, proxies: [🎯 全球直连]}
-
   - {name: 🛑 广告拦截, type: select, proxies: [REJECT]}
-
   - {name: 🎯 全球直连, type: select, proxies: [DIRECT]}
 
 rule-providers:
   ads:
     type: http
     behavior: domain
+    format: yaml
     url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/ads.yaml"
-    path: ./ruleset/ads.yaml
     interval: 86400
 
   private:
     type: http
     behavior: domain
+    format: yaml
     url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/private.yaml"
-    path: ./ruleset/private.yaml
     interval: 86400
 
   microsoft-cn:
     type: http
     behavior: domain
+    format: yaml
     url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/microsoft-cn.yaml"
-    path: ./ruleset/microsoft-cn.yaml
     interval: 86400
 
   apple-cn:
     type: http
     behavior: domain
+    format: yaml
     url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/apple-cn.yaml"
-    path: ./ruleset/apple-cn.yaml
     interval: 86400
 
   google-cn:
     type: http
     behavior: domain
+    format: yaml
     url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/google-cn.yaml"
-    path: ./ruleset/google-cn.yaml
     interval: 86400
 
   games-cn:
     type: http
     behavior: domain
+    format: yaml
     url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/games-cn.yaml"
-    path: ./ruleset/games-cn.yaml
     interval: 86400
 
   netflix:
     type: http
     behavior: classical
+    format: yaml
     url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/netflix.yaml"
-    path: ./ruleset/netflix.yaml
     interval: 86400
 
   disney:
     type: http
     behavior: domain
+    format: yaml
     url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/disney.yaml"
-    path: ./ruleset/disney.yaml
     interval: 86400
 
   max:
     type: http
     behavior: domain
+    format: yaml
     url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/max.yaml"
-    path: ./ruleset/max.yaml
     interval: 86400
 
   primevideo:
     type: http
     behavior: domain
+    format: yaml
     url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/primevideo.yaml"
-    path: ./ruleset/primevideo.yaml
     interval: 86400
 
   appletv:
     type: http
     behavior: domain
+    format: yaml
     url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/appletv.yaml"
-    path: ./ruleset/appletv.yaml
     interval: 86400
 
   youtube:
     type: http
     behavior: domain
+    format: yaml
     url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/youtube.yaml"
-    path: ./ruleset/youtube.yaml
     interval: 86400
 
   tiktok:
     type: http
     behavior: domain
+    format: yaml
     url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/tiktok.yaml"
-    path: ./ruleset/tiktok.yaml
     interval: 86400
 
   bilibili:
     type: http
     behavior: domain
+    format: yaml
     url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/bilibili.yaml"
-    path: ./ruleset/bilibili.yaml
     interval: 86400
 
   ai:
     type: http
     behavior: domain
+    format: yaml
     url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/ai.yaml"
-    path: ./ruleset/ai.yaml
     interval: 86400
 
   networktest:
     type: http
     behavior: classical
+    format: yaml
     url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/networktest.yaml"
-    path: ./ruleset/networktest.yaml
     interval: 86400
 
   applications:
     type: http
     behavior: classical
+    format: yaml
     url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/applications.yaml"
-    path: ./ruleset/applications.yaml
     interval: 86400
 
   proxy:
     type: http
     behavior: domain
+    format: yaml
     url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/proxy.yaml"
-    path: ./ruleset/proxy.yaml
     interval: 86400
 
   cn:
     type: http
     behavior: domain
+    format: yaml
     url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/cn.yaml"
-    path: ./ruleset/cn.yaml
     interval: 86400
 
   telegramip:
     type: http
     behavior: ipcidr
+    format: yaml
     url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/telegramip.yaml"
-    path: ./ruleset/telegramip.yaml
     interval: 86400
 
   privateip:
     type: http
     behavior: ipcidr
+    format: yaml
     url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/privateip.yaml"
-    path: ./ruleset/privateip.yaml
     interval: 86400
 
   cnip:
     type: http
     behavior: ipcidr
+    format: yaml
     url: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/cnip.yaml"
-    path: ./ruleset/cnip.yaml
     interval: 86400
 
 rules:
