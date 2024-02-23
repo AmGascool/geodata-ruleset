@@ -107,7 +107,7 @@ jobs:
 
       - name: Generate ads
         run: |
-          mkdir -p ./community/mydata/ ./domains/ ./ips/ ./clash/ ./sing-box/
+          mkdir -p ./community/mydata/ ./domains/ ./ips/ ./clash/ ./sing-box/ ./clash-config/ ./sing-box-config/
           mkdir -p ./tmp/sing-box/rules/ads/
           # Download clash geodata
           curl -sSL ${ads} | grep -Ev '#|payload:' | sed '/^\s*$/d' | sed "s/- '+.//g" | sed "s/- '/full:/g" | sed "s/'$//g" | sed 's/^[ \t]*//g' > ./community/mydata/ads
@@ -559,7 +559,7 @@ jobs:
 
       - name: Generate `clash` geodata-fakeip-user.yaml
         run: |
-          cat <<EOF > ./clash/geodata-fakeip-user.yaml
+          cat <<EOF > ./clash-config/geodata-fakeip-user.yaml
           mode: rule
           log-level: silent
           allow-lan: true
@@ -593,9 +593,9 @@ jobs:
             fake-ip-filter:
               - '*'
           EOF
-          curl -sSL https://raw.githubusercontent.com/juewuy/ShellCrash/dev/public/fake_ip_filter.list | grep -v '#' | sed '/^\s*$/d' | sed "s/.*/'&'/g" | sed 's/^/    - /g' >> ./clash/geodata-fakeip-user.yaml
-          curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep 'udp:' | grep -i '\.[A-Z]' | sed "s/^.*\/\//'/g" | sed "s/:.*\/.*/'/g" | sed 's/^/    - /g' >> ./clash/geodata-fakeip-user.yaml
-          cat <<EOF >> ./clash/geodata-fakeip-user.yaml
+          curl -sSL https://raw.githubusercontent.com/juewuy/ShellCrash/dev/public/fake_ip_filter.list | grep -v '#' | sed '/^\s*$/d' | sed "s/.*/'&'/g" | sed 's/^/    - /g' >> ./clash-config/geodata-fakeip-user.yaml
+          curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep 'udp:' | grep -i '\.[A-Z]' | sed "s/^.*\/\//'/g" | sed "s/:.*\/.*/'/g" | sed 's/^/    - /g' >> ./clash-config/geodata-fakeip-user.yaml
+          cat <<EOF >> ./clash-config/geodata-fakeip-user.yaml
             default-nameserver:
               - https://223.5.5.5/dns-query
               - https://1.12.12.12/dns-query
@@ -611,7 +611,7 @@ jobs:
 
       - name: Generate `clash` geodata-redirhost-user.yaml
         run: |
-          cat <<EOF > ./clash/geodata-redirhost-user.yaml
+          cat <<EOF > ./clash-config/geodata-redirhost-user.yaml
           mode: rule
           log-level: silent
           allow-lan: true
@@ -659,7 +659,7 @@ jobs:
 
       - name: Generate `clash` ruleset-fakeip-user.yaml
         run: |
-          cat <<EOF > ./clash/ruleset-fakeip-user.yaml
+          cat <<EOF > ./clash-config/ruleset-fakeip-user.yaml
           mode: rule
           log-level: silent
           allow-lan: true
@@ -685,9 +685,9 @@ jobs:
             fake-ip-filter:
               - '*'
           EOF
-          curl -sSL https://raw.githubusercontent.com/juewuy/ShellCrash/dev/public/fake_ip_filter.list | grep -v '#' | sed '/^\s*$/d' | sed "s/.*/'&'/g" | sed 's/^/    - /g' >> ./clash/ruleset-fakeip-user.yaml
-          curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep 'udp:' | grep -i '\.[A-Z]' | sed "s/^.*\/\//'/g" | sed "s/:.*\/.*/'/g" | sed 's/^/    - /g' >> ./clash/ruleset-fakeip-user.yaml
-          cat <<EOF >> ./clash/ruleset-fakeip-user.yaml
+          curl -sSL https://raw.githubusercontent.com/juewuy/ShellCrash/dev/public/fake_ip_filter.list | grep -v '#' | sed '/^\s*$/d' | sed "s/.*/'&'/g" | sed 's/^/    - /g' >> ./clash-config/ruleset-fakeip-user.yaml
+          curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep 'udp:' | grep -i '\.[A-Z]' | sed "s/^.*\/\//'/g" | sed "s/:.*\/.*/'/g" | sed 's/^/    - /g' >> ./clash-config/ruleset-fakeip-user.yaml
+          cat <<EOF >> ./clash-config/ruleset-fakeip-user.yaml
             default-nameserver:
               - https://223.5.5.5/dns-query
               - https://1.12.12.12/dns-query
@@ -703,7 +703,7 @@ jobs:
 
       - name: Generate `clash` ruleset-redirhost-user.yaml
         run: |
-          cat <<EOF > ./clash/ruleset-redirhost-user.yaml
+          cat <<EOF > ./clash-config/ruleset-redirhost-user.yaml
           mode: rule
           log-level: silent
           allow-lan: true
@@ -743,7 +743,7 @@ jobs:
 
       - name: Generate `sing-box` geodata-dns.json
         run: |
-          cat <<EOF > ./sing-box/geodata-dns.json
+          cat <<EOF > ./sing-box-config/geodata-dns.json
           {
             "dns": {
               "servers": [
@@ -770,7 +770,7 @@ jobs:
 
       - name: Generate `sing-box` ruleset-dns.json
         run: |
-          cat <<EOF > ./sing-box/ruleset-dns.json
+          cat <<EOF > ./sing-box-config/ruleset-dns.json
           {
             "dns": {
               "servers": [
@@ -880,6 +880,17 @@ jobs:
           git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
           git push -f -u origin clash
 
+      - name: Commit and push `clash-config` branch
+        run: |
+          cd ./clash-config/ || exit 1
+          git init
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git checkout -b clash-config
+          git add . && git commit -m "Clash 配置更新于 ${update_version}"
+          git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
+          git push -f -u origin clash-config
+
       - name: Release and upload `sing-box` assets
         uses: svenstaro/upload-release-action@v2
         with:
@@ -901,6 +912,17 @@ jobs:
           git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
           git push -f -u origin sing-box
 
+      - name: Commit and push `sing-box-config` branch
+        run: |
+          cd ./sing-box-config/ || exit 1
+          git init
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git checkout -b sing-box-config
+          git add . && git commit -m "sing-box 配置更新于 ${update_version}"
+          git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
+          git push -f -u origin sing-box-config
+
       - name: Purge jsDelivr CDN
         run: |
           cd ./domains/ || exit 1
@@ -915,7 +937,15 @@ jobs:
           for file in $(ls); do
             curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@clash/${file}"
           done
+          cd ../clash-config/ || exit 1
+          for file in $(ls); do
+            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@master/clash-config/${file}"
+          done
           cd ../sing-box/ || exit 1
           for file in $(ls); do
             curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@sing-box/${file}"
+          done
+          cd ../sing-box-config/ || exit 1
+          for file in $(ls); do
+            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@master/sing-box-config/${file}"
           done
