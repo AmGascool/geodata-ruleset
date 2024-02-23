@@ -128,9 +128,13 @@ curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\geoip.metadb -L http
 ```
 ## 5. 文件拓展
 ### ① [user.yaml](https://github.com/DustinWin/ruleset_geodata/tree/clash-config)（仅限 Clash.Meta 内核）
-注：
-- 1. 带有“fakeip”字样的 .yaml 配置文件中才含有 `fake-ip-filter` 参数
-- 2. 带有“lite”后缀的 .yaml 配置文件适合去掉了 Clash 广告拦截，且配合 [AdGuardHome](https://github.com/AdguardTeam/AdGuardHome) 的方案
+- 注：含有“fakeip”字样的 .yaml 配置文件中才含有 `fake-ip-filter` 参数
+
+不同后缀名的使用效果：
+|文件后缀|使用效果|
+|-----|-----|
+|lite.yaml|去掉 Clash 广告拦截，搭配 AdGuardHome|
+|noprocess.yaml|不含进程匹配模式，适合 ShellCrash 使用|
 
 • `fake-ip-filter` 参数  
 `fake-ip-filter` 中添加[常用 fake-ip 地址过滤列表](https://github.com/juewuy/ShellCrash/blob/master/public/fake_ip_filter.list)，提高兼容性  
@@ -158,7 +162,7 @@ taskkill /f /t /im clash-meta*
 curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\profiles\{Merge 文件名}.yaml -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-config/geodata-{DNS 模式}-user.yaml
 ```
 ### ② [dns.json](https://github.com/DustinWin/ruleset_geodata/tree/sing-box-config)（仅限 sing-box PuerNya 版内核）
-- 注：带有“lite”后缀的 .json 配置文件适合去掉了 sing-box 广告拦截，且配合 [AdGuardHome](https://github.com/AdguardTeam/AdGuardHome) 的方案
+- 注：含有“lite”后缀的 .json 配置文件适合去掉了 sing-box 广告拦截，且配合 [AdGuardHome](https://github.com/AdguardTeam/AdGuardHome) 的方案
 
 • `dns.rules` 数组  
 `dns.rules` 中添加 AdGuardHome 相关域名（包括：`adguardteam.github.io`、`adrules.top`、`anti-ad.net` 和 `static.adtidy.org`），防止作为下游时检查更新和下载“DNS 黑名单”失败  
@@ -625,10 +629,13 @@ rules:
 ```
 ## 4. 文件拓展
 ### ① [user.yaml](https://github.com/DustinWin/ruleset_geodata/tree/clash-config)（仅限 Clash.Meta 内核）
-注：
-- 1. 带有“fakeip”字样的 .yaml 配置文件中才含有 `fake-ip-filter` 参数
-- 2. 带有“lite”后缀的 .yaml 配置文件适合去掉了 Clash 广告拦截，且配合 [AdGuardHome](https://github.com/AdguardTeam/AdGuardHome) 的方案
-- 3. 带有“ruleset”字样的 .yaml 配置文件中含有 `find-process-mode: strict` 参数（由 Clash 判断是否开启进程匹配模式），不适合 ShellCrash
+- 注：含有“fakeip”字样的 .yaml 配置文件中才含有 `fake-ip-filter` 参数
+
+不同后缀名的使用效果：
+|文件后缀|使用效果|
+|-----|-----|
+|lite.yaml|去掉 Clash 广告拦截，搭配 AdGuardHome|
+|noprocess.yaml|不含进程匹配模式，适合 ShellCrash 使用|
 
 • `fake-ip-filter` 参数  
 `fake-ip-filter` 中添加[常用 fake-ip 地址过滤列表](https://github.com/juewuy/ShellCrash/blob/master/public/fake_ip_filter.list)，提高兼容性  
@@ -656,7 +663,7 @@ taskkill /f /t /im clash-meta*
 curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\profiles\{Merge 文件名}.yaml -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-config/ruleset-{DNS 模式}-user.yaml
 ```
 ### ② [dns.json](https://github.com/DustinWin/ruleset_geodata/tree/sing-box-config)（仅限 sing-box PuerNya 版内核）
-- 注：带有“lite”后缀的 .json 配置文件适合去掉了 sing-box 广告拦截，且配合 [AdGuardHome](https://github.com/AdguardTeam/AdGuardHome) 的方案
+- 注：含有“lite”后缀的 .json 配置文件适合去掉了 sing-box 广告拦截，且配合 [AdGuardHome](https://github.com/AdguardTeam/AdGuardHome) 的方案
 
 • `dns.rules` 数组  
 `dns.rules` 中添加 AdGuardHome 相关域名，包括：`adguardteam.github.io`（AdGuardHome 自带 DNS 黑名单下载域名）、`adrules.top`（常用广告拦截下载域名）、`anti-ad.net`（常用广告拦截下载域名）和 `static.adtidy.org`（AdGuardHome 检查更新域名），防止作为下游时检查更新和下载“DNS 黑名单”失败  
