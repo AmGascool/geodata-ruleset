@@ -105,8 +105,8 @@
 连接 SSH 后执行如下命令：
 ```
 # 适用于 Clash 内核
-curl -o $CRASHDIR/geosite.dat -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite.dat
-curl -o $CRASHDIR/geoip.dat -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.dat
+curl -o $CRASHDIR/GeoSite.dat -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite.dat
+curl -o $CRASHDIR/GeoIP.dat -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.dat
 curl -o $CRASHDIR/Country.mmdb -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/Country.mmdb
 # 适用于 Clash.Meta 内核
 curl -o $CRASHDIR/geoip.metadb -L https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.metadb
