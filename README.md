@@ -130,15 +130,15 @@ curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\geoip.metadb -L http
 ### ① [user.yaml](https://github.com/DustinWin/ruleset_geodata/tree/clash-config)（仅限 Clash.Meta 内核）
 注：
 - 1. 带有“fakeip”字样的 .yaml 配置文件中才含有 `fake-ip-filter` 参数
-- 2. 带有“lite”后缀的 .yaml 配置文件适合去掉了 Clash 广告拦截，且配合 AdGuardHome 的方案
+- 2. 带有“lite”后缀的 .yaml 配置文件适合去掉了 Clash 广告拦截，且配合 [AdGuardHome](https://github.com/AdguardTeam/AdGuardHome) 的方案
 
 • `fake-ip-filter` 参数  
 `fake-ip-filter` 中添加[常用 fake-ip 地址过滤列表](https://github.com/juewuy/ShellCrash/blob/master/public/fake_ip_filter.list)，提高兼容性  
 `fake-ip-filter` 中添加 [TrackersList](https://github.com/XIU2/TrackersListCollection/blob/master/all.txt)（udp 域名），防止 [BT 下载](https://github.com/c0re100/qBittorrent-Enhanced-Edition)无法连接 TrackersList UDP 协议  
 <img src="https://user-images.githubusercontent.com/45238096/224113233-4d76dec2-495c-4790-a00e-538fc1469639.png" width="60%"/>  
 `fake-ip-filter` 中添加 AdGuardHome 相关域名（包括：`adguardteam.github.io`、`adrules.top`、`anti-ad.net` 和 `static.adtidy.org`），防止作为下游时检查更新和下载“DNS 黑名单”失败  
-若想自己生成配置文件 user.yaml，可以 [Fork 本项目](https://github.com/DustinWin/ruleset_geodata/fork)后编辑 *.github/workflows/build.yml* 文件内的 `name: Generate `clash` geodata-xxx-user.yaml` 部分  
-若 DNS 模式选用的是 `redir-host`，必须进行 DNS 分流（可以参考 [Clash.Meta 内核 DNS 分流教程](https://github.com/DustinWin/clash_singbox-tutorials/tree/main/%E6%95%99%E7%A8%8B%E5%90%88%E9%9B%86/Clash/%E8%BF%9B%E9%98%B6%E7%AF%87)），可以进入 *.github/workflows/build.yml* 文件，编辑 `Generate `clash` geodata-redirhost-user.yaml` 部分，将 `nameserver` 中的 `🪜 代理域名` 改成可以访问外网的策略组名称，或者直接将 `'https://dns.google/dns-query#🪜 代理域名'` 修改为 `'tls://dns.google'`  
+若想自己生成配置文件 user.yaml，可以 [Fork 本项目](https://github.com/DustinWin/ruleset_geodata/fork)后编辑 *.github/workflows/build.yml* 文件内的 ```name: Generate `clash` geodata-xxx-user.yaml``` 部分  
+若 DNS 模式选用的是 `redir-host`，必须进行 DNS 分流（可以参考 [Clash.Meta 内核 DNS 分流教程](https://github.com/DustinWin/clash_singbox-tutorials/tree/main/%E6%95%99%E7%A8%8B%E5%90%88%E9%9B%86/Clash/%E8%BF%9B%E9%98%B6%E7%AF%87)），可以进入 *.github/workflows/build.yml* 文件，编辑 ```Generate `clash` geodata-redirhost-user.yaml``` 部分，将 `nameserver` 中的 `🪜 代理域名` 改成可以访问外网的策略组名称，或者直接将 `'https://dns.google/dns-query#🪜 代理域名'` 修改为 `'tls://dns.google'`  
 • 导入 Linux 端（以导入 ShellCrash 为例）  
 将下面命令中的 `{DNS 模式}` 替换为正在使用的 DNS 模式（`fakeip` 或 `redirhost`）  
 连接 SSH 后执行如下命令：
@@ -643,10 +643,10 @@ rules:
 }
 ```
 ## 4. 文件拓展
-### ① user.yaml（仅限 Clash.Meta 内核）
+### ① [user.yaml](https://github.com/DustinWin/ruleset_geodata/tree/clash-config)（仅限 Clash.Meta 内核）
 注：
 - 1. 带有“fakeip”字样的 .yaml 配置文件中才含有 `fake-ip-filter` 参数
-- 2. 带有“lite”后缀的 .yaml 配置文件适合去掉了 Clash 广告拦截，且配合 AdGuardHome 的方案
+- 2. 带有“lite”后缀的 .yaml 配置文件适合去掉了 Clash 广告拦截，且配合 [AdGuardHome](https://github.com/AdguardTeam/AdGuardHome) 的方案
 - 3. 带有“ruleset”字样的 .yaml 配置文件中含有 `find-process-mode: strict` 参数（由 Clash 判断是否开启进程匹配模式），不适合 ShellCrash
 
 • `fake-ip-filter` 参数  
@@ -654,8 +654,8 @@ rules:
 `fake-ip-filter` 中添加 [TrackersList](https://github.com/XIU2/TrackersListCollection/blob/master/all.txt)（udp 域名），防止 [BT 下载](https://github.com/c0re100/qBittorrent-Enhanced-Edition)无法连接 TrackersList UDP 协议  
 <img src="https://user-images.githubusercontent.com/45238096/224113233-4d76dec2-495c-4790-a00e-538fc1469639.png" width="60%"/>  
 `fake-ip-filter` 中添加 AdGuardHome 相关域名，包括：`adguardteam.github.io`（AdGuardHome 自带 DNS 黑名单下载域名）、`adrules.top`（常用广告拦截下载域名）、`anti-ad.net`（常用广告拦截下载域名）和 `static.adtidy.org`（AdGuardHome 检查更新域名），防止作为下游时检查更新和下载“DNS 黑名单”失败  
-若想自己生成配置文件 user.yaml，可以 [Fork 本项目](https://github.com/DustinWin/ruleset_geodata/fork)后编辑 *.github/workflows/build.yml* 文件内的 `name: Generate `clash` ruleset-xxx-user.yaml` 部分  
-若 DNS 模式选用的是 `redir-host`，必须进行 DNS 分流（可以参考 [Clash.Meta 内核 DNS 分流教程](https://github.com/DustinWin/clash_singbox-tutorials/tree/main/%E6%95%99%E7%A8%8B%E5%90%88%E9%9B%86/Clash/%E8%BF%9B%E9%98%B6%E7%AF%87)），可以进入 *.github/workflows/build.yml* 文件，编辑 `Generate `clash` ruleset-redirhost-user.yaml` 部分，将 `nameserver` 中的 `🪜 代理域名` 改成可以访问外网的策略组名称，或者直接将 `'https://dns.google/dns-query#🪜 代理域名'` 修改为 `'tls://dns.google'`  
+若想自己生成配置文件 user.yaml，可以 [Fork 本项目](https://github.com/DustinWin/ruleset_geodata/fork)后编辑 *.github/workflows/build.yml* 文件内的 ```name: Generate `clash` ruleset-xxx-user.yaml``` 部分  
+若 DNS 模式选用的是 `redir-host`，必须进行 DNS 分流（可以参考 [Clash.Meta 内核 DNS 分流教程](https://github.com/DustinWin/clash_singbox-tutorials/tree/main/%E6%95%99%E7%A8%8B%E5%90%88%E9%9B%86/Clash/%E8%BF%9B%E9%98%B6%E7%AF%87)），可以进入 *.github/workflows/build.yml* 文件，编辑 ```Generate `clash` ruleset-redirhost-user.yaml``` 部分，将 `nameserver` 中的 `🪜 代理域名` 改成可以访问外网的策略组名称，或者直接将 `'https://dns.google/dns-query#🪜 代理域名'` 修改为 `'tls://dns.google'`  
 • 导入 Linux 端（以导入 ShellCrash 为例）  
 将下面命令中的 `{DNS 模式}` 替换为正在使用的 DNS 模式（`fakeip` 或 `redirhost`）  
 连接 SSH 后执行如下命令：
