@@ -1,6 +1,6 @@
 # 一、 geodata 规则集文件说明
 ## 1. 文件类型
-① [Clash](https://github.com/Dreamacro/clash) geodata 规则集文件，包括：geosite.dat、Country.mmdb、geoip.dat 和 geoip.metadb（仅限 [Clash.Meta 内核](https://github.com/MetaCubeX/mihomo)）等  
+① [Clash](https://github.com/Dreamacro/clash) geodata 规则集文件，包括：geosite.dat、Country.mmdb、geoip.dat 和 geoip.metadb（仅限 [mihomo 内核](https://github.com/MetaCubeX/mihomo)）等  
 ② [sing-box](https://github.com/SagerNet/sing-box) geodata 规则集文件，包括：geosite.db 和 geoip.db 等
 ## 2. 数据源
 ① 每天凌晨 3 点（北京时间）自动构建，根据 [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat) 和 [Loyalsoldier/geoip](https://github.com/Loyalsoldier/geoip) 进行深度定制，可点击查看包含的[域名列表](https://github.com/DustinWin/ruleset_geodata/tree/domains)和 [IP 段列表](https://github.com/DustinWin/ruleset_geodata/tree/ips)  
@@ -173,7 +173,7 @@
 curl -o $CRASHDIR/GeoSite.dat -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite.dat
 curl -o $CRASHDIR/GeoIP.dat -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.dat
 curl -o $CRASHDIR/Country.mmdb -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/Country.mmdb
-# 适用于 Clash.Meta 内核
+# 适用于 mihomo 内核
 curl -o $CRASHDIR/geoip.metadb -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.metadb
 # 适用于 sing-box 内核
 curl -o $CRASHDIR/geosite.db -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/geosite.db
@@ -192,7 +192,7 @@ curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\Country.mmdb -L http
 curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\geoip.metadb -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.metadb
 ```
 ## 5. 文件拓展
-### ① [user.yaml](https://github.com/DustinWin/ruleset_geodata/tree/clash-config)（仅限 Clash.Meta 内核）
+### ① [user.yaml](https://github.com/DustinWin/ruleset_geodata/tree/clash-config)（仅限 mihomo 内核）
 - 注：含有“fakeip”字样的 .yaml 配置文件中才含有 `fake-ip-filter` 参数
 
 **配置文件后缀与使用场景对应关系如下表：**
@@ -207,7 +207,7 @@ curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\geoip.metadb -L http
 <img src="https://user-images.githubusercontent.com/45238096/224113233-4d76dec2-495c-4790-a00e-538fc1469639.png" width="60%"/>  
 `fake-ip-filter` 中添加 AdGuardHome 相关域名（包括：`adguardteam.github.io`、`adrules.top`、`anti-ad.net` 和 `static.adtidy.org`），防止作为下游时检查更新和下载“DNS 黑名单”失败  
 若想自己生成配置文件 user.yaml，可以 [Fork 本项目](https://github.com/DustinWin/ruleset_geodata/fork)后编辑 *.github/workflows/build.yml* 文件内的 ```name: Generate `clash` geodata-xxx-user.yaml``` 部分  
-若 DNS 模式选用的是 `redir-host`，必须进行 DNS 分流（可以参考 [Clash.Meta 内核 DNS 分流教程](https://github.com/DustinWin/clash_singbox-tutorials/tree/main/%E6%95%99%E7%A8%8B%E5%90%88%E9%9B%86/Clash/%E8%BF%9B%E9%98%B6%E7%AF%87)），可以进入 *.github/workflows/build.yml* 文件，编辑 ```Generate `clash` geodata-redirhost-user.yaml``` 部分，将 `nameserver` 中的 `🪜 代理域名` 改成可以访问外网的策略组名称，或者直接将 `'https://dns.google/dns-query#🪜 代理域名'` 修改为 `'tls://dns.google'`  
+若 DNS 模式选用的是 `redir-host`，必须进行 DNS 分流（可以参考 [mihomo 内核 DNS 分流教程](https://github.com/DustinWin/clash_singbox-tutorials/tree/main/%E6%95%99%E7%A8%8B%E5%90%88%E9%9B%86/Clash/%E8%BF%9B%E9%98%B6%E7%AF%87)），可以进入 *.github/workflows/build.yml* 文件，编辑 ```Generate `clash` geodata-redirhost-user.yaml``` 部分，将 `nameserver` 中的 `🪜 代理域名` 改成可以访问外网的策略组名称，或者直接将 `'https://dns.google/dns-query#🪜 代理域名'` 修改为 `'tls://dns.google'`  
 • 导入 Linux 端（以导入 ShellCrash 为例）  
 将下面命令中的 `{DNS 模式}` 替换为正在使用的 DNS 模式（`fakeip` 或 `redirhost`）  
 连接 SSH 后执行如下命令：
@@ -242,7 +242,7 @@ $CRASHDIR/start.sh restart
 ```
 # 适用于 Clash 内核
 201#curl -o /data/ShellCrash/GeoSite.dat -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite.dat && curl -o /data/ShellCrash/GeoIP.dat -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.dat && curl -o /data/ShellCrash/Country.mmdb -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/Country.mmdb && /data/ShellCrash/start.sh restart >/dev/null 2>&1#更新geodata路由规则文件
-# 适用于 Clash.Meta 内核
+# 适用于 mihomo 内核
 202#curl -o /data/ShellCrash/geoip.metadb -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.metadb && /data/ShellCrash/start.sh restart >/dev/null 2>&1#更新geodata路由规则文件
 203#curl -o /data/ShellCrash/yamls/user.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-config/geodata-{DNS 模式}-user-noprocess.yaml && /data/ShellCrash/start.sh restart >/dev/null 2>&1#更新user.yaml
 # 适用于 sing-box 内核
@@ -693,7 +693,7 @@ rules:
 }
 ```
 ## 4. 文件拓展
-### ① [user.yaml](https://github.com/DustinWin/ruleset_geodata/tree/clash-config)（仅限 Clash.Meta 内核）
+### ① [user.yaml](https://github.com/DustinWin/ruleset_geodata/tree/clash-config)（仅限 mihomo 内核）
 - 注：含有“fakeip”字样的 .yaml 配置文件中才含有 `fake-ip-filter` 参数
 
 **配置文件后缀与使用场景对应关系如下表：**
@@ -708,7 +708,7 @@ rules:
 <img src="https://user-images.githubusercontent.com/45238096/224113233-4d76dec2-495c-4790-a00e-538fc1469639.png" width="60%"/>  
 `fake-ip-filter` 中添加 AdGuardHome 相关域名，包括：`adguardteam.github.io`（AdGuardHome 自带 DNS 黑名单下载域名）、`adrules.top`（常用广告拦截下载域名）、`anti-ad.net`（常用广告拦截下载域名）和 `static.adtidy.org`（AdGuardHome 检查更新域名），防止作为下游时检查更新和下载“DNS 黑名单”失败  
 若想自己生成配置文件 user.yaml，可以 [Fork 本项目](https://github.com/DustinWin/ruleset_geodata/fork)后编辑 *.github/workflows/build.yml* 文件内的 ```name: Generate `clash` ruleset-xxx-user.yaml``` 部分  
-若 DNS 模式选用的是 `redir-host`，必须进行 DNS 分流（可以参考 [Clash.Meta 内核 DNS 分流教程](https://github.com/DustinWin/clash_singbox-tutorials/tree/main/%E6%95%99%E7%A8%8B%E5%90%88%E9%9B%86/Clash/%E8%BF%9B%E9%98%B6%E7%AF%87)），可以进入 *.github/workflows/build.yml* 文件，编辑 ```Generate `clash` ruleset-redirhost-user.yaml``` 部分，将 `nameserver` 中的 `🪜 代理域名` 改成可以访问外网的策略组名称，或者直接将 `'https://dns.google/dns-query#🪜 代理域名'` 修改为 `'tls://dns.google'`  
+若 DNS 模式选用的是 `redir-host`，必须进行 DNS 分流（可以参考 [mihomo 内核 DNS 分流教程](https://github.com/DustinWin/clash_singbox-tutorials/tree/main/%E6%95%99%E7%A8%8B%E5%90%88%E9%9B%86/Clash/%E8%BF%9B%E9%98%B6%E7%AF%87)），可以进入 *.github/workflows/build.yml* 文件，编辑 ```Generate `clash` ruleset-redirhost-user.yaml``` 部分，将 `nameserver` 中的 `🪜 代理域名` 改成可以访问外网的策略组名称，或者直接将 `'https://dns.google/dns-query#🪜 代理域名'` 修改为 `'tls://dns.google'`  
 • 导入 Linux 端（以导入 ShellCrash 为例）  
 将下面命令中的 `{DNS 模式}` 替换为正在使用的 DNS 模式（`fakeip` 或 `redirhost`）  
 连接 SSH 后执行如下命令：
@@ -741,7 +741,7 @@ $CRASHDIR/start.sh restart
 ### ③ 添加定时任务（以 ShellCrash 为例，安装路径为 */data/ShellCrash*）
 • 连接 SSH 后执行 `vi $CRASHDIR/task/task.user`，按一下 Ins 键（Insert 键），粘贴如下内容：
 ```
-# 适用于 Clash.Meta 内核
+# 适用于 mihomo 内核
 201#curl -o /data/ShellCrash/yamls/user.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-config/ruleset-{DNS 模式}-user-noprocess.yaml && /data/ShellCrash/start.sh restart >/dev/null 2>&1#更新user.yaml
 ```
 • 按一下 Esc 键（退出键），输入英文冒号 `:`，继续输入 `wq` 并回车  
