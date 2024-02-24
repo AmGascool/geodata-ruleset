@@ -180,7 +180,7 @@ curl -o $CRASHDIR/geosite.db -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_ge
 curl -o $CRASHDIR/geoip.db -L https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/geoip.db
 $CRASHDIR/start.sh restart
 ```
-### ② 导入到 Windows 端（以 [Clash Verge](https://github.com/MetaCubeX/clash-verge) 导入 geosite.dat、geoip.dat、Country.mmdb和 geoip.metadb 为例）
+### ② 导入到 Windows 端（以 [Clash Verge](https://github.com/clash-verge-rev/clash-verge-rev) 导入 geosite.dat、geoip.dat、Country.mmdb和 geoip.metadb 为例）
 以管理员身份运行 CMD 命令提示符，执行如下命令：
 ```
 taskkill /f /t /im "Clash Verge*"
