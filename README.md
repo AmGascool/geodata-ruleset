@@ -31,7 +31,7 @@
 <table>
   <tr>
     <td><b>规则集文件名称</b></td>
-    <td><b>包含规则</b></td>
+    <td align="center"><b>包含规则</b></td>
     <td><b>GitHub 源</b></td>
     <td><b>jsDelivr 源</b></td>
     <td><b>GitHub Proxy 源</b></td>
