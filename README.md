@@ -25,78 +25,143 @@
 ⑳ `geoip,netflix,🎥 奈飞视频` 源采用 [blackmatrix7/ios_rule_script/Netflix/Netflix_IP.txt](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Netflix)  
 ㉑ `geoip,telegram,📲 电报消息` 源采用 [Telegram IP 段](https://core.telegram.org/resources/cidr.txt)  
 ㉒ `geoip,private,🔒 私有网络` 源采用 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)  
-㉓ `geoip,cn,🇨🇳 国内 IP` 源采用 [GeoLite2/cn.txt](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data)、[17mon/china_ip_list](https://github.com/17mon/china_ip_list)、[gaoyifan/china-operator-ip](https://github.com/gaoyifan/china-operator-ip) 和 [blackmatrix7/ios_rule_script/ChinaIPs/ChinaIPs_IP.txt](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaIPs) 组合  
-**规则集文件包含的规则对应关系如下表：**
-|规则集文件名称|包含规则|
-|-----|-----|
-|geosite-all.dat 和 geosite-all.db|`ads`、`private`、`microsoft-cn`、`apple-cn`、`google-cn`、`games-cn`、`netflix`、`disney`、`max`、`primevideo`、`appletv`、`youtube`、`tiktok`、`bilibili`、`ai`、`networktest`、`proxy` 和 `cn`|
-|geosite-all-lite.dat 和 geosite-all-lite.db|~~`ads`~~、`private`、`microsoft-cn`、`apple-cn`、`google-cn`、`games-cn`、`netflix`、`disney`、`max`、`primevideo`、`appletv`、`youtube`、`tiktok`、`bilibili`、`ai`、`networktest`、`proxy` 和 `cn`|
-|geosite.dat 和 geosite.db|`ads`、`private`、`microsoft-cn`、`apple-cn`、`google-cn`、`games-cn`、`networktest`、`proxy` 和 `cn`|
-|geosite-lite.dat 和 geosite-lite.db|~~`ads`~~、`private`、`microsoft-cn`、`apple-cn`、`google-cn`、`games-cn`、`networktest`、`proxy` 和 `cn`|
-|geoip-all.dat、Country-all.mmdb、geoip-all.metadb 和 geoip-all.db|来源于 [Loyalsoldier/geoip](https://github.com/Loyalsoldier/geoip)，[点此查看](https://github.com/Loyalsoldier/geoip/tree/release/text)|
-|geoip.dat、Country.mmdb、geoip.metadb 和 geoip.db|`netflix`、`telegram`、`private` 和 `cn`|
-|geoip-lite.dat、Country-lite.mmdb、geoip-lite.metadb 和 geoip-lite.db|~~`netflix`~~、`telegram`、`private` 和 `cn`|
-## 3. 文件下载（以 geosite.dat、geosite.db、geoip.dat、Country.mmdb、geoip.metadb 和 geoip.db 为例）
+㉓ `geoip,cn,🇨🇳 国内 IP` 源采用 [GeoLite2/cn.txt](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data)、[17mon/china_ip_list](https://github.com/17mon/china_ip_list)、[gaoyifan/china-operator-ip](https://github.com/gaoyifan/china-operator-ip) 和 [blackmatrix7/ios_rule_script/ChinaIPs/ChinaIPs_IP.txt](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaIPs) 组合
+## 3. 文件下载
+**规则集文件包含的规则和下载地址对应关系如下表：**
 <table>
   <tr>
-    <td rowspan="3">geosite.dat</td>
-    <td>GitHub 源：https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geosite.dat</td>
+    <td><b>规则集文件名称</b></td>
+    <td><b>包含规则</b></td>
+    <td><b>GitHub 源</b></td>
+    <td><b>jsDelivr 源</b></td>
+    <td><b>GitHub Proxy 源</b></td>
   </tr>
   <tr>
-    <td>jsDelivr 源：https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite.dat</td>
+    <td>geosite-all.dat</td>
+    <td rowspan="2"><code>ads</code>、<code>private</code>、<code>microsoft-cn</code>、<code>apple-cn</code>、<code>google-cn</code>、<code>games-cn</code>、<code>netflix</code>、<code>disney</code>、<code>max</code>、<code>primevideo</code>、<code>appletv</code>、<code>youtube</code>、<code>tiktok</code>、<code>bilibili</code>、<code>ai</code>、<code>networktest</code>、<code>proxy</code> 和 <code>cn</code></td>
+    <td><a href="https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geosite-all.dat">点此下载</a></td>
+    <td><a href="https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite-all.dat">点此下载</a></td>
+    <td><a href="https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geosite-all.dat">点此下载</a></td>
   </tr>
   <tr>
-    <td>GitHub Proxy 源：https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geosite.dat</td>
+    <td>geosite-all.db</td>
+    <td><a href="https://raw.githubusercontent.com/DustinWin/ruleset_geodata/sing-box/geosite-all.db">点此下载</a></td>
+    <td><a href="https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/geosite-all.db">点此下载</a></td>
+    <td><a href="https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/sing-box/geosite-all.db">点此下载</a></td>
   </tr>
   <tr>
-    <td rowspan="3">geosite.db</td>
-    <td>GitHub 源：https://raw.githubusercontent.com/DustinWin/ruleset_geodata/sing-box/geosite.db</td>
+    <td>geosite-all-lite.dat</td>
+    <td rowspan="2"><del><code>ads</code></del>、<code>private</code>、<code>microsoft-cn</code>、<code>apple-cn</code>、<code>google-cn</code>、<code>games-cn</code>、<code>netflix</code>、<code>disney</code>、<code>max</code>、<code>primevideo</code>、<code>appletv</code>、<code>youtube</code>、<code>tiktok</code>、<code>bilibili</code>、<code>ai</code>、<code>networktest</code>、<code>proxy</code> 和 <code>cn</code></td>
+    <td><a href="https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geosite-all-lite.dat">点此下载</a></td>
+    <td><a href="https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite-all-lite.dat">点此下载</a></td>
+    <td><a href="https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geosite-all-lite.dat">点此下载</a></td>
   </tr>
   <tr>
-    <td>jsDelivr 源：https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/geosite.db</td>
+    <td>geosite-all-lite.db</td>
+    <td><a href="https://raw.githubusercontent.com/DustinWin/ruleset_geodata/sing-box/geosite-all-lite.db">点此下载</a></td>
+    <td><a href="https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/geosite-all-lite.db">点此下载</a></td>
+    <td><a href="https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/sing-box/geosite-all-lite.db">点此下载</a></td>
   </tr>
   <tr>
-    <td>GitHub Proxy 源：https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/sing-box/geosite.db</td>
+    <td>geosite.dat</td>
+    <td rowspan="2"><code>ads</code>、<code>private</code>、<code>microsoft-cn</code>、<code>apple-cn</code>、<code>google-cn</code>、<code>games-cn</code>、<code>networktest</code>、<code>proxy</code> 和 <code>cn</code></td>
+    <td><a href="https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geosite.dat">点此下载</a></td>
+    <td><a href="https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite.dat">点此下载</a></td>
+    <td><a href="https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geosite.dat">点此下载</a></td>
   </tr>
   <tr>
-    <td rowspan="3">geoip.dat</td>
-    <td>GitHub 源：https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geoip.dat</td>
+    <td>geosite.db</td>
+    <td><a href="https://raw.githubusercontent.com/DustinWin/ruleset_geodata/sing-box/geosite.db">点此下载</a></td>
+    <td><a href="https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/geosite.db">点此下载</a></td>
+    <td><a href="https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/sing-box/geosite.db">点此下载</a></td>
   </tr>
   <tr>
-    <td>jsDelivr 源：https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.dat</td>
+    <td>geosite-lite.dat</td>
+    <td rowspan="2"><del><code>ads</code></del>、<code>private</code>、<code>microsoft-cn</code>、<code>apple-cn</code>、<code>google-cn</code>、<code>games-cn</code>、<code>networktest</code>、<code>proxy</code> 和 <code>cn</code></td>
+    <td><a href="https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geosite-lite.dat">点此下载</a></td>
+    <td><a href="https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite-lite.dat">点此下载</a></td>
+    <td><a href="https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geosite-lite.dat">点此下载</a></td>
   </tr>
   <tr>
-    <td>GitHub Proxy 源：https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geoip.dat</td>
-  </tr>
-    <tr>
-    <td rowspan="3">Country.mmdb</td>
-    <td>GitHub 源：https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/Country.mmdb</td>
-  </tr>
-  <tr>
-    <td>jsDelivr 源：https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/Country.mmdb</td>
+    <td>geosite-lite.db</td>
+    <td><a href="https://raw.githubusercontent.com/DustinWin/ruleset_geodata/sing-box/geosite-lite.db">点此下载</a></td>
+    <td><a href="https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/geosite-lite.db">点此下载</a></td>
+    <td><a href="https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/sing-box/geosite-lite.db">点此下载</a></td>
   </tr>
   <tr>
-    <td>GitHub Proxy 源：https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/Country.mmdb</td>
+    <td>geoip-all.dat</td>
+    <td rowspan="4" align="center"><a href="https://github.com/Loyalsoldier/geoip/tree/release/text">点击查看</a></td>
+    <td><a href="https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geoip-all.dat">点此下载</a></td>
+    <td><a href="https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip-all.dat">点此下载</a></td>
+    <td><a href="https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geoip-all.dat">点此下载</a></td>
   </tr>
   <tr>
-    <td rowspan="3">geoip.metadb</td>
-    <td>GitHub 源：https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geoip.metadb</td>
+    <td>Country-all.mmdb</td>
+    <td><a href="https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/Country-all.mmdb">点此下载</a></td>
+    <td><a href="https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/Country-all.mmdb">点此下载</a></td>
+    <td><a href="https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/Country-all.mmdb">点此下载</a></td>
   </tr>
   <tr>
-    <td>jsDelivr 源：https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.metadb</td>
+    <td>geoip-all.metadb</td>
+    <td><a href="https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geoip-all.metadb">点此下载</a></td>
+    <td><a href="https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip-all.metadb">点此下载</a></td>
+    <td><a href="https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geoip-all.metadb">点此下载</a></td>
   </tr>
   <tr>
-    <td>GitHub Proxy 源：https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geoip.metadb</td>
+    <td>geoip-all.db</td>
+    <td><a href="https://raw.githubusercontent.com/DustinWin/ruleset_geodata/sing-box/geoip-all.db">点此下载</a></td>
+    <td><a href="https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/geoip-all.db">点此下载</a></td>
+    <td><a href="https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/sing-box/geoip-all.db">点此下载</a></td>
   </tr>
   <tr>
-    <td rowspan="3">geoip.db</td>
-    <td>GitHub 源：https://raw.githubusercontent.com/DustinWin/ruleset_geodata/sing-box/geoip.db</td>
+    <td>geoip.dat</td>
+    <td rowspan="4"><code>netflix</code>、<code>telegram</code>、<code>private</code> 和 <code>cn</code></td>
+    <td><a href="https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geoip.dat">点此下载</a></td>
+    <td><a href="https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.dat">点此下载</a></td>
+    <td><a href="https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geoip.dat">点此下载</a></td>
   </tr>
   <tr>
-    <td>jsDelivr 源：https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/geoip.db</td>
+    <td>Country.mmdb</td>
+    <td><a href="https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/Country.mmdb">点此下载</a></td>
+    <td><a href="https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/Country.mmdb">点此下载</a></td>
+    <td><a href="https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/Country.mmdb">点此下载</a></td>
   </tr>
   <tr>
-    <td>GitHub Proxy 源：https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/sing-box/geoip.db</td>
+    <td>geoip.metadb</td>
+    <td><a href="https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geoip.metadb">点此下载</a></td>
+    <td><a href="https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip.metadb">点此下载</a></td>
+    <td><a href="https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geoip.metadb">点此下载</a></td>
+  </tr>
+  <tr>
+    <td>geoip.db</td>
+    <td><a href="https://raw.githubusercontent.com/DustinWin/ruleset_geodata/sing-box/geoip.db">点此下载</a></td>
+    <td><a href="https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/geoip.db">点此下载</a></td>
+    <td><a href="https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/sing-box/geoip.db">点此下载</a></td>
+  </tr>
+  <tr>
+    <td>geoip-lite.dat</td>
+    <td rowspan="4"><del><code>netflix</code></del>、<code>telegram</code>、<code>private</code> 和 <code>cn</code></td>
+    <td><a href="https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geoip-lite.dat">点此下载</a></td>
+    <td><a href="https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip-lite.dat">点此下载</a></td>
+    <td><a href="https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geoip-lite.dat">点此下载</a></td>
+  </tr>
+  <tr>
+    <td>Country-lite.mmdb</td>
+    <td><a href="https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/Country-lite.mmdb">点此下载</a></td>
+    <td><a href="https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/Country-lite.mmdb">点此下载</a></td>
+    <td><a href="https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/Country-lite.mmdb">点此下载</a></td>
+  </tr>
+  <tr>
+    <td>geoip-lite.metadb</td>
+    <td><a href="https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geoip-lite.metadb">点此下载</a></td>
+    <td><a href="https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip-lite.metadb">点此下载</a></td>
+    <td><a href="https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash/geoip-lite.metadb">点此下载</a></td>
+  </tr>
+  <tr>
+    <td>geoip-lite.db</td>
+    <td><a href="https://raw.githubusercontent.com/DustinWin/ruleset_geodata/sing-box/geoip-lite.db">点此下载</a></td>
+    <td><a href="https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/geoip-lite.db">点此下载</a></td>
+    <td><a href="https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/sing-box/geoip-lite.db">点此下载</a></td>
   </tr>
 </table>
 
@@ -130,7 +195,7 @@ curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\geoip.metadb -L http
 ### ① [user.yaml](https://github.com/DustinWin/ruleset_geodata/tree/clash-config)（仅限 Clash.Meta 内核）
 - 注：含有“fakeip”字样的 .yaml 配置文件中才含有 `fake-ip-filter` 参数
 
-**配置文件后缀与使用场景对应关系如下：**
+**配置文件后缀与使用场景对应关系如下表：**
 |文件后缀|使用场景|
 |-----|-----|
 |lite.yaml|无 Clash 广告拦截，搭配 AdGuardHome|
@@ -631,7 +696,7 @@ rules:
 ### ① [user.yaml](https://github.com/DustinWin/ruleset_geodata/tree/clash-config)（仅限 Clash.Meta 内核）
 - 注：含有“fakeip”字样的 .yaml 配置文件中才含有 `fake-ip-filter` 参数
 
-**配置文件后缀与使用场景对应关系如下：**
+**配置文件后缀与使用场景对应关系如下表：**
 |文件后缀|使用场景|
 |-----|-----|
 |lite.yaml|无 Clash 广告拦截，搭配 AdGuardHome|
