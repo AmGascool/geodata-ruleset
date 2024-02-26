@@ -89,22 +89,6 @@ jobs:
           go-version: '1.22'
           cache-dependency-path: ./community/go.sum
 
-      - name: Delete `clash` tag and release
-        uses: dev-drprasad/delete-tag-and-release@v1.0
-        with:
-          tag_name: clash
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          delete_release: true
-          repo: ${{ github.repository }}
-
-      - name: Delete `sing-box` tag and release
-        uses: dev-drprasad/delete-tag-and-release@v1.0
-        with:
-          tag_name: sing-box
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          delete_release: true
-          repo: ${{ github.repository }}
-
       - name: Generate ads
         run: |
           mkdir -p ./community/mydata/ ./domains/ ./ips/ ./clash/ ./sing-box/ ./clash-config/ ./sing-box-config/
@@ -927,6 +911,8 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           release_name: clash
           tag: clash
+          overwrite: true
+          body: "[Clash](https://github.com/Dreamacro/clash) 规则集文件（包含 geodata 和 rule-set）"
           file_glob: true
           file: ./clash/*
 
@@ -959,6 +945,8 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           release_name: sing-box
           tag: sing-box
+          overwrite: true
+          body: "[sing-box](https://github.com/SagerNet/sing-box) 规则集文件（包含 geodata 和 rule_set）"
           file_glob: true
           file: ./sing-box/*
 
