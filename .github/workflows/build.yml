@@ -924,7 +924,7 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git checkout -b clash
           git add .
-          git commit -m "clash ruleset_geodata 文件更新于 ${update_version}"
+          git commit -m "Clash ruleset_geodata 文件更新于 ${update_version}"
           git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
           git push -f -u origin clash
 
@@ -935,7 +935,7 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git checkout -b clash-config
-          git add . && git commit -m "Clash 配置更新于 ${update_version}"
+          git add . && git commit -m "Clash 配置文件更新于 ${update_version}"
           git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
           git push -f -u origin clash-config
 
@@ -969,7 +969,7 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git checkout -b sing-box-config
-          git add . && git commit -m "sing-box 配置更新于 ${update_version}"
+          git add . && git commit -m "sing-box 配置文件更新于 ${update_version}"
           git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
           git push -f -u origin sing-box-config
 
