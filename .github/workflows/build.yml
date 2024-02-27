@@ -517,7 +517,7 @@ jobs:
           keyword:test-ipv6
           keyword:testipv6
           EOF
-          sort --ignore-case -u ./tmp/temp-networktest.txt > ./community/mydata/temp-networktest
+          sort --ignore-case -u ./tmp/temp-networktest.txt > ./community/mydata/networktest
           # Download clash rule-set_yaml
           count1=$(curl -sSL ${networktest1} | grep 'include:' | wc -l)
           curl -sSL ${networktest1} | grep -Ev '#|full:|keyword:|regexp:' | sed '/^\s*$/d' | sed "s/^/  - DOMAIN-SUFFIX,/g" > ./tmp/temp-networktest.txt
