@@ -468,7 +468,7 @@ jobs:
           curl -sSL ${ai2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/g" | sed "s/^DOMAIN-SUFFIX,/  - '+./g" | sed "s/$/'/g" >> ./tmp/temp-ai.txt
           curl -sSL ${ai3} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/g" | sed "s/^DOMAIN-SUFFIX,/  - '+./g" | sed "s/$/'/g" >> ./tmp/temp-ai.txt
           echo 'payload:' > ./clash-ruleset/ai.yaml
-          sort --ignore-case -u ./tmp/temp-ai.txt > ./clash-ruleset/ai.yaml
+          sort --ignore-case -u ./tmp/temp-ai.txt >> ./clash-ruleset/ai.yaml
           # Download clash rule-set_text
           curl -sSL ${ai1} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//g' | sed 's/^DOMAIN-SUFFIX,/+\./g' > ./tmp/temp-ai.txt
           curl -sSL ${ai2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//g' | sed 's/^DOMAIN-SUFFIX,/+\./g' >> ./tmp/temp-ai.txt
@@ -593,7 +593,7 @@ jobs:
           curl -sSL ${cn1} | grep 'full:' | sed 's/:@cn$//g' | sed "s/^full:/  - '/g" | sed "s/$/'/g" >> ./tmp/temp-cn.txt
           curl -sSL ${cn2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/g" | sed "s/^DOMAIN-SUFFIX,/  - '+./g" | sed "s/$/'/g" >> ./tmp/temp-cn.txt
           echo 'payload:' > ./clash-ruleset/cn.yaml
-          sort --ignore-case -u ./tmp/temp-cn.txt > ./clash-ruleset/cn.yaml
+          sort --ignore-case -u ./tmp/temp-cn.txt >> ./clash-ruleset/cn.yaml
           # Download clash rule-set_text
           curl -sSL ${cn1} | grep 'domain:' | sed 's/:@cn$//g' | sed 's/^domain:/+\./g' > ./tmp/temp-cn.txt
           curl -sSL ${cn1} | grep 'full:' | sed 's/:@cn$//g' | sed 's/^full://g' >> ./tmp/temp-cn.txt
