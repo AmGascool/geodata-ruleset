@@ -491,10 +491,10 @@ jobs:
           for((i=0;i<count1;i++)); do
             archs1=$(curl -sSL ${networktest1} | grep 'include:' | sed 's/^include://g' | sed -n "$((i+1))p")
             count2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | wc -l)
-            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep -Ev '#|include:' | sed '/^\s*$/d' >> ./tmp/temp-networktest.txt
+            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep -Ev '#|include:|@ads' | sed '/^\s*$/d' >> ./tmp/temp-networktest.txt
             for((j=0;j<count2;j++)); do
               archs2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | sed 's/^include://g' | sed -n "$((j+1))p")
-              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep -Ev '#|include:' | sed '/^\s*$/d' >> ./tmp/temp-networktest.txt
+              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep -Ev '#|include:|@ads' | sed '/^\s*$/d' >> ./tmp/temp-networktest.txt
             done
           done
           curl -sSL ${networktest2} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' >> ./tmp/temp-networktest.txt
