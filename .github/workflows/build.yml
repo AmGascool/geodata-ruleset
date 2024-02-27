@@ -500,7 +500,7 @@ jobs:
           mkdir -p ./tmp/sing-box/rules/networktest/
           # Download clash geodata
           count1=$(curl -sSL ${networktest1} | grep 'include:' | wc -l)
-          curl -sSL ${networktest1} | grep -v '#' | sed '/^\s*$/d' > ./tmp/temp-networktest.txt
+          curl -sSL ${networktest1} | grep -Ev '#|include:' | sed '/^\s*$/d' > ./tmp/temp-networktest.txt
           for((i=0;i<count1;i++)); do
             archs1=$(curl -sSL ${networktest1} | grep 'include:' | sed 's/^include://g' | sed -n "$((i+1))p")
             count2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | wc -l)
