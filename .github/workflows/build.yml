@@ -164,7 +164,7 @@ jobs:
           curl -sSL ${private1} | grep -Ev '#|full:|keyword:|regexp:' | sed '/^\s*$/d' | sed 's/^/  - DOMAIN-SUFFIX,/g' >> ./tmp/temp-private.txt
           curl -sSL ${private1} | grep 'full:' | sed 's/^full:/  - DOMAIN,/g' >> ./tmp/temp-private.txt
           curl -sSL ${private1} | grep 'keyword:' | sed 's/^keyword:/  - DOMAIN-KEYWORD,/g' >> ./tmp/temp-private.txt
-          curl -sSL ${private2} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/temp-private.txt
+          curl -sSL ${private2} | grep -v '#' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/temp-private.txt
           echo 'payload:' > ./tmp/sing-box/rules/private/private.yaml
           sort --ignore-case -u ./tmp/temp-private.txt >> ./tmp/sing-box/rules/private/private.yaml
 
@@ -339,8 +339,8 @@ jobs:
               curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep 'keyword:' | grep '@cn' | sed 's/^keyword:/  - DOMAIN-KEYWORD,/g' | sed 's/ *@cn$//g' >> ./tmp/temp-games-cn.txt
             done
           done
-          curl -sSL ${games_cn2} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/temp-games-cn.txt
-          curl -sSL ${games_cn3} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/temp-games-cn.txt
+          curl -sSL ${games_cn2} | grep -v '#' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/temp-games-cn.txt
+          curl -sSL ${games_cn3} | grep -v '#' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/temp-games-cn.txt
           echo 'payload:' > ./tmp/sing-box/rules/games-cn/games-cn.yaml
           sort --ignore-case -u ./tmp/temp-games-cn.txt >> ./tmp/sing-box/rules/games-cn/games-cn.yaml
 
@@ -356,7 +356,7 @@ jobs:
           curl -sSL ${netflix} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//g' | sed 's/^DOMAIN-SUFFIX,/+\./g' > ./clash-ruleset/netflix.list
           # Download sing-box rule_set
           echo 'payload:' > ./tmp/sing-box/rules/netflix/netflix.yaml
-          curl -sSL ${netflix} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/sing-box/rules/netflix/netflix.yaml
+          curl -sSL ${netflix} | grep -v '#' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/sing-box/rules/netflix/netflix.yaml
 
       - name: Generate disney
         run: |
@@ -370,7 +370,7 @@ jobs:
           curl -sSL ${disney} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//g' | sed 's/^DOMAIN-SUFFIX,/+\./g' > ./clash-ruleset/disney.list
           # Download sing-box rule_set
           echo 'payload:' > ./tmp/sing-box/rules/disney/disney.yaml
-          curl -sSL ${disney} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/sing-box/rules/disney/disney.yaml
+          curl -sSL ${disney} | grep -v '#' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/sing-box/rules/disney/disney.yaml
 
       - name: Generate max
         run: |
@@ -384,7 +384,7 @@ jobs:
           curl -sSL ${max} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//g' | sed 's/^DOMAIN-SUFFIX,/+\./g' > ./clash-ruleset/max.list
           # Download sing-box rule_set
           echo 'payload:' > ./tmp/sing-box/rules/max/max.yaml
-          curl -sSL ${max} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/sing-box/rules/max/max.yaml
+          curl -sSL ${max} | grep -v '#' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/sing-box/rules/max/max.yaml
 
       - name: Generate primevideo
         run: |
@@ -398,7 +398,7 @@ jobs:
           curl -sSL ${primevideo} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//g' | sed 's/^DOMAIN-SUFFIX,/+\./g' > ./clash-ruleset/primevideo.list
           # Download sing-box rule_set
           echo 'payload:' > ./tmp/sing-box/rules/primevideo/primevideo.yaml
-          curl -sSL ${primevideo} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/sing-box/rules/primevideo/primevideo.yaml
+          curl -sSL ${primevideo} | grep -v '#' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/sing-box/rules/primevideo/primevideo.yaml
 
       - name: Generate appletv
         run: |
@@ -412,7 +412,7 @@ jobs:
           curl -sSL ${appletv} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//g' | sed 's/^DOMAIN-SUFFIX,/+\./g' > ./clash-ruleset/appletv.list
           # Download sing-box rule_set
           echo 'payload:' > ./tmp/sing-box/rules/appletv/appletv.yaml
-          curl -sSL ${appletv} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/sing-box/rules/appletv/appletv.yaml
+          curl -sSL ${appletv} | grep -v '#' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/sing-box/rules/appletv/appletv.yaml
 
       - name: Generate youtube
         run: |
@@ -426,7 +426,7 @@ jobs:
           curl -sSL ${youtube} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//g' | sed 's/^DOMAIN-SUFFIX,/+\./g' > ./clash-ruleset/youtube.list
           # Download sing-box rule_set
           echo 'payload:' > ./tmp/sing-box/rules/youtube/youtube.yaml
-          curl -sSL ${youtube} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/sing-box/rules/youtube/youtube.yaml
+          curl -sSL ${youtube} | grep -v '#' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/sing-box/rules/youtube/youtube.yaml
 
       - name: Generate tiktok
         run: |
@@ -440,7 +440,7 @@ jobs:
           curl -sSL ${tiktok} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//g' | sed 's/^DOMAIN-SUFFIX,/+\./g' > ./clash-ruleset/tiktok.list
           # Download sing-box rule_set
           echo 'payload:' > ./tmp/sing-box/rules/tiktok/tiktok.yaml
-          curl -sSL ${tiktok} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/sing-box/rules/tiktok/tiktok.yaml
+          curl -sSL ${tiktok} | grep -v '#' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/sing-box/rules/tiktok/tiktok.yaml
 
       - name: Generate bilibili
         run: |
@@ -454,7 +454,7 @@ jobs:
           curl -sSL ${bilibili} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//g' | sed 's/^DOMAIN-SUFFIX,/+\./g' > ./clash-ruleset/bilibili.list
           # Download sing-box rule_set
           echo 'payload:' > ./tmp/sing-box/rules/bilibili/bilibili.yaml
-          curl -sSL ${bilibili} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/sing-box/rules/bilibili/bilibili.yaml
+          curl -sSL ${bilibili} | grep -v '#' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/sing-box/rules/bilibili/bilibili.yaml
 
       - name: Generate ai
         run: |
@@ -476,9 +476,9 @@ jobs:
           curl -sSL ${ai3} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//g' | sed 's/^DOMAIN-SUFFIX,/+\./g' >> ./tmp/temp-ai.txt
           sort --ignore-case -u ./tmp/temp-ai.txt > ./clash-ruleset/ai.list
           # Download sing-box rule_set
-          curl -sSL ${ai1} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' > ./tmp/temp-ai.txt
-          curl -sSL ${ai2} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/temp-ai.txt
-          curl -sSL ${ai3} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/temp-ai.txt
+          curl -sSL ${ai1} | grep -v '#' | sed '/^\s*$/d' | sed 's/^/  - /g' > ./tmp/temp-ai.txt
+          curl -sSL ${ai2} | grep -v '#' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/temp-ai.txt
+          curl -sSL ${ai3} | grep -v '#' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/temp-ai.txt
           echo 'payload:' > ./tmp/sing-box/rules/ai/ai.yaml
           sort --ignore-case -u ./tmp/temp-ai.txt >> ./tmp/sing-box/rules/ai/ai.yaml
 
@@ -523,7 +523,7 @@ jobs:
               curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep 'keyword:' | sed 's/^keyword:/  - DOMAIN-KEYWORD,/g' >> ./tmp/temp-networktest.txt
             done
           done
-          curl -sSL ${networktest2} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed "s/^/  - /g" >> ./tmp/temp-networktest.txt
+          curl -sSL ${networktest2} | grep -v '#' | sed '/^\s*$/d' | sed "s/^/  - /g" >> ./tmp/temp-networktest.txt
           cat <<EOF >> ./tmp/temp-networktest.txt
             - DOMAIN-KEYWORD,ipv6-test
             - DOMAIN-KEYWORD,ipv6test
@@ -577,7 +577,7 @@ jobs:
           sed "s/^/  - DOMAIN-SUFFIX,/g" ../tmp/temp-proxy5.txt > ../tmp/temp-proxy6.txt
           curl -sSL ${proxy1} | grep 'domain:' | sed 's/:@\!cn$//g' | sed 's/^domain:/  - DOMAIN-SUFFIX,/g' >> ../tmp/temp-proxy6.txt
           curl -sSL ${proxy1} | grep 'full:' | sed 's/:@\!cn$//g' | sed 's/^full:/  - DOMAIN,/g' >> ../tmp/temp-proxy6.txt
-          curl -sSL ${proxy2} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ../tmp/temp-proxy6.txt
+          curl -sSL ${proxy2} | grep -v '#' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ../tmp/temp-proxy6.txt
           echo 'payload:' > ../tmp/sing-box/rules/proxy/proxy.yaml
           sort --ignore-case -u ../tmp/temp-proxy6.txt >> ../tmp/sing-box/rules/proxy/proxy.yaml
           rm -rf ../gfwlist2dnsmasq/
@@ -603,7 +603,7 @@ jobs:
           # Download sing-box rule_set
           curl -sSL ${cn1} | grep 'domain:' | sed 's/:@cn$//g' | sed 's/^domain:/  - DOMAIN-SUFFIX,/g' > ./tmp/temp-cn.txt
           curl -sSL ${cn1} | grep 'full:' | sed 's/:@cn$//g' | sed 's/^full:/  - DOMAIN,/g' >> ./tmp/temp-cn.txt
-          curl -sSL ${cn2} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/temp-cn.txt
+          curl -sSL ${cn2} | grep -v '#' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/temp-cn.txt
           echo 'payload:' > ./tmp/sing-box/rules/cn/cn.yaml
           sort --ignore-case -u ./tmp/temp-cn.txt >> ./tmp/sing-box/rules/cn/cn.yaml
 
