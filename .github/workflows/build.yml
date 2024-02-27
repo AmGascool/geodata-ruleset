@@ -548,7 +548,7 @@ jobs:
           # Download clash rule-set_text
           grep -v 'payload:' ./clash-ruleset/networktest.yaml | sed '/^\s*$/d' | sed 's/^[ \t]*//g' | sed 's/^- //g' > ./clash-ruleset/networktest.list
           # Download sing-box rule_set
-          cp -f ./clash-ruleset/networktest.yaml > ./tmp/sing-box/rules/networktest/networktest.yaml
+          cp -f ./clash-ruleset/networktest.yaml ./tmp/sing-box/rules/networktest/networktest.yaml
 
       - name: Generate applications
         run: |
