@@ -1,6 +1,6 @@
 # 一、 geodata 规则集文件说明
 ## 1. 文件类型
-① [Clash](https://github.com/Dreamacro/clash) geodata 规则集文件，包括：geosite.dat、Country.mmdb、geoip.dat 和 geoip.metadb（仅限 [mihomo 内核](https://github.com/MetaCubeX/mihomo)）等  
+① [Clash](https://github.com/Dreamacro/clash) geodata 规则集文件，包括：geosite.dat、geoip.dat、Country.mmdb 和 geoip.metadb（仅限 [mihomo 内核](https://github.com/MetaCubeX/mihomo)）等  
 ② [sing-box](https://github.com/SagerNet/sing-box) geodata 规则集文件，包括：geosite.db 和 geoip.db 等
 ## 2. 数据源
 ① 每天凌晨 3 点（北京时间）自动构建，根据 [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat) 和 [Loyalsoldier/geoip](https://github.com/Loyalsoldier/geoip) 进行深度定制，可点击查看包含的[域名列表](https://github.com/DustinWin/ruleset_geodata/tree/domains)和 [IP 段列表](https://github.com/DustinWin/ruleset_geodata/tree/ips)  
@@ -19,13 +19,13 @@
 ⑭ `geosite,tiktok,🎵 TikTok` 源采用 [blackmatrix7/ios_rule_script/TikTok](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/TikTok)  
 ⑮ `geosite,bilibili,📺 哔哩哔哩` 源采用 [blackmatrix7/ios_rule_script/BiliBili](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/BiliBili)  
 ⑯ `geosite,ai,🤖 人工智能` 源采用 [blackmatrix7/ios_rule_script/OpenAI](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/OpenAI)、[blackmatrix7/ios_rule_script/Bing](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Bing) 和 [blackmatrix7/ios_rule_script/BardAI](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/BardAI) 组合  
-⑰ `geosite,networktest,📈 网络测试` 源采用 [blackmatrix7/ios_rule_script/Speedtest](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Speedtest) 和 IPv6 测试域名关键字（`keyword`，包括：`ipv6-test`、`test-ipv6`、`ipv6test` 和 `testipv6`）组合    
-⑱ `geosite,proxy,🪜 代理域名` 源采用 [cokebar/gfwlist2dnsmasq](https://github.com/cokebar/gfwlist2dnsmasq) 生成的 [gfwlist](https://github.com/gfwlist/gfwlist) 和 [Loyalsoldier/domain-list-custom/geolocation-!cn.txt](https://github.com/Loyalsoldier/domain-list-custom) 组合  
-⑲ `geosite,cn,🔗 直连域名` 源采用 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)  
-⑳ `geoip,netflix,🎥 奈飞视频` 源采用 [blackmatrix7/ios_rule_script/Netflix/Netflix_IP.txt](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Netflix)  
-㉑ `geoip,telegram,📲 电报消息` 源采用 [Telegram IP 段](https://core.telegram.org/resources/cidr.txt)  
+⑰ `geosite,networktest,📈 网络测试` 源采用 [v2fly/domain-list-community/speedtest](https://github.com/v2fly/domain-list-community/blob/master/data/speedtest)、[blackmatrix7/ios_rule_script/Speedtest](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Speedtest) 和 IPv6 测试域名关键字（`keyword`，包括：`ipv6-test`、`test-ipv6`、`ipv6test` 和 `testipv6`）组合    
+⑱ `geosite,proxy,🪜 代理域名` 源采用 [cokebar/gfwlist2dnsmasq](https://github.com/cokebar/gfwlist2dnsmasq) 生成的 [gfwlist](https://github.com/gfwlist/gfwlist)、[Loyalsoldier/domain-list-custom/geolocation-!cn.txt](https://github.com/Loyalsoldier/domain-list-custom) 和 [blackmatrix7/ios_rule_script/Global](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Global) 组合  
+⑲ `geosite,cn,🔗 直连域名` 源采用 [Loyalsoldier/domain-list-custom/cn.txt](https://github.com/Loyalsoldier/domain-list-custom) 和 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)  
+⑳ `geoip,netflix,🎥 奈飞视频` 源采用 [GeoLite2/netflix.txt](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data) 和 [blackmatrix7/ios_rule_script/Netflix](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Netflix) 组合  
+㉑ `geoip,telegram,📲 电报消息` 源采用 [GeoLite2/telegram.txt](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data)、[Telegram IP 段](https://core.telegram.org/resources/cidr.txt) 和 [blackmatrix7/ios_rule_script/Telegram](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Telegram) 组合  
 ㉒ `geoip,private,🔒 私有网络` 源采用 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)  
-㉓ `geoip,cn,🇨🇳 国内 IP` 源采用 [GeoLite2/cn.txt](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data)、[17mon/china_ip_list](https://github.com/17mon/china_ip_list)、[gaoyifan/china-operator-ip](https://github.com/gaoyifan/china-operator-ip) 和 [blackmatrix7/ios_rule_script/ChinaIPs/ChinaIPs_IP.txt](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaIPs) 组合
+㉓ `geoip,cn,🇨🇳 国内 IP` 源采用 [GeoLite2/cn.txt](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data)、[17mon/china_ip_list](https://github.com/17mon/china_ip_list)、[gaoyifan/china-operator-ip](https://github.com/gaoyifan/china-operator-ip) 和 [blackmatrix7/ios_rule_script/ChinaIPs](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaIPs) 组合
 ## 3. 文件下载
 **规则集文件包含的规则和下载地址对应关系如下表：**
 <table>
@@ -262,7 +262,7 @@ $CRASHDIR/start.sh restart
 ⑤ `rule-set,apple-cn,🍎 苹果服务` 源采用 [felixonmars/dnsmasq-china-list/apple.china.conf](https://github.com/felixonmars/dnsmasq-china-list)  
 ⑥ `rule-set,google-cn,📢 谷歌服务` 源采用 [felixonmars/dnsmasq-china-list/google.china.conf](https://github.com/felixonmars/dnsmasq-china-list)  
 ⑦ `rule-set,games-cn,🎮 游戏平台` 源采用 [v2fly/domain-list-community/category-games@cn](https://github.com/v2fly/domain-list-community/blob/master/data/category-games)、[blackmatrix7/ios_rule_script/SteamCN](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/SteamCN) 和 [blackmatrix7/ios_rule_script/GameDownloadCN](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Game/GameDownloadCN) 组合  
-⑧ `rule-set,netflix,🎥 奈飞视频` 源采用 [blackmatrix7/ios_rule_script/Netflix](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Netflix)  
+⑧ `rule-set,netflix,🎥 奈飞视频` 源采用 [blackmatrix7/ios_rule_script/Netflix](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Netflix)（仅域名）  
 ⑨ `rule-set,disney,📽️ 迪士尼+` 源采用 [blackmatrix7/ios_rule_script/Disney](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Disney)  
 ⑩ `rule-set,max,🎞️ Max` 源采用 [blackmatrix7/ios_rule_script/HBO](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/HBO)  
 ⑪ `rule-set,primevideo,🎬 Prime Video` 源采用 [blackmatrix7/ios_rule_script/PrimeVideo](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/PrimeVideo)  
@@ -271,12 +271,14 @@ $CRASHDIR/start.sh restart
 ⑭ `rule-set,tiktok,🎵 TikTok` 源采用 [blackmatrix7/ios_rule_script/TikTok](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/TikTok)  
 ⑮ `rule-set,bilibili,📺 哔哩哔哩` 源采用 [blackmatrix7/ios_rule_script/BiliBili](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/BiliBili)  
 ⑯ `rule-set,ai,🤖 人工智能` 源采用 [blackmatrix7/ios_rule_script/OpenAI](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/OpenAI)、[blackmatrix7/ios_rule_script/Bing](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Bing) 和 [blackmatrix7/ios_rule_script/BardAI](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/BardAI) 组合  
-⑰ `rule-set,networktest,📈 网络测试` 源采用 [blackmatrix7/ios_rule_script/Speedtest](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Speedtest) 和 IPv6 测试域名关键字（`keyword`，包括：`ipv6-test`、`test-ipv6`、`ipv6test` 和 `testipv6`）组合    
-⑱ `rule-set,proxy,🪜 代理域名` 源采用 [cokebar/gfwlist2dnsmasq](https://github.com/cokebar/gfwlist2dnsmasq) 生成的 [gfwlist](https://github.com/gfwlist/gfwlist) 和 [Loyalsoldier/domain-list-custom/geolocation-!cn.txt](https://github.com/Loyalsoldier/domain-list-custom) 组合  
-⑲ `rule-set,cn,🔗 直连域名` 源采用 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)  
-⑳ `rule-set,telegramip,📲 电报消息` 源采用 [Telegram IP 段](https://core.telegram.org/resources/cidr.txt)  
-㉑ `rule-set,privateip,🔒 私有网络` 源采用 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)  
-㉒ `rule-set,cnip,🇨🇳 国内 IP` 源采用 [GeoLite2/cn.txt](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data)、[17mon/china_ip_list](https://github.com/17mon/china_ip_list)、[gaoyifan/china-operator-ip](https://github.com/gaoyifan/china-operator-ip) 和 [blackmatrix7/ios_rule_script/ChinaIPs/ChinaIPs_IP.txt](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaIPs) 组合
+⑰ `rule-set,networktest,📈 网络测试` 源采用 [v2fly/domain-list-community/speedtest](https://github.com/v2fly/domain-list-community/blob/master/data/speedtest)、[blackmatrix7/ios_rule_script/Speedtest](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Speedtest) 和 IPv6 测试域名关键字（`keyword`，包括：`ipv6-test`、`test-ipv6`、`ipv6test` 和 `testipv6`）组合  
+⑱ `rule-set,applications,🖥️ 直连软件` 源采用 [Loyalsoldier/clash-rules/applications.txt](https://github.com/Loyalsoldier/clash-rules)  
+⑲ `rule-set,proxy,🪜 代理域名` 源采用 [cokebar/gfwlist2dnsmasq](https://github.com/cokebar/gfwlist2dnsmasq) 生成的 [gfwlist](https://github.com/gfwlist/gfwlist)、[Loyalsoldier/domain-list-custom/geolocation-!cn.txt](https://github.com/Loyalsoldier/domain-list-custom) 和 [blackmatrix7/ios_rule_script/Global](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Global) 组合  
+⑳ `rule-set,cn,🔗 直连域名` 源采用 [Loyalsoldier/domain-list-custom/cn.txt](https://github.com/Loyalsoldier/domain-list-custom) 和 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax) 组合  
+㉑ `rule-set,netflixip,🎥 奈飞视频` 源采用 [GeoLite2/netflix.txt](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data) 和 [blackmatrix7/ios_rule_script/Netflix](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Netflix)（仅 IP）组合  
+㉒ `rule-set,telegramip,📲 电报消息` 源采用 [GeoLite2/telegram.txt](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data)、[Telegram IP 段](https://core.telegram.org/resources/cidr.txt) 和 [blackmatrix7/ios_rule_script/Telegram](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Telegram) 组合  
+㉓ `rule-set,privateip,🔒 私有网络` 源采用 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)  
+㉔ `rule-set,cnip,🇨🇳 国内 IP` 源采用 [GeoLite2/cn.txt](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data)、[17mon/china_ip_list](https://github.com/17mon/china_ip_list)、[gaoyifan/china-operator-ip](https://github.com/gaoyifan/china-operator-ip) 和 [blackmatrix7/ios_rule_script/ChinaIPs/ChinaIPs_IP.txt](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaIPs) 组合
 ## 3. 文件使用
 ### ① Clash 内核
 - 注：以下只是节选，请酌情套用
@@ -311,154 +313,161 @@ rule-providers:
     type: http
     behavior: domain
     format: yaml
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/ads.yaml"
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/ads.yaml"
     interval: 86400
 
   private:
     type: http
     behavior: domain
     format: yaml
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/private.yaml"
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/private.yaml"
     interval: 86400
 
   microsoft-cn:
     type: http
     behavior: domain
     format: yaml
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/microsoft-cn.yaml"
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/microsoft-cn.yaml"
     interval: 86400
 
   apple-cn:
     type: http
     behavior: domain
     format: yaml
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/apple-cn.yaml"
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/apple-cn.yaml"
     interval: 86400
 
   google-cn:
     type: http
     behavior: domain
     format: yaml
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/google-cn.yaml"
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/google-cn.yaml"
     interval: 86400
 
   games-cn:
     type: http
     behavior: domain
     format: yaml
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/games-cn.yaml"
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/games-cn.yaml"
     interval: 86400
 
   netflix:
     type: http
-    behavior: classical
+    behavior: domain
     format: yaml
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/netflix.yaml"
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/netflix.yaml"
     interval: 86400
 
   disney:
     type: http
     behavior: domain
     format: yaml
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/disney.yaml"
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/disney.yaml"
     interval: 86400
 
   max:
     type: http
     behavior: domain
     format: yaml
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/max.yaml"
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/max.yaml"
     interval: 86400
 
   primevideo:
     type: http
     behavior: domain
     format: yaml
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/primevideo.yaml"
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/primevideo.yaml"
     interval: 86400
 
   appletv:
     type: http
     behavior: domain
     format: yaml
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/appletv.yaml"
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/appletv.yaml"
     interval: 86400
 
   youtube:
     type: http
     behavior: domain
     format: yaml
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/youtube.yaml"
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/youtube.yaml"
     interval: 86400
 
   tiktok:
     type: http
     behavior: domain
     format: yaml
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/tiktok.yaml"
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/tiktok.yaml"
     interval: 86400
 
   bilibili:
     type: http
     behavior: domain
     format: yaml
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/bilibili.yaml"
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/bilibili.yaml"
     interval: 86400
 
   ai:
     type: http
     behavior: domain
     format: yaml
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/ai.yaml"
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/ai.yaml"
     interval: 86400
 
   networktest:
     type: http
     behavior: classical
     format: yaml
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/networktest.yaml"
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/networktest.yaml"
     interval: 86400
 
   applications:
     type: http
     behavior: classical
     format: yaml
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/applications.yaml"
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/applications.yaml"
     interval: 86400
 
   proxy:
     type: http
     behavior: domain
     format: yaml
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/proxy.yaml"
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/proxy.yaml"
     interval: 86400
 
   cn:
     type: http
     behavior: domain
     format: yaml
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/cn.yaml"
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/cn.yaml"
+    interval: 86400
+
+  netflixip:
+    type: http
+    behavior: ipcidr
+    format: yaml
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/netflixip.yaml"
     interval: 86400
 
   telegramip:
     type: http
     behavior: ipcidr
     format: yaml
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/telegramip.yaml"
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/telegramip.yaml"
     interval: 86400
 
   privateip:
     type: http
     behavior: ipcidr
     format: yaml
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/privateip.yaml"
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/privateip.yaml"
     interval: 86400
 
   cnip:
     type: http
     behavior: ipcidr
     format: yaml
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/cnip.yaml"
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/cnip.yaml"
     interval: 86400
 
 rules:
@@ -481,6 +490,7 @@ rules:
   - RULE-SET,applications,🖥️ 直连软件
   - RULE-SET,proxy,🪜 代理域名
   - RULE-SET,cn,🔗 直连域名
+  - RULE-SET,netflixip,🎥 奈飞视频
   - RULE-SET,telegramip,📲 电报消息
   - RULE-SET,privateip,🔒 私有网络,no-resolve
   - RULE-SET,cnip,🇨🇳 国内 IP
@@ -510,6 +520,7 @@ rules:
     { "tag": "🍎 苹果服务", "type": "selector", "outbounds": [ "🎯 全球直连", "🚀 节点选择" ] },
     { "tag": "🇨🇳 国内 IP", "type": "selector", "outbounds": [ "🎯 全球直连", "🚀 节点选择" ] },
     { "tag": "📲 电报消息", "type": "selector", "outbounds": ["🚀 节点选择"] },
+    { "tag": "🖥️ 直连软件", "type": "selector", "outbounds": ["🎯 全球直连"] },
     { "tag": "🔒 私有网络", "type": "selector", "outbounds": ["🎯 全球直连"] },
     { "tag": "🛑 广告拦截", "type": "selector", "outbounds": ["REJECT"] },
     { "tag": "🎯 全球直连", "type": "selector", "outbounds": ["DIRECT"] },
@@ -534,8 +545,10 @@ rules:
       { "rule_set": [ "bilibili" ], "outbound": "📺 哔哩哔哩" },
       { "rule_set": [ "ai" ], "outbound": "🤖 人工智能" },
       { "rule_set": [ "networktest" ], "outbound": "📈 网络测试" },
+      { "rule_set": [ "applications" ], "outbound": "🖥️ 直连软件" },
       { "rule_set": [ "proxy" ], "outbound": "🪜 代理域名" },
       { "rule_set": [ "cn" ], "outbound": "🔗 直连域名" },
+      { "rule_set": [ "netflixip" ], "outbound": "🎥 奈飞视频" },
       { "rule_set": [ "telegramip" ], "outbound": "📲 电报消息" },
       { "rule_set": [ "privateip" ], "outbound": "🔒 私有网络" },
       { "rule_set": [ "cnip" ], "outbound": "🇨🇳 国内 IP" }
@@ -545,147 +558,161 @@ rules:
         "tag": "ads",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/ads.srs",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/ads.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "private",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/private.srs",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/private.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "microsoft-cn",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/microsoft-cn.srs",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/microsoft-cn.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "apple-cn",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/apple-cn.srs",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/apple-cn.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "google-cn",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/google-cn.srs",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/google-cn.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "games-cn",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/games-cn.srs",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/games-cn.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "netflix",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/netflix.srs",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/netflix.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "disney",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/disney.srs",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/disney.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "max",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/max.srs",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/max.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "primevideo",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/primevideo.srs",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/primevideo.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "appletv",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/appletv.srs",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/appletv.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "youtube",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/youtube.srs",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/youtube.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "tiktok",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/tiktok.srs",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/tiktok.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "bilibili",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/bilibili.srs",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/bilibili.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "ai",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/ai.srs",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/ai.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "networktest",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/networktest.srs",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/networktest.srs",
+        "download_detour": "DIRECT"
+      },
+      {
+        "tag": "applications",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/applications.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "proxy",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/proxy.srs",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/proxy.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "cn",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/cn.srs",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/cn.srs",
+        "download_detour": "DIRECT"
+      },
+      {
+        "tag": "netflixip",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/netflixip.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "telegramip",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/telegramip.srs",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/telegramip.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "privateip",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/privateip.srs",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/privateip.srs",
         "download_detour": "DIRECT"
       },
       {
         "tag": "cnip",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box/cnip.srs",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/cnip.srs",
         "download_detour": "DIRECT"
       }
     ]
