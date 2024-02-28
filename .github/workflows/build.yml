@@ -98,13 +98,13 @@ jobs:
           mkdir -p ./community/mydata/ ./domains/ ./ips/ ./clash/ ./clash-config/ ./clash-ruleset/ ./sing-box/ ./sing-box-config/ ./sing-box-ruleset/
           mkdir -p ./tmp/sing-box/rules/ads/
           # Download clash geodata
-          curl -sSL ${ads} | grep -Ev '#|payload:' | sed '/^\s*$/d' | sed "s/- '+.//g" | sed "s/- '/full:/g" | sed "s/'$//g" | sed 's/^[ \t]*//g' > ./community/mydata/ads
+          curl -sSL ${ads} | grep -Ev '#|payload:' | sed '/^\s*$/d' | sed "s/- '+\.//" | sed "s/- '/full:/" | sed "s/'$//" | sed 's/^[ \t]*//' > ./community/mydata/ads
           # Download clash rule-set_yaml
           curl -sSL ${ads} | grep -v '#' | sed '/^\s*$/d' > ./clash-ruleset/ads.yaml
           # Download clash rule-set_text
-          curl -sSL ${ads} | grep -Ev '#|payload:' | sed '/^\s*$/d' | sed "s/- '//g" | sed "s/'$//g" | sed 's/^[ \t]*//g' > ./clash-ruleset/ads.list
+          curl -sSL ${ads} | grep -Ev '#|payload:' | sed '/^\s*$/d' | sed "s/- '+\./+\./" | sed "s/- '//" | sed "s/'$//" | sed 's/^[ \t]*//' > ./clash-ruleset/ads.list
           # Download sing-box rule_set
-          curl -sSL ${ads} | grep -v '#' | sed '/^\s*$/d' | sed 's/'\''$//g' | sed "s/'+./DOMAIN-SUFFIX,/g" | sed "s/'/DOMAIN,/g" > ./tmp/sing-box/rules/ads/ads.yaml
+          curl -sSL ${ads} | grep -v '#' | sed '/^\s*$/d' | sed "s/'$//" | sed "s/'+\./DOMAIN-SUFFIX,/" | sed "s/'/DOMAIN,/" > ./tmp/sing-box/rules/ads/ads.yaml
 
       - name: Generate private
         run: |
@@ -120,7 +120,7 @@ jobs:
           full:metacubexd.pages.dev
           EOF
           curl -sSL ${private1} | grep -v '#' | sed '/^\s*$/d' >> ./tmp/temp-private.txt
-          curl -sSL ${private2} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' >> ./tmp/temp-private.txt
+          curl -sSL ${private2} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/' | sed 's/^DOMAIN-SUFFIX,//' | sed 's/^DOMAIN-KEYWORD,/keyword:/' | sed 's/^[ \t]*//' >> ./tmp/temp-private.txt
           sort --ignore-case -u ./tmp/temp-private.txt > ./community/mydata/private
           # Download clash rule-set_yaml
           cat <<EOF > ./tmp/temp-private.txt
@@ -132,9 +132,9 @@ jobs:
             - 'metacubex.github.io'
             - 'metacubexd.pages.dev'
           EOF
-          curl -sSL ${private1} | grep -Ev '#|full:|keyword:|regexp:' | sed '/^\s*$/d' | sed "s/^/  - '+./g" | sed "s/$/'/g" >> ./tmp/temp-private.txt
-          curl -sSL ${private1} | grep 'full:' | sed "s/^full:/  - '/g" | sed "s/$/'/g" >> ./tmp/temp-private.txt
-          curl -sSL ${private2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/g" | sed "s/^DOMAIN-SUFFIX,/  - '+./g" | sed "s/$/'/g" >> ./tmp/temp-private.txt
+          curl -sSL ${private1} | grep -Ev '#|full:|keyword:|regexp:' | sed '/^\s*$/d' | sed "s/^/  - '+\./" | sed "s/$/'/" >> ./tmp/temp-private.txt
+          curl -sSL ${private1} | grep 'full:' | sed "s/^full:/  - '/" | sed "s/$/'/" >> ./tmp/temp-private.txt
+          curl -sSL ${private2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/" | sed "s/^DOMAIN-SUFFIX,/  - '+\./" | sed "s/$/'/" >> ./tmp/temp-private.txt
           echo 'payload:' > ./clash-ruleset/private.yaml
           sort --ignore-case -u ./tmp/temp-private.txt >> ./clash-ruleset/private.yaml
           # Download clash rule-set_text
@@ -147,9 +147,9 @@ jobs:
           metacubex.github.io
           metacubexd.pages.dev
           EOF
-          curl -sSL ${private1} | grep -Ev '#|full:|keyword:|regexp:' | sed '/^\s*$/d' | sed 's/^/+\./g' >> ./tmp/temp-private.txt
-          curl -sSL ${private1} | grep 'full:' | sed 's/^full://g' >> ./tmp/temp-private.txt
-          curl -sSL ${private2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//g' | sed 's/^DOMAIN-SUFFIX,/+\./g' >> ./tmp/temp-private.txt
+          curl -sSL ${private1} | grep -Ev '#|full:|keyword:|regexp:' | sed '/^\s*$/d' | sed 's/^/+\./' >> ./tmp/temp-private.txt
+          curl -sSL ${private1} | grep 'full:' | sed 's/^full://' >> ./tmp/temp-private.txt
+          curl -sSL ${private2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//' | sed 's/^DOMAIN-SUFFIX,/+\./' >> ./tmp/temp-private.txt
           sort --ignore-case -u ./tmp/temp-private.txt > ./clash-ruleset/private.list
           # Download sing-box rule_set
           cat <<EOF > ./tmp/temp-private.txt
@@ -161,10 +161,10 @@ jobs:
             - DOMAIN,metacubex.github.io
             - DOMAIN,metacubexd.pages.dev
           EOF
-          curl -sSL ${private1} | grep -Ev '#|full:|keyword:|regexp:' | sed '/^\s*$/d' | sed 's/^/  - DOMAIN-SUFFIX,/g' >> ./tmp/temp-private.txt
-          curl -sSL ${private1} | grep 'full:' | sed 's/^full:/  - DOMAIN,/g' >> ./tmp/temp-private.txt
-          curl -sSL ${private1} | grep 'keyword:' | sed 's/^keyword:/  - DOMAIN-KEYWORD,/g' >> ./tmp/temp-private.txt
-          curl -sSL ${private2} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/temp-private.txt
+          curl -sSL ${private1} | grep -Ev '#|full:|keyword:|regexp:' | sed '/^\s*$/d' | sed 's/^/  - DOMAIN-SUFFIX,/' >> ./tmp/temp-private.txt
+          curl -sSL ${private1} | grep 'full:' | sed 's/^full:/  - DOMAIN,/' >> ./tmp/temp-private.txt
+          curl -sSL ${private1} | grep 'keyword:' | sed 's/^keyword:/  - DOMAIN-KEYWORD,/' >> ./tmp/temp-private.txt
+          curl -sSL ${private2} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /' >> ./tmp/temp-private.txt
           echo 'payload:' > ./tmp/sing-box/rules/private/private.yaml
           sort --ignore-case -u ./tmp/temp-private.txt >> ./tmp/sing-box/rules/private/private.yaml
 
@@ -173,66 +173,66 @@ jobs:
           mkdir -p ./tmp/sing-box/rules/microsoft-cn/
           # Download clash geodata
           count1=$(curl -sSL ${microsoft_cn} | grep 'include:' | wc -l)
-          curl -sSL ${microsoft_cn} | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' > ./tmp/temp-microsoft-cn.txt
+          curl -sSL ${microsoft_cn} | grep -v '#' | grep '@cn' | sed 's/ *@cn$//' > ./tmp/temp-microsoft-cn.txt
           for((i=0;i<count1;i++)); do
-            archs1=$(curl -sSL ${microsoft_cn} | grep 'include:' | sed 's/^include://g' | sed -n "$((i+1))p")
+            archs1=$(curl -sSL ${microsoft_cn} | grep 'include:' | sed 's/^include://' | sed -n "$((i+1))p")
             count2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | wc -l)
-            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' >> ./tmp/temp-microsoft-cn.txt
+            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep -v '#' | grep '@cn' | sed 's/ *@cn$//' >> ./tmp/temp-microsoft-cn.txt
             for((j=0;j<count2;j++)); do
-              archs2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | sed 's/^include://g' | sed -n "$((j+1))p")
-              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' >> ./tmp/temp-microsoft-cn.txt
+              archs2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | sed 's/^include://' | sed -n "$((j+1))p")
+              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep -v '#' | grep '@cn' | sed 's/ *@cn$//' >> ./tmp/temp-microsoft-cn.txt
             done
           done
           sort --ignore-case -u ./tmp/temp-microsoft-cn.txt > ./community/mydata/microsoft-cn
           # Download clash rule-set_yaml
           count1=$(curl -sSL ${microsoft_cn} | grep 'include:' | wc -l)
-          curl -sSL ${microsoft_cn} | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed "s/^/  - '+./g" | sed "s/ *@cn$/'/g" > ./tmp/temp-microsoft-cn.txt
-          curl -sSL ${microsoft_cn} | grep 'full:' | grep '@cn' | sed "s/^full:/  - '/g" | sed "s/ *@cn$/'/g" >> ./tmp/temp-microsoft-cn.txt
+          curl -sSL ${microsoft_cn} | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed "s/^/  - '+\./" | sed "s/ *@cn$/'/" > ./tmp/temp-microsoft-cn.txt
+          curl -sSL ${microsoft_cn} | grep 'full:' | grep '@cn' | sed "s/^full:/  - '/" | sed "s/ *@cn$/'/" >> ./tmp/temp-microsoft-cn.txt
           for((i=0;i<count1;i++)); do
             archs1=$(curl -sSL ${microsoft_cn} | grep 'include:' | sed 's/^include://g' | sed -n "$((i+1))p")
             count2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | wc -l)
-            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed "s/^/  - '+./g" | sed "s/ *@cn$/'/g" >> ./tmp/temp-microsoft-cn.txt
-            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'full:' | grep '@cn' | sed "s/^full:/  - '/g" | sed "s/ *@cn$/'/g" >> ./tmp/temp-microsoft-cn.txt
+            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed "s/^/  - '+\./" | sed "s/ *@cn$/'/" >> ./tmp/temp-microsoft-cn.txt
+            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'full:' | grep '@cn' | sed "s/^full:/  - '/" | sed "s/ *@cn$/'/" >> ./tmp/temp-microsoft-cn.txt
             for((j=0;j<count2;j++)); do
-              archs2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | sed 's/^include://g' | sed -n "$((j+1))p")
-              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed "s/^/  - '+./g" | sed "s/ *@cn$/'/g" >> ./tmp/temp-microsoft-cn.txt
-              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep 'full:' | grep '@cn' | sed "s/^full:/  - '/g" | sed "s/ *@cn$/'/g" >> ./tmp/temp-microsoft-cn.txt
+              archs2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | sed 's/^include://' | sed -n "$((j+1))p")
+              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed "s/^/  - '+\./" | sed "s/ *@cn$/'/" >> ./tmp/temp-microsoft-cn.txt
+              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep 'full:' | grep '@cn' | sed "s/^full:/  - '/" | sed "s/ *@cn$/'/" >> ./tmp/temp-microsoft-cn.txt
             done
           done
           echo 'payload:' > ./clash-ruleset/microsoft-cn.yaml
           sort --ignore-case -u ./tmp/temp-microsoft-cn.txt >> ./clash-ruleset/microsoft-cn.yaml
           # Download clash rule-set_text
           count1=$(curl -sSL ${microsoft_cn} | grep 'include:' | wc -l)
-          curl -sSL ${microsoft_cn} | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed 's/^/+\./g' | sed 's/ *@cn$//g' > ./tmp/temp-microsoft-cn.txt
-          curl -sSL ${microsoft_cn} | grep 'full:' | grep '@cn' | sed 's/^full://g' | sed 's/ *@cn$//g' >> ./tmp/temp-microsoft-cn.txt
+          curl -sSL ${microsoft_cn} | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed 's/^/+\./' | sed 's/ *@cn$//' > ./tmp/temp-microsoft-cn.txt
+          curl -sSL ${microsoft_cn} | grep 'full:' | grep '@cn' | sed 's/^full://' | sed 's/ *@cn$//' >> ./tmp/temp-microsoft-cn.txt
           for((i=0;i<count1;i++)); do
-            archs1=$(curl -sSL ${microsoft_cn} | grep 'include:' | sed 's/^include://g' | sed -n "$((i+1))p")
+            archs1=$(curl -sSL ${microsoft_cn} | grep 'include:' | sed 's/^include://' | sed -n "$((i+1))p")
             count2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | wc -l)
-            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed 's/^/+\./g' | sed 's/ *@cn$//g' >> ./tmp/temp-microsoft-cn.txt
-            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'full:' | grep '@cn' | sed 's/^full://g' | sed 's/ *@cn$//g' >> ./tmp/temp-microsoft-cn.txt
+            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed 's/^/+\./' | sed 's/ *@cn$//' >> ./tmp/temp-microsoft-cn.txt
+            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'full:' | grep '@cn' | sed 's/^full://' | sed 's/ *@cn$//' >> ./tmp/temp-microsoft-cn.txt
             for((j=0;j<count2;j++)); do
-              archs2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | sed 's/^include://g' | sed -n "$((j+1))p")
-              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed 's/^/+\./g' | sed 's/ *@cn$//g' >> ./tmp/temp-microsoft-cn.txt
-              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep 'full:' | grep '@cn' | sed 's/^full://g' | sed 's/ *@cn$//g' >> ./tmp/temp-microsoft-cn.txt
+              archs2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | sed 's/^include://' | sed -n "$((j+1))p")
+              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed 's/^/+\./' | sed 's/ *@cn$//' >> ./tmp/temp-microsoft-cn.txt
+              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep 'full:' | grep '@cn' | sed 's/^full://' | sed 's/ *@cn$//' >> ./tmp/temp-microsoft-cn.txt
             done
           done
           sort --ignore-case -u ./tmp/temp-microsoft-cn.txt > ./clash-ruleset/microsoft-cn.list
           # Download sing-box rule_set
           count1=$(curl -sSL ${microsoft_cn} | grep 'include:' | wc -l)
-          curl -sSL ${microsoft_cn} | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed 's/^/  - DOMAIN-SUFFIX,/g' | sed 's/ *@cn$//g' > ./tmp/temp-microsoft-cn.yaml
-          curl -sSL ${microsoft_cn} | grep 'full:' | grep '@cn' | sed 's/^full:/  - DOMAIN,/g' | sed 's/ *@cn$//g' >> ./tmp/temp-microsoft-cn.yaml
-          curl -sSL ${microsoft_cn} | grep 'keyword:' | grep '@cn' | sed 's/^keyword:/  - DOMAIN-KEYWORD,/g' | sed 's/ *@cn$//g' >> ./tmp/temp-microsoft-cn.yaml
+          curl -sSL ${microsoft_cn} | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed 's/^/  - DOMAIN-SUFFIX,/' | sed 's/ *@cn$//' > ./tmp/temp-microsoft-cn.yaml
+          curl -sSL ${microsoft_cn} | grep 'full:' | grep '@cn' | sed 's/^full:/  - DOMAIN,/' | sed 's/ *@cn$//' >> ./tmp/temp-microsoft-cn.yaml
+          curl -sSL ${microsoft_cn} | grep 'keyword:' | grep '@cn' | sed 's/^keyword:/  - DOMAIN-KEYWORD,/' | sed 's/ *@cn$//' >> ./tmp/temp-microsoft-cn.yaml
           for((i=0;i<count1;i++)); do
-            archs1=$(curl -sSL ${microsoft_cn} | grep 'include:' | sed 's/^include://g' | sed -n "$((i+1))p")
+            archs1=$(curl -sSL ${microsoft_cn} | grep 'include:' | sed 's/^include://' | sed -n "$((i+1))p")
             count2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | wc -l)
-            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed 's/^/  - DOMAIN-SUFFIX,/g' | sed 's/ *@cn$//g' >> ./tmp/temp-microsoft-cn.yaml
-            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'full:' | grep '@cn' | sed 's/^full:/  - DOMAIN,/g' | sed 's/ *@cn$//g' >> ./tmp/temp-microsoft-cn.yaml
-            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'keyword:' | grep '@cn' | sed 's/^keyword:/  - DOMAIN-KEYWORD,/g' | sed 's/ *@cn$//g' >> ./tmp/temp-microsoft-cn.yaml
+            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed 's/^/  - DOMAIN-SUFFIX,/' | sed 's/ *@cn$//' >> ./tmp/temp-microsoft-cn.yaml
+            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'full:' | grep '@cn' | sed 's/^full:/  - DOMAIN,/' | sed 's/ *@cn$//' >> ./tmp/temp-microsoft-cn.yaml
+            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'keyword:' | grep '@cn' | sed 's/^keyword:/  - DOMAIN-KEYWORD,/' | sed 's/ *@cn$//' >> ./tmp/temp-microsoft-cn.yaml
             for((j=0;j<count2;j++)); do
-              archs2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | sed 's/^include://g' | sed -n "$((j+1))p")
-              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed 's/^/  - DOMAIN-SUFFIX,/g' | sed 's/ *@cn$//g' >> ./tmp/temp-microsoft-cn.yaml
-              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep 'full:' | grep '@cn' | sed 's/^full:/  - DOMAIN,/g' | sed 's/ *@cn$//g' >> ./tmp/temp-microsoft-cn.yaml
-              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep 'keyword:' | grep '@cn' | sed 's/^keyword:/  - DOMAIN-KEYWORD,/g' | sed 's/ *@cn$//g' >> ./tmp/temp-microsoft-cn.yaml
+              archs2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | sed 's/^include://' | sed -n "$((j+1))p")
+              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed 's/^/  - DOMAIN-SUFFIX,/' | sed 's/ *@cn$//' >> ./tmp/temp-microsoft-cn.yaml
+              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep 'full:' | grep '@cn' | sed 's/^full:/  - DOMAIN,/' | sed 's/ *@cn$//' >> ./tmp/temp-microsoft-cn.yaml
+              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep 'keyword:' | grep '@cn' | sed 's/^keyword:/  - DOMAIN-KEYWORD,/' | sed 's/ *@cn$//' >> ./tmp/temp-microsoft-cn.yaml
             done
           done
           echo 'payload:' > ./tmp/sing-box/rules/microsoft-cn/microsoft-cn.yaml
@@ -245,7 +245,7 @@ jobs:
           curl -sSL ${apple_cn} | perl -ne '/^server=\/([^\/]+)\// && print "full:$1\n"' > ./community/mydata/apple-cn
           # Download clash rule-set_yaml
           echo 'payload:' > ./clash-ruleset/apple-cn.yaml
-          curl -sSL ${apple_cn} | perl -ne '/^server=\/([^\/]+)\// && print "  - '\''$1\n"' | sed "s/$/'/g" >> ./clash-ruleset/apple-cn.yaml
+          curl -sSL ${apple_cn} | perl -ne '/^server=\/([^\/]+)\// && print "  - '\''$1\n"' | sed "s/$/'/" >> ./clash-ruleset/apple-cn.yaml
           # Download clash rule-set_text
           curl -sSL ${apple_cn} | perl -ne '/^server=\/([^\/]+)\// && print "$1\n"' > ./clash-ruleset/apple-cn.list
           # Download sing-box rule_set
@@ -259,7 +259,7 @@ jobs:
           curl -sSL ${google_cn} | perl -ne '/^server=\/([^\/]+)\// && print "full:$1\n"' > ./community/mydata/google-cn
           # Download clash rule-set_yaml
           echo 'payload:' > ./clash-ruleset/google-cn.yaml
-          curl -sSL ${google_cn} | perl -ne '/^server=\/([^\/]+)\// && print "  - '\''$1\n"' | sed "s/$/'/g" >> ./clash-ruleset/google-cn.yaml
+          curl -sSL ${google_cn} | perl -ne '/^server=\/([^\/]+)\// && print "  - '\''$1\n"' | sed "s/$/'/" >> ./clash-ruleset/google-cn.yaml
           # Download clash rule-set_text
           curl -sSL ${google_cn} | perl -ne '/^server=\/([^\/]+)\// && print "$1\n"' > ./clash-ruleset/google-cn.list
           # Download sing-box rule_set
@@ -271,76 +271,76 @@ jobs:
           mkdir -p ./tmp/sing-box/rules/games-cn/
           # Download clash geodata
           count1=$(curl -sSL ${games_cn1} | grep 'include:' | wc -l)
-          curl -sSL ${games_cn1} | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' > ./tmp/temp-games-cn.txt
+          curl -sSL ${games_cn1} | grep -v '#' | grep '@cn' | sed 's/ *@cn$//' > ./tmp/temp-games-cn.txt
           for((i=0;i<count1;i++)); do
-            archs1=$(curl -sSL ${games_cn1} | grep 'include:' | sed 's/^include://g' | sed -n "$((i+1))p")
+            archs1=$(curl -sSL ${games_cn1} | grep 'include:' | sed 's/^include://' | sed -n "$((i+1))p")
             count2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | wc -l)
-            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' >> ./tmp/temp-games-cn.txt
+            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep -v '#' | grep '@cn' | sed 's/ *@cn$//' >> ./tmp/temp-games-cn.txt
             for((j=0;j<count2;j++)); do
-              archs2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | sed 's/^include://g' | sed -n "$((j+1))p")
-              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep -v '#' | grep '@cn' | sed 's/ *@cn$//g' >> ./tmp/temp-games-cn.txt
+              archs2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | sed 's/^include://' | sed -n "$((j+1))p")
+              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep -v '#' | grep '@cn' | sed 's/ *@cn$//' >> ./tmp/temp-games-cn.txt
             done
           done
-          curl -sSL ${games_cn2} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' >> ./tmp/temp-games-cn.txt
-          curl -sSL ${games_cn3} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' >> ./tmp/temp-games-cn.txt
+          curl -sSL ${games_cn2} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/' | sed 's/^DOMAIN-SUFFIX,//' | sed 's/^DOMAIN-KEYWORD,/keyword:/' | sed 's/^[ \t]*//' >> ./tmp/temp-games-cn.txt
+          curl -sSL ${games_cn3} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/' | sed 's/^DOMAIN-SUFFIX,//' | sed 's/^DOMAIN-KEYWORD,/keyword:/' | sed 's/^[ \t]*//' >> ./tmp/temp-games-cn.txt
           sort --ignore-case -u ./tmp/temp-games-cn.txt > ./community/mydata/games-cn
           # Download clash rule-set_yaml
           count1=$(curl -sSL ${games_cn1} | grep 'include:' | wc -l)
-          curl -sSL ${games_cn1} | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed "s/^/  - '+./g" | sed "s/ *@cn$/'/g" > ./tmp/temp-games-cn.txt
-          curl -sSL ${games_cn1} | grep 'full:' | grep '@cn' | sed "s/^full:/  - '/g" | sed "s/ *@cn$/'/g" >> ./tmp/temp-games-cn.txt
+          curl -sSL ${games_cn1} | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed "s/^/  - '+\./" | sed "s/ *@cn$/'/" > ./tmp/temp-games-cn.txt
+          curl -sSL ${games_cn1} | grep 'full:' | grep '@cn' | sed "s/^full:/  - '/" | sed "s/ *@cn$/'/" >> ./tmp/temp-games-cn.txt
           for((i=0;i<count1;i++)); do
-            archs1=$(curl -sSL ${games_cn1} | grep 'include:' | sed 's/^include://g' | sed -n "$((i+1))p")
+            archs1=$(curl -sSL ${games_cn1} | grep 'include:' | sed 's/^include://' | sed -n "$((i+1))p")
             count2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | wc -l)
-            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed "s/^/  - '+./g" | sed "s/ *@cn$/'/g" >> ./tmp/temp-games-cn.txt
-            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'full:' | grep '@cn' | sed "s/^full:/  - '/g" | sed "s/ *@cn$/'/g" >> ./tmp/temp-games-cn.txt
+            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed "s/^/  - '+\./" | sed "s/ *@cn$/'/" >> ./tmp/temp-games-cn.txt
+            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'full:' | grep '@cn' | sed "s/^full:/  - '/" | sed "s/ *@cn$/'/" >> ./tmp/temp-games-cn.txt
             for((j=0;j<count2;j++)); do
-              archs2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | sed 's/^include://g' | sed -n "$((j+1))p")
-              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed "s/^/  - '+./g" | sed "s/ *@cn$/'/g" >> ./tmp/temp-games-cn.txt
-              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep 'full:' | grep '@cn' | sed "s/^full:/  - '/g" | sed "s/ *@cn$/'/g" >> ./tmp/temp-games-cn.txt
+              archs2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | sed 's/^include://' | sed -n "$((j+1))p")
+              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed "s/^/  - '+\./" | sed "s/ *@cn$/'/" >> ./tmp/temp-games-cn.txt
+              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep 'full:' | grep '@cn' | sed "s/^full:/  - '/" | sed "s/ *@cn$/'/" >> ./tmp/temp-games-cn.txt
             done
           done
-          curl -sSL ${games_cn2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/g" | sed "s/^DOMAIN-SUFFIX,/  - '+./g" | sed "s/$/'/g" >> ./tmp/temp-games-cn.txt
-          curl -sSL ${games_cn3} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/g" | sed "s/^DOMAIN-SUFFIX,/  - '+./g" | sed "s/$/'/g" >> ./tmp/temp-games-cn.txt
+          curl -sSL ${games_cn2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/" | sed "s/^DOMAIN-SUFFIX,/  - '+\./" | sed "s/$/'/" >> ./tmp/temp-games-cn.txt
+          curl -sSL ${games_cn3} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/" | sed "s/^DOMAIN-SUFFIX,/  - '+\./" | sed "s/$/'/" >> ./tmp/temp-games-cn.txt
           echo 'payload:' > ./clash-ruleset/games-cn.yaml
           sort --ignore-case -u ./tmp/temp-games-cn.txt >> ./clash-ruleset/games-cn.yaml
           # Download clash rule-set_text
           count1=$(curl -sSL ${games_cn1} | grep 'include:' | wc -l)
-          curl -sSL ${games_cn1} | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed 's/^/+\./g' | sed 's/ *@cn$//g' > ./tmp/temp-games-cn.txt
-          curl -sSL ${games_cn1} | grep 'full:' | grep '@cn' | sed 's/^full://g' | sed 's/ *@cn$//g' >> ./tmp/temp-games-cn.txt
+          curl -sSL ${games_cn1} | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed 's/^/+\./' | sed 's/ *@cn$//' > ./tmp/temp-games-cn.txt
+          curl -sSL ${games_cn1} | grep 'full:' | grep '@cn' | sed 's/^full://' | sed 's/ *@cn$//' >> ./tmp/temp-games-cn.txt
           for((i=0;i<count1;i++)); do
-            archs1=$(curl -sSL ${games_cn1} | grep 'include:' | sed 's/^include://g' | sed -n "$((i+1))p")
+            archs1=$(curl -sSL ${games_cn1} | grep 'include:' | sed 's/^include://' | sed -n "$((i+1))p")
             count2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | wc -l)
-            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed 's/^/+\./g' | sed 's/ *@cn$//g' >> ./tmp/temp-games-cn.txt
-            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'full:' | grep '@cn' | sed 's/^full://g' | sed 's/ *@cn$//g' >> ./tmp/temp-games-cn.txt
+            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed 's/^/+\./' | sed 's/ *@cn$//' >> ./tmp/temp-games-cn.txt
+            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'full:' | grep '@cn' | sed 's/^full://' | sed 's/ *@cn$//' >> ./tmp/temp-games-cn.txt
             for((j=0;j<count2;j++)); do
-              archs2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | sed 's/^include://g' | sed -n "$((j+1))p")
-              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed 's/^/+\./g' | sed 's/ *@cn$//g' >> ./tmp/temp-games-cn.txt
-              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep 'full:' | grep '@cn' | sed 's/^full://g' | sed 's/ *@cn$//g' >> ./tmp/temp-games-cn.txt
+              archs2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | sed 's/^include://' | sed -n "$((j+1))p")
+              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed 's/^/+\./' | sed 's/ *@cn$//' >> ./tmp/temp-games-cn.txt
+              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep 'full:' | grep '@cn' | sed 's/^full://' | sed 's/ *@cn$//' >> ./tmp/temp-games-cn.txt
             done
           done
-          curl -sSL ${games_cn2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//g' | sed 's/^DOMAIN-SUFFIX,/+\./g' >> ./tmp/temp-games-cn.txt
-          curl -sSL ${games_cn3} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//g' | sed 's/^DOMAIN-SUFFIX,/+\./g' >> ./tmp/temp-games-cn.txt
+          curl -sSL ${games_cn2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//' | sed 's/^DOMAIN-SUFFIX,/+\./' >> ./tmp/temp-games-cn.txt
+          curl -sSL ${games_cn3} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//' | sed 's/^DOMAIN-SUFFIX,/+\./' >> ./tmp/temp-games-cn.txt
           sort --ignore-case -u ./tmp/temp-games-cn.txt > ./clash-ruleset/games-cn.list
           # Download sing-box rule_set
           count1=$(curl -sSL ${games_cn1} | grep 'include:' | wc -l)
-          curl -sSL ${games_cn1} | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed 's/^/  - DOMAIN-SUFFIX,/g' | sed 's/ *@cn$//g' > ./tmp/temp-games-cn.txt
-          curl -sSL ${games_cn1} | grep 'full:' | grep '@cn' | sed 's/^full:/  - DOMAIN,/g' | sed 's/ *@cn$//g' >> ./tmp/temp-games-cn.txt
-          curl -sSL ${games_cn1} | grep 'keyword:' | grep '@cn' | sed 's/^keyword:/  - DOMAIN-KEYWORD,/g' | sed 's/ *@cn$//g' >> ./tmp/temp-games-cn.txt
+          curl -sSL ${games_cn1} | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed 's/^/  - DOMAIN-SUFFIX,/' | sed 's/ *@cn$//' > ./tmp/temp-games-cn.txt
+          curl -sSL ${games_cn1} | grep 'full:' | grep '@cn' | sed 's/^full:/  - DOMAIN,/' | sed 's/ *@cn$//' >> ./tmp/temp-games-cn.txt
+          curl -sSL ${games_cn1} | grep 'keyword:' | grep '@cn' | sed 's/^keyword:/  - DOMAIN-KEYWORD,/' | sed 's/ *@cn$//' >> ./tmp/temp-games-cn.txt
           for((i=0;i<count1;i++)); do
-            archs1=$(curl -sSL ${games_cn1} | grep 'include:' | sed 's/^include://g' | sed -n "$((i+1))p")
+            archs1=$(curl -sSL ${games_cn1} | grep 'include:' | sed 's/^include://' | sed -n "$((i+1))p")
             count2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | wc -l)
-            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed 's/^/  - DOMAIN-SUFFIX,/g' | sed 's/ *@cn$//g' >> ./tmp/temp-games-cn.txt
-            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'full:' | grep '@cn' | sed 's/^full:/  - DOMAIN,/g' | sed 's/ *@cn$//g' >> ./tmp/temp-games-cn.txt
-            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'keyword:' | grep '@cn' | sed 's/^keyword:/  - DOMAIN-KEYWORD,/g' | sed 's/ *@cn$//g' >> ./tmp/temp-games-cn.txt
+            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed 's/^/  - DOMAIN-SUFFIX,/' | sed 's/ *@cn$//' >> ./tmp/temp-games-cn.txt
+            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'full:' | grep '@cn' | sed 's/^full:/  - DOMAIN,/' | sed 's/ *@cn$//' >> ./tmp/temp-games-cn.txt
+            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'keyword:' | grep '@cn' | sed 's/^keyword:/  - DOMAIN-KEYWORD,/' | sed 's/ *@cn$//' >> ./tmp/temp-games-cn.txt
             for((j=0;j<count2;j++)); do
-              archs2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | sed 's/^include://g' | sed -n "$((j+1))p")
-              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed 's/^/  - DOMAIN-SUFFIX,/g' | sed 's/ *@cn$//g' >> ./tmp/temp-games-cn.txt
-              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep 'full:' | grep '@cn' | sed 's/^full:/  - DOMAIN,/g' | sed 's/ *@cn$//g' >> ./tmp/temp-games-cn.txt
-              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep 'keyword:' | grep '@cn' | sed 's/^keyword:/  - DOMAIN-KEYWORD,/g' | sed 's/ *@cn$//g' >> ./tmp/temp-games-cn.txt
+              archs2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | sed 's/^include://' | sed -n "$((j+1))p")
+              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep -Ev '#|full:|keyword:|regexp:' | grep '@cn' | sed 's/^/  - DOMAIN-SUFFIX,/' | sed 's/ *@cn$//' >> ./tmp/temp-games-cn.txt
+              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep 'full:' | grep '@cn' | sed 's/^full:/  - DOMAIN,/' | sed 's/ *@cn$//' >> ./tmp/temp-games-cn.txt
+              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep 'keyword:' | grep '@cn' | sed 's/^keyword:/  - DOMAIN-KEYWORD,/' | sed 's/ *@cn$//' >> ./tmp/temp-games-cn.txt
             done
           done
-          curl -sSL ${games_cn2} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/temp-games-cn.txt
-          curl -sSL ${games_cn3} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/temp-games-cn.txt
+          curl -sSL ${games_cn2} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /' >> ./tmp/temp-games-cn.txt
+          curl -sSL ${games_cn3} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /' >> ./tmp/temp-games-cn.txt
           echo 'payload:' > ./tmp/sing-box/rules/games-cn/games-cn.yaml
           sort --ignore-case -u ./tmp/temp-games-cn.txt >> ./tmp/sing-box/rules/games-cn/games-cn.yaml
 
@@ -348,137 +348,137 @@ jobs:
         run: |
           mkdir -p ./tmp/sing-box/rules/netflix/
           # Download clash geodata
-          curl -sSL ${netflix} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' > ./community/mydata/netflix
+          curl -sSL ${netflix} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/' | sed 's/^DOMAIN-SUFFIX,//' | sed 's/^DOMAIN-KEYWORD,/keyword:/' | sed 's/^[ \t]*//' > ./community/mydata/netflix
           # Download clash rule-set_yaml
           echo 'payload:' > ./clash-ruleset/netflix.yaml
-          curl -sSL ${netflix} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/g" | sed "s/^DOMAIN-SUFFIX,/  - '+./g" | sed "s/$/'/g" >> ./clash-ruleset/netflix.yaml
+          curl -sSL ${netflix} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/" | sed "s/^DOMAIN-SUFFIX,/  - '+\./" | sed "s/$/'/" >> ./clash-ruleset/netflix.yaml
           # Download clash rule-set_text
-          curl -sSL ${netflix} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//g' | sed 's/^DOMAIN-SUFFIX,/+\./g' > ./clash-ruleset/netflix.list
+          curl -sSL ${netflix} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//' | sed 's/^DOMAIN-SUFFIX,/+\./' > ./clash-ruleset/netflix.list
           # Download sing-box rule_set
           echo 'payload:' > ./tmp/sing-box/rules/netflix/netflix.yaml
-          curl -sSL ${netflix} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/sing-box/rules/netflix/netflix.yaml
+          curl -sSL ${netflix} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /' >> ./tmp/sing-box/rules/netflix/netflix.yaml
 
       - name: Generate disney
         run: |
           mkdir -p ./tmp/sing-box/rules/disney/
           # Download clash geodata
-          curl -sSL ${disney} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/g' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' > ./community/mydata/disney
+          curl -sSL ${disney} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/' | sed 's/- DOMAIN-SUFFIX,//' | sed 's/- DOMAIN-KEYWORD,/keyword:/' | sed 's/^[ \t]*//' > ./community/mydata/disney
           # Download clash rule-set_yaml
           echo 'payload:' > ./clash-ruleset/disney.yaml
-          curl -sSL ${disney} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/g" | sed "s/^DOMAIN-SUFFIX,/  - '+./g" | sed "s/$/'/g" >> ./clash-ruleset/disney.yaml
+          curl -sSL ${disney} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/" | sed "s/^DOMAIN-SUFFIX,/  - '+\./" | sed "s/$/'/" >> ./clash-ruleset/disney.yaml
           # Download clash rule-set_text
-          curl -sSL ${disney} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//g' | sed 's/^DOMAIN-SUFFIX,/+\./g' > ./clash-ruleset/disney.list
+          curl -sSL ${disney} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//' | sed 's/^DOMAIN-SUFFIX,/+\./' > ./clash-ruleset/disney.list
           # Download sing-box rule_set
           echo 'payload:' > ./tmp/sing-box/rules/disney/disney.yaml
-          curl -sSL ${disney} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/sing-box/rules/disney/disney.yaml
+          curl -sSL ${disney} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /' >> ./tmp/sing-box/rules/disney/disney.yaml
 
       - name: Generate max
         run: |
           mkdir -p ./tmp/sing-box/rules/max/
           # Download clash geodata
-          curl -sSL ${max} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/g' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' > ./community/mydata/max
+          curl -sSL ${max} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/' | sed 's/- DOMAIN-SUFFIX,//' | sed 's/- DOMAIN-KEYWORD,/keyword:/' | sed 's/^[ \t]*//' > ./community/mydata/max
           # Download clash rule-set_yaml
           echo 'payload:' > ./clash-ruleset/max.yaml
-          curl -sSL ${max} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/g" | sed "s/^DOMAIN-SUFFIX,/  - '+./g" | sed "s/$/'/g" >> ./clash-ruleset/max.yaml
+          curl -sSL ${max} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/" | sed "s/^DOMAIN-SUFFIX,/  - '+\./" | sed "s/$/'/" >> ./clash-ruleset/max.yaml
           # Download clash rule-set_text
-          curl -sSL ${max} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//g' | sed 's/^DOMAIN-SUFFIX,/+\./g' > ./clash-ruleset/max.list
+          curl -sSL ${max} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//' | sed 's/^DOMAIN-SUFFIX,/+\./' > ./clash-ruleset/max.list
           # Download sing-box rule_set
           echo 'payload:' > ./tmp/sing-box/rules/max/max.yaml
-          curl -sSL ${max} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/sing-box/rules/max/max.yaml
+          curl -sSL ${max} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /' >> ./tmp/sing-box/rules/max/max.yaml
 
       - name: Generate primevideo
         run: |
           mkdir -p ./tmp/sing-box/rules/primevideo/
           # Download clash geodata
-          curl -sSL ${primevideo} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/g' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' > ./community/mydata/primevideo
+          curl -sSL ${primevideo} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/' | sed 's/- DOMAIN-SUFFIX,//' | sed 's/- DOMAIN-KEYWORD,/keyword:/' | sed 's/^[ \t]*//' > ./community/mydata/primevideo
           # Download clash rule-set_yaml
           echo 'payload:' > ./clash-ruleset/primevideo.yaml
-          curl -sSL ${primevideo} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/g" | sed "s/^DOMAIN-SUFFIX,/  - '+./g" | sed "s/$/'/g" >> ./clash-ruleset/primevideo.yaml
+          curl -sSL ${primevideo} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/" | sed "s/^DOMAIN-SUFFIX,/  - '+\./" | sed "s/$/'/" >> ./clash-ruleset/primevideo.yaml
           # Download clash rule-set_text
-          curl -sSL ${primevideo} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//g' | sed 's/^DOMAIN-SUFFIX,/+\./g' > ./clash-ruleset/primevideo.list
+          curl -sSL ${primevideo} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//' | sed 's/^DOMAIN-SUFFIX,/+\./' > ./clash-ruleset/primevideo.list
           # Download sing-box rule_set
           echo 'payload:' > ./tmp/sing-box/rules/primevideo/primevideo.yaml
-          curl -sSL ${primevideo} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/sing-box/rules/primevideo/primevideo.yaml
+          curl -sSL ${primevideo} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /' >> ./tmp/sing-box/rules/primevideo/primevideo.yaml
 
       - name: Generate appletv
         run: |
           mkdir -p ./tmp/sing-box/rules/appletv/
           # Download clash geodata
-          curl -sSL ${appletv} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/g' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' > ./community/mydata/appletv
+          curl -sSL ${appletv} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/' | sed 's/- DOMAIN-SUFFIX,//' | sed 's/- DOMAIN-KEYWORD,/keyword:/' | sed 's/^[ \t]*//' > ./community/mydata/appletv
           # Download clash rule-set_yaml
           echo 'payload:' > ./clash-ruleset/appletv.yaml
-          curl -sSL ${appletv} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/g" | sed "s/^DOMAIN-SUFFIX,/  - '+./g" | sed "s/$/'/g" >> ./clash-ruleset/appletv.yaml
+          curl -sSL ${appletv} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/" | sed "s/^DOMAIN-SUFFIX,/  - '+\./" | sed "s/$/'/" >> ./clash-ruleset/appletv.yaml
           # Download clash rule-set_text
-          curl -sSL ${appletv} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//g' | sed 's/^DOMAIN-SUFFIX,/+\./g' > ./clash-ruleset/appletv.list
+          curl -sSL ${appletv} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//' | sed 's/^DOMAIN-SUFFIX,/+\./' > ./clash-ruleset/appletv.list
           # Download sing-box rule_set
           echo 'payload:' > ./tmp/sing-box/rules/appletv/appletv.yaml
-          curl -sSL ${appletv} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/sing-box/rules/appletv/appletv.yaml
+          curl -sSL ${appletv} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /' >> ./tmp/sing-box/rules/appletv/appletv.yaml
 
       - name: Generate youtube
         run: |
           mkdir -p ./tmp/sing-box/rules/youtube/
           # Download clash geodata
-          curl -sSL ${youtube} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/g' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' > ./community/mydata/youtube
+          curl -sSL ${youtube} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/' | sed 's/- DOMAIN-SUFFIX,//' | sed 's/- DOMAIN-KEYWORD,/keyword:/' | sed 's/^[ \t]*//' > ./community/mydata/youtube
           # Download clash rule-set_yaml
           echo 'payload:' > ./clash-ruleset/youtube.yaml
-          curl -sSL ${youtube} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/g" | sed "s/^DOMAIN-SUFFIX,/  - '+./g" | sed "s/$/'/g" >> ./clash-ruleset/youtube.yaml
+          curl -sSL ${youtube} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/" | sed "s/^DOMAIN-SUFFIX,/  - '+\./" | sed "s/$/'/" >> ./clash-ruleset/youtube.yaml
           # Download clash rule-set_text
-          curl -sSL ${youtube} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//g' | sed 's/^DOMAIN-SUFFIX,/+\./g' > ./clash-ruleset/youtube.list
+          curl -sSL ${youtube} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//' | sed 's/^DOMAIN-SUFFIX,/+\./' > ./clash-ruleset/youtube.list
           # Download sing-box rule_set
           echo 'payload:' > ./tmp/sing-box/rules/youtube/youtube.yaml
-          curl -sSL ${youtube} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/sing-box/rules/youtube/youtube.yaml
+          curl -sSL ${youtube} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /' >> ./tmp/sing-box/rules/youtube/youtube.yaml
 
       - name: Generate tiktok
         run: |
           mkdir -p ./tmp/sing-box/rules/tiktok/
           # Download clash geodata
-          curl -sSL ${tiktok} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/g' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' > ./community/mydata/tiktok
+          curl -sSL ${tiktok} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/' | sed 's/- DOMAIN-SUFFIX,//' | sed 's/- DOMAIN-KEYWORD,/keyword:/' | sed 's/^[ \t]*//' > ./community/mydata/tiktok
           # Download clash rule-set_yaml
           echo 'payload:' > ./clash-ruleset/tiktok.yaml
-          curl -sSL ${tiktok} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/g" | sed "s/^DOMAIN-SUFFIX,/  - '+./g" | sed "s/$/'/g" >> ./clash-ruleset/tiktok.yaml
+          curl -sSL ${tiktok} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/" | sed "s/^DOMAIN-SUFFIX,/  - '+\./" | sed "s/$/'/" >> ./clash-ruleset/tiktok.yaml
           # Download clash rule-set_text
-          curl -sSL ${tiktok} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//g' | sed 's/^DOMAIN-SUFFIX,/+\./g' > ./clash-ruleset/tiktok.list
+          curl -sSL ${tiktok} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//' | sed 's/^DOMAIN-SUFFIX,/+\./' > ./clash-ruleset/tiktok.list
           # Download sing-box rule_set
           echo 'payload:' > ./tmp/sing-box/rules/tiktok/tiktok.yaml
-          curl -sSL ${tiktok} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/sing-box/rules/tiktok/tiktok.yaml
+          curl -sSL ${tiktok} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /' >> ./tmp/sing-box/rules/tiktok/tiktok.yaml
 
       - name: Generate bilibili
         run: |
           mkdir -p ./tmp/sing-box/rules/bilibili/
           # Download clash geodata
-          curl -sSL ${bilibili} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/g' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' > ./community/mydata/bilibili
+          curl -sSL ${bilibili} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/' | sed 's/- DOMAIN-SUFFIX,//' | sed 's/- DOMAIN-KEYWORD,/keyword:/' | sed 's/^[ \t]*//' > ./community/mydata/bilibili
           # Download clash rule-set_yaml
           echo 'payload:' > ./clash-ruleset/bilibili.yaml
-          curl -sSL ${bilibili} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/g" | sed "s/^DOMAIN-SUFFIX,/  - '+./g" | sed "s/$/'/g" >> ./clash-ruleset/bilibili.yaml
+          curl -sSL ${bilibili} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/" | sed "s/^DOMAIN-SUFFIX,/  - '+\./" | sed "s/$/'/" >> ./clash-ruleset/bilibili.yaml
           # Download clash rule-set_text
-          curl -sSL ${bilibili} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//g' | sed 's/^DOMAIN-SUFFIX,/+\./g' > ./clash-ruleset/bilibili.list
+          curl -sSL ${bilibili} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//' | sed 's/^DOMAIN-SUFFIX,/+\./' > ./clash-ruleset/bilibili.list
           # Download sing-box rule_set
           echo 'payload:' > ./tmp/sing-box/rules/bilibili/bilibili.yaml
-          curl -sSL ${bilibili} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/sing-box/rules/bilibili/bilibili.yaml
+          curl -sSL ${bilibili} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /' >> ./tmp/sing-box/rules/bilibili/bilibili.yaml
 
       - name: Generate ai
         run: |
           mkdir -p ./tmp/sing-box/rules/ai/
           # Download clash geodata
-          curl -sSL ${ai1} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/g' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' > ./tmp/temp-ai.txt
-          curl -sSL ${ai2} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/g' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' >> ./tmp/temp-ai.txt
-          curl -sSL ${ai3} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/g' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' >> ./tmp/temp-ai.txt
+          curl -sSL ${ai1} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/' | sed 's/- DOMAIN-SUFFIX,//' | sed 's/- DOMAIN-KEYWORD,/keyword:/' | sed 's/^[ \t]*//' > ./tmp/temp-ai.txt
+          curl -sSL ${ai2} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/' | sed 's/- DOMAIN-SUFFIX,//' | sed 's/- DOMAIN-KEYWORD,/keyword:/' | sed 's/^[ \t]*//' >> ./tmp/temp-ai.txt
+          curl -sSL ${ai3} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/' | sed 's/- DOMAIN-SUFFIX,//' | sed 's/- DOMAIN-KEYWORD,/keyword:/' | sed 's/^[ \t]*//' >> ./tmp/temp-ai.txt
           sort --ignore-case -u ./tmp/temp-ai.txt > ./community/mydata/ai
           # Download clash rule-set_yaml
-          curl -sSL ${ai1} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/g" | sed "s/^DOMAIN-SUFFIX,/  - '+./g" | sed "s/$/'/g" > ./tmp/temp-ai.txt
-          curl -sSL ${ai2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/g" | sed "s/^DOMAIN-SUFFIX,/  - '+./g" | sed "s/$/'/g" >> ./tmp/temp-ai.txt
-          curl -sSL ${ai3} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/g" | sed "s/^DOMAIN-SUFFIX,/  - '+./g" | sed "s/$/'/g" >> ./tmp/temp-ai.txt
+          curl -sSL ${ai1} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/" | sed "s/^DOMAIN-SUFFIX,/  - '+\./" | sed "s/$/'/" > ./tmp/temp-ai.txt
+          curl -sSL ${ai2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/" | sed "s/^DOMAIN-SUFFIX,/  - '+\./" | sed "s/$/'/" >> ./tmp/temp-ai.txt
+          curl -sSL ${ai3} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/" | sed "s/^DOMAIN-SUFFIX,/  - '+\./" | sed "s/$/'/" >> ./tmp/temp-ai.txt
           echo 'payload:' > ./clash-ruleset/ai.yaml
           sort --ignore-case -u ./tmp/temp-ai.txt >> ./clash-ruleset/ai.yaml
           # Download clash rule-set_text
-          curl -sSL ${ai1} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//g' | sed 's/^DOMAIN-SUFFIX,/+\./g' > ./tmp/temp-ai.txt
-          curl -sSL ${ai2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//g' | sed 's/^DOMAIN-SUFFIX,/+\./g' >> ./tmp/temp-ai.txt
-          curl -sSL ${ai3} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//g' | sed 's/^DOMAIN-SUFFIX,/+\./g' >> ./tmp/temp-ai.txt
+          curl -sSL ${ai1} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//' | sed 's/^DOMAIN-SUFFIX,/+\./' > ./tmp/temp-ai.txt
+          curl -sSL ${ai2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//' | sed 's/^DOMAIN-SUFFIX,/+\./' >> ./tmp/temp-ai.txt
+          curl -sSL ${ai3} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//' | sed 's/^DOMAIN-SUFFIX,/+\./' >> ./tmp/temp-ai.txt
           sort --ignore-case -u ./tmp/temp-ai.txt > ./clash-ruleset/ai.list
           # Download sing-box rule_set
-          curl -sSL ${ai1} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' > ./tmp/temp-ai.txt
-          curl -sSL ${ai2} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/temp-ai.txt
-          curl -sSL ${ai3} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/temp-ai.txt
+          curl -sSL ${ai1} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /' > ./tmp/temp-ai.txt
+          curl -sSL ${ai2} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /' >> ./tmp/temp-ai.txt
+          curl -sSL ${ai3} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /' >> ./tmp/temp-ai.txt
           echo 'payload:' > ./tmp/sing-box/rules/ai/ai.yaml
           sort --ignore-case -u ./tmp/temp-ai.txt >> ./tmp/sing-box/rules/ai/ai.yaml
 
@@ -489,15 +489,15 @@ jobs:
           count1=$(curl -sSL ${networktest1} | grep 'include:' | wc -l)
           curl -sSL ${networktest1} | grep -Ev '#|include:' | sed '/^\s*$/d' > ./tmp/temp-networktest.txt
           for((i=0;i<count1;i++)); do
-            archs1=$(curl -sSL ${networktest1} | grep 'include:' | sed 's/^include://g' | sed -n "$((i+1))p")
+            archs1=$(curl -sSL ${networktest1} | grep 'include:' | sed 's/^include://' | sed -n "$((i+1))p")
             count2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | wc -l)
             curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep -Ev '#|include:|@ads' | sed '/^\s*$/d' >> ./tmp/temp-networktest.txt
             for((j=0;j<count2;j++)); do
-              archs2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | sed 's/^include://g' | sed -n "$((j+1))p")
+              archs2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | sed 's/^include://' | sed -n "$((j+1))p")
               curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep -Ev '#|include:|@ads' | sed '/^\s*$/d' >> ./tmp/temp-networktest.txt
             done
           done
-          curl -sSL ${networktest2} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' >> ./tmp/temp-networktest.txt
+          curl -sSL ${networktest2} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/' | sed 's/^DOMAIN-SUFFIX,//' | sed 's/^DOMAIN-KEYWORD,/keyword:/' | sed 's/^[ \t]*//' >> ./tmp/temp-networktest.txt
           cat <<EOF >> ./tmp/temp-networktest.txt
           keyword:ipv6-test
           keyword:ipv6test
@@ -507,23 +507,23 @@ jobs:
           sort --ignore-case -u ./tmp/temp-networktest.txt > ./community/mydata/networktest
           # Download clash rule-set_yaml
           count1=$(curl -sSL ${networktest1} | grep 'include:' | wc -l)
-          curl -sSL ${networktest1} | grep -Ev '#|include:|full:|keyword:|regexp:' | sed '/^\s*$/d' | sed "s/^/  - DOMAIN-SUFFIX,/g" > ./tmp/temp-networktest.txt
-          curl -sSL ${networktest1} | grep 'full:' | sed "s/^full:/  - DOMAIN,/g" >> ./tmp/temp-networktest.txt
-          curl -sSL ${networktest1} | grep 'keyword:' | sed 's/^keyword:/  - DOMAIN-KEYWORD,/g' >> ./tmp/temp-networktest.txt
+          curl -sSL ${networktest1} | grep -Ev '#|include:|full:|keyword:|regexp:' | sed '/^\s*$/d' | sed "s/^/  - DOMAIN-SUFFIX,/" > ./tmp/temp-networktest.txt
+          curl -sSL ${networktest1} | grep 'full:' | sed "s/^full:/  - DOMAIN,/" >> ./tmp/temp-networktest.txt
+          curl -sSL ${networktest1} | grep 'keyword:' | sed 's/^keyword:/  - DOMAIN-KEYWORD,/' >> ./tmp/temp-networktest.txt
           for((i=0;i<count1;i++)); do
-            archs1=$(curl -sSL ${networktest1} | grep 'include:' | sed 's/^include://g' | sed -n "$((i+1))p")
+            archs1=$(curl -sSL ${networktest1} | grep 'include:' | sed 's/^include://' | sed -n "$((i+1))p")
             count2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | wc -l)
-            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep -Ev '#|include:|full:|keyword:|regexp:' | sed '/^\s*$/d' | sed "s/^/  - DOMAIN-SUFFIX,/g" >> ./tmp/temp-networktest.txt
-            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'full:' | sed "s/^full:/  - DOMAIN,/g" >> ./tmp/temp-networktest.txt
-            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'keyword:' | sed 's/^keyword:/  - DOMAIN-KEYWORD,/g' >> ./tmp/temp-networktest.txt
+            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep -Ev '#|include:|full:|keyword:|regexp:' | sed '/^\s*$/d' | sed "s/^/  - DOMAIN-SUFFIX,/" >> ./tmp/temp-networktest.txt
+            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'full:' | sed "s/^full:/  - DOMAIN,/" >> ./tmp/temp-networktest.txt
+            curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'keyword:' | sed 's/^keyword:/  - DOMAIN-KEYWORD,/' >> ./tmp/temp-networktest.txt
             for((j=0;j<count2;j++)); do
-              archs2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | sed 's/^include://g' | sed -n "$((j+1))p")
-              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep -Ev '#|include:|full:|keyword:|regexp:' | sed '/^\s*$/d' | sed "s/^/  - DOMAIN-SUFFIX,/g" >> ./tmp/temp-networktest.txt
-              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep 'full:' | sed "s/^full:/  - DOMAIN,/g" >> ./tmp/temp-networktest.txt
-              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep 'keyword:' | sed 's/^keyword:/  - DOMAIN-KEYWORD,/g' >> ./tmp/temp-networktest.txt
+              archs2=$(curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs1" | grep 'include:' | sed 's/^include://' | sed -n "$((j+1))p")
+              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep -Ev '#|include:|full:|keyword:|regexp:' | sed '/^\s*$/d' | sed "s/^/  - DOMAIN-SUFFIX,/" >> ./tmp/temp-networktest.txt
+              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep 'full:' | sed "s/^full:/  - DOMAIN,/" >> ./tmp/temp-networktest.txt
+              curl -sSL "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/$archs2" | grep 'keyword:' | sed 's/^keyword:/  - DOMAIN-KEYWORD,/' >> ./tmp/temp-networktest.txt
             done
           done
-          curl -sSL ${networktest2} | grep -v '#' | sed '/^\s*$/d' | sed "s/^/  - /g" >> ./tmp/temp-networktest.txt
+          curl -sSL ${networktest2} | grep -v '#' | sed '/^\s*$/d' | sed "s/^/  - /" >> ./tmp/temp-networktest.txt
           cat <<EOF >> ./tmp/temp-networktest.txt
             - DOMAIN-KEYWORD,ipv6-test
             - DOMAIN-KEYWORD,ipv6test
@@ -533,7 +533,7 @@ jobs:
           echo 'payload:' > ./clash-ruleset/networktest.yaml
           sort --ignore-case -u ./tmp/temp-networktest.txt >> ./clash-ruleset/networktest.yaml
           # Download clash rule-set_text
-          grep -v 'payload:' ./clash-ruleset/networktest.yaml | sed '/^\s*$/d' | sed 's/^[ \t]*//g' | sed 's/^- //g' > ./clash-ruleset/networktest.list
+          grep -v 'payload:' ./clash-ruleset/networktest.yaml | sed '/^\s*$/d' | sed 's/^[ \t]*//' | sed 's/^- //' > ./clash-ruleset/networktest.list
           # Download sing-box rule_set
           cp -f ./clash-ruleset/networktest.yaml ./tmp/sing-box/rules/networktest/networktest.yaml
 
@@ -543,7 +543,7 @@ jobs:
           # Download clash rule-set_yaml
           curl -sSL ${applications} | sed '/^\s*$/d' > ./clash-ruleset/applications.yaml
           # Download clash rule-set_text
-          curl -sSL ${applications} | grep -v 'payload:' | sed '/^\s*$/d' | sed 's/^[ \t]*//g' | sed 's/^- //g' > ./clash-ruleset/applications.list
+          curl -sSL ${applications} | grep -v 'payload:' | sed '/^\s*$/d' | sed 's/^[ \t]*//' | sed 's/^- //' > ./clash-ruleset/applications.list
           # Download sing-box rule_set
           curl -sSL ${applications} | sed '/^\s*$/d' > ./tmp/sing-box/rules/applications/applications.yaml
 
@@ -554,30 +554,30 @@ jobs:
           cd ./gfwlist2dnsmasq/ || exit 1
           chmod +x ./gfwlist2dnsmasq.sh
           ./gfwlist2dnsmasq.sh -l -o ../tmp/temp-proxy.txt
-          curl -sSL ${proxy1} | sed 's/^domain://g' | sed 's/:@\!cn$//g' >> ../tmp/temp-proxy.txt
-          curl -sSL ${proxy2} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' >> ../tmp/temp-proxy.txt
+          curl -sSL ${proxy1} | sed 's/^domain://' | sed 's/:@\!cn$//' >> ../tmp/temp-proxy.txt
+          curl -sSL ${proxy2} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/' | sed 's/^DOMAIN-SUFFIX,//' | sed 's/^DOMAIN-KEYWORD,/keyword:/' | sed 's/^[ \t]*//' >> ../tmp/temp-proxy.txt
           sort --ignore-case -u ../tmp/temp-proxy.txt > ../community/mydata/proxy
           # Download clash rule-set_yaml
           ./gfwlist2dnsmasq.sh -l -o ../tmp/temp-proxy1.txt
-          sed "s/^/  - '+./g" ../tmp/temp-proxy1.txt | sed "s/$/'/g" > ../tmp/temp-proxy2.txt
-          curl -sSL ${proxy1} | grep 'domain:' | sed 's/:@\!cn$//g' | sed "s/^domain:/  - '+./g" | sed "s/$/'/g" >> ../tmp/temp-proxy2.txt
-          curl -sSL ${proxy1} | grep 'full:' | sed 's/:@\!cn$//g' | sed "s/^full:/  - '/g" | sed "s/$/'/g" >> ../tmp/temp-proxy2.txt
-          curl -sSL ${proxy2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/g" | sed "s/^DOMAIN-SUFFIX,/  - '+./g" | sed "s/$/'/g" >> ../tmp/temp-proxy2.txt
+          sed "s/^/  - '+\./" ../tmp/temp-proxy1.txt | sed "s/$/'/" > ../tmp/temp-proxy2.txt
+          curl -sSL ${proxy1} | grep 'domain:' | sed 's/:@\!cn$//' | sed "s/^domain:/  - '+\./" | sed "s/$/'/" >> ../tmp/temp-proxy2.txt
+          curl -sSL ${proxy1} | grep 'full:' | sed 's/:@\!cn$//' | sed "s/^full:/  - '/" | sed "s/$/'/" >> ../tmp/temp-proxy2.txt
+          curl -sSL ${proxy2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/" | sed "s/^DOMAIN-SUFFIX,/  - '+\./" | sed "s/$/'/" >> ../tmp/temp-proxy2.txt
           echo 'payload:' > ../clash-ruleset/proxy.yaml
           sort --ignore-case -u ../tmp/temp-proxy2.txt >> ../clash-ruleset/proxy.yaml
           # Download clash rule-set_text
           ./gfwlist2dnsmasq.sh -l -o ../tmp/temp-proxy3.txt
-          sed 's/^/+\./g' ../tmp/temp-proxy3.txt > ../tmp/temp-proxy4.txt
-          curl -sSL ${proxy1} | grep 'domain:' | sed 's/:@\!cn$//g' | sed 's/^domain:/+\./g' >> ../tmp/temp-proxy4.txt
-          curl -sSL ${proxy1} | grep 'full:' | sed 's/:@\!cn$//g' | sed "s/^full://g" >> ../tmp/temp-proxy4.txt
-          curl -sSL ${proxy2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//g' | sed 's/^DOMAIN-SUFFIX,/+\./g' >> ../tmp/temp-proxy4.txt
+          sed 's/^/+\./' ../tmp/temp-proxy3.txt > ../tmp/temp-proxy4.txt
+          curl -sSL ${proxy1} | grep 'domain:' | sed 's/:@\!cn$//' | sed 's/^domain:/+\./' >> ../tmp/temp-proxy4.txt
+          curl -sSL ${proxy1} | grep 'full:' | sed 's/:@\!cn$//' | sed "s/^full://" >> ../tmp/temp-proxy4.txt
+          curl -sSL ${proxy2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//' | sed 's/^DOMAIN-SUFFIX,/+\./' >> ../tmp/temp-proxy4.txt
           sort --ignore-case -u ../tmp/temp-proxy4.txt > ../clash-ruleset/proxy.list
           # Download sing-box rule_set
           ./gfwlist2dnsmasq.sh -l -o ../tmp/temp-proxy5.txt
-          sed "s/^/  - DOMAIN-SUFFIX,/g" ../tmp/temp-proxy5.txt > ../tmp/temp-proxy6.txt
-          curl -sSL ${proxy1} | grep 'domain:' | sed 's/:@\!cn$//g' | sed 's/^domain:/  - DOMAIN-SUFFIX,/g' >> ../tmp/temp-proxy6.txt
-          curl -sSL ${proxy1} | grep 'full:' | sed 's/:@\!cn$//g' | sed 's/^full:/  - DOMAIN,/g' >> ../tmp/temp-proxy6.txt
-          curl -sSL ${proxy2} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ../tmp/temp-proxy6.txt
+          sed "s/^/  - DOMAIN-SUFFIX,/" ../tmp/temp-proxy5.txt > ../tmp/temp-proxy6.txt
+          curl -sSL ${proxy1} | grep 'domain:' | sed 's/:@\!cn$//' | sed 's/^domain:/  - DOMAIN-SUFFIX,/' >> ../tmp/temp-proxy6.txt
+          curl -sSL ${proxy1} | grep 'full:' | sed 's/:@\!cn$//' | sed 's/^full:/  - DOMAIN,/' >> ../tmp/temp-proxy6.txt
+          curl -sSL ${proxy2} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /' >> ../tmp/temp-proxy6.txt
           echo 'payload:' > ../tmp/sing-box/rules/proxy/proxy.yaml
           sort --ignore-case -u ../tmp/temp-proxy6.txt >> ../tmp/sing-box/rules/proxy/proxy.yaml
           rm -rf ../gfwlist2dnsmasq/
@@ -586,24 +586,24 @@ jobs:
         run: |
           mkdir -p ./tmp/sing-box/rules/cn/
           # Download clash geodata
-          curl -sSL ${cn1} | sed 's/^domain://g' | sed 's/:@cn$//g' > ./tmp/temp-cn.txt
-          curl -sSL ${cn2} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' >> ./tmp/temp-cn.txt
+          curl -sSL ${cn1} | sed 's/^domain://' | sed 's/:@cn$//' > ./tmp/temp-cn.txt
+          curl -sSL ${cn2} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/' | sed 's/^DOMAIN-SUFFIX,//' | sed 's/^DOMAIN-KEYWORD,/keyword:/' | sed 's/^[ \t]*//' >> ./tmp/temp-cn.txt
           sort --ignore-case -u ./tmp/temp-cn.txt > ./community/mydata/cn
           # Download clash rule-set_yaml
-          curl -sSL ${cn1} | grep 'domain:' | sed 's/:@cn$//g' | sed "s/^domain:/  - '+./g" | sed "s/$/'/g" > ./tmp/temp-cn.txt
-          curl -sSL ${cn1} | grep 'full:' | sed 's/:@cn$//g' | sed "s/^full:/  - '/g" | sed "s/$/'/g" >> ./tmp/temp-cn.txt
-          curl -sSL ${cn2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/g" | sed "s/^DOMAIN-SUFFIX,/  - '+./g" | sed "s/$/'/g" >> ./tmp/temp-cn.txt
+          curl -sSL ${cn1} | grep 'domain:' | sed 's/:@cn$//' | sed "s/^domain:/  - '+\./" | sed "s/$/'/" > ./tmp/temp-cn.txt
+          curl -sSL ${cn1} | grep 'full:' | sed 's/:@cn$//' | sed "s/^full:/  - '/" | sed "s/$/'/" >> ./tmp/temp-cn.txt
+          curl -sSL ${cn2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/" | sed "s/^DOMAIN-SUFFIX,/  - '+\./" | sed "s/$/'/" >> ./tmp/temp-cn.txt
           echo 'payload:' > ./clash-ruleset/cn.yaml
           sort --ignore-case -u ./tmp/temp-cn.txt >> ./clash-ruleset/cn.yaml
           # Download clash rule-set_text
-          curl -sSL ${cn1} | grep 'domain:' | sed 's/:@cn$//g' | sed 's/^domain:/+\./g' > ./tmp/temp-cn.txt
-          curl -sSL ${cn1} | grep 'full:' | sed 's/:@cn$//g' | sed 's/^full://g' >> ./tmp/temp-cn.txt
-          curl -sSL ${cn2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//g' | sed 's/^DOMAIN-SUFFIX,/+\./g' >> ./tmp/temp-cn.txt
+          curl -sSL ${cn1} | grep 'domain:' | sed 's/:@cn$//' | sed 's/^domain:/+\./' > ./tmp/temp-cn.txt
+          curl -sSL ${cn1} | grep 'full:' | sed 's/:@cn$//' | sed 's/^full://' >> ./tmp/temp-cn.txt
+          curl -sSL ${cn2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//' | sed 's/^DOMAIN-SUFFIX,/+\./' >> ./tmp/temp-cn.txt
           sort --ignore-case -u ./tmp/temp-cn.txt > ./clash-ruleset/cn.list
           # Download sing-box rule_set
-          curl -sSL ${cn1} | grep 'domain:' | sed 's/:@cn$//g' | sed 's/^domain:/  - DOMAIN-SUFFIX,/g' > ./tmp/temp-cn.txt
-          curl -sSL ${cn1} | grep 'full:' | sed 's/:@cn$//g' | sed 's/^full:/  - DOMAIN,/g' >> ./tmp/temp-cn.txt
-          curl -sSL ${cn2} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/temp-cn.txt
+          curl -sSL ${cn1} | grep 'domain:' | sed 's/:@cn$//' | sed 's/^domain:/  - DOMAIN-SUFFIX,/' > ./tmp/temp-cn.txt
+          curl -sSL ${cn1} | grep 'full:' | sed 's/:@cn$//' | sed 's/^full:/  - DOMAIN,/' >> ./tmp/temp-cn.txt
+          curl -sSL ${cn2} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /' >> ./tmp/temp-cn.txt
           echo 'payload:' > ./tmp/sing-box/rules/cn/cn.yaml
           sort --ignore-case -u ./tmp/temp-cn.txt >> ./tmp/sing-box/rules/cn/cn.yaml
 
@@ -612,52 +612,52 @@ jobs:
           mkdir -p ./tmp/sing-box/rules/netflixip/
           # Download clash rule-set_yaml
           echo 'payload:' > ./clash-ruleset/netflixip.yaml
-          curl -sSL ${netflixip} | sed "s/^/  - '/g" | sed "s/$/'/g" >> ./clash-ruleset/netflixip.yaml
+          curl -sSL ${netflixip} | sed "s/^/  - '/" | sed "s/$/'/" >> ./clash-ruleset/netflixip.yaml
           # Download clash rule-set_text
           curl -sSL ${netflixip} > ./clash-ruleset/netflixip.list
           # Download sing-box rule_set
           echo 'payload:' > ./tmp/sing-box/rules/netflixip/netflixip.yaml
-          curl -sSL ${netflixip} | grep -v '::' | sed '/^\s*$/d' | sed 's/^/  - IP-CIDR,/g' >> ./tmp/sing-box/rules/netflixip/netflixip.yaml
-          curl -sSL ${netflixip} | grep '::' | sed 's/^/  - IP-CIDR6,/g' >> ./tmp/sing-box/rules/netflixip/netflixip.yaml
+          curl -sSL ${netflixip} | grep -v '::' | sed '/^\s*$/d' | sed 's/^/  - IP-CIDR,/' >> ./tmp/sing-box/rules/netflixip/netflixip.yaml
+          curl -sSL ${netflixip} | grep '::' | sed 's/^/  - IP-CIDR6,/' >> ./tmp/sing-box/rules/netflixip/netflixip.yaml
 
       - name: Generate telegramip
         run: |
           mkdir -p ./tmp/sing-box/rules/telegramip/
           # Download clash rule-set_yaml
           echo 'payload:' > ./clash-ruleset/telegramip.yaml
-          curl -sSL ${telegramip} | sed "s/^/  - '/g" | sed "s/$/'/g" >> ./clash-ruleset/telegramip.yaml
+          curl -sSL ${telegramip} | sed "s/^/  - '/" | sed "s/$/'/" >> ./clash-ruleset/telegramip.yaml
           # Download clash rule-set_text
           curl -sSL ${telegramip} > ./clash-ruleset/telegramip.list
           # Download sing-box rule_set
           echo 'payload:' > ./tmp/sing-box/rules/telegramip/telegramip.yaml
-          curl -sSL ${telegramip} | grep -v '::' | sed '/^\s*$/d' | sed 's/^/  - IP-CIDR,/g' >> ./tmp/sing-box/rules/telegramip/telegramip.yaml
-          curl -sSL ${telegramip} | grep '::' | sed 's/^/  - IP-CIDR6,/g' >> ./tmp/sing-box/rules/telegramip/telegramip.yaml
+          curl -sSL ${telegramip} | grep -v '::' | sed '/^\s*$/d' | sed 's/^/  - IP-CIDR,/' >> ./tmp/sing-box/rules/telegramip/telegramip.yaml
+          curl -sSL ${telegramip} | grep '::' | sed 's/^/  - IP-CIDR6,/' >> ./tmp/sing-box/rules/telegramip/telegramip.yaml
 
       - name: Generate privateip
         run: |
           mkdir -p ./tmp/sing-box/rules/privateip/
           # Download clash rule-set_yaml
           echo 'payload:' > ./clash-ruleset/privateip.yaml
-          curl -sSL ${privateip} | sed "s/^/  - '/g" | sed "s/$/'/g" >> ./clash-ruleset/privateip.yaml
+          curl -sSL ${privateip} | sed "s/^/  - '/" | sed "s/$/'/" >> ./clash-ruleset/privateip.yaml
           # Download clash rule-set_text
           curl -sSL ${privateip} > ./clash-ruleset/privateip.list
           # Download sing-box rule_set
           echo 'payload:' > ./tmp/sing-box/rules/privateip/privateip.yaml
-          curl -sSL ${privateip} | grep -v '::' | sed '/^\s*$/d' | sed 's/^/  - IP-CIDR,/g' >> ./tmp/sing-box/rules/privateip/privateip.yaml
-          curl -sSL ${privateip} | grep '::' | sed 's/^/  - IP-CIDR6,/g' >> ./tmp/sing-box/rules/privateip/privateip.yaml
+          curl -sSL ${privateip} | grep -v '::' | sed '/^\s*$/d' | sed 's/^/  - IP-CIDR,/' >> ./tmp/sing-box/rules/privateip/privateip.yaml
+          curl -sSL ${privateip} | grep '::' | sed 's/^/  - IP-CIDR6,/' >> ./tmp/sing-box/rules/privateip/privateip.yaml
 
       - name: Generate cnip
         run: |
           mkdir -p ./tmp/sing-box/rules/cnip/
           # Download clash rule-set_yaml
           echo 'payload:' > ./clash-ruleset/cnip.yaml
-          curl -sSL ${cnip} | sed "s/^/  - '/g" | sed "s/$/'/g" >> ./clash-ruleset/cnip.yaml
+          curl -sSL ${cnip} | sed "s/^/  - '/" | sed "s/$/'/" >> ./clash-ruleset/cnip.yaml
           # Download clash rule-set_text
           curl -sSL ${cnip} > ./clash-ruleset/cnip.list
           # Download sing-box rule_set
           echo 'payload:' > ./tmp/sing-box/rules/cnip/cnip.yaml
-          curl -sSL ${cnip} | grep -v '::' | sed '/^\s*$/d' | sed 's/^/  - IP-CIDR,/g' >> ./tmp/sing-box/rules/cnip/cnip.yaml
-          curl -sSL ${cnip} | grep '::' | sed 's/^/  - IP-CIDR6,/g' >> ./tmp/sing-box/rules/cnip/cnip.yaml
+          curl -sSL ${cnip} | grep -v '::' | sed '/^\s*$/d' | sed 's/^/  - IP-CIDR,/' >> ./tmp/sing-box/rules/cnip/cnip.yaml
+          curl -sSL ${cnip} | grep '::' | sed 's/^/  - IP-CIDR6,/' >> ./tmp/sing-box/rules/cnip/cnip.yaml
 
       - name: copy `mydata` domains to `domains`
         run: |
@@ -679,7 +679,7 @@ jobs:
 
       - name: Generate `clash` geosite.dat
         run: |
-          curl -sSL ${ads} | grep -Ev '#|payload:' | sed '/^\s*$/d' | sed "s/- '+.//g" | sed "s/- '/full:/g" | sed "s/'$//g" | sed 's/^[ \t]*//g' > ./community/mydata/ads
+          curl -sSL ${ads} | grep -Ev '#|payload:' | sed '/^\s*$/d' | sed "s/- '+\.//" | sed "s/- '/full:/" | sed "s/'$//" | sed 's/^[ \t]*//' > ./community/mydata/ads
           rm -f ./community/mydata/netflix \
                 ./community/mydata/disney \
                 ./community/mydata/max \
@@ -709,7 +709,7 @@ jobs:
         run: |
           cd ./community/ || exit 1
           go install -trimpath -ldflags="-s -w -buildid=" github.com/metacubex/geo/cmd/geo@master
-          for file in $(ls *.dat | sed 's/\..*//g'); do
+          for file in $(ls *.dat | sed 's/\..*//'); do
             geo convert site -i v2ray -o sing -f "./${file}.db" "./${file}.dat"
           done
 
@@ -726,13 +726,13 @@ jobs:
 
       - name: Download and unzip `sing-box core`
         run: |
-          sing_box_version=$(curl -sSL https://api.github.com/repos/SagerNet/sing-box/releases/latest | grep 'tag_name' | sed 's/.*v//g' | sed 's/",$//g')
+          sing_box_version=$(curl -sSL https://api.github.com/repos/SagerNet/sing-box/releases/latest | grep 'tag_name' | sed 's/.*v//' | sed 's/".*//')
           wget "https://github.com/SagerNet/sing-box/releases/download/v${sing_box_version}/sing-box-${sing_box_version}-linux-amd64.tar.gz" -O - | tar -zxf - -C ./tmp/
           cp -f ./tmp/sing-box-${sing_box_version}-linux-amd64/sing-box ./tmp/sing-box/
 
       - name: Generate `sing-box` rule_set
         run: |
-          curl -sSL https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/master/resouces/bm7.sh | sed 's|./rule/Clash/|./rules/|g' > ./tmp/sing-box/bm7.sh
+          curl -sSL https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/master/resouces/bm7.sh | sed 's|./rule/Clash/|./rules/|' > ./tmp/sing-box/bm7.sh
           cd ./tmp/sing-box/
           sed -i '/# 拉文件/,/# 处理文件/d' bm7.sh
           chmod +x bm7.sh && ./bm7.sh
@@ -755,9 +755,9 @@ jobs:
 
           geodata-mode: true
           geox-url:
-            geosite: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite.dat"
-            geoip: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip-lite.dat"
-            mmdb: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/Country-lite.mmdb"
+            geosite: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite.dat"
+            geoip: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip-lite.dat"
+            mmdb: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/Country-lite.mmdb"
           geo-auto-update: true
           geo-update-interval: 24
 
@@ -777,8 +777,8 @@ jobs:
             fake-ip-filter:
               - '*'
           EOF
-          curl -sSL https://raw.githubusercontent.com/juewuy/ShellCrash/dev/public/fake_ip_filter.list | grep -v '#' | sed '/^\s*$/d' | sed "s/.*/'&'/g" | sed 's/^/    - /g' >> ./clash-config/geodata-fakeip-user.yaml
-          curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep 'udp:' | grep -i '\.[A-Z]' | sed "s/^.*\/\//'/g" | sed "s/:.*\/.*/'/g" | sed 's/^/    - /g' >> ./clash-config/geodata-fakeip-user.yaml
+          curl -sSL https://raw.githubusercontent.com/juewuy/ShellCrash/dev/public/fake_ip_filter.list | grep -v '#' | sed '/^\s*$/d' | sed "s/.*/'&'/" | sed 's/^/    - /' >> ./clash-config/geodata-fakeip-user.yaml
+          curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep 'udp:' | grep -i '\.[A-Z]' | awk -F'[/:]' '{print $4}' | sed "s/.*/'&'/" | sed 's/^/    - /' >> ./clash-config/geodata-fakeip-user.yaml
           cat <<EOF >> ./clash-config/geodata-fakeip-user.yaml
             default-nameserver:
               - https://223.5.5.5/dns-query
@@ -820,9 +820,9 @@ jobs:
 
           geodata-mode: true
           geox-url:
-            geosite: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite.dat"
-            geoip: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip-lite.dat"
-            mmdb: "https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/Country-lite.mmdb"
+            geosite: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite.dat"
+            geoip: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip-lite.dat"
+            mmdb: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/Country-lite.mmdb"
           geo-auto-update: true
           geo-update-interval: 24
 
@@ -895,8 +895,8 @@ jobs:
             fake-ip-filter:
               - '*'
           EOF
-          curl -sSL https://raw.githubusercontent.com/juewuy/ShellCrash/dev/public/fake_ip_filter.list | grep -v '#' | sed '/^\s*$/d' | sed "s/.*/'&'/g" | sed 's/^/    - /g' >> ./clash-config/ruleset-fakeip-user.yaml
-          curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep 'udp:' | grep -i '\.[A-Z]' | sed "s/^.*\/\//'/g" | sed "s/:.*\/.*/'/g" | sed 's/^/    - /g' >> ./clash-config/ruleset-fakeip-user.yaml
+          curl -sSL https://raw.githubusercontent.com/juewuy/ShellCrash/dev/public/fake_ip_filter.list | grep -v '#' | sed '/^\s*$/d' | sed "s/.*/'&'/" | sed 's/^/    - /' >> ./clash-config/ruleset-fakeip-user.yaml
+          curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep 'udp:' | grep -i '\.[A-Z]' | awk -F'[/:]' '{print $4}' | sed "s/.*/'&'/" | sed 's/^/    - /' >> ./clash-config/ruleset-fakeip-user.yaml
           cat <<EOF >> ./clash-config/ruleset-fakeip-user.yaml
             default-nameserver:
               - https://223.5.5.5/dns-query
