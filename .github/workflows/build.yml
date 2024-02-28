@@ -36,6 +36,7 @@ jobs:
           echo "ai1=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.list" >> $GITHUB_ENV
           echo "ai2=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Bing/Bing.list" >> $GITHUB_ENV
           echo "ai3=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/BardAI/BardAI.list" >> $GITHUB_ENV
+          echo "ai4=https://raw.githubusercontent.com/AmGascool/geodata-ruleset/master/rule/ai/OpenAI.list" >> $GITHUB_ENV
           echo "networktest1=https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/speedtest" >> $GITHUB_ENV
           echo "networktest2=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Speedtest/Speedtest.list" >> $GITHUB_ENV
           echo "applications=https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/applications.txt" >> $GITHUB_ENV
@@ -463,22 +464,26 @@ jobs:
           curl -sSL ${ai1} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/g' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' > ./tmp/temp-ai.txt
           curl -sSL ${ai2} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/g' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' >> ./tmp/temp-ai.txt
           curl -sSL ${ai3} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/g' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' >> ./tmp/temp-ai.txt
+          curl -sSL ${ai4} | grep -v '#' | grep 'DOMAIN' | sed 's/- DOMAIN,/full:/g' | sed 's/- DOMAIN-SUFFIX,//g' | sed 's/- DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' >> ./tmp/temp-ai.txt
           sort --ignore-case -u ./tmp/temp-ai.txt > ./community/mydata/ai
           # Download clash rule-set_yaml
           curl -sSL ${ai1} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/g" | sed "s/^DOMAIN-SUFFIX,/  - '+./g" | sed "s/$/'/g" > ./tmp/temp-ai.txt
           curl -sSL ${ai2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/g" | sed "s/^DOMAIN-SUFFIX,/  - '+./g" | sed "s/$/'/g" >> ./tmp/temp-ai.txt
           curl -sSL ${ai3} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/g" | sed "s/^DOMAIN-SUFFIX,/  - '+./g" | sed "s/$/'/g" >> ./tmp/temp-ai.txt
+          curl -sSL ${ai4} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/g" | sed "s/^DOMAIN-SUFFIX,/  - '+./g" | sed "s/$/'/g" >> ./tmp/temp-ai.txt
           echo 'payload:' > ./clash-ruleset/ai.yaml
           sort --ignore-case -u ./tmp/temp-ai.txt >> ./clash-ruleset/ai.yaml
           # Download clash rule-set_text
           curl -sSL ${ai1} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//g' | sed 's/^DOMAIN-SUFFIX,/+\./g' > ./tmp/temp-ai.txt
           curl -sSL ${ai2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//g' | sed 's/^DOMAIN-SUFFIX,/+\./g' >> ./tmp/temp-ai.txt
           curl -sSL ${ai3} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//g' | sed 's/^DOMAIN-SUFFIX,/+\./g' >> ./tmp/temp-ai.txt
+          curl -sSL ${ai4} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//g' | sed 's/^DOMAIN-SUFFIX,/+\./g' >> ./tmp/temp-ai.txt
           sort --ignore-case -u ./tmp/temp-ai.txt > ./clash-ruleset/ai.list
           # Download sing-box rule_set
           curl -sSL ${ai1} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' > ./tmp/temp-ai.txt
           curl -sSL ${ai2} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/temp-ai.txt
           curl -sSL ${ai3} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/temp-ai.txt
+          curl -sSL ${ai4} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ./tmp/temp-ai.txt
           echo 'payload:' > ./tmp/sing-box/rules/ai/ai.yaml
           sort --ignore-case -u ./tmp/temp-ai.txt >> ./tmp/sing-box/rules/ai/ai.yaml
 
@@ -556,7 +561,7 @@ jobs:
           ./gfwlist2dnsmasq.sh -l -o ../tmp/temp-proxy.txt
           curl -sSL ${proxy1} | sed 's/^domain://g' | sed 's/:@\!cn$//g' >> ../tmp/temp-proxy.txt
           curl -sSL ${proxy2} | grep -v '#' | grep 'DOMAIN' | sed 's/^DOMAIN,/full:/g' | sed 's/^DOMAIN-SUFFIX,//g' | sed 's/^DOMAIN-KEYWORD,/keyword:/g' | sed 's/^[ \t]*//g' >> ../tmp/temp-proxy.txt
-          sort --ignore-case -u ../tmp/temp-proxy.txt > ../community/mydata/proxy
+          sort --ignore-case -u ../tmp/temp-proxy.txt | grep -v 'chatgpt.com' > ../community/mydata/proxy
           # Download clash rule-set_yaml
           ./gfwlist2dnsmasq.sh -l -o ../tmp/temp-proxy1.txt
           sed "s/^/  - '+./g" ../tmp/temp-proxy1.txt | sed "s/$/'/g" > ../tmp/temp-proxy2.txt
@@ -564,14 +569,14 @@ jobs:
           curl -sSL ${proxy1} | grep 'full:' | sed 's/:@\!cn$//g' | sed "s/^full:/  - '/g" | sed "s/$/'/g" >> ../tmp/temp-proxy2.txt
           curl -sSL ${proxy2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/^DOMAIN,/  - '/g" | sed "s/^DOMAIN-SUFFIX,/  - '+./g" | sed "s/$/'/g" >> ../tmp/temp-proxy2.txt
           echo 'payload:' > ../clash-ruleset/proxy.yaml
-          sort --ignore-case -u ../tmp/temp-proxy2.txt >> ../clash-ruleset/proxy.yaml
+          sort --ignore-case -u ../tmp/temp-proxy2.txt | grep -v 'chatgpt.com' >> ../clash-ruleset/proxy.yaml
           # Download clash rule-set_text
           ./gfwlist2dnsmasq.sh -l -o ../tmp/temp-proxy3.txt
           sed 's/^/+\./g' ../tmp/temp-proxy3.txt > ../tmp/temp-proxy4.txt
           curl -sSL ${proxy1} | grep 'domain:' | sed 's/:@\!cn$//g' | sed 's/^domain:/+\./g' >> ../tmp/temp-proxy4.txt
           curl -sSL ${proxy1} | grep 'full:' | sed 's/:@\!cn$//g' | sed "s/^full://g" >> ../tmp/temp-proxy4.txt
           curl -sSL ${proxy2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed 's/^DOMAIN,//g' | sed 's/^DOMAIN-SUFFIX,/+\./g' >> ../tmp/temp-proxy4.txt
-          sort --ignore-case -u ../tmp/temp-proxy4.txt > ../clash-ruleset/proxy.list
+          sort --ignore-case -u ../tmp/temp-proxy4.txt | grep -v 'chatgpt.com' > ../clash-ruleset/proxy.list
           # Download sing-box rule_set
           ./gfwlist2dnsmasq.sh -l -o ../tmp/temp-proxy5.txt
           sed "s/^/  - DOMAIN-SUFFIX,/g" ../tmp/temp-proxy5.txt > ../tmp/temp-proxy6.txt
@@ -579,7 +584,7 @@ jobs:
           curl -sSL ${proxy1} | grep 'full:' | sed 's/:@\!cn$//g' | sed 's/^full:/  - DOMAIN,/g' >> ../tmp/temp-proxy6.txt
           curl -sSL ${proxy2} | grep -Ev '#|IP-CIDR' | sed '/^\s*$/d' | sed 's/^/  - /g' >> ../tmp/temp-proxy6.txt
           echo 'payload:' > ../tmp/sing-box/rules/proxy/proxy.yaml
-          sort --ignore-case -u ../tmp/temp-proxy6.txt >> ../tmp/sing-box/rules/proxy/proxy.yaml
+          sort --ignore-case -u ../tmp/temp-proxy6.txt | grep -v 'chatgpt.com' >> ../tmp/sing-box/rules/proxy/proxy.yaml
           rm -rf ../gfwlist2dnsmasq/
 
       - name: Generate cn
