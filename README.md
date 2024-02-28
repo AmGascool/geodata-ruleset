@@ -656,7 +656,7 @@ rules:
         "tag": "ai",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/ai.srs",
+        "url": "https://cdn.jsdelivr.net/gh/AmGascool/geodata-ruleset@sing-box-ruleset/ai.srs",
         "download_detour": "DIRECT"
       },
       {
@@ -677,7 +677,7 @@ rules:
         "tag": "proxy",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/proxy.srs",
+        "url": "https://cdn.jsdelivr.net/gh/AmGascool/geodata-ruleset@sing-box-ruleset/proxy.srs",
         "download_detour": "DIRECT"
       },
       {
