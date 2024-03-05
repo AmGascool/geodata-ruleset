@@ -198,7 +198,7 @@ curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\geoip.metadb -L http
 **配置文件名关键字与使用场景对应关系如下表：**
 |文件名关键字|使用场景|
 |-----|-----|
-|lite|无 Clash 广告拦截，搭配 AdGuardHome|
+|lite|无广告拦截，搭配 AdGuardHome|
 |noprocess|不含进程匹配模式，仅适合 ShellCrash|
 
 • `fake-ip-filter` 参数  
@@ -726,7 +726,7 @@ rules:
 **配置文件名关键字与使用场景对应关系如下表：**
 |文件名关键字|使用场景|
 |-----|-----|
-|lite|无 Clash 广告拦截，搭配 AdGuardHome|
+|lite|无广告拦截，搭配 AdGuardHome|
 |noprocess|不含进程匹配模式，仅适合 ShellCrash|
 
 • `fake-ip-filter` 参数  
