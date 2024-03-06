@@ -313,6 +313,7 @@ rule-providers:
     type: http
     behavior: domain
     format: text
+    path: ./rules/ads.list
     url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/ads.list"
     interval: 86400
 
@@ -320,6 +321,7 @@ rule-providers:
     type: http
     behavior: classical
     format: text
+    path: ./rules/applications.list
     url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/applications.list"
     interval: 86400
 
@@ -327,6 +329,7 @@ rule-providers:
     type: http
     behavior: domain
     format: text
+    path: ./rules/private.list
     url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/private.list"
     interval: 86400
 
@@ -334,6 +337,7 @@ rule-providers:
     type: http
     behavior: domain
     format: text
+    path: ./rules/microsoft-cn.list
     url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/microsoft-cn.list"
     interval: 86400
 
@@ -341,6 +345,7 @@ rule-providers:
     type: http
     behavior: domain
     format: text
+    path: ./rules/apple-cn.list
     url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/apple-cn.list"
     interval: 86400
 
@@ -348,6 +353,7 @@ rule-providers:
     type: http
     behavior: domain
     format: text
+    path: ./rules/google-cn.list
     url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/google-cn.list"
     interval: 86400
 
@@ -355,6 +361,7 @@ rule-providers:
     type: http
     behavior: domain
     format: text
+    path: ./rules/games-cn.list
     url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/games-cn.list"
     interval: 86400
 
@@ -362,6 +369,7 @@ rule-providers:
     type: http
     behavior: domain
     format: text
+    path: ./rules/netflix.list
     url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/netflix.list"
     interval: 86400
 
@@ -369,6 +377,7 @@ rule-providers:
     type: http
     behavior: domain
     format: text
+    path: ./rules/disney.list
     url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/disney.list"
     interval: 86400
 
@@ -376,6 +385,7 @@ rule-providers:
     type: http
     behavior: domain
     format: text
+    path: ./rules/max.list
     url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/max.list"
     interval: 86400
 
@@ -383,6 +393,7 @@ rule-providers:
     type: http
     behavior: domain
     format: text
+    path: ./rules/primevideo.list
     url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/primevideo.list"
     interval: 86400
 
@@ -390,6 +401,7 @@ rule-providers:
     type: http
     behavior: domain
     format: text
+    path: ./rules/appletv.list
     url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/appletv.list"
     interval: 86400
 
@@ -397,6 +409,7 @@ rule-providers:
     type: http
     behavior: domain
     format: text
+    path: ./rules/youtube.list
     url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/youtube.list"
     interval: 86400
 
@@ -404,6 +417,7 @@ rule-providers:
     type: http
     behavior: domain
     format: text
+    path: ./rules/tiktok.list
     url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/tiktok.list"
     interval: 86400
 
@@ -411,6 +425,7 @@ rule-providers:
     type: http
     behavior: domain
     format: text
+    path: ./rules/bilibili.list
     url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/bilibili.list"
     interval: 86400
 
@@ -418,6 +433,7 @@ rule-providers:
     type: http
     behavior: domain
     format: text
+    path: ./rules/ai.list
     url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/ai.list"
     interval: 86400
 
@@ -425,6 +441,7 @@ rule-providers:
     type: http
     behavior: classical
     format: text
+    path: ./rules/networktest.list
     url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/networktest.list"
     interval: 86400
 
@@ -432,6 +449,7 @@ rule-providers:
     type: http
     behavior: domain
     format: text
+    path: ./rules/proxy.list
     url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/proxy.list"
     interval: 86400
 
@@ -439,6 +457,7 @@ rule-providers:
     type: http
     behavior: domain
     format: text
+    path: ./rules/cn.list
     url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/cn.list"
     interval: 86400
 
@@ -446,6 +465,7 @@ rule-providers:
     type: http
     behavior: ipcidr
     format: text
+    path: ./rules/netflixip.list
     url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/netflixip.list"
     interval: 86400
 
@@ -453,6 +473,7 @@ rule-providers:
     type: http
     behavior: ipcidr
     format: text
+    path: ./rules/telegramip.list
     url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/telegramip.list"
     interval: 86400
 
@@ -460,6 +481,7 @@ rule-providers:
     type: http
     behavior: ipcidr
     format: text
+    path: ./rules/privateip.list
     url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/privateip.list"
     interval: 86400
 
@@ -467,6 +489,7 @@ rule-providers:
     type: http
     behavior: ipcidr
     format: text
+    path: ./rules/cnip.list
     url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/cnip.list"
     interval: 86400
 
