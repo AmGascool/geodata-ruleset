@@ -56,33 +56,33 @@ jobs:
           fetch-depth: 0
 
       - name: Checkout v2fly/domain-list-community
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: v2fly/domain-list-community
           path: community
 
       - name: Checkout cokebar/gfwlist2dnsmasq
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: cokebar/gfwlist2dnsmasq
           path: gfwlist2dnsmasq
 
       - name: Checkout DustinWin/geoip
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: DustinWin/geoip
           ref: ips
           path: geoip/ips
 
       - name: Checkout DustinWin/geoip
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: DustinWin/geoip
           ref: clash
           path: geoip/clash
 
       - name: Checkout DustinWin/geoip
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: DustinWin/geoip
           ref: sing-box
